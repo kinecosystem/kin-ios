@@ -1,0 +1,7 @@
+ignore:
+  - "KinSampleApp"
+  - "KinGrpcApi"
+  - "KinBaseCompat"
+  - "KinBase/KinBase/Src/Storage/Gen"
+  - "KinBase/KinBase/Src/Tools/ListObservable.swift"
+  - "KinBase/KinBase/Src/Stellar/StellarSdkProxy.swift"

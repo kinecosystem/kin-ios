@@ -1,0 +1,32 @@
+PODS:
+  - kin-stellar-ios-mac-sdk (1.7.4)
+  - PromisesObjC (1.2.9)
+  - PromisesSwift (1.2.9):
+    - PromisesObjC (= 1.2.9)
+  - Protobuf (3.12.0)
+  - Sodium (0.8.0)
+
+DEPENDENCIES:
+  - kin-stellar-ios-mac-sdk
+  - PromisesSwift (~> 1.2.8)
+  - Protobuf (~> 3.0)
+  - Sodium (= 0.8.0)
+
+SPEC REPOS:
+  trunk:
+    - kin-stellar-ios-mac-sdk
+    - PromisesObjC
+    - PromisesSwift
+    - Protobuf
+    - Sodium
+
+SPEC CHECKSUMS:
+  kin-stellar-ios-mac-sdk: b82c65878d3e65643fed7d7ad1fc758a94e6b058
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
+  Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
+
+PODFILE CHECKSUM: 2dc08072932162024e2828155ec834da854858ab
+
+COCOAPODS: 1.8.3

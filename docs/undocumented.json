@@ -1,0 +1,3001 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 28,
+      "symbol": "KinAccountReadOperations",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 58,
+      "symbol": "KinPaymentReadOperations",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 82,
+      "symbol": "KinPaymentWriteOperations",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 114,
+      "symbol": "KinAccountContext.Errors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 115,
+      "symbol": "KinAccountContext.Errors.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 122,
+      "symbol": "KinAccountContext.Builder.init(env:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 157,
+      "symbol": "KinAccountContext.NewAccountBuilder",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 164,
+      "symbol": "KinAccountContext.NewAccountBuilder.build()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 176,
+      "symbol": "KinAccountContext.ExistingAccountBuilder",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinAccountContext.swift",
+      "line": 180,
+      "symbol": "KinAccountContext.ExistingAccountBuilder.build()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 12,
+      "symbol": "KinEnvironment",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 13,
+      "symbol": "KinEnvironment.Errors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 14,
+      "symbol": "KinEnvironment.Errors.missingPrivateKey",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 17,
+      "symbol": "KinEnvironment.network",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 18,
+      "symbol": "KinEnvironment.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 19,
+      "symbol": "KinEnvironment.storage",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 20,
+      "symbol": "KinEnvironment.networkHandler",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 21,
+      "symbol": "KinEnvironment.dispatchQueue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 70,
+      "symbol": "KinEnvironment",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/KinEnvironment.swift",
+      "line": 101,
+      "symbol": "KinEnvironment.importPrivateKey(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 12,
+      "symbol": "KinAccount",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 13,
+      "symbol": "KinAccount.Key",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 14,
+      "symbol": "KinAccount.Id",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 16,
+      "symbol": "KinAccount.Status",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 17,
+      "symbol": "KinAccount.Status.unregistered",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 18,
+      "symbol": "KinAccount.Status.registered",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 21,
+      "symbol": "KinAccount.key",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 23,
+      "symbol": "KinAccount.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 29,
+      "symbol": "KinAccount.balance",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 30,
+      "symbol": "KinAccount.Status",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 31,
+      "symbol": "KinAccount.status",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 41,
+      "symbol": "KinAccount",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 47,
+      "symbol": "KinAccount",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 57,
+      "symbol": "KinAccount",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinAccount.swift",
+      "line": 75,
+      "symbol": "KinAccount",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinBalance.swift",
+      "line": 11,
+      "symbol": "KinBalance",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinBalance.swift",
+      "line": 12,
+      "symbol": "KinBalance.amount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinBalance.swift",
+      "line": 13,
+      "symbol": "KinBalance.pendingAmount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinBalance.swift",
+      "line": 15,
+      "symbol": "KinBalance.zero",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinBalance.swift",
+      "line": 21,
+      "symbol": "KinBalance",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinMemo.swift",
+      "line": 11,
+      "symbol": "KinMemo",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinMemo.swift",
+      "line": 14,
+      "symbol": "KinMemo.none",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinMemo.swift",
+      "line": 16,
+      "symbol": "KinMemo.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinMemo.swift",
+      "line": 20,
+      "symbol": "KinMemo.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinMemo.swift",
+      "line": 24,
+      "symbol": "KinMemo.init(text:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinOperation.swift",
+      "line": 11,
+      "symbol": "KinOperation",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinOperation.swift",
+      "line": 15,
+      "symbol": "KinPaymentOperation",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinOperation.swift",
+      "line": 16,
+      "symbol": "KinPaymentOperation.amount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinOperation.swift",
+      "line": 17,
+      "symbol": "KinPaymentOperation.source",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinOperation.swift",
+      "line": 18,
+      "symbol": "KinPaymentOperation.destination",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 11,
+      "symbol": "KinPayment",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 12,
+      "symbol": "KinPayment.Id",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 13,
+      "symbol": "KinPayment.Id.transactionHash",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 14,
+      "symbol": "KinPayment.Id.offset",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 16,
+      "symbol": "KinPayment.Id.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 21,
+      "symbol": "KinPayment.Status",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 22,
+      "symbol": "KinPayment.Status.inFlight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 23,
+      "symbol": "KinPayment.Status.success",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 24,
+      "symbol": "KinPayment.Status.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 27,
+      "symbol": "KinPayment.Addendum",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 29,
+      "symbol": "KinPayment.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 30,
+      "symbol": "KinPayment.status",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 31,
+      "symbol": "KinPayment.sourceAccountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 32,
+      "symbol": "KinPayment.destAccountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 33,
+      "symbol": "KinPayment.amount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 34,
+      "symbol": "KinPayment.fee",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 35,
+      "symbol": "KinPayment.memo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 36,
+      "symbol": "KinPayment.timestamp",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 37,
+      "symbol": "KinPayment.extra",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 38,
+      "symbol": "KinPayment.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 52,
+      "symbol": "KinPaymentItem",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 53,
+      "symbol": "KinPaymentItem.amount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 54,
+      "symbol": "KinPaymentItem.destAccountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinPayment.swift",
+      "line": 56,
+      "symbol": "KinPaymentItem.init(amount:destAccountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 12,
+      "symbol": "KinTransaction",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 14,
+      "symbol": "KinTransaction.PagingToken",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 15,
+      "symbol": "KinTransaction.ResultCode",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 17,
+      "symbol": "KinTransaction.Record",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 56,
+      "symbol": "KinTransaction.envelopeXdrBytes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 57,
+      "symbol": "KinTransaction.record",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 58,
+      "symbol": "KinTransaction.network",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 60,
+      "symbol": "KinTransaction.transactionHash",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 65,
+      "symbol": "KinTransaction",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 68,
+      "symbol": "KinTransaction.sourceAccount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 72,
+      "symbol": "KinTransaction.sequenceNumber",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 76,
+      "symbol": "KinTransaction.fee",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 77,
+      "symbol": "KinTransactions",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 80,
+      "symbol": "KinTransaction.memo",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 88,
+      "symbol": "KinTransaction.paymentOperations",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 102,
+      "symbol": "KinTransaction.resultCode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 121,
+      "symbol": "KinTransaction.inFlightTransaction(envelope:network:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 133,
+      "symbol": "KinTransaction",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 134,
+      "symbol": "KinTransaction.kinPayments",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 158,
+      "symbol": "Array.kinPayments",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 163,
+      "symbol": "KinTransactionHash",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 164,
+      "symbol": "KinTransactionHash.rawValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 166,
+      "symbol": "KinTransactionHash.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 175,
+      "symbol": "KinTransactionHash",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 181,
+      "symbol": "KinTransactions",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 182,
+      "symbol": "KinTransactions.items",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 183,
+      "symbol": "KinTransactions.headPagingToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTransaction.swift",
+      "line": 184,
+      "symbol": "KinTransactions.tailPagingToken",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 16,
+      "symbol": "Byte",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 18,
+      "symbol": "Kin",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 20,
+      "symbol": "Quark",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 22,
+      "symbol": "Kin",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 23,
+      "symbol": "Kin.quark",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 28,
+      "symbol": "Quark",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Model/KinTypes.swift",
+      "line": 29,
+      "symbol": "Quark.kin",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 11,
+      "symbol": "BackoffStrategy",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 12,
+      "symbol": "BackoffStrategy.Constants",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 13,
+      "symbol": "BackoffStrategy.Constants.defaultMaxAttempt",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 14,
+      "symbol": "BackoffStrategy.Constants.defaultMaxAttemptWaitTime",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 18,
+      "symbol": "BackoffStrategy.Errors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 19,
+      "symbol": "BackoffStrategy.Errors.retriesExceeded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 22,
+      "symbol": "BackoffStrategy.StrategyType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 23,
+      "symbol": "BackoffStrategy.StrategyType.never",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 24,
+      "symbol": "BackoffStrategy.StrategyType.fixed(after:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 25,
+      "symbol": "BackoffStrategy.StrategyType.exponential(initial:multiplier:jitter:maxWaitTime:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 26,
+      "symbol": "BackoffStrategy.StrategyType.custom(afterClosure:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 29,
+      "symbol": "BackoffStrategy.currentAttempt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 30,
+      "symbol": "BackoffStrategy.maxAttempts",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 32,
+      "symbol": "BackoffStrategy.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 40,
+      "symbol": "BackoffStrategy.never()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 45,
+      "symbol": "BackoffStrategy.fixed(after:maxAttempts:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 51,
+      "symbol": "BackoffStrategy.exponential(initial:multiplier:jitter:maxWaitTime:maxAttempts:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 63,
+      "symbol": "BackoffStrategy.custom(afterClosure:maxAttempts:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/BackoffStrategy.swift",
+      "line": 69,
+      "symbol": "BackoffStrategy.nextDelay()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 11,
+      "symbol": "KinAccountApi",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 12,
+      "symbol": "KinAccountApi.getAccount(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 15,
+      "symbol": "KinAccountApi.streamAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 19,
+      "symbol": "GetAccountRequest",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 20,
+      "symbol": "GetAccountRequest.accountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 22,
+      "symbol": "GetAccountRequest.init(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 27,
+      "symbol": "GetAccountResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 28,
+      "symbol": "GetAccountResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 29,
+      "symbol": "GetAccountResponse.Result.upgradeRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 30,
+      "symbol": "GetAccountResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 31,
+      "symbol": "GetAccountResponse.Result.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 34,
+      "symbol": "GetAccountResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 35,
+      "symbol": "GetAccountResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 36,
+      "symbol": "GetAccountResponse.account",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountApi.swift",
+      "line": 38,
+      "symbol": "GetAccountResponse.init(result:error:account:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 13,
+      "symbol": "KinAccountCreationApi.createAccount(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 18,
+      "symbol": "CreateAccountRequest",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 19,
+      "symbol": "CreateAccountRequest.accountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 21,
+      "symbol": "CreateAccountRequest.init(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 26,
+      "symbol": "CreateAccountResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 27,
+      "symbol": "CreateAccountResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 28,
+      "symbol": "CreateAccountResponse.Result.upgradeRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 29,
+      "symbol": "CreateAccountResponse.Result.transientFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 30,
+      "symbol": "CreateAccountResponse.Result.undefinedError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 31,
+      "symbol": "CreateAccountResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 32,
+      "symbol": "CreateAccountResponse.Result.exists",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 33,
+      "symbol": "CreateAccountResponse.Result.unavailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 36,
+      "symbol": "CreateAccountResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 37,
+      "symbol": "CreateAccountResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 38,
+      "symbol": "CreateAccountResponse.account",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinAccountCreationApi.swift",
+      "line": 40,
+      "symbol": "CreateAccountResponse.init(result:error:account:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 11,
+      "symbol": "KinNetwork",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 12,
+      "symbol": "KinNetwork.mainNet",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 13,
+      "symbol": "KinNetwork.testNet",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 16,
+      "symbol": "KinNetwork",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 17,
+      "symbol": "KinNetwork.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 26,
+      "symbol": "KinNetwork.horizonUrl",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinNetwork.swift",
+      "line": 95,
+      "symbol": "KinNetwork",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 13,
+      "symbol": "TransactionOrder",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 14,
+      "symbol": "TransactionOrder.ascending",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 15,
+      "symbol": "TransactionOrder.descending",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 18,
+      "symbol": "KinServiceType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 19,
+      "symbol": "KinServiceType.createAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 21,
+      "symbol": "KinServiceType.getAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 23,
+      "symbol": "KinServiceType.streamAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 25,
+      "symbol": "KinServiceType.getLatestTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 27,
+      "symbol": "KinServiceType.getTransactionPage(accountId:pagingToken:order:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 31,
+      "symbol": "KinServiceType.getTransaction(transactionHash:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 33,
+      "symbol": "KinServiceType.getMinFee()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 35,
+      "symbol": "KinServiceType.canWhitelistTransactions()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 37,
+      "symbol": "KinServiceType.buildAndSignTransaction(sourceKinAccount:paymentItems:memo:fee:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 42,
+      "symbol": "KinServiceType.submitTransaction(transaction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 44,
+      "symbol": "KinServiceType.streamNewTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 47,
+      "symbol": "KinService",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 48,
+      "symbol": "KinService.Errors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 49,
+      "symbol": "KinService.Errors.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 50,
+      "symbol": "KinService.Errors.transientFailure(error:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 51,
+      "symbol": "KinService.Errors.invalidAccount",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 52,
+      "symbol": "KinService.Errors.missingApi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 53,
+      "symbol": "KinService.Errors.insufficientBalance",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 88,
+      "symbol": "KinService.init(network:networkOperationHandler:dispatchQueue:accountApi:accountCreationApi:transactionApi:transactionWhitelistingApi:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 101,
+      "symbol": "TransactionOrder",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 105,
+      "symbol": "KinService",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 106,
+      "symbol": "KinService.createAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 132,
+      "symbol": "KinService.getAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 160,
+      "symbol": "KinService.streamAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 164,
+      "symbol": "KinService.getLatestTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 195,
+      "symbol": "KinService.getTransactionPage(accountId:pagingToken:order:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 228,
+      "symbol": "KinService.getTransaction(transactionHash:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 257,
+      "symbol": "KinService.getMinFee()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 285,
+      "symbol": "KinService.canWhitelistTransactions()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 289,
+      "symbol": "KinService.buildAndSignTransaction(sourceKinAccount:paymentItems:memo:fee:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 331,
+      "symbol": "KinService.submitTransaction(transaction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinService.swift",
+      "line": 362,
+      "symbol": "KinService.streamNewTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 11,
+      "symbol": "KinTransactionApi",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 12,
+      "symbol": "KinTransactionApi.getTransactionHistory(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 15,
+      "symbol": "KinTransactionApi.getTransaction(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 18,
+      "symbol": "KinTransactionApi.getTransactionMinFee(completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 20,
+      "symbol": "KinTransactionApi.submitTransaction(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 23,
+      "symbol": "KinTransactionApi.streamNewTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 27,
+      "symbol": "GetTransactionHistoryRequest",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 28,
+      "symbol": "GetTransactionHistoryRequest.accountId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 29,
+      "symbol": "GetTransactionHistoryRequest.cursor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 30,
+      "symbol": "GetTransactionHistoryRequest.order",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 32,
+      "symbol": "GetTransactionHistoryRequest.init(accountId:cursor:order:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 39,
+      "symbol": "GetTransactionHistoryResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 40,
+      "symbol": "GetTransactionHistoryResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 41,
+      "symbol": "GetTransactionHistoryResponse.Result.upgradeRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 42,
+      "symbol": "GetTransactionHistoryResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 43,
+      "symbol": "GetTransactionHistoryResponse.Result.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 46,
+      "symbol": "GetTransactionHistoryResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 47,
+      "symbol": "GetTransactionHistoryResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 48,
+      "symbol": "GetTransactionHistoryResponse.kinTransactions",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 50,
+      "symbol": "GetTransactionHistoryResponse.init(result:error:kinTransactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 57,
+      "symbol": "GetTransactionRequest",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 58,
+      "symbol": "GetTransactionRequest.transactionHash",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 60,
+      "symbol": "GetTransactionRequest.init(transactionHash:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 65,
+      "symbol": "GetTransactionResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 66,
+      "symbol": "GetTransactionResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 67,
+      "symbol": "GetTransactionResponse.Result.upgradeRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 68,
+      "symbol": "GetTransactionResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 69,
+      "symbol": "GetTransactionResponse.Result.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 72,
+      "symbol": "GetTransactionResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 73,
+      "symbol": "GetTransactionResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 74,
+      "symbol": "GetTransactionResponse.kinTransaction",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 76,
+      "symbol": "GetTransactionResponse.init(result:error:kinTransaction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 83,
+      "symbol": "GetMinFeeForTransactionResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 84,
+      "symbol": "GetMinFeeForTransactionResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 85,
+      "symbol": "GetMinFeeForTransactionResponse.Result.upgradeRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 86,
+      "symbol": "GetMinFeeForTransactionResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 87,
+      "symbol": "GetMinFeeForTransactionResponse.Result.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 90,
+      "symbol": "GetMinFeeForTransactionResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 91,
+      "symbol": "GetMinFeeForTransactionResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 92,
+      "symbol": "GetMinFeeForTransactionResponse.fee",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 94,
+      "symbol": "GetMinFeeForTransactionResponse.init(result:error:fee:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 101,
+      "symbol": "SubmitTransactionRequest",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 102,
+      "symbol": "SubmitTransactionRequest.transactionEnvelopeXdr",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 104,
+      "symbol": "SubmitTransactionRequest.init(transactionEnvelopeXdr:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 109,
+      "symbol": "SubmitTransactionResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 116,
+      "symbol": "SubmitTransactionResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 117,
+      "symbol": "SubmitTransactionResponse.Result.upgradeRequired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 118,
+      "symbol": "SubmitTransactionResponse.Result.undefinedError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 119,
+      "symbol": "SubmitTransactionResponse.Result.transientFailure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 120,
+      "symbol": "SubmitTransactionResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 121,
+      "symbol": "SubmitTransactionResponse.Result.insufficientBalance",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 124,
+      "symbol": "SubmitTransactionResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 125,
+      "symbol": "SubmitTransactionResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionApi.swift",
+      "line": 126,
+      "symbol": "SubmitTransactionResponse.kinTransaction",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 13,
+      "symbol": "KinTransactionWhitelistingApi.isWhitelistingAvailable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 15,
+      "symbol": "KinTransactionWhitelistingApi.whitelistTransaction(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 20,
+      "symbol": "WhitelistTransactionRequest",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 21,
+      "symbol": "WhitelistTransactionRequest.transactionEnvelope",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 23,
+      "symbol": "WhitelistTransactionRequest.init(transactionEnvelope:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 28,
+      "symbol": "WhitelistTransactionResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 29,
+      "symbol": "WhitelistTransactionResponse.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 30,
+      "symbol": "WhitelistTransactionResponse.Result.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 31,
+      "symbol": "WhitelistTransactionResponse.Result.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 34,
+      "symbol": "WhitelistTransactionResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 35,
+      "symbol": "WhitelistTransactionResponse.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 36,
+      "symbol": "WhitelistTransactionResponse.whitelistedTransactionEnvelope",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/KinTransactionWhitelistingApi.swift",
+      "line": 38,
+      "symbol": "WhitelistTransactionResponse.init(result:error:whitelistedTransactionEnvelope:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 12,
+      "symbol": "NetworkOperationErrors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 13,
+      "symbol": "NetworkOperationErrors.timeout",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 14,
+      "symbol": "NetworkOperationErrors.internalError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 17,
+      "symbol": "PromisedCallback",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 18,
+      "symbol": "PromisedCallback.onSuccess",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 19,
+      "symbol": "PromisedCallback.onError",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 22,
+      "symbol": "NetworkOperation",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 23,
+      "symbol": "NetworkOperation.State",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 24,
+      "symbol": "NetworkOperation.State.init",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 25,
+      "symbol": "NetworkOperation.State.queued",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 26,
+      "symbol": "NetworkOperation.State.scheduled(dispatchTime:workItem:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 27,
+      "symbol": "NetworkOperation.State.running",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 28,
+      "symbol": "NetworkOperation.State.completed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 29,
+      "symbol": "NetworkOperation.State.errored(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 32,
+      "symbol": "NetworkOperation.state",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 40,
+      "symbol": "NetworkOperation.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 41,
+      "symbol": "NetworkOperation.timeout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 42,
+      "symbol": "NetworkOperation.backoffStrategy",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 43,
+      "symbol": "NetworkOperation.work",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 44,
+      "symbol": "NetworkOperation.completion",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 45,
+      "symbol": "NetworkOperation.expiryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 46,
+      "symbol": "NetworkOperation.shouldRetryError",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 47,
+      "symbol": "NetworkOperation.queue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 68,
+      "symbol": "NetworkOperation.init(onSuccess:onError:work:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 95,
+      "symbol": "NetworkOperationHandler.queueOperation(op:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Network/NetworkOperationHandler.swift",
+      "line": 189,
+      "symbol": "NetworkOperationHandler.queueWork(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/DefaultHorizonKinAccountCreationApi.swift",
+      "line": 11,
+      "symbol": "DefaultHorizonKinAccountCreationApi",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/DefaultHorizonKinAccountCreationApi.swift",
+      "line": 13,
+      "symbol": "DefaultHorizonKinAccountCreationApi.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/DefaultHorizonKinTransactionWhitelistingApi.swift",
+      "line": 11,
+      "symbol": "DefaultHorizonKinTransactionWhitelistingApi",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/DefaultHorizonKinTransactionWhitelistingApi.swift",
+      "line": 12,
+      "symbol": "DefaultHorizonKinTransactionWhitelistingApi.isWhitelistingAvailable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/DefaultHorizonKinTransactionWhitelistingApi.swift",
+      "line": 14,
+      "symbol": "DefaultHorizonKinTransactionWhitelistingApi.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/FriendBotApi.swift",
+      "line": 30,
+      "symbol": "FriendBotApi.createAccount(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 12,
+      "symbol": "HorizonKinApi",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 13,
+      "symbol": "HorizonKinApi.Errors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 14,
+      "symbol": "HorizonKinApi.Errors.malformattedResponse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 22,
+      "symbol": "HorizonKinApi.init(stellarSdkProxy:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 27,
+      "symbol": "HorizonKinApi",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 28,
+      "symbol": "HorizonKinApi.getAccount(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 53,
+      "symbol": "HorizonKinApi.streamAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 76,
+      "symbol": "HorizonKinApi",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 81,
+      "symbol": "HorizonKinApi.getTransactionHistory(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 123,
+      "symbol": "HorizonKinApi.getTransaction(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 159,
+      "symbol": "HorizonKinApi.getTransactionMinFee(completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 192,
+      "symbol": "HorizonKinApi.submitTransaction(request:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/HorizonKinApi.swift",
+      "line": 251,
+      "symbol": "HorizonKinApi.streamNewTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 21,
+      "symbol": "stellarsdk.Seed.data",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 27,
+      "symbol": "stellarsdk.Transaction.defaultOperationFee",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 31,
+      "symbol": "stellarsdk.AccountResponse.kinAccount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 53,
+      "symbol": "stellarsdk.TransactionResponse.toHistoricalKinTransaction(network:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 72,
+      "symbol": "stellarsdk.SubmitTransactionResponse.toAcknowledgedKinTransaction(network:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 85,
+      "symbol": "stellarsdk.Transaction.toInFlightKinTransaction(network:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 96,
+      "symbol": "KinNetwork.stellarNetwork",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Stellar/StellarSdkExtensions.swift",
+      "line": 102,
+      "symbol": "TransactionOrder.stellarOrder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/Gen/Storage.pbobjc.h",
+      "line": 101,
+      "symbol": "KinStorageKinAccount_Status",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/Gen/Storage.pbobjc.h",
+      "line": 128,
+      "symbol": "KinStorageKinTransaction_Status",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 12,
+      "symbol": "KinFileStorage",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 13,
+      "symbol": "KinFileStorage.Errors",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 14,
+      "symbol": "KinFileStorage.Errors.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 15,
+      "symbol": "KinFileStorage.Errors.malformattedInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 16,
+      "symbol": "KinFileStorage.Errors.missingAccount",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 17,
+      "symbol": "KinFileStorage.Errors.unregisteredAccount",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 44,
+      "symbol": "KinFileStorage",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 47,
+      "symbol": "KinFileStorage.addAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 53,
+      "symbol": "KinFileStorage.addAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 64,
+      "symbol": "KinFileStorage.getAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 70,
+      "symbol": "KinFileStorage.updateAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 90,
+      "symbol": "KinFileStorage.removeAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 102,
+      "symbol": "KinFileStorage.advanceSequence(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 124,
+      "symbol": "KinFileStorage.deductFromAccountBalance(accountId:amount:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 147,
+      "symbol": "KinFileStorage.getAllAccountIds()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 165,
+      "symbol": "KinFileStorage.storeTransactions(accountId:transactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 189,
+      "symbol": "KinFileStorage.getStoredTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 193,
+      "symbol": "KinFileStorage.insertNewTransaction(accountId:newTransaction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 202,
+      "symbol": "KinFileStorage.upsertNewTransactions(accountId:newTransactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 218,
+      "symbol": "KinFileStorage.upsertOldTransactions(accountId:oldTransactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 234,
+      "symbol": "KinFileStorage.setMinFee(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 238,
+      "symbol": "KinFileStorage.getMinFee()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinFileStorage.swift",
+      "line": 242,
+      "symbol": "KinFileStorage.clearStorage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 14,
+      "symbol": "PublicKey.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 22,
+      "symbol": "KinBalance.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 31,
+      "symbol": "KinAccount.Status.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 42,
+      "symbol": "KinAccount.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 53,
+      "symbol": "KinTransaction.Record.RecordType.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 66,
+      "symbol": "KinTransaction.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 78,
+      "symbol": "KinTransactions.storableObject",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 90,
+      "symbol": "KinStoragePublicKey.publicKey",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 96,
+      "symbol": "KinStoragePublicKey.kinBalance",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 102,
+      "symbol": "KinStorageKinAccount_Status.kinAccountStatus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 113,
+      "symbol": "KinStoragePublicKey.kinAccount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 129,
+      "symbol": "KinStorageKinTransaction_Status.kinTransactionRecordType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 144,
+      "symbol": "KinStoragePublicKey.kinTransaction(network:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorableObjectExtensions.swift",
+      "line": 156,
+      "symbol": "KinStoragePublicKey.kinTransactions(network:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 12,
+      "symbol": "KinStorageType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 13,
+      "symbol": "KinStorageType.addAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 15,
+      "symbol": "KinStorageType.addAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 17,
+      "symbol": "KinStorageType.getAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 19,
+      "symbol": "KinStorageType.updateAccount(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 21,
+      "symbol": "KinStorageType.removeAccount(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 23,
+      "symbol": "KinStorageType.getAllAccountIds()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 25,
+      "symbol": "KinStorageType.advanceSequence(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 27,
+      "symbol": "KinStorageType.deductFromAccountBalance(accountId:amount:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 30,
+      "symbol": "KinStorageType.storeTransactions(accountId:transactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 33,
+      "symbol": "KinStorageType.getStoredTransactions(accountId:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 36,
+      "symbol": "KinStorageType.upsertNewTransactions(accountId:newTransactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 39,
+      "symbol": "KinStorageType.upsertOldTransactions(accountId:oldTransactions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 42,
+      "symbol": "KinStorageType.insertNewTransaction(accountId:newTransaction:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 45,
+      "symbol": "KinStorageType.setMinFee(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 47,
+      "symbol": "KinStorageType.getMinFee()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Storage/KinStorage.swift",
+      "line": 49,
+      "symbol": "KinStorageType.clearStorage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 11,
+      "symbol": "ListObserverType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 12,
+      "symbol": "ListObserverType.Element",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 14,
+      "symbol": "ListObserverType.onNext(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 17,
+      "symbol": "ListObservable",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 18,
+      "symbol": "ListObservable.ValueListener",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 21,
+      "symbol": "ListObservable.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 25,
+      "symbol": "ListObservable.dispose()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 29,
+      "symbol": "ListObservable.doOnDisposed(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 33,
+      "symbol": "ListObservable.requestNextPage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 37,
+      "symbol": "ListObservable.requestPreviousPage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 41,
+      "symbol": "ListObservable.invalidate()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListObservable.swift",
+      "line": 46,
+      "symbol": "ListObservable.disposedBy(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 11,
+      "symbol": "ListSubject",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 12,
+      "symbol": "ListSubject.Element",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 25,
+      "symbol": "ListSubject.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 37,
+      "symbol": "ListSubject.onNext(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 43,
+      "symbol": "ListSubject.setFetchNextPage(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 48,
+      "symbol": "ListSubject.requestNextPage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 54,
+      "symbol": "ListSubject.setFetchPreviousPage(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 59,
+      "symbol": "ListSubject.requestPreviousPage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 65,
+      "symbol": "ListSubject.setInvalidation(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 70,
+      "symbol": "ListSubject.invalidate()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 75,
+      "symbol": "ListSubject.dispose()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/ListSubject.swift",
+      "line": 83,
+      "symbol": "ListSubject.doOnDisposed(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 12,
+      "symbol": "Disposable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 13,
+      "symbol": "Disposable.dispose()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 15,
+      "symbol": "Disposable.doOnDisposed(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 18,
+      "symbol": "Disposable.disposedBy(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 21,
+      "symbol": "ObserverType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 22,
+      "symbol": "ObserverType.Element",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 24,
+      "symbol": "ObserverType.onNext(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 27,
+      "symbol": "DisposeBag",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 31,
+      "symbol": "DisposeBag.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 33,
+      "symbol": "DisposeBag.add(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 39,
+      "symbol": "DisposeBag.dispose()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 46,
+      "symbol": "Observable",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 47,
+      "symbol": "Observable.ValueListener",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 50,
+      "symbol": "Observable.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 54,
+      "symbol": "Observable.dispose()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 58,
+      "symbol": "Observable.doOnDisposed(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 62,
+      "symbol": "Observable.invalidate()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 67,
+      "symbol": "Observable.disposedBy(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 73,
+      "symbol": "ValueSubject",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 74,
+      "symbol": "ValueSubject.Element",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 84,
+      "symbol": "ValueSubject.subscribe(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 96,
+      "symbol": "ValueSubject.onNext(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 102,
+      "symbol": "ValueSubject.setInvalidation(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 107,
+      "symbol": "ValueSubject.invalidate()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 112,
+      "symbol": "ValueSubject.dispose()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lchen/kin-ios/KinBase/KinBase/Src/Tools/Observable.swift",
+      "line": 120,
+      "symbol": "ValueSubject.doOnDisposed(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/lchen/kin-ios"
+}

@@ -1,0 +1,11 @@
+coverage_service: cobertura_xml
+xcodeproj: KinBase/KinBase.xcodeproj
+workspace: ./kin-ios.xcworkspace
+scheme: "KinBaseFramework"
+source_directory: KinBase/KinBase
+output_directory: coverage/
+ignore:
+  - Pods/*
+  - KinGrpcApi/*
+  - KinSampleApp/*
+  - KinBase/KinBase/Classes/Grpc/*

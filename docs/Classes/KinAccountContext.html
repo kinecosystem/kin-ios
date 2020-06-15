@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>KinAccountContext Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/KinAccountContext" class="dashAnchor"></a>
+    <a title="KinAccountContext Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">KinBase Docs</a> (14% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">KinBase Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        KinAccountContext Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/BackoffStrategy.html">BackoffStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BackoffStrategy/Constants.html">– Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BackoffStrategy/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BackoffStrategy/StrategyType.html">– StrategyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultHorizonKinAccountCreationApi.html">DefaultHorizonKinAccountCreationApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultHorizonKinTransactionWhitelistingApi.html">DefaultHorizonKinTransactionWhitelistingApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DisposeBag.html">DisposeBag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HorizonKinApi.html">HorizonKinApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HorizonKinApi/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccount.html">KinAccount</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccount/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccountContext.html">KinAccountContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccountContext/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccountContext/Builder.html">– Builder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccountContext/NewAccountBuilder.html">– NewAccountBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinAccountContext/ExistingAccountBuilder.html">– ExistingAccountBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinFileStorage.html">KinFileStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinFileStorage/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinService.html">KinService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinService/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ListObservable.html">ListObservable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ListSubject.html">ListSubject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NetworkOperation.html">NetworkOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NetworkOperation/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NetworkOperationHandler.html">NetworkOperationHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Observable.html">Observable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:7KinBase15StellarSdkProxyC">StellarSdkProxy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ValueSubject.html">ValueSubject</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/KinNetwork.html">KinNetwork</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/NetworkOperationErrors.html">NetworkOperationErrors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ObservationMode.html">ObservationMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TransactionOrder.html">TransactionOrder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Kin.html">Kin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/KinStorageKinAccount_Status.html">KinStorageKinAccount_Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/KinStorageKinTransaction_Status.html">KinStorageKinTransaction_Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/KinStoragePublicKey.html">KinStoragePublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/PublicKey.html">PublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Quark.html">Quark</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk.html">stellarsdk</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk/KeyPair.html">– KeyPair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk/Seed.html">– Seed</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk/Transaction.html">– Transaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk/AccountResponse.html">– AccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk/TransactionResponse.html">– TransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/stellarsdk/SubmitTransactionResponse.html">– SubmitTransactionResponse</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Disposable.html">Disposable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinAccountApi.html">KinAccountApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinAccountCreationApi.html">KinAccountCreationApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinAccountReadOperations.html">KinAccountReadOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:7KinBase0A9OperationP">KinOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinPaymentReadOperations.html">KinPaymentReadOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinPaymentWriteOperations.html">KinPaymentWriteOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinServiceType.html">KinServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinStorageType.html">KinStorageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinTransactionApi.html">KinTransactionApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/KinTransactionWhitelistingApi.html">KinTransactionWhitelistingApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ListObserverType.html">ListObserverType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObserverType.html">ObserverType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CreateAccountRequest.html">CreateAccountRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateAccountResponse.html">CreateAccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateAccountResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetAccountRequest.html">GetAccountRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetAccountResponse.html">GetAccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetAccountResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetMinFeeForTransactionResponse.html">GetMinFeeForTransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetMinFeeForTransactionResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetTransactionHistoryRequest.html">GetTransactionHistoryRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetTransactionHistoryResponse.html">GetTransactionHistoryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetTransactionHistoryResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetTransactionRequest.html">GetTransactionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetTransactionResponse.html">GetTransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetTransactionResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinBalance.html">KinBalance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinEnvironment.html">KinEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinEnvironment/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinMemo.html">KinMemo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinPayment.html">KinPayment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinPayment/Id.html">– Id</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinPayment/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinPaymentItem.html">KinPaymentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinPaymentOperation.html">KinPaymentOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinTransaction.html">KinTransaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinTransaction.html#/s:7KinBase0A11TransactionV6RecordV">– Record</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinTransactionHash.html">KinTransactionHash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KinTransactions.html">KinTransactions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PromisedCallback.html">PromisedCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SubmitTransactionRequest.html">SubmitTransactionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SubmitTransactionResponse.html">SubmitTransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SubmitTransactionResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WhitelistTransactionRequest.html">WhitelistTransactionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WhitelistTransactionResponse.html">WhitelistTransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WhitelistTransactionResponse/Result.html">– Result</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:7KinBase4Bytea">Byte</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:7KinBase0A0a">Kin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:7KinBase5Quarka">Quark</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>KinAccountContext</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">KinAccountContext</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KinAccountContext</span><span class="p">:</span> <span class="kt"><a href="../Protocols/KinAccountReadOperations.html">KinAccountReadOperations</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KinAccountContext</span><span class="p">:</span> <span class="kt"><a href="../Protocols/KinPaymentReadOperations.html">KinPaymentReadOperations</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KinAccountContext</span><span class="p">:</span> <span class="kt"><a href="../Protocols/KinPaymentWriteOperations.html">KinPaymentWriteOperations</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Instantiate a <code>KinAccountContext</code> to operate on a <code><a href="../Classes/KinAccount.html">KinAccount</a></code> when you have a private key.</p>
+
+<p>Can be used to:</p>
+
+<ul>
+<li>create an account</li>
+<li>get account data, payment history, and listen to changes over time</li>
+<li>send payments</li>
+</ul>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC6ErrorsO"></a>
+                    <a name="//apple_ref/swift/Enum/Errors" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC6ErrorsO">Errors</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Classes/KinAccountContext/Errors.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Errors</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC7BuilderV"></a>
+                    <a name="//apple_ref/swift/Struct/Builder" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC7BuilderV">Builder</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides different ways to build a <code><a href="../Classes/KinAccountContext.html">KinAccountContext</a></code>. Initialize the <code>Builder</code> with a <code><a href="../Structs/KinEnvironment.html">KinEnvironment</a></code> to start.</p>
+
+                        <a href="../Classes/KinAccountContext/Builder.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Builder</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC03NewC7BuilderV"></a>
+                    <a name="//apple_ref/swift/Struct/NewAccountBuilder" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC03NewC7BuilderV">NewAccountBuilder</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Classes/KinAccountContext/NewAccountBuilder.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NewAccountBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC08ExistingC7BuilderV"></a>
+                    <a name="//apple_ref/swift/Struct/ExistingAccountBuilder" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC08ExistingC7BuilderV">ExistingAccountBuilder</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="../Classes/KinAccountContext/ExistingAccountBuilder.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ExistingAccountBuilder</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC7serviceAA0A11ServiceType_pvp"></a>
+                    <a name="//apple_ref/swift/Property/service" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC7serviceAA0A11ServiceType_pvp">service</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A service used to retrieve all account and payment data</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">service</span><span class="p">:</span> <span class="kt"><a href="../Protocols/KinServiceType.html">KinServiceType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC7storageAA0A11StorageType_pvp"></a>
+                    <a name="//apple_ref/swift/Property/storage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC7storageAA0A11StorageType_pvp">storage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stores all account and payment data. See <code><a href="../Classes/KinFileStorage.html">KinFileStorage</a></code> for provided implementation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">storage</span><span class="p">:</span> <span class="kt"><a href="../Protocols/KinStorageType.html">KinStorageType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC13dispatchQueueSo03OS_E6_queueCvp"></a>
+                    <a name="//apple_ref/swift/Property/dispatchQueue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC13dispatchQueueSo03OS_E6_queueCvp">dispatchQueue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>DispatchQueue</code> to run operations on</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">dispatchQueue</span><span class="p">:</span> <span class="kt">DispatchQueue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A14AccountContextC9accountIdSSvp"></a>
+                    <a name="//apple_ref/swift/Property/accountId" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A14AccountContextC9accountIdSSvp">accountId</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Denotes the <code><a href="../Classes/KinAccount.html">KinAccount</a></code> to get information from</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">accountId</span><span class="p">:</span> <span class="kt"><a href="../Classes/KinAccount.html">KinAccount</a></span><span class="o">.</span><span class="kt">Id</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KinAccountReadOperations"></a>
+                <a name="//apple_ref/swift/Section/KinAccountReadOperations" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/KinAccountReadOperations"></a>
+                  <h3 class="section-name"><p>KinAccountReadOperations</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A21AccountReadOperationsP03getC011forceUpdate8Promises7PromiseCyAA0aC0CGSb_tF"></a>
+                    <a name="//apple_ref/swift/Method/getAccount(forceUpdate:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A21AccountReadOperationsP03getC011forceUpdate8Promises7PromiseCyAA0aC0CGSb_tF">getAccount(forceUpdate:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAccount</span><span class="p">(</span><span class="nv">forceUpdate</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/KinAccount.html">KinAccount</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A21AccountReadOperationsP14observeBalance4modeAA10ObservableCyAA0aG0VGAA15ObservationModeO_tF"></a>
+                    <a name="//apple_ref/swift/Method/observeBalance(mode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A21AccountReadOperationsP14observeBalance4modeAA10ObservableCyAA0aG0VGAA15ObservationModeO_tF">observeBalance(mode:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">observeBalance</span><span class="p">(</span><span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/ObservationMode.html">ObservationMode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">passive</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Observable.html">Observable</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/KinBalance.html">KinBalance</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A21AccountReadOperationsP12clearStorage8Promises7PromiseCyytGyF"></a>
+                    <a name="//apple_ref/swift/Method/clearStorage()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A21AccountReadOperationsP12clearStorage8Promises7PromiseCyytGyF">clearStorage()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">clearStorage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KinPaymentReadOperations"></a>
+                <a name="//apple_ref/swift/Section/KinPaymentReadOperations" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/KinPaymentReadOperations"></a>
+                  <h3 class="section-name"><p>KinPaymentReadOperations</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A21PaymentReadOperationsP15observePayments4modeAA14ListObservableCyAA0aC0VGAA15ObservationModeO_tF"></a>
+                    <a name="//apple_ref/swift/Method/observePayments(mode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A21PaymentReadOperationsP15observePayments4modeAA14ListObservableCyAA0aC0VGAA15ObservationModeO_tF">observePayments(mode:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">observePayments</span><span class="p">(</span><span class="nv">mode</span><span class="p">:</span> <span class="kt"><a href="../Enums/ObservationMode.html">ObservationMode</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">passive</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ListObservable.html">ListObservable</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/KinPayment.html">KinPayment</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A21PaymentReadOperationsP29getPaymentsForTransactionHashy8Promises7PromiseCySayAA0aC0VGGAA0aiJ0VF"></a>
+                    <a name="//apple_ref/swift/Method/getPaymentsForTransactionHash(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A21PaymentReadOperationsP29getPaymentsForTransactionHashy8Promises7PromiseCySayAA0aC0VGGAA0aiJ0VF">getPaymentsForTransactionHash(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getPaymentsForTransactionHash</span><span class="p">(</span><span class="n">_</span> <span class="nv">transactionHash</span><span class="p">:</span> <span class="kt"><a href="../Structs/KinTransactionHash.html">KinTransactionHash</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/KinPayment.html">KinPayment</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KinPaymentWriteOperations"></a>
+                <a name="//apple_ref/swift/Section/KinPaymentWriteOperations" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/KinPaymentWriteOperations"></a>
+                  <h3 class="section-name"><p>KinPaymentWriteOperations</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A22PaymentWriteOperationsP04sendaC0_4memo8Promises7PromiseCyAA0aC0VGAA0aC4ItemV_AA0A4MemoVtF"></a>
+                    <a name="//apple_ref/swift/Method/sendKinPayment(_:memo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A22PaymentWriteOperationsP04sendaC0_4memo8Promises7PromiseCyAA0aC0VGAA0aC4ItemV_AA0A4MemoVtF">sendKinPayment(_:memo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sendKinPayment</span><span class="p">(</span><span class="n">_</span> <span class="nv">paymentItem</span><span class="p">:</span> <span class="kt"><a href="../Structs/KinPaymentItem.html">KinPaymentItem</a></span><span class="p">,</span> <span class="nv">memo</span><span class="p">:</span> <span class="kt"><a href="../Structs/KinMemo.html">KinMemo</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/KinPayment.html">KinPayment</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A22PaymentWriteOperationsP04sendA8Payments_4memo8Promises7PromiseCySayAA0aC0VGGSayAA0aC4ItemVG_AA0A4MemoVtF"></a>
+                    <a name="//apple_ref/swift/Method/sendKinPayments(_:memo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A22PaymentWriteOperationsP04sendA8Payments_4memo8Promises7PromiseCySayAA0aC0VGGSayAA0aC4ItemVG_AA0A4MemoVtF">sendKinPayments(_:memo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sendKinPayments</span><span class="p">(</span><span class="n">_</span> <span class="nv">payments</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/KinPaymentItem.html">KinPaymentItem</a></span><span class="p">],</span> <span class="nv">memo</span><span class="p">:</span> <span class="kt"><a href="../Structs/KinMemo.html">KinMemo</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/KinPayment.html">KinPayment</a></span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2020-06-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
