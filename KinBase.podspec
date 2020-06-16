@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinBase'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'Kin SDK for iOS'
 
   s.description      = <<-DESC
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   non_arc_files = 'KinBase/KinBase/Src/Storage/Gen/*.{h,m}'
   s.source_files = 'KinBase/KinBase/**/*.{h,swift}'
 
-  s.dependency 'kin-stellar-ios-mac-sdk'
+  s.dependency 'kin-stellar-ios-mac-sdk', '~> 1.7.4'
   s.dependency 'PromisesSwift', '~> 1.2.8'
 
   s.requires_arc = true
