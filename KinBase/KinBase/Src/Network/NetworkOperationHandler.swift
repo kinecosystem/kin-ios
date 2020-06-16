@@ -124,7 +124,6 @@ public class NetworkOperationHandler {
     private func scheduleOperation<ResponseType>(_ op: NetworkOperation<ResponseType>) {
         do {
             let delay = try op.backoffStrategy.nextDelay()
-            print("KinBase.NetworkOperation " + op.id + " delay " + String(delay))
             let dispatchTime: DispatchTime = .now() + delay
 
             let work = DispatchWorkItem { [weak self] in
@@ -165,7 +164,6 @@ public class NetworkOperationHandler {
     private func handleError<ResponseType>(_ error: Error, for op: NetworkOperation<ResponseType>) {
         if op.shouldRetryError?(error) == true {
             op.state = .errored(error)
-            print("KinBase.NetworkOperation " + op.id + " errored " + error.localizedDescription)
             scheduleOperation(op)
         } else {
             fatalError(error, for: op)
