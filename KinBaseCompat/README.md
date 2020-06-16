@@ -9,6 +9,8 @@ If you're currently making use of [kin-sdk-ios](https://github.com/kinecosystem/
 In the old [kin-sdk-ios](https://github.com/kinecosystem/kin-sdk-ios) sdk you would have had this:
 ```
 pod 'KinSDK', '~> 1.0.2'
+// or
+pod 'KinSDK', '~> 1.0.2', :subspecs => ['BackupRestore']
 ```
 Now, replace that with the following and do a clean build:
 ```
