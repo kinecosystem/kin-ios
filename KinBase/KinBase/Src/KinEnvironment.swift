@@ -73,14 +73,7 @@ extension KinEnvironment {
                                                 whitelistingApi: KinTransactionWhitelistingApi) -> KinEnvironment {
         DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
         let horizonApi = HorizonKinApi(stellarSdkProxy: StellarSdkProxy(network: network))
-        let networkHandler = NetworkOperationHandler { error -> Bool in
-            if let kinServiceError = error as? KinService.Errors,
-                case .transientFailure(_) = kinServiceError {
-                return true
-            }
-
-            return false
-        }
+        let networkHandler = NetworkOperationHandler()
         let service = KinService(network: network,
                                  networkOperationHandler: networkHandler,
                                  dispatchQueue: .promises,

@@ -7,7 +7,7 @@ PODS:
   - Sodium (0.8.0)
 
 DEPENDENCIES:
-  - kin-stellar-ios-mac-sdk
+  - kin-stellar-ios-mac-sdk (~> 1.7.4)
   - PromisesSwift (~> 1.2.8)
   - Protobuf (~> 3.0)
   - Sodium (= 0.8.0)
@@ -27,6 +27,6 @@ SPEC CHECKSUMS:
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: 2dc08072932162024e2828155ec834da854858ab
+PODFILE CHECKSUM: 272797048f881bb72e0cf6af78ad9779d1f8f446
 
 COCOAPODS: 1.8.3

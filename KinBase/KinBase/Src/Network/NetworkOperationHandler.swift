@@ -121,7 +121,8 @@ public class NetworkOperationHandler {
         cleanup(op)
     }
 
-    private func scheduleOperation<ResponseType>(_ op: NetworkOperation<ResponseType>) {
+    private func scheduleOperation<ResponseType>(_ op: NetworkOperation<ResponseType>,
+                                                 prevError: Error? = nil) {
         do {
             let delay = try op.backoffStrategy.nextDelay()
             let dispatchTime: DispatchTime = .now() + delay
@@ -133,8 +134,8 @@ public class NetworkOperationHandler {
             queue.asyncAfter(deadline: dispatchTime, execute: work)
             op.state = .scheduled(dispatchTime: dispatchTime, workItem: work)
 
-        } catch let error {
-            fatalError(error, for: op)
+        } catch {
+            fatalError(prevError ?? error, for: op)
         }
     }
 
@@ -164,7 +165,7 @@ public class NetworkOperationHandler {
     private func handleError<ResponseType>(_ error: Error, for op: NetworkOperation<ResponseType>) {
         if op.shouldRetryError?(error) == true {
             op.state = .errored(error)
-            scheduleOperation(op)
+            scheduleOperation(op, prevError: error)
         } else {
             fatalError(error, for: op)
         }

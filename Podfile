@@ -5,7 +5,7 @@ install! 'cocoapods', :deterministic_uuids => false
 use_frameworks!
 
 def kin_base_dependencies
-    pod 'kin-stellar-ios-mac-sdk'
+    pod 'kin-stellar-ios-mac-sdk', '~> 1.7.4'
     pod 'PromisesSwift', '~> 1.2.8'
     pod 'Protobuf', '~> 3.0'
 end
