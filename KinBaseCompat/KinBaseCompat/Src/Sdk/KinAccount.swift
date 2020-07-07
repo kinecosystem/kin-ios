@@ -291,7 +291,7 @@ public final class KinAccount {
             emitter.next(balance)
         }
 
-        kinAccountContext.observeBalance()
+        kinAccountContext.observeBalance(mode: .active)
             .subscribe { newBalance in
                 emitter.next(newBalance.amount as Kin)
             }
