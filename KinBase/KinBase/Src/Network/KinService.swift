@@ -118,6 +118,8 @@ extension KinService: KinServiceType {
                         break
                     }
                     fallthrough
+                case .unavailable:
+                    respond.onError?(Errors.missingApi)
                 default:
                     var error = Errors.unknown
                     if let transientError = response.error {

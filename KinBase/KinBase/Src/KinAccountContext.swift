@@ -267,6 +267,7 @@ extension KinAccountContext: KinAccountReadOperations {
                     return self.service.getAccount(accountId: self.accountId)
                         .then(on: self.dispatchQueue) { self.storage.updateAccount($0) }
                         .recover(on: self.dispatchQueue) { _ in self.registerAccount(account: account) }
+                        .recover(on: self.dispatchQueue) { _ in return account }
                 case .registered:
                     if forceUpdate {
                         return self.service.getAccount(accountId: self.accountId)
