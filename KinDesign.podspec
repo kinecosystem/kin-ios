@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   s.source_files = 'KinDesign/KinDesign/Classes/**/*'
+  s.resources = 'KinDesign/KinDesign/*.{xcassets}'
   s.frameworks = 'UIKit'
 end
 
