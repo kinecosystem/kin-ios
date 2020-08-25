@@ -100,6 +100,12 @@ public protocol KinPaymentWriteOperations {
     func sendKinPayments(_ payments: [KinPaymentItem],
                          memo: KinMemo)
         -> Promise<[KinPayment]>
+
+    func payInvoice(processingAppIdx: AppIndex,
+                    destinationAccount: KinAccount.Id,
+                    invoice: Invoice,
+                    type: KinBinaryMemo.TransferType)
+        -> Promise<KinPayment>
 }
 
 /**
@@ -343,6 +349,10 @@ extension KinAccountContext: KinPaymentWriteOperations {
     }
 
     public func sendKinPayments(_ payments: [KinPaymentItem], memo: KinMemo) -> Promise<[KinPayment]> {
+        let invoices = payments.compactMap { $0.invoice }
+        let invoiceList = try? InvoiceList(invoices: invoices)
+        var resultTransaction: KinTransaction?
+
         return all(getAccount(), getFee())
             .then(on: dispatchQueue) { account, fee -> Promise<KinTransaction> in
                 self.service.buildAndSignTransaction(sourceKinAccount: account,
@@ -350,29 +360,57 @@ extension KinAccountContext: KinPaymentWriteOperations {
                                                      memo: memo,
                                                      fee: fee)
             }
-            .then(on: dispatchQueue) { transaction -> Promise<KinTransaction> in
-                self.service.submitTransaction(transaction: transaction)
+            .then(on: dispatchQueue) { signedTransaction -> Promise<KinTransaction> in
+                guard let transaction = try? KinTransaction(envelopeXdrBytes: signedTransaction.envelopeXdrBytes,
+                                                            record: signedTransaction.record,
+                                                            network: signedTransaction.network,
+                                                            invoiceList: invoiceList) else {
+                        throw Errors.unknown
+                }
+
+                return self.service.submitTransaction(transaction: transaction)
             }
-            .then(on: dispatchQueue) { [weak self] transaction -> [KinPayment] in
-                guard let self = self else {
+            .then(on: dispatchQueue) { transaction -> Promise<KinAccount> in
+                resultTransaction = transaction
+                return self.storage.advanceSequence(accountId: self.accountId)
+            }
+            .then(on: dispatchQueue) { _ in
+                self.storage.insertNewTransaction(accountId: self.accountId,
+                                                  newTransaction: resultTransaction!)
+            }
+            .then(on: dispatchQueue) { [weak self] transactions -> [KinPayment] in
+                guard let self = self, let transaction = transactions.first else {
                     throw Errors.unknown
                 }
 
-                _ = try await(self.storage.advanceSequence(accountId: self.accountId))
-                _ = try await(self.storage.insertNewTransaction(accountId: self.accountId,
-                                                                newTransaction: transaction))
                 let payments = transaction.kinPayments
                 let amountToDeduct = payments.reduce(Kin.zero) { $0 + $1.amount }
 
                 let account = try await(self.storage.deductFromAccountBalance(accountId: self.accountId,
                                                                               amount: amountToDeduct))
                 self.balanceSubject.onNext(account.balance)
-
                 return payments
             }
     }
 
-
+    public func payInvoice(processingAppIdx: AppIndex,
+                           destinationAccount: KinAccount.Id,
+                           invoice: Invoice,
+                           type: KinBinaryMemo.TransferType = .spend) -> Promise<KinPayment> {
+        do {
+            let invoiceList = try InvoiceList(invoices: [invoice])
+            let agoraMemo = try KinBinaryMemo(typeId: type.rawValue,
+                                          appIdx: processingAppIdx.value,
+                                          foreignKeyBytes: invoiceList.id.decode())
+            let paymentItem = KinPaymentItem(amount: invoice.total,
+                                             destAccountId: destinationAccount,
+                                             invoice: invoice)
+            return sendKinPayment(paymentItem,
+                                  memo: agoraMemo.kinMemo)
+        } catch let error {
+            return .init(error)
+        }
+    }
 }
 
 // MARK: Private
@@ -435,7 +473,12 @@ extension KinAccountContext {
         accountObservable = service.streamAccount(accountId: self.accountId)
             .subscribe { [weak self] account in
                 self?.storage.updateAccount(account)
+                    // Yea...this 5s delay is gross but reads aren't
+                    // deterministic with the account update events so
+                    // instead of polling (worse), we delay for a
+                    // 'best effort' history update.
                     .then { self?.balanceSubject.onNext($0.balance) }
+                    .delay(5)
                     .then { self?.fetchUpdatedTransactionHistory() }
                     .catch { _ in }
                 }
@@ -449,10 +492,10 @@ extension KinAccountContext {
                     return .init(Errors.unknown)
                 }
 
-                if let headPagingToken = transactions?.headPagingToken {
+                if let headPagingToken = transactions?.headPagingToken, !headPagingToken.isEmpty {
                     return self.service.getTransactionPage(accountId: self.accountId,
                                                            pagingToken: headPagingToken,
-                                                           order: .ascending)
+                                                           order: .descending)
                 } else {
                     return self.service.getLatestTransactions(accountId: self.accountId)
                 }

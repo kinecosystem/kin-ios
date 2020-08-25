@@ -1,32 +1,237 @@
 PODS:
-  - kin-stellar-ios-mac-sdk (1.7.4)
+  - "!ProtoCompiler (3.11.2)":
+    - Protobuf (~> 3.0)
+  - "!ProtoCompiler-gRPCPlugin (1.28.2)":
+    - "!ProtoCompiler (= 3.11.2)"
+    - gRPC-ProtoRPC (= 1.28.2)
+  - abseil/algorithm/algorithm (0.20200225.0):
+    - abseil/base/config
+  - abseil/base/atomic_hook (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+  - abseil/base/base (0.20200225.0):
+    - abseil/base/atomic_hook
+    - abseil/base/base_internal
+    - abseil/base/config
+    - abseil/base/core_headers
+    - abseil/base/dynamic_annotations
+    - abseil/base/log_severity
+    - abseil/base/raw_logging_internal
+    - abseil/base/spinlock_wait
+    - abseil/meta/type_traits
+  - abseil/base/base_internal (0.20200225.0):
+    - abseil/base/config
+    - abseil/meta/type_traits
+  - abseil/base/bits (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+  - abseil/base/config (0.20200225.0)
+  - abseil/base/core_headers (0.20200225.0):
+    - abseil/base/config
+  - abseil/base/dynamic_annotations (0.20200225.0)
+  - abseil/base/endian (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+  - abseil/base/errno_saver (0.20200225.0):
+    - abseil/base/config
+  - abseil/base/log_severity (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+  - abseil/base/raw_logging_internal (0.20200225.0):
+    - abseil/base/atomic_hook
+    - abseil/base/config
+    - abseil/base/core_headers
+    - abseil/base/log_severity
+  - abseil/base/spinlock_wait (0.20200225.0):
+    - abseil/base/base_internal
+    - abseil/base/core_headers
+    - abseil/base/errno_saver
+  - abseil/base/throw_delegate (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/raw_logging_internal
+  - abseil/container/compressed_tuple (0.20200225.0):
+    - abseil/utility/utility
+  - abseil/container/inlined_vector (0.20200225.0):
+    - abseil/algorithm/algorithm
+    - abseil/base/core_headers
+    - abseil/base/throw_delegate
+    - abseil/container/inlined_vector_internal
+    - abseil/memory/memory
+  - abseil/container/inlined_vector_internal (0.20200225.0):
+    - abseil/base/core_headers
+    - abseil/container/compressed_tuple
+    - abseil/memory/memory
+    - abseil/meta/type_traits
+    - abseil/types/span
+  - abseil/memory/memory (0.20200225.0):
+    - abseil/base/core_headers
+    - abseil/meta/type_traits
+  - abseil/meta/type_traits (0.20200225.0):
+    - abseil/base/config
+  - abseil/numeric/int128 (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+  - abseil/strings/internal (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+    - abseil/base/endian
+    - abseil/base/raw_logging_internal
+    - abseil/meta/type_traits
+  - abseil/strings/str_format (0.20200225.0):
+    - abseil/strings/str_format_internal
+  - abseil/strings/str_format_internal (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/core_headers
+    - abseil/meta/type_traits
+    - abseil/numeric/int128
+    - abseil/strings/strings
+    - abseil/types/span
+  - abseil/strings/strings (0.20200225.0):
+    - abseil/base/base
+    - abseil/base/bits
+    - abseil/base/config
+    - abseil/base/core_headers
+    - abseil/base/endian
+    - abseil/base/raw_logging_internal
+    - abseil/base/throw_delegate
+    - abseil/memory/memory
+    - abseil/meta/type_traits
+    - abseil/numeric/int128
+    - abseil/strings/internal
+  - abseil/types/bad_optional_access (0.20200225.0):
+    - abseil/base/config
+    - abseil/base/raw_logging_internal
+  - abseil/types/optional (0.20200225.0):
+    - abseil/base/base_internal
+    - abseil/base/config
+    - abseil/base/core_headers
+    - abseil/memory/memory
+    - abseil/meta/type_traits
+    - abseil/types/bad_optional_access
+    - abseil/utility/utility
+  - abseil/types/span (0.20200225.0):
+    - abseil/algorithm/algorithm
+    - abseil/base/core_headers
+    - abseil/base/throw_delegate
+    - abseil/meta/type_traits
+  - abseil/utility/utility (0.20200225.0):
+    - abseil/base/base_internal
+    - abseil/base/config
+    - abseil/meta/type_traits
+  - BoringSSL-GRPC (0.0.7):
+    - BoringSSL-GRPC/Implementation (= 0.0.7)
+    - BoringSSL-GRPC/Interface (= 0.0.7)
+  - BoringSSL-GRPC/Implementation (0.0.7):
+    - BoringSSL-GRPC/Interface (= 0.0.7)
+  - BoringSSL-GRPC/Interface (0.0.7)
+  - gRPC-Core (1.28.2):
+    - gRPC-Core/Implementation (= 1.28.2)
+    - gRPC-Core/Interface (= 1.28.2)
+  - gRPC-Core/Implementation (1.28.2):
+    - abseil/container/inlined_vector (= 0.20200225.0)
+    - abseil/memory/memory (= 0.20200225.0)
+    - abseil/strings/str_format (= 0.20200225.0)
+    - abseil/strings/strings (= 0.20200225.0)
+    - abseil/types/optional (= 0.20200225.0)
+    - BoringSSL-GRPC (= 0.0.7)
+    - gRPC-Core/Interface (= 1.28.2)
+  - gRPC-Core/Interface (1.28.2)
+  - gRPC-ProtoRPC (1.28.2):
+    - gRPC-ProtoRPC/Legacy (= 1.28.2)
+    - gRPC-ProtoRPC/Legacy-Header (= 1.28.2)
+    - gRPC-ProtoRPC/Main (= 1.28.2)
+  - gRPC-ProtoRPC/Legacy (1.28.2):
+    - gRPC-ProtoRPC/Legacy-Header (= 1.28.2)
+    - gRPC-ProtoRPC/Main (= 1.28.2)
+    - gRPC-RxLibrary (= 1.28.2)
+    - gRPC/GRPCCore (= 1.28.2)
+    - Protobuf (~> 3.0)
+  - gRPC-ProtoRPC/Legacy-Header (1.28.2)
+  - gRPC-ProtoRPC/Main (1.28.2):
+    - gRPC-ProtoRPC/Legacy-Header (= 1.28.2)
+    - gRPC/Interface (= 1.28.2)
+    - Protobuf (~> 3.0)
+  - gRPC-RxLibrary (1.28.2):
+    - gRPC-RxLibrary/Implementation (= 1.28.2)
+    - gRPC-RxLibrary/Interface (= 1.28.2)
+  - gRPC-RxLibrary/Implementation (1.28.2):
+    - gRPC-RxLibrary/Interface
+  - gRPC-RxLibrary/Interface (1.28.2)
+  - gRPC/GRPCCore (1.28.2):
+    - gRPC-Core (= 1.28.2)
+    - gRPC-RxLibrary (= 1.28.2)
+    - gRPC/Interface (= 1.28.2)
+    - gRPC/Interface-Legacy (= 1.28.2)
+  - gRPC/Interface (1.28.2):
+    - gRPC/Interface-Legacy (= 1.28.2)
+  - gRPC/Interface-Legacy (1.28.2):
+    - gRPC-RxLibrary/Interface (= 1.28.2)
+  - kin-stellar-ios-mac-sdk (1.7.5)
+  - KinGrpcApi (0.2.0):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
+    - KinGrpcApi/Messages (= 0.2.0)
+    - KinGrpcApi/Services (= 0.2.0)
+  - KinGrpcApi/Messages (0.2.0):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
+    - Protobuf (~> 3.11.4)
+  - KinGrpcApi/Services (0.2.0):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
+    - gRPC-ProtoRPC (~> 1.28.0)
+    - KinGrpcApi/Messages
   - PromisesObjC (1.2.9)
   - PromisesSwift (1.2.9):
     - PromisesObjC (= 1.2.9)
-  - Protobuf (3.12.0)
+  - Protobuf (3.11.4)
   - Sodium (0.8.0)
 
 DEPENDENCIES:
-  - kin-stellar-ios-mac-sdk (~> 1.7.4)
+  - kin-stellar-ios-mac-sdk (~> 1.7.5)
+  - "KinGrpcApi (from `git@github.com:kinecosystem/kin-ios.git`, branch `dev`)"
   - PromisesSwift (~> 1.2.8)
-  - Protobuf (~> 3.0)
   - Sodium (= 0.8.0)
 
 SPEC REPOS:
   trunk:
+    - "!ProtoCompiler"
+    - "!ProtoCompiler-gRPCPlugin"
+    - abseil
+    - BoringSSL-GRPC
+    - gRPC
+    - gRPC-Core
+    - gRPC-ProtoRPC
+    - gRPC-RxLibrary
     - kin-stellar-ios-mac-sdk
     - PromisesObjC
     - PromisesSwift
     - Protobuf
     - Sodium
 
+EXTERNAL SOURCES:
+  KinGrpcApi:
+    :branch: dev
+    :git: "git@github.com:kinecosystem/kin-ios.git"
+
+CHECKOUT OPTIONS:
+  KinGrpcApi:
+    :commit: 117241b2aede38b57fe63c8b8b82355a95bafc78
+    :git: "git@github.com:kinecosystem/kin-ios.git"
+
 SPEC CHECKSUMS:
-  kin-stellar-ios-mac-sdk: b82c65878d3e65643fed7d7ad1fc758a94e6b058
+  "!ProtoCompiler": da24805d8339f352ec7bb4cb4df2db6a3be45665
+  "!ProtoCompiler-gRPCPlugin": 5b943196cbcceb70b0307c7f344d843aa506aea0
+  abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  gRPC: bc33d0d34a369a3466f6db65119532d110bead9e
+  gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
+  gRPC-ProtoRPC: cb8a66ef60a177174bae734ae54efa4188846dfc
+  gRPC-RxLibrary: d3e2f7e4c3c36dc1b45b7c47f6961f894c9d6810
+  kin-stellar-ios-mac-sdk: b3069fd5023286c49a4f593d0b094e9ce609ddbe
+  KinGrpcApi: e9f44c26aff1948cd86e0e7157711862b950111a
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
-  Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: 272797048f881bb72e0cf6af78ad9779d1f8f446
+PODFILE CHECKSUM: 262eb100500033080a8887b0fef70940ae0dc121
 
 COCOAPODS: 1.8.3

@@ -36,6 +36,7 @@ public struct KinPayment: Equatable {
     public let timestamp: TimeInterval
     public let extra: Addendum? = nil
     public let error: Error? = nil
+    public let invoice: Invoice?
 
     public static func == (lhs: KinPayment, rhs: KinPayment) -> Bool {
         return lhs.id == rhs.id &&
@@ -45,17 +46,21 @@ public struct KinPayment: Equatable {
             lhs.amount == rhs.amount &&
             lhs.fee == rhs.fee &&
             lhs.timestamp == rhs.timestamp &&
-            lhs.extra == rhs.extra
+            lhs.extra == rhs.extra &&
+            lhs.invoice == rhs.invoice
     }
 }
 
 public struct KinPaymentItem {
     public let amount: Kin
     public let destAccountId: KinAccount.Id
+    public let invoice: Invoice?
 
     public init(amount: Kin,
-                destAccountId: KinAccount.Id) {
+                destAccountId: KinAccount.Id,
+                invoice: Invoice? = nil) {
         self.amount = amount
         self.destAccountId = destAccountId
+        self.invoice = invoice
     }
 }

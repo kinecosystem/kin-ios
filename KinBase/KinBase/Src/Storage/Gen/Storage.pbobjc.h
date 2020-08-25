@@ -27,6 +27,7 @@
 
 CF_EXTERN_C_BEGIN
 
+@class KinStorageInvoiceListBlob;
 @class KinStorageKinBalance;
 @class KinStorageKinTransaction;
 @class KinStoragePrivateKey;
@@ -231,6 +232,32 @@ typedef GPB_ENUM(KinStorageKinTransactions_FieldNumber) {
 
 /** The oldest paging token to query older transactions with */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *tailPagingToken;
+
+@end
+
+#pragma mark - KinStorageInvoiceListBlob
+
+typedef GPB_ENUM(KinStorageInvoiceListBlob_FieldNumber) {
+  KinStorageInvoiceListBlob_FieldNumber_NetworkInvoiceList = 1,
+};
+
+@interface KinStorageInvoiceListBlob : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSData *networkInvoiceList;
+
+@end
+
+#pragma mark - KinStorageInvoices
+
+typedef GPB_ENUM(KinStorageInvoices_FieldNumber) {
+  KinStorageInvoices_FieldNumber_InvoiceLists = 1,
+};
+
+@interface KinStorageInvoices : GPBMessage
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableDictionary<NSString*, KinStorageInvoiceListBlob*> *invoiceLists;
+/** The number of items in @c invoiceLists without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger invoiceLists_Count;
 
 @end
 

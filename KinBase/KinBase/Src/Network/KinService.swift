@@ -55,6 +55,11 @@ public class KinService {
         /// to upgrade to a newer version of the software that should contain a more
         /// recent version of this SDK.
         case upgradeRequired
+        case itemNotFound
+        case insufficientFee
+        case badSequenceNumber
+        case webhookRejectedTransaction
+        case invoiceErrorsInRequest(errors: [InvoiceError])
 
         public static func == (lhs: KinService.Errors, rhs: KinService.Errors) -> Bool {
             switch (lhs, rhs) {
@@ -70,6 +75,16 @@ public class KinService {
                 return true
             case (.upgradeRequired, .upgradeRequired):
                 return true
+            case (.itemNotFound, .itemNotFound):
+                return true
+            case (.insufficientFee, .insufficientFee):
+                return true
+            case (.badSequenceNumber, .badSequenceNumber):
+                return true
+            case (.webhookRejectedTransaction, .webhookRejectedTransaction):
+                return true
+            case (.invoiceErrorsInRequest(_), .invoiceErrorsInRequest(_)):
+                return true
             default:
                 return false
             }
@@ -84,6 +99,7 @@ public class KinService {
     private let accountCreationApi: KinAccountCreationApi
     private let transactionApi: KinTransactionApi
     private let transactionWhitelistingApi: KinTransactionWhitelistingApi
+    private let streamingApi: KinStreamingApi
 
     public init(network: KinNetwork,
                 networkOperationHandler: NetworkOperationHandler,
@@ -91,7 +107,8 @@ public class KinService {
                 accountApi: KinAccountApi,
                 accountCreationApi: KinAccountCreationApi,
                 transactionApi: KinTransactionApi,
-                transactionWhitelistingApi: KinTransactionWhitelistingApi) {
+                transactionWhitelistingApi: KinTransactionWhitelistingApi,
+                streamingApi: KinStreamingApi) {
         self.network = network
         self.networkOperationHandler = networkOperationHandler
         self.dispatchQueue = dispatchQueue
@@ -99,6 +116,7 @@ public class KinService {
         self.accountCreationApi = accountCreationApi
         self.transactionApi = transactionApi
         self.transactionWhitelistingApi = transactionWhitelistingApi
+        self.streamingApi = streamingApi
     }
 }
 
@@ -146,7 +164,9 @@ extension KinService: KinServiceType {
                         break
                     }
                     fallthrough
-                case .error:
+                case .notFound:
+                    respond.onError?(Errors.itemNotFound)
+                case .transientFailure:
                     var error = Errors.unknown
                     if let transientError = response.error {
                         error = Errors.transientFailure(error: transientError)
@@ -160,7 +180,7 @@ extension KinService: KinServiceType {
     }
 
     public func streamAccount(accountId: KinAccount.Id) -> Observable<KinAccount> {
-        return accountApi.streamAccount(accountId)
+        return streamingApi.streamAccount(accountId)
     }
 
     public func getLatestTransactions(accountId: KinAccount.Id) -> Promise<[KinTransaction]> {
@@ -181,7 +201,9 @@ extension KinService: KinServiceType {
                         break
                     }
                     fallthrough
-                case .error:
+                case .notFound:
+                    respond.onError?(Errors.itemNotFound)
+                case .transientFailure:
                     var error = Errors.unknown
                     if let transientError = response.error {
                         error = Errors.transientFailure(error: transientError)
@@ -214,7 +236,9 @@ extension KinService: KinServiceType {
                         break
                     }
                     fallthrough
-                case .error:
+                case .notFound:
+                    respond.onError?(Errors.itemNotFound)
+                case .transientFailure:
                     var error = Errors.unknown
                     if let transientError = response.error {
                         error = Errors.transientFailure(error: transientError)
@@ -243,7 +267,9 @@ extension KinService: KinServiceType {
                         break
                     }
                     fallthrough
-                case .error:
+                case .notFound:
+                    respond.onError?(Errors.itemNotFound)
+                case .transientFailure:
                     var error = Errors.unknown
                     if let transientError = response.error {
                         error = Errors.transientFailure(error: transientError)
@@ -314,7 +340,7 @@ extension KinService: KinServiceType {
                 let nonZeroFee = fee > 0 ? UInt32(fee) : Transaction.defaultOperationFee
                 let transaction = try Transaction(sourceAccount: sourceKinAccount,
                                                   operations: paymentOperations,
-                                                  memo: try Memo(text: memo.text),
+                                                  memo: memo.stellarMemo ?? Memo.none,
                                                   timeBounds: nil,
                                                   maxOperationFee: nonZeroFee)
 
@@ -337,7 +363,8 @@ extension KinService: KinServiceType {
                 return
             }
 
-            let request = SubmitTransactionRequest(transactionEnvelopeXdr: Data(transaction.envelopeXdrBytes).base64EncodedString())
+            let request = SubmitTransactionRequest(transactionEnvelopeXdr: transaction.envelopeXdrString,
+                                                   invoiceList: transaction.invoiceList)
             self.transactionApi.submitTransaction(request: request) { response in
                 switch response.result {
                 case .ok:
@@ -350,6 +377,21 @@ extension KinService: KinServiceType {
                     respond.onError?(Errors.insufficientBalance)
                 case .upgradeRequired:
                     respond.onError?(Errors.upgradeRequired)
+                case .badSequenceNumber:
+                    respond.onError?(Errors.badSequenceNumber)
+                case .insufficientFee:
+                    respond.onError?(Errors.insufficientFee)
+                case .noAccount:
+                    respond.onError?(Errors.itemNotFound)
+                case .webhookRejected:
+                    respond.onError?(Errors.webhookRejectedTransaction)
+                case .invoiceError:
+                    guard let error = response.error as? AgoraKinTransactionsApi.Errors,
+                        case let .invoiceErrors(invoiceErrors) = error else {
+                        fallthrough
+                    }
+
+                    respond.onError?(Errors.invoiceErrorsInRequest(errors: invoiceErrors))
                 default:
                     var error = Errors.unknown
                     if let transientError = response.error {
@@ -362,6 +404,6 @@ extension KinService: KinServiceType {
     }
 
     public func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction> {
-        return transactionApi.streamNewTransactions(accountId: accountId)
+        return streamingApi.streamNewTransactions(accountId: accountId)
     }
 }

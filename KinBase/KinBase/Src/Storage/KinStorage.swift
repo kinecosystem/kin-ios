@@ -42,6 +42,11 @@ public protocol KinStorageType {
     func insertNewTransaction(accountId: KinAccount.Id,
                               newTransaction: KinTransaction) -> Promise<[KinTransaction]>
 
+    func addInvoiceLists(accountId: KinAccount.Id,
+                         invoiceLists: [InvoiceList]) -> Promise<[InvoiceList]>
+
+    func getInvoiceListsMapForAccountId(account: KinAccount.Id) -> Promise<[InvoiceList.Id: InvoiceList]>
+
     func setMinFee(_ fee: Quark)
 
     func getMinFee() -> Quark?

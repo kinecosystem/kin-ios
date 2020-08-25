@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BaseViewModel Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/BaseViewModel" class="dashAnchor"></a>
+    <a title="BaseViewModel Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">KinUX Docs</a> (4% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">KinUX Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        BaseViewModel Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/BaseObservableViewModel.html">BaseObservableViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BaseViewModel.html">BaseViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinNavigationController.html">KinNavigationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KinPresentationController.html">KinPresentationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaymentFlowController.html">PaymentFlowController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaymentFlowViewController.html">PaymentFlowViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PaymentFlowViewModel.html">PaymentFlowViewModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SheetPresentationController.html">SheetPresentationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SheetTransition.html">SheetTransition</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/PaymentFlowFailureReason.html">PaymentFlowFailureReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PaymentFlowViewModelResult.html">PaymentFlowViewModelResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PaymentFlowViewModelState.html">PaymentFlowViewModelState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SheetTransitionCover.html">SheetTransitionCover</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Invoice.html">Invoice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LineItem.html">LineItem</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:5KinUX9NavigatorP">Navigator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ObservableViewModelType.html">ObservableViewModelType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PaymentFlowViewModelType.html">PaymentFlowViewModelType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ViewModelType.html">ViewModelType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/PaymentFlowError.html">PaymentFlowError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PaymentFlowViewModelArgs.html">PaymentFlowViewModelArgs</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:5KinUX13StateListenera">StateListener</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>BaseViewModel</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">BaseViewModel</span><span class="o">&lt;</span><span class="kt">ArgsType</span><span class="p">,</span> <span class="kt">StateType</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/BaseObservableViewModel.html">BaseObservableViewModel</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Protocols/ViewModelType.html">ViewModelType</a></span> <span class="k">where</span> <span class="kt">StateType</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5KinUX13BaseViewModelC8ArgsTypea"></a>
+                    <a name="//apple_ref/swift/Alias/ArgsType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5KinUX13BaseViewModelC8ArgsTypea">ArgsType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ArgsType</span> <span class="o">=</span> <span class="kt">ArgsType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5KinUX13BaseViewModelC9StateTypea"></a>
+                    <a name="//apple_ref/swift/Alias/StateType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5KinUX13BaseViewModelC9StateTypea">StateType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">StateType</span> <span class="o">=</span> <span class="kt">StateType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5KinUX13BaseViewModelC7cleanupyyF"></a>
+                    <a name="//apple_ref/swift/Method/cleanup()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5KinUX13BaseViewModelC7cleanupyyF">cleanup()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">cleanup</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2020-08-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

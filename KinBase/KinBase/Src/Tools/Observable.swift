@@ -68,6 +68,14 @@ public class Observable<Element>: Disposable {
         disposeBag.add(self)
         return self
     }
+
+    public func filter(_ isIncluded: @escaping (Element) -> Bool) -> Observable<Element> {
+        fatalError("Missing Implementation")
+    }
+
+    public func map<Result>(_ transform: @escaping (Element) -> Result) -> Observable<Result> {
+        fatalError("Missing Implementation")
+    }
 }
 
 public class ValueSubject<Element>: Observable<Element>, ObserverType {
@@ -81,6 +89,7 @@ public class ValueSubject<Element>: Observable<Element>, ObserverType {
 
     private var currentValue: Element?
 
+    @discardableResult
     public override func subscribe(_ listener: @escaping ValueListener) -> Self {
         queue.sync {
             listeners.append(listener)
@@ -117,11 +126,40 @@ public class ValueSubject<Element>: Observable<Element>, ObserverType {
         }
     }
 
+    @discardableResult
     public override func doOnDisposed(_ onDisposed: @escaping () -> Void) -> Self {
         queue.sync {
             self.onDisposed.append(onDisposed)
         }
 
         return self
+    }
+
+    public override func filter(_ isIncluded: @escaping (Element) -> Bool) -> Observable<Element> {
+        let subject = ValueSubject<Element>()
+            .doOnDisposed { [weak self] in
+                self?.dispose()
+            }
+
+        subscribe { element in
+            if isIncluded(element) {
+                subject.onNext(element)
+            }
+        }
+
+        return subject
+    }
+
+    public override func map<Result>(_ transform: @escaping (Element) -> Result) -> Observable<Result> {
+        let subject = ValueSubject<Result>()
+            .doOnDisposed { [weak self] in
+                self?.dispose()
+            }
+
+        subscribe { element in
+            subject.onNext(transform(element))
+        }
+
+        return subject
     }
 }

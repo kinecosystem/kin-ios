@@ -8,6 +8,7 @@
 
 import Foundation
 import stellarsdk
+import KinGrpcApi
 
 // MARK: Models to KinStorage Objects
 extension PublicKey {
@@ -85,6 +86,27 @@ extension KinTransactions {
     }
 }
 
+extension Dictionary where Key == InvoiceList.Id, Value == InvoiceList {
+    var storableObject: KinStorageInvoices {
+        var invoiceLists = [String : KinStorageInvoiceListBlob]()
+        self.forEach { (key: SHA224Hash, value: InvoiceList) in
+            invoiceLists[key.encodedValue] = value.storableObject
+        }
+
+        let storable = KinStorageInvoices()
+        storable.invoiceLists = NSMutableDictionary(dictionary: invoiceLists)
+        return storable
+    }
+}
+
+extension InvoiceList {
+    public var storableObject: KinStorageInvoiceListBlob {
+        let storable = KinStorageInvoiceListBlob()
+        storable.networkInvoiceList = self.proto.data()
+        return storable
+    }
+}
+
 // MARK: KinStorage Objects to Models
 extension KinStoragePublicKey {
     var publicKey: PublicKey? {
@@ -142,10 +164,19 @@ extension KinStorageKinTransaction_Status {
 
 extension KinStorageKinTransaction {
     func kinTransaction(network: KinNetwork) -> KinTransaction? {
-        let record = KinTransaction.Record(recordType: status.kinTransactionRecordType,
-                                           timestamp: TimeInterval(timestamp),
-                                           resultXdrBytes: [Byte](resultXdr),
-                                           pagingToken: pagingToken)
+        let record: KinTransaction.Record
+        switch status.kinTransactionRecordType {
+        case .inFlight:
+            record = .inFlight(ts: TimeInterval(timestamp))
+        case .acknowledged:
+            record = .acknowledged(ts: TimeInterval(timestamp),
+                                   resultXdrBytes: [Byte](resultXdr))
+        case .historical:
+            record = .historical(ts: TimeInterval(timestamp),
+                                 resultXdrBytes: [Byte](resultXdr),
+                                 pagingToken: pagingToken)
+        }
+
         return try? KinTransaction(envelopeXdrBytes: [Byte](envelopeXdr),
                                    record: record,
                                    network: network)
@@ -161,5 +192,32 @@ extension KinStorageKinTransactions {
         return KinTransactions(items: transactions,
                                headPagingToken: headPagingToken ?? "",
                                tailPagingToken: tailPagingToken ?? "")
+    }
+}
+
+extension KinStorageInvoices {
+    var invoicesMap: [InvoiceList.Id: InvoiceList] {
+        guard let invoices = invoiceLists as? [String: KinStorageInvoiceListBlob] else {
+            return [:]
+        }
+
+        var map = [InvoiceList.Id: InvoiceList]()
+
+        invoices.forEach { (key: String, value: KinStorageInvoiceListBlob) in
+            map[SHA224Hash(encodedValue: key)] = value.invoiceList
+        }
+
+        return map
+    }
+}
+
+extension KinStorageInvoiceListBlob {
+    public var invoiceList: InvoiceList? {
+        guard networkInvoiceList != nil,
+            let protoInvoiceList = try? APBCommonV3InvoiceList(data: networkInvoiceList) else {
+            return nil
+        }
+
+        return protoInvoiceList.invoiceList
     }
 }

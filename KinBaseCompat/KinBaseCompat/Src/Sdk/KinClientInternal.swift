@@ -22,7 +22,7 @@ class KinClientInternal {
         self.url = nodeProviderUrl
         self.network = network
         self.appId = appId
-        self.kinEnvironment = network == .mainNet ? .mainNet() : .testNet()
+        self.kinEnvironment = network == .mainNet ? KinEnvironment.Agora.mainNet() : KinEnvironment.Agora.testNet()
         self.accounts = KinAccounts(kinEnvironment: kinEnvironment,
                                     appId: appId)
     }

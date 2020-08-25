@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinBaseCompat'
-  s.version          = '0.1.3'
+  s.version          = '0.2.0'
   s.summary          = 'Kin SDK for iOS'
 
   s.description      = <<-DESC
@@ -27,6 +27,22 @@ Pod::Spec.new do |s|
   s.source_files = 'KinBaseCompat/KinBaseCompat/Src/**/*.swift'
   s.resources = 'KinBaseCompat/KinBaseCompat/Src/KinBackupRestoreModule/*.{strings,xcassets}'
 
-  s.dependency 'KinBase', '~> 0.1.3'
+  s.dependency 'KinBase', '~> 0.2.0'
   s.dependency 'Sodium', '0.8.0'
+
+  # Dependencies needed for KinGrpcApi
+  s.dependency 'gRPC-ProtoRPC'
+  s.dependency 'Protobuf'
+
+  s.pod_target_xcconfig = {
+      # This is needed by all pods that depend on Protobuf:
+      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1 GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO=1',
+      # This is needed by all pods that depend on gRPC-RxLibrary:
+      'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+      # This is needed for the user Podfile to use_framework! https://github.com/CocoaPods/CocoaPods/issues/4605
+      'USE_HEADERMAP' => 'NO',
+      'ALWAYS_SEARCH_USER_PATHS' => 'NO',
+      'USER_HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/KinGrpcApi/KinGrpcApi/gen',
+      'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/KinGrpcApi/KinGrpcApi/gen'
+  }
 end

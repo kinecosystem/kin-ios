@@ -88,6 +88,14 @@ class MockKinStorage: KinStorageType {
         return .init(oldTransactions)
     }
 
+    func addInvoiceLists(accountId: KinAccount.Id, invoiceLists: [InvoiceList]) -> Promise<[InvoiceList]> {
+        return .init([])
+    }
+
+    func getInvoiceListsMapForAccountId(account: KinAccount.Id) -> Promise<[InvoiceList.Id : InvoiceList]> {
+        return .init([:])
+    }
+
     func setMinFee(_ fee: Quark) {
 
     }

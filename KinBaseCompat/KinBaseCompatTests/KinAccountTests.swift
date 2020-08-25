@@ -444,7 +444,7 @@ extension KinAccountTests {
             kinClient.minFee().then { quark in
                 let fee = (Kin(quark) / Kin(AssetUnitDivisor))
 
-                XCTAssertEqual(balance0, startBalance0 - sendAmount - fee)
+                XCTAssertEqual(balance0, startBalance0 - sendAmount)
                 XCTAssertEqual(balance1, startBalance1 + sendAmount)
 
                 completion()

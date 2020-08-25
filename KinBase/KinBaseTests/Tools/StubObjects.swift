@@ -8,11 +8,15 @@
 
 import Foundation
 import stellarsdk
+import KinGrpcApi
 @testable import KinBase
 
 class StubObjects {
     static let accountId1 = "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM"
     static let accountId2 = "GBD2LB2VV2GKLO5RBNJKL7IP3WSN2BK46KSYEMDCYZSWLVA5HC7TYR72"
+    static let agoraTestAppAccountId = "GDHCB4VCNNFIMZI3BVHLA2FVASECBR2ZXHOAXEBBFVUH5G2YAD7V3JVH"
+    static let badAccountId = "GAXOKOHOUOED5V6PDQP3XNXTJ25Y5DH4MEMY2RRYHYO5F5BVYZ6F7L3D"
+    static let androidTestAccountId = "GDOC25WFE2XQBNXCQ6TTI7H4CBS2CRAQ6BBV5VYFG4GUGBZY7QERNIW4"
 
     static let seed1 = "SA5XMJ7XKHFWO6JYE6IWN7OZIV75QBAXIIO2WBKPEG4Q2VEQ2MEOB6XN"
     static let seed2 = "SDXHKOQBDGQ4GPZN44OQCM242ZEAAWZG5HS6NSSP6NS767RIVJ6VXRAA"
@@ -24,6 +28,8 @@ class StubObjects {
     static let transactionEvelope1 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDpSBbgeceq6/vcEh3/blqn0qNYo4q8DLHes4DADOPzunvSjREWBeKJC9SdaKhtCnrcv3J04V1MVmdN5iDQ5HcP"
 
     static let transactionEvelope2 = "AAAAAOzFRF9HqAO0rV5fj+w1jKBgOR2nObp9g7EMA2/HCSx7AAAAZABbBVMAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAA7MVEX0eoA7StXl+P7DWMoGA5Hac5un2DsQwDb8cJLHsAAAABAAAAAEE14+z9KYW9IT2Qgdpwth9IqeNZZcQzMJwy1OMeIywbAAAAAAAAAAAAmJaAAAAAAAAAAAHHCSx7AAAAQA0iuANUcSwZnSlBBbESVDnDANb6BkHmJAow6ZNIaNaiWX0ykBgsyxbqDLMbttqixCBzNfqJg1XDuVbO1jYBPA4="
+
+    static let transactionResult1 = "AAAAAAAAAGQAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAA="
 
     static let transationResponse1 = """
         {
@@ -73,17 +79,54 @@ class StubObjects {
         }
     """
 
+    static let stubInvoiceList1: InvoiceList =
+        try! InvoiceList(invoices: [StubObjects.stubInvoice,
+                                    StubObjects.stubInvoice])
+
+    static let stubInvoiceList2: InvoiceList =
+        try! InvoiceList(invoices: [StubObjects.stubInvoice])
+
+    static let stubInvoice: Invoice =
+        try! Invoice(lineItems: [StubObjects.stubLineItem])
+
+    static let stubLineItem: LineItem =
+        try! LineItem(title: "title",
+                      description: "desc",
+                      amount: Kin(123),
+                      sku: SKU(bytes: [1, 3, 0]))
+
+    static let stubInvoiceListProto: APBCommonV3InvoiceList = {
+        let invoiceList = APBCommonV3InvoiceList()
+        invoiceList.invoicesArray = [StubObjects.stubInvoiceProto]
+        return invoiceList
+    }()
+
+    static let stubInvoiceProto: APBCommonV3Invoice = {
+        let invoice = APBCommonV3Invoice()
+        invoice.itemsArray = [StubObjects.stubLineItemProto, StubObjects.stubLineItemProto]
+        return invoice
+    }()
+
+    static let stubLineItemProto: APBCommonV3Invoice_LineItem = {
+        let item = APBCommonV3Invoice_LineItem()
+        item.amount = 10
+        item.title = "title"
+        item.description_p = "description"
+        return item
+    }()
+
     static func inFlightTransaction(from envelope: String) -> KinTransaction {
         return try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
                                    record: .inFlight(ts: Date().timeIntervalSince1970),
                                    network: .testNet)
     }
 
-    static func ackedTransaction(from envelope: String) -> KinTransaction {
+    static func ackedTransaction(from envelope: String, withInvoice: Bool = false) -> KinTransaction {
         return try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
                                    record: .acknowledged(ts: Date().timeIntervalSince1970,
                                                          resultXdrBytes: [0, 1, 2]),
-                                   network: .testNet)
+                                   network: .testNet,
+                                   invoiceList: withInvoice ? stubInvoiceList1 : nil)
     }
 
     static func historicalTransaction(from envelope: String) -> KinTransaction {

@@ -31,4 +31,17 @@ public extension KinNetwork {
             return "https://horizon-testnet.kininfrastructure.com"
         }
     }
+
+    var agoraUrl: String {
+        switch self {
+        case .mainNet:
+            return "api.agorainfra.net:" + tlsPort
+        case .testNet:
+            return "api.agorainfra.dev:" + tlsPort
+        }
+    }
+
+    private var tlsPort: String {
+        return "443"
+    }
 }

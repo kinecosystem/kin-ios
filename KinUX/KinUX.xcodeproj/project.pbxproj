@@ -1,0 +1,704 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		44515D15B4FE4D7B93772908 /* Pods_KinUX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5157BBCF03348BE7D5E7A16 /* Pods_KinUX.framework */; };
+		8525B7D524D90482008277AB /* KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7D224D90482008277AB /* KinBase.framework */; };
+		8525B7D624D90482008277AB /* KinBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7D224D90482008277AB /* KinBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8525B7D724D90482008277AB /* KinDesign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7D324D90482008277AB /* KinDesign.framework */; };
+		8525B7D824D90482008277AB /* KinDesign.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7D324D90482008277AB /* KinDesign.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8525B7DD24D906D6008277AB /* PaymentFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7DC24D906D6008277AB /* PaymentFlowViewModel.swift */; };
+		8525B7DF24D9A814008277AB /* PaymentFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7DE24D9A814008277AB /* PaymentFlowViewController.swift */; };
+		8525B7E524D9B7AE008277AB /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7E424D9B7AE008277AB /* ViewModelType.swift */; };
+		8525B7E724D9B7B7008277AB /* PaymentFlowViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7E624D9B7B7008277AB /* PaymentFlowViewModelType.swift */; };
+		8525B7ED24DB4FE7008277AB /* PaymentFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7EC24DB4FE7008277AB /* PaymentFlowController.swift */; };
+		8585A0492375E27300FE9A0C /* KinUX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8585A03F2375E27200FE9A0C /* KinUX.framework */; };
+		8585A04E2375E27300FE9A0C /* KinUXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8585A04D2375E27300FE9A0C /* KinUXTests.swift */; };
+		8597CB0A2384437200B08E1D /* KinNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8597CB092384437200B08E1D /* KinNavigationController.swift */; };
+		8597CB0C238445A800B08E1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8597CB0B238445A800B08E1D /* Assets.xcassets */; };
+		8597CB1E2388825900B08E1D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8597CB202388825900B08E1D /* Localizable.strings */; };
+		8597CB2A238C667300B08E1D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8597CB29238C667300B08E1D /* Extensions.swift */; };
+		85BFB4652383068600EA1485 /* KinPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BFB4642383068600EA1485 /* KinPresentationController.swift */; };
+		CB0C0198CCCBEA813413A225 /* Pods_KinUXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9181ADE01222F669786B449 /* Pods_KinUXTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8585A04A2375E27300FE9A0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8585A0362375E27200FE9A0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8585A03E2375E27200FE9A0C;
+			remoteInfo = KinUX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8525B7DB24D90483008277AB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8525B7D624D90482008277AB /* KinBase.framework in Embed Frameworks */,
+				8525B7D824D90482008277AB /* KinDesign.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		72A44279480138D3FE4E9BC5 /* Pods-KinUXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinUXTests.debug.xcconfig"; path = "Target Support Files/Pods-KinUXTests/Pods-KinUXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7C3C9B6CB9CA1CDAB68593D9 /* Pods-KinUXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinUXTests.release.xcconfig"; path = "Target Support Files/Pods-KinUXTests/Pods-KinUXTests.release.xcconfig"; sourceTree = "<group>"; };
+		8525B7D224D90482008277AB /* KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B7D324D90482008277AB /* KinDesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinDesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B7D424D90482008277AB /* KinViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B7DC24D906D6008277AB /* PaymentFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowViewModel.swift; sourceTree = "<group>"; };
+		8525B7DE24D9A814008277AB /* PaymentFlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowViewController.swift; sourceTree = "<group>"; };
+		8525B7E024D9ABCA008277AB /* KinGrpcApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinGrpcApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B7E424D9B7AE008277AB /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		8525B7E624D9B7B7008277AB /* PaymentFlowViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowViewModelType.swift; sourceTree = "<group>"; };
+		8525B7EC24DB4FE7008277AB /* PaymentFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowController.swift; sourceTree = "<group>"; };
+		8585A03F2375E27200FE9A0C /* KinUX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinUX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8585A0432375E27200FE9A0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8585A0482375E27300FE9A0C /* KinUXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinUXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8585A04D2375E27300FE9A0C /* KinUXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinUXTests.swift; sourceTree = "<group>"; };
+		8585A04F2375E27300FE9A0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8585A05B2375E34B00FE9A0C /* KinDesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinDesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8585A05F2375E34F00FE9A0C /* KinPresentation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinPresentation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8597CB092384437200B08E1D /* KinNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinNavigationController.swift; sourceTree = "<group>"; };
+		8597CB0B238445A800B08E1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8597CB1F2388825900B08E1D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8597CB29238C667300B08E1D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		85BFB45B237F597500EA1485 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		85BFB4642383068600EA1485 /* KinPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinPresentationController.swift; sourceTree = "<group>"; };
+		9495E848A14C5E2AA31C18B5 /* Pods-KinUX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinUX.debug.xcconfig"; path = "Target Support Files/Pods-KinUX/Pods-KinUX.debug.xcconfig"; sourceTree = "<group>"; };
+		AD74E7FF1E153B1B9A093ED6 /* Pods-KinUX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinUX.release.xcconfig"; path = "Target Support Files/Pods-KinUX/Pods-KinUX.release.xcconfig"; sourceTree = "<group>"; };
+		B5157BBCF03348BE7D5E7A16 /* Pods_KinUX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinUX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9181ADE01222F669786B449 /* Pods_KinUXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinUXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8585A03C2375E27200FE9A0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8525B7D524D90482008277AB /* KinBase.framework in Frameworks */,
+				8525B7D724D90482008277AB /* KinDesign.framework in Frameworks */,
+				44515D15B4FE4D7B93772908 /* Pods_KinUX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8585A0452375E27300FE9A0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8585A0492375E27300FE9A0C /* KinUX.framework in Frameworks */,
+				CB0C0198CCCBEA813413A225 /* Pods_KinUXTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8525B7D124D9040E008277AB /* PaymentFlow */ = {
+			isa = PBXGroup;
+			children = (
+				8525B7E624D9B7B7008277AB /* PaymentFlowViewModelType.swift */,
+				8525B7DC24D906D6008277AB /* PaymentFlowViewModel.swift */,
+				8525B7DE24D9A814008277AB /* PaymentFlowViewController.swift */,
+				8525B7EC24DB4FE7008277AB /* PaymentFlowController.swift */,
+			);
+			path = PaymentFlow;
+			sourceTree = "<group>";
+		};
+		8525B7E324D9B79E008277AB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8525B7E424D9B7AE008277AB /* ViewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8585A0352375E27200FE9A0C = {
+			isa = PBXGroup;
+			children = (
+				8585A0412375E27200FE9A0C /* KinUX */,
+				8585A04C2375E27300FE9A0C /* KinUXTests */,
+				8585A0402375E27200FE9A0C /* Products */,
+				8585A05A2375E34B00FE9A0C /* Frameworks */,
+				8DADC5E31A287EA331428EA7 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		8585A0402375E27200FE9A0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8585A03F2375E27200FE9A0C /* KinUX.framework */,
+				8585A0482375E27300FE9A0C /* KinUXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8585A0412375E27200FE9A0C /* KinUX */ = {
+			isa = PBXGroup;
+			children = (
+				8585A0592375E2D500FE9A0C /* Src */,
+				8585A0432375E27200FE9A0C /* Info.plist */,
+				8597CB202388825900B08E1D /* Localizable.strings */,
+				8597CB0B238445A800B08E1D /* Assets.xcassets */,
+			);
+			path = KinUX;
+			sourceTree = "<group>";
+		};
+		8585A04C2375E27300FE9A0C /* KinUXTests */ = {
+			isa = PBXGroup;
+			children = (
+				8585A04D2375E27300FE9A0C /* KinUXTests.swift */,
+				8585A04F2375E27300FE9A0C /* Info.plist */,
+			);
+			path = KinUXTests;
+			sourceTree = "<group>";
+		};
+		8585A0592375E2D500FE9A0C /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				8525B7E324D9B79E008277AB /* ViewModel */,
+				8525B7D124D9040E008277AB /* PaymentFlow */,
+				8597CB082384434D00B08E1D /* Navigation */,
+				85BFB4632383065F00EA1485 /* Presentation */,
+				8597CB28238C664700B08E1D /* Utils */,
+			);
+			path = Src;
+			sourceTree = "<group>";
+		};
+		8585A05A2375E34B00FE9A0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8525B7E024D9ABCA008277AB /* KinGrpcApi.framework */,
+				8525B7D224D90482008277AB /* KinBase.framework */,
+				8525B7D324D90482008277AB /* KinDesign.framework */,
+				8525B7D424D90482008277AB /* KinViewModel.framework */,
+				85BFB45B237F597500EA1485 /* UIKit.framework */,
+				8585A05F2375E34F00FE9A0C /* KinPresentation.framework */,
+				8585A05B2375E34B00FE9A0C /* KinDesign.framework */,
+				B5157BBCF03348BE7D5E7A16 /* Pods_KinUX.framework */,
+				E9181ADE01222F669786B449 /* Pods_KinUXTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8597CB082384434D00B08E1D /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				8597CB092384437200B08E1D /* KinNavigationController.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		8597CB28238C664700B08E1D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8597CB29238C667300B08E1D /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		85BFB4632383065F00EA1485 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				85BFB4642383068600EA1485 /* KinPresentationController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8DADC5E31A287EA331428EA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9495E848A14C5E2AA31C18B5 /* Pods-KinUX.debug.xcconfig */,
+				AD74E7FF1E153B1B9A093ED6 /* Pods-KinUX.release.xcconfig */,
+				72A44279480138D3FE4E9BC5 /* Pods-KinUXTests.debug.xcconfig */,
+				7C3C9B6CB9CA1CDAB68593D9 /* Pods-KinUXTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8585A03A2375E27200FE9A0C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8585A03E2375E27200FE9A0C /* KinUX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8585A0532375E27300FE9A0C /* Build configuration list for PBXNativeTarget "KinUX" */;
+			buildPhases = (
+				C68D9296B52F4F47E66A5BE4 /* [CP] Check Pods Manifest.lock */,
+				8585A03A2375E27200FE9A0C /* Headers */,
+				8585A03B2375E27200FE9A0C /* Sources */,
+				8585A03C2375E27200FE9A0C /* Frameworks */,
+				8585A03D2375E27200FE9A0C /* Resources */,
+				8525B7DB24D90483008277AB /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinUX;
+			productName = KinUX;
+			productReference = 8585A03F2375E27200FE9A0C /* KinUX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8585A0472375E27300FE9A0C /* KinUXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8585A0562375E27300FE9A0C /* Build configuration list for PBXNativeTarget "KinUXTests" */;
+			buildPhases = (
+				191F2356AB4844013946F344 /* [CP] Check Pods Manifest.lock */,
+				8585A0442375E27300FE9A0C /* Sources */,
+				8585A0452375E27300FE9A0C /* Frameworks */,
+				8585A0462375E27300FE9A0C /* Resources */,
+				D937E7303F6F3EC0B093D5B4 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8585A04B2375E27300FE9A0C /* PBXTargetDependency */,
+			);
+			name = KinUXTests;
+			productName = KinUXTests;
+			productReference = 8585A0482375E27300FE9A0C /* KinUXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8585A0362375E27200FE9A0C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = "Kin Foundation";
+				TargetAttributes = {
+					8585A03E2375E27200FE9A0C = {
+						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
+					};
+					8585A0472375E27300FE9A0C = {
+						CreatedOnToolsVersion = 11.1;
+					};
+				};
+			};
+			buildConfigurationList = 8585A0392375E27200FE9A0C /* Build configuration list for PBXProject "KinUX" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8585A0352375E27200FE9A0C;
+			productRefGroup = 8585A0402375E27200FE9A0C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8585A03E2375E27200FE9A0C /* KinUX */,
+				8585A0472375E27300FE9A0C /* KinUXTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8585A03D2375E27200FE9A0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8597CB0C238445A800B08E1D /* Assets.xcassets in Resources */,
+				8597CB1E2388825900B08E1D /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8585A0462375E27300FE9A0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		191F2356AB4844013946F344 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinUXTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C68D9296B52F4F47E66A5BE4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinUX-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D937E7303F6F3EC0B093D5B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinUXTests/Pods-KinUXTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinUXTests/Pods-KinUXTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinUXTests/Pods-KinUXTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8585A03B2375E27200FE9A0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8525B7ED24DB4FE7008277AB /* PaymentFlowController.swift in Sources */,
+				8525B7E724D9B7B7008277AB /* PaymentFlowViewModelType.swift in Sources */,
+				85BFB4652383068600EA1485 /* KinPresentationController.swift in Sources */,
+				8597CB2A238C667300B08E1D /* Extensions.swift in Sources */,
+				8525B7E524D9B7AE008277AB /* ViewModelType.swift in Sources */,
+				8597CB0A2384437200B08E1D /* KinNavigationController.swift in Sources */,
+				8525B7DD24D906D6008277AB /* PaymentFlowViewModel.swift in Sources */,
+				8525B7DF24D9A814008277AB /* PaymentFlowViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8585A0442375E27300FE9A0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8585A04E2375E27300FE9A0C /* KinUXTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8585A04B2375E27300FE9A0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8585A03E2375E27200FE9A0C /* KinUX */;
+			targetProxy = 8585A04A2375E27300FE9A0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8597CB202388825900B08E1D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8597CB1F2388825900B08E1D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8585A0512375E27300FE9A0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8585A0522375E27300FE9A0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8585A0542375E27300FE9A0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9495E848A14C5E2AA31C18B5 /* Pods-KinUX.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = KinUX/Assets.xcassets;
+				DEVELOPMENT_TEAM = 64923RW79V;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = KinUX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinUX;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8585A0552375E27300FE9A0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD74E7FF1E153B1B9A093ED6 /* Pods-KinUX.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = KinUX/Assets.xcassets;
+				DEVELOPMENT_TEAM = 64923RW79V;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = KinUX/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinUX;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8585A0572375E27300FE9A0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72A44279480138D3FE4E9BC5 /* Pods-KinUXTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 64923RW79V;
+				INFOPLIST_FILE = KinUXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinUXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8585A0582375E27300FE9A0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C3C9B6CB9CA1CDAB68593D9 /* Pods-KinUXTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 64923RW79V;
+				INFOPLIST_FILE = KinUXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinUXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8585A0392375E27200FE9A0C /* Build configuration list for PBXProject "KinUX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8585A0512375E27300FE9A0C /* Debug */,
+				8585A0522375E27300FE9A0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8585A0532375E27300FE9A0C /* Build configuration list for PBXNativeTarget "KinUX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8585A0542375E27300FE9A0C /* Debug */,
+				8585A0552375E27300FE9A0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8585A0562375E27300FE9A0C /* Build configuration list for PBXNativeTarget "KinUXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8585A0572375E27300FE9A0C /* Debug */,
+				8585A0582375E27300FE9A0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8585A0362375E27200FE9A0C /* Project object */;
+}

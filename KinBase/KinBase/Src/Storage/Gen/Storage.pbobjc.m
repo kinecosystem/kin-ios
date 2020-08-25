@@ -519,6 +519,102 @@ typedef struct KinStorageKinTransactions__storage_ {
 
 @end
 
+#pragma mark - KinStorageInvoiceListBlob
+
+@implementation KinStorageInvoiceListBlob
+
+@dynamic networkInvoiceList;
+
+typedef struct KinStorageInvoiceListBlob__storage_ {
+  uint32_t _has_storage_[1];
+  NSData *networkInvoiceList;
+} KinStorageInvoiceListBlob__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "networkInvoiceList",
+        .dataTypeSpecific.className = NULL,
+        .number = KinStorageInvoiceListBlob_FieldNumber_NetworkInvoiceList,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(KinStorageInvoiceListBlob__storage_, networkInvoiceList),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeBytes,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[KinStorageInvoiceListBlob class]
+                                     rootClass:[KinStorageStorageRoot class]
+                                          file:KinStorageStorageRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(KinStorageInvoiceListBlob__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\001\022\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - KinStorageInvoices
+
+@implementation KinStorageInvoices
+
+@dynamic invoiceLists, invoiceLists_Count;
+
+typedef struct KinStorageInvoices__storage_ {
+  uint32_t _has_storage_[1];
+  NSMutableDictionary *invoiceLists;
+} KinStorageInvoices__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "invoiceLists",
+        .dataTypeSpecific.className = GPBStringifySymbol(KinStorageInvoiceListBlob),
+        .number = KinStorageInvoices_FieldNumber_InvoiceLists,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(KinStorageInvoices__storage_, invoiceLists),
+        .flags = (GPBFieldFlags)(GPBFieldMapKeyString | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[KinStorageInvoices class]
+                                     rootClass:[KinStorageStorageRoot class]
+                                          file:KinStorageStorageRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(KinStorageInvoices__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\001\014\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - KinStorageKinConfig
 
 @implementation KinStorageKinConfig

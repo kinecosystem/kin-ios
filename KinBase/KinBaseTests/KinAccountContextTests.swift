@@ -34,6 +34,114 @@ class KinAccountContextTests: XCTestCase {
         disposeBag.dispose()
     }
 
+    // TODO: remove
+//    func testSubmitTransactionLive() {
+//        let key = try! KeyPair.generateRandomKeyPair()
+//        var account = KinAccount(key: key)
+//        print(account.id)
+//
+//        let agoraEnv = KinEnvironment.Agora.testNet()
+//
+//        let expectCreateAccount = expectation(description: "create account")
+//        agoraEnv.service.createAccount(accountId: account.id)
+//            .then { resultAccount in
+//                account = account.merge(resultAccount)
+//                expectCreateAccount.fulfill()
+//                print("account created")
+//            }
+//
+//        wait(for: [expectCreateAccount], timeout: 20)
+//
+//        let context = try! KinAccountContext.Builder(env: agoraEnv)
+//            .importExistingPrivateKey(key)
+//            .build()
+//
+//        let expectPay = expectation(description: "pay")
+//        context.sendKinPayment(KinPaymentItem(amount: Kin(100),
+//                                              destAccountId: StubObjects.badAccountId),
+//                               memo: .none)
+//            .then { payment in
+//                print(payment)
+//                expectPay.fulfill()
+//            }
+//            .catch { error in
+//                print(error)
+//                expectPay.fulfill()
+//            }
+//
+//        wait(for: [expectPay], timeout: 300)
+//    }
+//
+    // TODO: remove
+//    func testPayInvoiceLive() {
+//        let key = try! KeyPair.generateRandomKeyPair()
+//        var account = KinAccount(key: key)
+//        print(account.id)
+//
+//        var horizonEnv: KinEnvironment? = KinEnvironment.Horizon.testNet()
+////        let agoraEnv = KinEnvironment.Agora.testNet()
+//
+//        let expectCreateAccount = expectation(description: "create account")
+//        horizonEnv!.service.createAccount(accountId: account.id)
+//            .then { resultAccount in
+//                account = account.merge(resultAccount)
+//                expectCreateAccount.fulfill()
+//                print("account created")
+//            }
+//
+//        wait(for: [expectCreateAccount], timeout: 20)
+//
+//        horizonEnv = nil
+//
+//        let agoraEnv = KinEnvironment.Agora.testNet()
+//        let context = try! KinAccountContext.Builder(env: agoraEnv)
+//            .importExistingPrivateKey(key)
+//            .build()
+//
+////        let lineItem = try! LineItem(title: "ios invoice title",
+////                                     description: "ios invoice desc",
+////                                     amount: Kin(100),
+////                                     sku: SKU(bytes: [0, 2, 3]))
+////        let invoice = try! Invoice(lineItems: [lineItem])
+////        let expectPay = expectation(description: "pay invoice")
+////        var resultPayment: KinPayment?
+////        context.payInvoice(processingAppIdx: .testApp,
+////                           destinationAccount: StubObjects.androidTestAccountId,
+////                           invoice: invoice,
+////                           type: .spend)
+////            .then { result  in
+////                print(result)
+////                resultPayment = result
+////                expectPay.fulfill()
+////            }
+////            .catch { error in
+////                print(error)
+////            }
+//        var resultPayment: KinPayment?
+//        context.sendKinPayment(KinPaymentItem(amount: Kin(100),
+//                                              destAccountId: StubObjects.androidTestAccountId),
+//                               memo: .none)
+//            .then { result in
+//                print(result)
+//                resultPayment = result
+//                expectPay.fulfill()
+//
+//            }
+//            .catch { error in
+//                print(error)
+//                expectPay.fulfill()
+//            }
+//
+//        wait(for: [expectPay], timeout: 300)
+//
+//        let expectRecord = expectation(description: "transaction record")
+//        context.getPaymentsForTransactionHash(resultPayment!.id.transactionHash)
+//            .then { payment  in
+//                expectRecord.fulfill()
+//        }
+//        wait(for: [expectRecord], timeout: 300)
+//    }
+
     func testGetAccountNotInStorage() {
         let key = try! KeyPair.generateRandomKeyPair()
         sut = KinAccountContext(environment: mockEnv,
@@ -261,6 +369,55 @@ class KinAccountContextTests: XCTestCase {
         let expect = expectation(description: "callback")
         sut.sendKinPayment(payment, memo: memo).catch { error in
             XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+            expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+
+    func testPayInvoiceSucceed() {
+        // Set up account in storage
+        let key = try! KeyPair(secretSeed: StubObjects.seed1)
+        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
+                                            balance: KinBalance(Kin(10000)),
+                                            status: .registered,
+                                            sequence: 1)
+
+        mockKinStorage.stubGetAccountResult = expectAccount
+
+        sut = KinAccountContext(environment: mockEnv,
+                                accountId: key.accountId)
+
+        // Set up signed transaction returned by service
+        let signedEnvelope = "AAAAAOg2QBm0NeppntiRBPTrzbkKvo3F8SZyGqHco/tuLdJtAAAAZAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAA6DZAGbQ16mme2JEE9OvNuQq+jcXxJnIaodyj+24t0m0AAAABAAAAAEelh1WujKW7sQtSpf0P3aTdBVzypYIwYsZlZdQdOL88AAAAAAAAAAAF9eEAAAAAAAAAAAFuLdJtAAAAQGUUccKOuGODuCBE/qJ6bczgvkIuBSHrUHICVwYdjNb0BdvcpQd/tznSmqtl0zfrVIVvSEAnlOmeIDw8WyzWEwQ="
+        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: signedEnvelope)
+
+        mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
+        mockKinService.stubGetAccountResult = expectAccount
+
+        // Set up submited transaction on serivce
+        let stubAckedTransaction = StubObjects.ackedTransaction(from: signedEnvelope, withInvoice: true)
+        mockKinService.stubSubmitTransactionResult = .init(stubAckedTransaction)
+        mockKinService.stubCanWhitelistTransactionResult = false
+
+        // Set up account updates in storage
+        mockKinStorage.stubAdvanceSequenceResult = expectAccount
+        mockKinStorage.stubDeductFromBalanceResult = expectAccount
+        mockKinStorage.stubUpdateAccountResult = expectAccount
+        mockKinStorage.stubInsertNewTransactionResult = [stubAckedTransaction]
+        mockKinStorage.stubGetFeeResult = Quark(99)
+
+        // Test
+        let expect = expectation(description: "callback")
+        sut.payInvoice(processingAppIdx: .testApp,
+                       destinationAccount: StubObjects.accountId2,
+                       invoice: StubObjects.stubInvoice,
+                       type: .p2p).then { resultPayment in
+            XCTAssertTrue(self.mockKinStorage.sequenceAdvanced)
+            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 1000)))
+            XCTAssertEqual(self.mockKinStorage.transactionInserted, stubAckedTransaction)
+            XCTAssertEqual(resultPayment, stubAckedTransaction.kinPayments.first)
+            XCTAssertNotNil(resultPayment.invoice)
             expect.fulfill()
         }
 

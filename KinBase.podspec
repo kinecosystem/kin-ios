@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinBase'
-  s.version          = '0.1.3'
+  s.version          = '0.2.0'
   s.summary          = 'Kin SDK for iOS'
 
   s.description      = <<-DESC
@@ -26,8 +26,13 @@ Pod::Spec.new do |s|
   non_arc_files = 'KinBase/KinBase/Src/Storage/Gen/*.{h,m}'
   s.source_files = 'KinBase/KinBase/**/*.{h,swift}'
 
-  s.dependency 'kin-stellar-ios-mac-sdk', '~> 1.7.4'
+  s.dependency 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
   s.dependency 'PromisesSwift', '~> 1.2.8'
+  s.dependency 'KinGrpcApi', '~> 0.2.0'
+
+  # Dependencies needed for KinGrpcApi
+  s.dependency 'gRPC-ProtoRPC'
+  s.dependency 'Protobuf'
 
   s.requires_arc = true
 
@@ -37,4 +42,15 @@ Pod::Spec.new do |s|
     sna.dependency 'Protobuf', '~> 3.0'
   end
 
+  s.pod_target_xcconfig = {
+      # This is needed by all pods that depend on Protobuf:
+      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1 GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO=1',
+      # This is needed by all pods that depend on gRPC-RxLibrary:
+      'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+      # This is needed for the user Podfile to use_framework! https://github.com/CocoaPods/CocoaPods/issues/4605
+      'USE_HEADERMAP' => 'NO',
+      'ALWAYS_SEARCH_USER_PATHS' => 'NO',
+      'USER_HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/KinGrpcApi/KinGrpcApi/gen',
+      'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/KinGrpcApi/KinGrpcApi/gen'
+  }
 end

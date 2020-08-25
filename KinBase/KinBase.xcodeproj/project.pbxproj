@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		167108C93CE609A97325BB6E /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82363D272B8652C191E782CD /* Pods_KinBase.framework */; };
 		8518B10E244C9BE300EC329B /* KinServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8518B10D244C9BE300EC329B /* KinServiceTests.swift */; };
 		8518B110244C9D2200EC329B /* MockStellarSdkProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8518B10F244C9D2200EC329B /* MockStellarSdkProxy.swift */; };
 		851B278324326C0B004EE486 /* HorizonKinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B278224326C0B004EE486 /* HorizonKinApi.swift */; };
@@ -24,8 +25,26 @@
 		851BC5B9248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851BC5B8248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift */; };
 		851BC5BB248F0E5E00EC6609 /* KinEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851BC5BA248F0E5E00EC6609 /* KinEnvironmentTests.swift */; };
 		851BC5BD248F192300EC6609 /* MockTransactionStreamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851BC5BC248F192300EC6609 /* MockTransactionStreamItem.swift */; };
+		851E7BB624A2A5FD00B800C8 /* AgoraKinAccountsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E7BB524A2A5FD00B800C8 /* AgoraKinAccountsApi.swift */; };
+		851E7BB824A2A61A00B800C8 /* AgoraKinTransactionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E7BB724A2A61A00B800C8 /* AgoraKinTransactionsApi.swift */; };
+		8525B7EF24DB5101008277AB /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7EE24DB5101008277AB /* AppInfo.swift */; };
+		8525B7F424DCCF1F008277AB /* AppUserAuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7F324DCCF1F008277AB /* AppUserAuthInterceptor.swift */; };
+		8525B7F624DCD835008277AB /* AppInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7F524DCD834008277AB /* AppInfoProvider.swift */; };
+		8525B83C24DE31F0008277AB /* AppUserAuthInterceptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B83B24DE31F0008277AB /* AppUserAuthInterceptorTests.swift */; };
+		853EC7A924EC5D38004E0BED /* KinTestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7A824EC5D37004E0BED /* KinTestService.swift */; };
+		853EC7AD24EDB900004E0BED /* AppInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7AC24EDB900004E0BED /* AppInfoTests.swift */; };
+		853EC7AF24EDBE6D004E0BED /* InvoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7AE24EDBE6D004E0BED /* InvoiceTests.swift */; };
+		853EC7B324EDCB4C004E0BED /* MockFriendBotApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7B224EDCB4C004E0BED /* MockFriendBotApi.swift */; };
+		853EC7B524EDCC06004E0BED /* KinTestServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7B424EDCC06004E0BED /* KinTestServiceTests.swift */; };
+		853EC7B724EF569F004E0BED /* GrpcServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7B624EF569F004E0BED /* GrpcServiceProvider.swift */; };
 		854C64A524450E0000CF398D /* StellarSdkProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854C64A424450E0000CF398D /* StellarSdkProxy.swift */; };
 		854C64AC24478C0600CF398D /* KinOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854C64AB24478C0600CF398D /* KinOperation.swift */; };
+		85572F9A24A80AEA003734CB /* ModelToProto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85572F9924A80AEA003734CB /* ModelToProto.swift */; };
+		85572F9C24A80E8C003734CB /* ProtoToModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85572F9B24A80E8C003734CB /* ProtoToModel.swift */; };
+		85572FA224A8241C003734CB /* AgoraKinAccountsApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85572FA124A8241C003734CB /* AgoraKinAccountsApiTests.swift */; };
+		85572FA624AA6881003734CB /* AgoraGrpcProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85572FA524AA6881003734CB /* AgoraGrpcProxy.swift */; };
+		85572FA824AB90C2003734CB /* AgoraKinTransactionsApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85572FA724AB90C2003734CB /* AgoraKinTransactionsApiTests.swift */; };
+		85572FAA24B3CABB003734CB /* KinStreamingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85572FA924B3CABB003734CB /* KinStreamingApi.swift */; };
 		855B76E224366E350037F407 /* KinStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B76E124366E350037F407 /* KinStorage.swift */; };
 		855B76E524366E710037F407 /* KinAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B76E424366E710037F407 /* KinAccount.swift */; };
 		855B76E72436775C0037F407 /* KinTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B76E62436775B0037F407 /* KinTransaction.swift */; };
@@ -64,10 +83,13 @@
 		85B024072371CC7700829FD6 /* KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B023FD2371CC7700829FD6 /* KinBase.framework */; };
 		85B0240E2371CC7700829FD6 /* KinBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 85B024002371CC7700829FD6 /* KinBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85E7CBB324855A5A0088591F /* DefaultHorizonKinAccountCreationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7CBB224855A5A0088591F /* DefaultHorizonKinAccountCreationApi.swift */; };
+		85EEEB7724BB748A002AAC29 /* Invoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB7624BB748A002AAC29 /* Invoices.swift */; };
+		85EEEB7924BB7512002AAC29 /* KinBinaryMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB7824BB7512002AAC29 /* KinBinaryMemo.swift */; };
+		85EEEB7B24BB7554002AAC29 /* SHA224Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB7A24BB7554002AAC29 /* SHA224Hash.swift */; };
+		85EEEB8224BE237A002AAC29 /* KinBinaryMemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */; };
 		85F037002469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F036FF2469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift */; };
 		85F037042469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */; };
-		B5F13AE9A6B2CE9CD74EB877 /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F248FDB3B6A7988356D56EC /* Pods_KinBase.framework */; };
-		EFD4BEE5613BE6393C598338 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B3BAFB5CF99D0F15AFC4CE /* Pods_KinBaseTests.framework */; };
+		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,9 +110,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15475037C01625B83109553A /* Pods-KinBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.release.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.release.xcconfig"; sourceTree = "<group>"; };
-		3BEA751542996AEC2277DD51 /* Pods-KinBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.release.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.release.xcconfig"; sourceTree = "<group>"; };
-		5F248FDB3B6A7988356D56EC /* Pods_KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		509B215374A50AEDD2D38FDE /* Pods-KinBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.debug.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.debug.xcconfig"; sourceTree = "<group>"; };
+		6720D833B4A6B64843BC5B8A /* Pods-KinBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.release.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.release.xcconfig"; sourceTree = "<group>"; };
+		81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.release.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		82363D272B8652C191E782CD /* Pods_KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8518B10D244C9BE300EC329B /* KinServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceTests.swift; sourceTree = "<group>"; };
 		8518B10F244C9D2200EC329B /* MockStellarSdkProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStellarSdkProxy.swift; sourceTree = "<group>"; };
 		851B278224326C0B004EE486 /* HorizonKinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonKinApi.swift; sourceTree = "<group>"; };
@@ -111,8 +135,27 @@
 		851BC5B8248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinAccountCreationApiTests.swift; sourceTree = "<group>"; };
 		851BC5BA248F0E5E00EC6609 /* KinEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinEnvironmentTests.swift; sourceTree = "<group>"; };
 		851BC5BC248F192300EC6609 /* MockTransactionStreamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTransactionStreamItem.swift; sourceTree = "<group>"; };
+		851E7BB524A2A5FD00B800C8 /* AgoraKinAccountsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinAccountsApi.swift; sourceTree = "<group>"; };
+		851E7BB724A2A61A00B800C8 /* AgoraKinTransactionsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinTransactionsApi.swift; sourceTree = "<group>"; };
+		8525B7EE24DB5101008277AB /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		8525B7F324DCCF1F008277AB /* AppUserAuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserAuthInterceptor.swift; sourceTree = "<group>"; };
+		8525B7F524DCD834008277AB /* AppInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoProvider.swift; sourceTree = "<group>"; };
+		8525B83B24DE31F0008277AB /* AppUserAuthInterceptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserAuthInterceptorTests.swift; sourceTree = "<group>"; };
+		853EC7A824EC5D37004E0BED /* KinTestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinTestService.swift; sourceTree = "<group>"; };
+		853EC7AC24EDB900004E0BED /* AppInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoTests.swift; sourceTree = "<group>"; };
+		853EC7AE24EDBE6D004E0BED /* InvoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTests.swift; sourceTree = "<group>"; };
+		853EC7B224EDCB4C004E0BED /* MockFriendBotApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFriendBotApi.swift; sourceTree = "<group>"; };
+		853EC7B424EDCC06004E0BED /* KinTestServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinTestServiceTests.swift; sourceTree = "<group>"; };
+		853EC7B624EF569F004E0BED /* GrpcServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrpcServiceProvider.swift; sourceTree = "<group>"; };
+		853EC7B824EF582F004E0BED /* KinGrpcApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinGrpcApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		854C64A424450E0000CF398D /* StellarSdkProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StellarSdkProxy.swift; sourceTree = "<group>"; };
 		854C64AB24478C0600CF398D /* KinOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinOperation.swift; sourceTree = "<group>"; };
+		85572F9924A80AEA003734CB /* ModelToProto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelToProto.swift; sourceTree = "<group>"; };
+		85572F9B24A80E8C003734CB /* ProtoToModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtoToModel.swift; sourceTree = "<group>"; };
+		85572FA124A8241C003734CB /* AgoraKinAccountsApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinAccountsApiTests.swift; sourceTree = "<group>"; };
+		85572FA524AA6881003734CB /* AgoraGrpcProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraGrpcProxy.swift; sourceTree = "<group>"; };
+		85572FA724AB90C2003734CB /* AgoraKinTransactionsApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinTransactionsApiTests.swift; sourceTree = "<group>"; };
+		85572FA924B3CABB003734CB /* KinStreamingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinStreamingApi.swift; sourceTree = "<group>"; };
 		855B76E124366E350037F407 /* KinStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinStorage.swift; sourceTree = "<group>"; };
 		855B76E424366E710037F407 /* KinAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinAccount.swift; sourceTree = "<group>"; };
 		855B76E62436775B0037F407 /* KinTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinTransaction.swift; sourceTree = "<group>"; };
@@ -154,11 +197,13 @@
 		85B024062371CC7700829FD6 /* KinBaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinBaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85B0240D2371CC7700829FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85E7CBB224855A5A0088591F /* DefaultHorizonKinAccountCreationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinAccountCreationApi.swift; sourceTree = "<group>"; };
+		85EEEB7624BB748A002AAC29 /* Invoices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoices.swift; sourceTree = "<group>"; };
+		85EEEB7824BB7512002AAC29 /* KinBinaryMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBinaryMemo.swift; sourceTree = "<group>"; };
+		85EEEB7A24BB7554002AAC29 /* SHA224Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA224Hash.swift; sourceTree = "<group>"; };
+		85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBinaryMemoTests.swift; sourceTree = "<group>"; };
 		85F036FF2469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinTransactionWhitelistingApi.swift; sourceTree = "<group>"; };
 		85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinTransactionWhitelistingApiTests.swift; sourceTree = "<group>"; };
-		95B3BAFB5CF99D0F15AFC4CE /* Pods_KinBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C30EF4FC1FEFE28F33E4C4F9 /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CE88D571AEAC9E123E4B6870 /* Pods-KinBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.debug.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.debug.xcconfig"; sourceTree = "<group>"; };
+		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F13AE9A6B2CE9CD74EB877 /* Pods_KinBase.framework in Frameworks */,
+				167108C93CE609A97325BB6E /* Pods_KinBase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,18 +227,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				85B024072371CC7700829FD6 /* KinBase.framework in Frameworks */,
-				EFD4BEE5613BE6393C598338 /* Pods_KinBaseTests.framework in Frameworks */,
+				C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7CB90152BED0543328625726 /* Frameworks */ = {
+		4778AA979B6B2663CF8952FE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5F248FDB3B6A7988356D56EC /* Pods_KinBase.framework */,
-				95B3BAFB5CF99D0F15AFC4CE /* Pods_KinBaseTests.framework */,
+				509B215374A50AEDD2D38FDE /* Pods-KinBase.debug.xcconfig */,
+				6720D833B4A6B64843BC5B8A /* Pods-KinBase.release.xcconfig */,
+				DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */,
+				81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		64DCE9545BED844A80D66CDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				853EC7B824EF582F004E0BED /* KinGrpcApi.framework */,
+				82363D272B8652C191E782CD /* Pods_KinBase.framework */,
+				29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -207,6 +265,7 @@
 				851B278624328089004EE486 /* FriendBotApi.swift */,
 				854C64A424450E0000CF398D /* StellarSdkProxy.swift */,
 				851B278D24328513004EE486 /* StellarSdkExtensions.swift */,
+				853EC7A824EC5D37004E0BED /* KinTestService.swift */,
 			);
 			path = Stellar;
 			sourceTree = "<group>";
@@ -246,6 +305,73 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		851E7BB124A1849200B800C8 /* KinApi */ = {
+			isa = PBXGroup;
+			children = (
+				85737EDC243E629C0012132E /* KinAccountApi.swift */,
+				85737EDE243E62AD0012132E /* KinAccountCreationApi.swift */,
+				85737EE0243E62EE0012132E /* KinTransactionApi.swift */,
+				85737EE2243E635A0012132E /* KinTransactionWhitelistingApi.swift */,
+				85572FA924B3CABB003734CB /* KinStreamingApi.swift */,
+			);
+			path = KinApi;
+			sourceTree = "<group>";
+		};
+		851E7BB424A2A58C00B800C8 /* Agora */ = {
+			isa = PBXGroup;
+			children = (
+				85572FA524AA6881003734CB /* AgoraGrpcProxy.swift */,
+				851E7BB524A2A5FD00B800C8 /* AgoraKinAccountsApi.swift */,
+				851E7BB724A2A61A00B800C8 /* AgoraKinTransactionsApi.swift */,
+				85572F9924A80AEA003734CB /* ModelToProto.swift */,
+				85572F9B24A80E8C003734CB /* ProtoToModel.swift */,
+				853EC7B624EF569F004E0BED /* GrpcServiceProvider.swift */,
+			);
+			path = Agora;
+			sourceTree = "<group>";
+		};
+		85572F9D24A823AF003734CB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8518B10D244C9BE300EC329B /* KinServiceTests.swift */,
+				858A245D248AB32E002EB843 /* NetworkOperationHandlerTests.swift */,
+				8525B83B24DE31F0008277AB /* AppUserAuthInterceptorTests.swift */,
+				853EC7B424EDCC06004E0BED /* KinTestServiceTests.swift */,
+				85572F9E24A823BA003734CB /* Stellar */,
+				85572FA024A823F1003734CB /* Agora */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		85572F9E24A823BA003734CB /* Stellar */ = {
+			isa = PBXGroup;
+			children = (
+				851B278424326FC7004EE486 /* HorizonKinApiTests.swift */,
+				85737EE6243F9DB00012132E /* FriendBotApiTests.swift */,
+				85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */,
+				851BC5B8248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift */,
+			);
+			path = Stellar;
+			sourceTree = "<group>";
+		};
+		85572F9F24A823D0003734CB /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				851B278B24328225004EE486 /* KeyChainStorageTests.swift */,
+				85713C3424520958005F5A48 /* KinFileStorageTests.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		85572FA024A823F1003734CB /* Agora */ = {
+			isa = PBXGroup;
+			children = (
+				85572FA124A8241C003734CB /* AgoraKinAccountsApiTests.swift */,
+				85572FA724AB90C2003734CB /* AgoraKinTransactionsApiTests.swift */,
+			);
+			path = Agora;
+			sourceTree = "<group>";
+		};
 		855B76E324366E650037F407 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +382,10 @@
 				85737EED2443A15A0012132E /* KinBalance.swift */,
 				85737ED5243E587C0012132E /* KinPayment.swift */,
 				854C64AB24478C0600CF398D /* KinOperation.swift */,
+				85EEEB7624BB748A002AAC29 /* Invoices.swift */,
+				85EEEB7824BB7512002AAC29 /* KinBinaryMemo.swift */,
+				85EEEB7A24BB7554002AAC29 /* SHA224Hash.swift */,
+				8525B7EE24DB5101008277AB /* AppInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,14 +413,14 @@
 		85737EDB243E62890012132E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				85737EDC243E629C0012132E /* KinAccountApi.swift */,
-				85737EDE243E62AD0012132E /* KinAccountCreationApi.swift */,
-				85737EE0243E62EE0012132E /* KinTransactionApi.swift */,
-				85737EE2243E635A0012132E /* KinTransactionWhitelistingApi.swift */,
+				851E7BB424A2A58C00B800C8 /* Agora */,
+				851B278124326BEB004EE486 /* Stellar */,
+				851E7BB124A1849200B800C8 /* KinApi */,
 				85737EC0243D7CC30012132E /* KinService.swift */,
 				85737EE4243E63E70012132E /* KinNetwork.swift */,
 				858ECDAF2458819D006AF3D6 /* NetworkOperationHandler.swift */,
 				858A245B24897D0D002EB843 /* BackoffStrategy.swift */,
+				8525B7F324DCCF1F008277AB /* AppUserAuthInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -305,6 +435,7 @@
 				858ECDB7245A04B6006AF3D6 /* StubObjects.swift */,
 				859A760824620DFE0028555F /* MockAccountsStreamItem.swift */,
 				851BC5BC248F192300EC6609 /* MockTransactionStreamItem.swift */,
+				853EC7B224EDCB4C004E0BED /* MockFriendBotApi.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -316,8 +447,8 @@
 				85B0240A2371CC7700829FD6 /* KinBaseTests */,
 				851B279424354AF9004EE486 /* KinBaseTestsHost */,
 				85B023FE2371CC7700829FD6 /* Products */,
-				895C187139B5E2F8FB73E9F4 /* Pods */,
-				7CB90152BED0543328625726 /* Frameworks */,
+				64DCE9545BED844A80D66CDE /* Frameworks */,
+				4778AA979B6B2663CF8952FE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -344,17 +475,12 @@
 		85B0240A2371CC7700829FD6 /* KinBaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				85572F9F24A823D0003734CB /* Storage */,
+				85572F9D24A823AF003734CB /* Network */,
+				85EEEB7E24BE233E002AAC29 /* Model */,
 				85737EE8243FBCC80012132E /* Tools */,
-				851B278424326FC7004EE486 /* HorizonKinApiTests.swift */,
-				858A245D248AB32E002EB843 /* NetworkOperationHandlerTests.swift */,
 				858ECDA9245783FA006AF3D6 /* KinAccountContextTests.swift */,
-				851B278B24328225004EE486 /* KeyChainStorageTests.swift */,
-				85737EE6243F9DB00012132E /* FriendBotApiTests.swift */,
-				8518B10D244C9BE300EC329B /* KinServiceTests.swift */,
-				85713C3424520958005F5A48 /* KinFileStorageTests.swift */,
 				858ECDB5245A0413006AF3D6 /* KinTransactionTests.swift */,
-				85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */,
-				851BC5B8248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift */,
 				851BC5BA248F0E5E00EC6609 /* KinEnvironmentTests.swift */,
 				85B0240D2371CC7700829FD6 /* Info.plist */,
 			);
@@ -367,24 +493,22 @@
 				85737EDB243E62890012132E /* Network */,
 				855B76E324366E650037F407 /* Model */,
 				851B27882432820D004EE486 /* Storage */,
-				851B278124326BEB004EE486 /* Stellar */,
 				85737ED0243E1E920012132E /* Tools */,
 				85737EBE243D7C8A0012132E /* KinAccountContext.swift */,
 				85737ED7243E59060012132E /* KinEnvironment.swift */,
+				8525B7F524DCD834008277AB /* AppInfoProvider.swift */,
 			);
 			path = Src;
 			sourceTree = "<group>";
 		};
-		895C187139B5E2F8FB73E9F4 /* Pods */ = {
+		85EEEB7E24BE233E002AAC29 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE88D571AEAC9E123E4B6870 /* Pods-KinBase.debug.xcconfig */,
-				3BEA751542996AEC2277DD51 /* Pods-KinBase.release.xcconfig */,
-				C30EF4FC1FEFE28F33E4C4F9 /* Pods-KinBaseTests.debug.xcconfig */,
-				15475037C01625B83109553A /* Pods-KinBaseTests.release.xcconfig */,
+				85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */,
+				853EC7AC24EDB900004E0BED /* AppInfoTests.swift */,
+				853EC7AE24EDBE6D004E0BED /* InvoiceTests.swift */,
 			);
-			name = Pods;
-			path = ../Pods;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,7 +547,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024112371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBase" */;
 			buildPhases = (
-				C0AF1F3FA4DAC55B69CCC989 /* [CP] Check Pods Manifest.lock */,
+				7231B06145C3663364EF9BAA /* [CP] Check Pods Manifest.lock */,
 				85B023F82371CC7700829FD6 /* Headers */,
 				85B023F92371CC7700829FD6 /* Sources */,
 				85B023FA2371CC7700829FD6 /* Frameworks */,
@@ -442,11 +566,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024142371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBaseTests" */;
 			buildPhases = (
-				8376FA083E7D2A1904BC50B6 /* [CP] Check Pods Manifest.lock */,
+				E3D28F604C27FD90113045D9 /* [CP] Check Pods Manifest.lock */,
 				85B024022371CC7700829FD6 /* Sources */,
 				85B024032371CC7700829FD6 /* Frameworks */,
 				85B024042371CC7700829FD6 /* Resources */,
-				D47FFA32456E74D69F82D48B /* [CP] Embed Pods Frameworks */,
+				80247D2EE62F12DBEE34FE9F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -530,29 +654,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8376FA083E7D2A1904BC50B6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KinBaseTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0AF1F3FA4DAC55B69CCC989 /* [CP] Check Pods Manifest.lock */ = {
+		7231B06145C3663364EF9BAA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -574,7 +676,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D47FFA32456E74D69F82D48B /* [CP] Embed Pods Frameworks */ = {
+		80247D2EE62F12DBEE34FE9F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -589,6 +691,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3D28F604C27FD90113045D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinBaseTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -608,29 +732,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8525B7F424DCCF1F008277AB /* AppUserAuthInterceptor.swift in Sources */,
 				851B278724328089004EE486 /* FriendBotApi.swift in Sources */,
 				85737EEC24439FD90012132E /* Observable.swift in Sources */,
 				851B278A2432821D004EE486 /* SecureKeyStorage.swift in Sources */,
 				85737EF22443AFFB0012132E /* Helper.swift in Sources */,
 				85737ED4243E4EE30012132E /* KinTypes.swift in Sources */,
 				85737EE3243E635A0012132E /* KinTransactionWhitelistingApi.swift in Sources */,
+				851E7BB824A2A61A00B800C8 /* AgoraKinTransactionsApi.swift in Sources */,
 				858A245C24897D0D002EB843 /* BackoffStrategy.swift in Sources */,
+				85572FA624AA6881003734CB /* AgoraGrpcProxy.swift in Sources */,
 				85737EE5243E63E70012132E /* KinNetwork.swift in Sources */,
 				85F037002469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift in Sources */,
 				85737EDD243E629C0012132E /* KinAccountApi.swift in Sources */,
+				851E7BB624A2A5FD00B800C8 /* AgoraKinAccountsApi.swift in Sources */,
+				85572F9C24A80E8C003734CB /* ProtoToModel.swift in Sources */,
 				855B76E72436775C0037F407 /* KinTransaction.swift in Sources */,
 				85737ECF243E1D1D0012132E /* KinMemo.swift in Sources */,
+				85EEEB7724BB748A002AAC29 /* Invoices.swift in Sources */,
+				853EC7B724EF569F004E0BED /* GrpcServiceProvider.swift in Sources */,
 				85737EC1243D7CC30012132E /* KinService.swift in Sources */,
 				85713C2D2450A83E005F5A48 /* Storage.pbobjc.m in Sources */,
+				85572F9A24A80AEA003734CB /* ModelToProto.swift in Sources */,
 				85737ED8243E59060012132E /* KinEnvironment.swift in Sources */,
 				85E7CBB324855A5A0088591F /* DefaultHorizonKinAccountCreationApi.swift in Sources */,
+				853EC7A924EC5D38004E0BED /* KinTestService.swift in Sources */,
 				85737EE1243E62EE0012132E /* KinTransactionApi.swift in Sources */,
 				859A760B2464AC240028555F /* ListObservable.swift in Sources */,
+				8525B7EF24DB5101008277AB /* AppInfo.swift in Sources */,
 				855B76E524366E710037F407 /* KinAccount.swift in Sources */,
 				85737EEE2443A15A0012132E /* KinBalance.swift in Sources */,
+				8525B7F624DCD835008277AB /* AppInfoProvider.swift in Sources */,
+				85EEEB7B24BB7554002AAC29 /* SHA224Hash.swift in Sources */,
 				85713C332450CE8C005F5A48 /* KinStorableObjectExtensions.swift in Sources */,
+				85572FAA24B3CABB003734CB /* KinStreamingApi.swift in Sources */,
 				85737ED6243E587C0012132E /* KinPayment.swift in Sources */,
 				854C64A524450E0000CF398D /* StellarSdkProxy.swift in Sources */,
+				85EEEB7924BB7512002AAC29 /* KinBinaryMemo.swift in Sources */,
 				85737EC3243D7CF90012132E /* KinFileStorage.swift in Sources */,
 				85763611249038B00011C356 /* ListSubject.swift in Sources */,
 				858ECDB02458819D006AF3D6 /* NetworkOperationHandler.swift in Sources */,
@@ -651,20 +789,28 @@
 				851BC5BD248F192300EC6609 /* MockTransactionStreamItem.swift in Sources */,
 				85F037042469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift in Sources */,
 				851BC5BB248F0E5E00EC6609 /* KinEnvironmentTests.swift in Sources */,
+				853EC7AD24EDB900004E0BED /* AppInfoTests.swift in Sources */,
+				853EC7AF24EDBE6D004E0BED /* InvoiceTests.swift in Sources */,
 				8518B10E244C9BE300EC329B /* KinServiceTests.swift in Sources */,
 				8518B110244C9D2200EC329B /* MockStellarSdkProxy.swift in Sources */,
+				853EC7B324EDCB4C004E0BED /* MockFriendBotApi.swift in Sources */,
 				85737EEA243FBD0D0012132E /* MockURLProtocol.swift in Sources */,
 				85737EE7243F9DB00012132E /* FriendBotApiTests.swift in Sources */,
 				859A760924620DFE0028555F /* MockAccountsStreamItem.swift in Sources */,
 				851B278C24328225004EE486 /* KeyChainStorageTests.swift in Sources */,
 				851BC5B9248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift in Sources */,
+				85EEEB8224BE237A002AAC29 /* KinBinaryMemoTests.swift in Sources */,
+				8525B83C24DE31F0008277AB /* AppUserAuthInterceptorTests.swift in Sources */,
+				853EC7B524EDCC06004E0BED /* KinTestServiceTests.swift in Sources */,
 				851B278524326FC7004EE486 /* HorizonKinApiTests.swift in Sources */,
 				858A245E248AB32F002EB843 /* NetworkOperationHandlerTests.swift in Sources */,
 				858ECDB6245A0413006AF3D6 /* KinTransactionTests.swift in Sources */,
+				85572FA224A8241C003734CB /* AgoraKinAccountsApiTests.swift in Sources */,
 				858ECDAC245784A7006AF3D6 /* MockKinService.swift in Sources */,
 				858ECDAA245783FA006AF3D6 /* KinAccountContextTests.swift in Sources */,
 				858ECDAE245784D3006AF3D6 /* MockKinStorage.swift in Sources */,
 				85713C3524520958005F5A48 /* KinFileStorageTests.swift in Sources */,
+				85572FA824AB90C2003734CB /* AgoraKinTransactionsApiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,7 +1008,7 @@
 		};
 		85B024122371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE88D571AEAC9E123E4B6870 /* Pods-KinBase.debug.xcconfig */;
+			baseConfigurationReference = 509B215374A50AEDD2D38FDE /* Pods-KinBase.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -880,7 +1026,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -903,7 +1049,7 @@
 		};
 		85B024132371CC7700829FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BEA751542996AEC2277DD51 /* Pods-KinBase.release.xcconfig */;
+			baseConfigurationReference = 6720D833B4A6B64843BC5B8A /* Pods-KinBase.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -921,7 +1067,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -943,7 +1089,7 @@
 		};
 		85B024152371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C30EF4FC1FEFE28F33E4C4F9 /* Pods-KinBaseTests.debug.xcconfig */;
+			baseConfigurationReference = DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -964,7 +1110,7 @@
 		};
 		85B024162371CC7700829FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15475037C01625B83109553A /* Pods-KinBaseTests.release.xcconfig */;
+			baseConfigurationReference = 81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

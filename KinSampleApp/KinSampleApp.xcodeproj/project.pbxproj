@@ -1,0 +1,692 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DE51FD37D56F14988BE7097 /* Pods_KinSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220126CCDCCDDDD7B551586E /* Pods_KinSampleApp.framework */; };
+		8525B7B024C8D8CB008277AB /* KinDesign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7AF24C8D8CB008277AB /* KinDesign.framework */; };
+		8525B7B124C8D8CB008277AB /* KinDesign.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7AF24C8D8CB008277AB /* KinDesign.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8525B7B424CDCCF5008277AB /* KinDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7B324CDCCF5008277AB /* KinDesignViewController.swift */; };
+		8525B7B724CDD4D8008277AB /* KinDesignDemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7B624CDD4D8008277AB /* KinDesignDemoTableViewCell.swift */; };
+		8525B7C824D366E5008277AB /* KinDesignInvoiceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B7C724D366E5008277AB /* KinDesignInvoiceTableView.swift */; };
+		8525B7E924D9D24D008277AB /* KinUX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7E824D9D24D008277AB /* KinUX.framework */; };
+		8525B7EA24D9D24D008277AB /* KinUX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7E824D9D24D008277AB /* KinUX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8525B7F124DB861F008277AB /* KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7F024DB861F008277AB /* KinBase.framework */; };
+		8525B7F224DB861F008277AB /* KinBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8525B7F024DB861F008277AB /* KinBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8525B88A24E33C83008277AB /* KinWalletDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B88924E33C83008277AB /* KinWalletDemoViewController.swift */; };
+		8525B88C24E36B80008277AB /* KinWalletAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B88B24E36B80008277AB /* KinWalletAccountViewController.swift */; };
+		8525B89324E48747008277AB /* KinWalletSendKinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525B89224E48747008277AB /* KinWalletSendKinViewController.swift */; };
+		853EC7A324EB06FD004E0BED /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7A224EB06FD004E0BED /* Utils.swift */; };
+		853EC7A524EC239D004E0BED /* KinWalletInvoiceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7A424EC239D004E0BED /* KinWalletInvoiceListViewController.swift */; };
+		853EC7A724EC31C9004E0BED /* KinWalletInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7A624EC31C9004E0BED /* KinWalletInvoiceViewController.swift */; };
+		853EC7AB24ECA652004E0BED /* KinWalletCreateInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853EC7AA24ECA652004E0BED /* KinWalletCreateInvoiceViewController.swift */; };
+		85B02475237220E500829FD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B02474237220E500829FD6 /* AppDelegate.swift */; };
+		85B02477237220E600829FD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B02476237220E600829FD6 /* SceneDelegate.swift */; };
+		85B0247B237220E600829FD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85B0247A237220E600829FD6 /* Assets.xcassets */; };
+		85B0247E237220E600829FD6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85B0247D237220E600829FD6 /* Preview Assets.xcassets */; };
+		85B02481237220E600829FD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85B0247F237220E600829FD6 /* LaunchScreen.storyboard */; };
+		85B0248C237220E600829FD6 /* KinSampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B0248B237220E600829FD6 /* KinSampleAppTests.swift */; };
+		85F0370E246EE3FC005734A8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0370D246EE3FC005734A8 /* HomeViewController.swift */; };
+		A785C38F87D89B1F9BADB6E9 /* Pods_KinSampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B83141CC45B0EA6AA3D7A1F4 /* Pods_KinSampleAppTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		85B02488237220E600829FD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85B02469237220E500829FD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85B02470237220E500829FD6;
+			remoteInfo = KinSampleApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8525B7B224C8D8CB008277AB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8525B7F224DB861F008277AB /* KinBase.framework in Embed Frameworks */,
+				8525B7EA24D9D24D008277AB /* KinUX.framework in Embed Frameworks */,
+				8525B7B124C8D8CB008277AB /* KinDesign.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0B171CCC009A4FFB6D15CFCF /* Pods-KinSampleAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinSampleAppTests.debug.xcconfig"; path = "Target Support Files/Pods-KinSampleAppTests/Pods-KinSampleAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		220126CCDCCDDDD7B551586E /* Pods_KinSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63B5F97708E94EC386732AC0 /* Pods-KinSampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinSampleAppTests.release.xcconfig"; path = "Target Support Files/Pods-KinSampleAppTests/Pods-KinSampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		8525B7AF24C8D8CB008277AB /* KinDesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinDesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B7B324CDCCF5008277AB /* KinDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinDesignViewController.swift; sourceTree = "<group>"; };
+		8525B7B624CDD4D8008277AB /* KinDesignDemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinDesignDemoTableViewCell.swift; sourceTree = "<group>"; };
+		8525B7C724D366E5008277AB /* KinDesignInvoiceTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinDesignInvoiceTableView.swift; sourceTree = "<group>"; };
+		8525B7E824D9D24D008277AB /* KinUX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinUX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B7F024DB861F008277AB /* KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8525B88924E33C83008277AB /* KinWalletDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinWalletDemoViewController.swift; sourceTree = "<group>"; };
+		8525B88B24E36B80008277AB /* KinWalletAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinWalletAccountViewController.swift; sourceTree = "<group>"; };
+		8525B89224E48747008277AB /* KinWalletSendKinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinWalletSendKinViewController.swift; sourceTree = "<group>"; };
+		853006E02422794100074D0A /* KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		853006E3242279CA00074D0A /* libKinGrpcApi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libKinGrpcApi.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		853525902429562900161423 /* KinUX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinUX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		853EC7A224EB06FD004E0BED /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		853EC7A424EC239D004E0BED /* KinWalletInvoiceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinWalletInvoiceListViewController.swift; sourceTree = "<group>"; };
+		853EC7A624EC31C9004E0BED /* KinWalletInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinWalletInvoiceViewController.swift; sourceTree = "<group>"; };
+		853EC7AA24ECA652004E0BED /* KinWalletCreateInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinWalletCreateInvoiceViewController.swift; sourceTree = "<group>"; };
+		855A7E0024181776003BC023 /* KinGrpcApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinGrpcApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		855A7E0324181789003BC023 /* GRPCClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GRPCClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85B02471237220E500829FD6 /* KinSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85B02474237220E500829FD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		85B02476237220E600829FD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		85B0247A237220E600829FD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		85B0247D237220E600829FD6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		85B02480237220E600829FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85B02482237220E600829FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85B02487237220E600829FD6 /* KinSampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinSampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85B0248B237220E600829FD6 /* KinSampleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinSampleAppTests.swift; sourceTree = "<group>"; };
+		85B0248D237220E600829FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85BFB44A237F547800EA1485 /* KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BFB44B237F547800EA1485 /* KinPresentation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinPresentation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BFB44C237F547800EA1485 /* KinUX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinUX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85DDD60D241BE121006DC118 /* KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85F03707246DEDCB005734A8 /* KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85F0370D246EE3FC005734A8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8A8F797E0EC7805574E73EA4 /* Pods-KinSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-KinSampleApp/Pods-KinSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		B83141CC45B0EA6AA3D7A1F4 /* Pods_KinSampleAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinSampleAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F70F1D3B1F2AEC9C87E53CBD /* Pods-KinSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinSampleApp.release.xcconfig"; path = "Target Support Files/Pods-KinSampleApp/Pods-KinSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85B0246E237220E500829FD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8525B7E924D9D24D008277AB /* KinUX.framework in Frameworks */,
+				6DE51FD37D56F14988BE7097 /* Pods_KinSampleApp.framework in Frameworks */,
+				8525B7F124DB861F008277AB /* KinBase.framework in Frameworks */,
+				8525B7B024C8D8CB008277AB /* KinDesign.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85B02484237220E600829FD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A785C38F87D89B1F9BADB6E9 /* Pods_KinSampleAppTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		524FA761765DD2C00E4CC764 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8525B7F024DB861F008277AB /* KinBase.framework */,
+				8525B7E824D9D24D008277AB /* KinUX.framework */,
+				8525B7AF24C8D8CB008277AB /* KinDesign.framework */,
+				85F03707246DEDCB005734A8 /* KinBase.framework */,
+				853525902429562900161423 /* KinUX.framework */,
+				853006E3242279CA00074D0A /* libKinGrpcApi.a */,
+				853006E02422794100074D0A /* KinBase.framework */,
+				85DDD60D241BE121006DC118 /* KinBase.framework */,
+				855A7E0324181789003BC023 /* GRPCClient.framework */,
+				855A7E0024181776003BC023 /* KinGrpcApi.framework */,
+				85BFB44A237F547800EA1485 /* KinBase.framework */,
+				85BFB44B237F547800EA1485 /* KinPresentation.framework */,
+				85BFB44C237F547800EA1485 /* KinUX.framework */,
+				220126CCDCCDDDD7B551586E /* Pods_KinSampleApp.framework */,
+				B83141CC45B0EA6AA3D7A1F4 /* Pods_KinSampleAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		62B944DA4FD5789B0E41321B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A8F797E0EC7805574E73EA4 /* Pods-KinSampleApp.debug.xcconfig */,
+				F70F1D3B1F2AEC9C87E53CBD /* Pods-KinSampleApp.release.xcconfig */,
+				0B171CCC009A4FFB6D15CFCF /* Pods-KinSampleAppTests.debug.xcconfig */,
+				63B5F97708E94EC386732AC0 /* Pods-KinSampleAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		8525B7B524CDD4A4008277AB /* KinDesignDemo */ = {
+			isa = PBXGroup;
+			children = (
+				8525B7B324CDCCF5008277AB /* KinDesignViewController.swift */,
+				8525B7B624CDD4D8008277AB /* KinDesignDemoTableViewCell.swift */,
+				8525B7C724D366E5008277AB /* KinDesignInvoiceTableView.swift */,
+			);
+			path = KinDesignDemo;
+			sourceTree = "<group>";
+		};
+		8525B88824E33C55008277AB /* KinWalletDemo */ = {
+			isa = PBXGroup;
+			children = (
+				8525B88924E33C83008277AB /* KinWalletDemoViewController.swift */,
+				8525B88B24E36B80008277AB /* KinWalletAccountViewController.swift */,
+				8525B89224E48747008277AB /* KinWalletSendKinViewController.swift */,
+				853EC7A424EC239D004E0BED /* KinWalletInvoiceListViewController.swift */,
+				853EC7A624EC31C9004E0BED /* KinWalletInvoiceViewController.swift */,
+				853EC7AA24ECA652004E0BED /* KinWalletCreateInvoiceViewController.swift */,
+			);
+			path = KinWalletDemo;
+			sourceTree = "<group>";
+		};
+		85B02468237220E500829FD6 = {
+			isa = PBXGroup;
+			children = (
+				85B02473237220E500829FD6 /* KinSampleApp */,
+				85B0248A237220E600829FD6 /* KinSampleAppTests */,
+				85B02472237220E500829FD6 /* Products */,
+				524FA761765DD2C00E4CC764 /* Frameworks */,
+				62B944DA4FD5789B0E41321B /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		85B02472237220E500829FD6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85B02471237220E500829FD6 /* KinSampleApp.app */,
+				85B02487237220E600829FD6 /* KinSampleAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85B02473237220E500829FD6 /* KinSampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				8525B88824E33C55008277AB /* KinWalletDemo */,
+				8525B7B524CDD4A4008277AB /* KinDesignDemo */,
+				85B02474237220E500829FD6 /* AppDelegate.swift */,
+				85B02476237220E600829FD6 /* SceneDelegate.swift */,
+				85F0370D246EE3FC005734A8 /* HomeViewController.swift */,
+				853EC7A224EB06FD004E0BED /* Utils.swift */,
+				85B0247A237220E600829FD6 /* Assets.xcassets */,
+				85B0247F237220E600829FD6 /* LaunchScreen.storyboard */,
+				85B02482237220E600829FD6 /* Info.plist */,
+				85B0247C237220E600829FD6 /* Preview Content */,
+			);
+			path = KinSampleApp;
+			sourceTree = "<group>";
+		};
+		85B0247C237220E600829FD6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				85B0247D237220E600829FD6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		85B0248A237220E600829FD6 /* KinSampleAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				85B0248B237220E600829FD6 /* KinSampleAppTests.swift */,
+				85B0248D237220E600829FD6 /* Info.plist */,
+			);
+			path = KinSampleAppTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85B02470237220E500829FD6 /* KinSampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85B02490237220E600829FD6 /* Build configuration list for PBXNativeTarget "KinSampleApp" */;
+			buildPhases = (
+				3B7D693A0A11335AFBEAC1AB /* [CP] Check Pods Manifest.lock */,
+				85B0246D237220E500829FD6 /* Sources */,
+				85B0246E237220E500829FD6 /* Frameworks */,
+				85B0246F237220E500829FD6 /* Resources */,
+				2A419EBA633DACDA7C19D507 /* [CP] Embed Pods Frameworks */,
+				8525B7B224C8D8CB008277AB /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinSampleApp;
+			productName = KinSampleApp;
+			productReference = 85B02471237220E500829FD6 /* KinSampleApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		85B02486237220E600829FD6 /* KinSampleAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85B02493237220E600829FD6 /* Build configuration list for PBXNativeTarget "KinSampleAppTests" */;
+			buildPhases = (
+				C88EFA36203524D8083C3003 /* [CP] Check Pods Manifest.lock */,
+				85B02483237220E600829FD6 /* Sources */,
+				85B02484237220E600829FD6 /* Frameworks */,
+				85B02485237220E600829FD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85B02489237220E600829FD6 /* PBXTargetDependency */,
+			);
+			name = KinSampleAppTests;
+			productName = KinSampleAppTests;
+			productReference = 85B02487237220E600829FD6 /* KinSampleAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		85B02469237220E500829FD6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = "Kin Foundation";
+				TargetAttributes = {
+					85B02470237220E500829FD6 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					85B02486237220E600829FD6 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 85B02470237220E500829FD6;
+					};
+				};
+			};
+			buildConfigurationList = 85B0246C237220E500829FD6 /* Build configuration list for PBXProject "KinSampleApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 85B02468237220E500829FD6;
+			productRefGroup = 85B02472237220E500829FD6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85B02470237220E500829FD6 /* KinSampleApp */,
+				85B02486237220E600829FD6 /* KinSampleAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85B0246F237220E500829FD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85B02481237220E600829FD6 /* LaunchScreen.storyboard in Resources */,
+				85B0247E237220E600829FD6 /* Preview Assets.xcassets in Resources */,
+				85B0247B237220E600829FD6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85B02485237220E600829FD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A419EBA633DACDA7C19D507 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinSampleApp/Pods-KinSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinSampleApp/Pods-KinSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinSampleApp/Pods-KinSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B7D693A0A11335AFBEAC1AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinSampleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C88EFA36203524D8083C3003 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinSampleAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85B0246D237220E500829FD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8525B88C24E36B80008277AB /* KinWalletAccountViewController.swift in Sources */,
+				85F0370E246EE3FC005734A8 /* HomeViewController.swift in Sources */,
+				85B02475237220E500829FD6 /* AppDelegate.swift in Sources */,
+				853EC7AB24ECA652004E0BED /* KinWalletCreateInvoiceViewController.swift in Sources */,
+				85B02477237220E600829FD6 /* SceneDelegate.swift in Sources */,
+				853EC7A724EC31C9004E0BED /* KinWalletInvoiceViewController.swift in Sources */,
+				8525B89324E48747008277AB /* KinWalletSendKinViewController.swift in Sources */,
+				8525B88A24E33C83008277AB /* KinWalletDemoViewController.swift in Sources */,
+				853EC7A524EC239D004E0BED /* KinWalletInvoiceListViewController.swift in Sources */,
+				853EC7A324EB06FD004E0BED /* Utils.swift in Sources */,
+				8525B7C824D366E5008277AB /* KinDesignInvoiceTableView.swift in Sources */,
+				8525B7B724CDD4D8008277AB /* KinDesignDemoTableViewCell.swift in Sources */,
+				8525B7B424CDCCF5008277AB /* KinDesignViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85B02483237220E600829FD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85B0248C237220E600829FD6 /* KinSampleAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		85B02489237220E600829FD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85B02470237220E500829FD6 /* KinSampleApp */;
+			targetProxy = 85B02488237220E600829FD6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		85B0247F237220E600829FD6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85B02480237220E600829FD6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		85B0248E237220E600829FD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		85B0248F237220E600829FD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		85B02491237220E600829FD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A8F797E0EC7805574E73EA4 /* Pods-KinSampleApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"KinSampleApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 429CURH2S8;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = KinSampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinSampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		85B02492237220E600829FD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F70F1D3B1F2AEC9C87E53CBD /* Pods-KinSampleApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"KinSampleApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 429CURH2S8;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = KinSampleApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinSampleApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		85B02494237220E600829FD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B171CCC009A4FFB6D15CFCF /* Pods-KinSampleAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 64923RW79V;
+				INFOPLIST_FILE = KinSampleAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinSampleAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinSampleApp.app/KinSampleApp";
+			};
+			name = Debug;
+		};
+		85B02495237220E600829FD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63B5F97708E94EC386732AC0 /* Pods-KinSampleAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 64923RW79V;
+				INFOPLIST_FILE = KinSampleAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinSampleAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinSampleApp.app/KinSampleApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85B0246C237220E500829FD6 /* Build configuration list for PBXProject "KinSampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85B0248E237220E600829FD6 /* Debug */,
+				85B0248F237220E600829FD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85B02490237220E600829FD6 /* Build configuration list for PBXNativeTarget "KinSampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85B02491237220E600829FD6 /* Debug */,
+				85B02492237220E600829FD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85B02493237220E600829FD6 /* Build configuration list for PBXNativeTarget "KinSampleAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85B02494237220E600829FD6 /* Debug */,
+				85B02495237220E600829FD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 85B02469237220E500829FD6 /* Project object */;
+}

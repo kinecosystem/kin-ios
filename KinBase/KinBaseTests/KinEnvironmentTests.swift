@@ -8,25 +8,38 @@
 
 import XCTest
 import stellarsdk
+import Promises
 @testable import KinBase
 
 class KinEnvironmentTests: XCTestCase {
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
     }
 
-    func testTestNet() {
-        let sut = KinEnvironment.testNet()
+    func testHorizonTestNet() {
+        let sut = KinEnvironment.Horizon.testNet()
         XCTAssertEqual(sut.network, KinNetwork.testNet)
     }
 
-    func testMainNet() {
-        let sut = KinEnvironment.mainNet()
+    func testHorizonMainNet() {
+        let sut = KinEnvironment.Horizon.mainNet()
+        XCTAssertEqual(sut.network, KinNetwork.mainNet)
+    }
+
+    func testAgoraTestNet() {
+        let sut = KinEnvironment.Agora.testNet()
+        XCTAssertEqual(sut.network, KinNetwork.testNet)
+    }
+
+    func testAgoraMainNet() {
+        let sut = KinEnvironment.Agora.mainNet()
         XCTAssertEqual(sut.network, KinNetwork.mainNet)
     }
 
     func testImportKeyAndGetAllAccounts() {
-        let sut = KinEnvironment.testNet()
+        let sut = KinEnvironment.Horizon.testNet()
+        _ = try! await(sut.storage.clearStorage())
+
         let key = try! KinAccount.Key(secretSeed: StubObjects.seed1)
         _ = try! sut.importPrivateKey(key)
 
@@ -48,7 +61,7 @@ class KinEnvironmentTests: XCTestCase {
     }
 
     func testImportPrivateKeyMissingKey() {
-        let sut = KinEnvironment.testNet()
+        let sut = KinEnvironment.Horizon.testNet()
         let key = try! KinAccount.Key(accountId: StubObjects.accountId1)
         XCTAssertThrowsError(try sut.importPrivateKey(key))
     }

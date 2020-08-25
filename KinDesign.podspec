@@ -1,0 +1,23 @@
+#
+# Spec for KinDesign
+#
+Pod::Spec.new do |s|
+  s.name             = 'KinDesign'
+  s.version          = '0.2.0'
+  s.summary          = 'Kin Design Library for iOS'
+
+  s.description      = <<-DESC
+    The shared KinDesign library components for creating consistent Kin user experiences. When creating a custom Kin experience, this library can be used to include standard UI components for displaying Kin prices, transactions, etc.
+                       DESC
+
+  s.homepage         = 'https://github.com/kinecosystem/kin-ios'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'Kik Engineering' => 'engineering@kik.com' }
+  s.source           = { :git => 'https://github.com/kinecosystem/kin-ios.git' }
+
+  s.ios.deployment_target = '9.0'
+
+  s.source_files = 'KinDesign/KinDesign/Classes/**/*'
+  s.frameworks = 'UIKit'
+end
+

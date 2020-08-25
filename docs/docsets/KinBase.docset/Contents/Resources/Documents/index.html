@@ -372,21 +372,23 @@
 <tr>
 <td style="text-align: left"><code>KinBaseCompat</code></td>
 <td style="text-align: left"><a href="KinBaseCompat"><code>/KinBaseCompat</code></a></td>
-<td style="text-align: left">The KinBaseCompat library implements the public surface layer to be a drop in replacement of the, now deprecated, <a href="https://github.com/kinecosystem/kin-sdk-ios">kin-sdk-ios</a> library. Just update your version in Podfile and have better performance and stability.</td>
+<td style="text-align: left">The <a href="KinBaseCompat">:KinBaseCompat</a> library implements the public surface layer to be a drop in replacement of the, now deprecated, <a href="https://github.com/kinecosystem/kin-sdk-ios">kin-sdk-ios</a> library. Just update your version in Podfile and have better performance and stability.</td>
 </tr>
 </tbody></table>
 <h2 id='installation' class='heading'>Installation</h2>
 
-<p>For developers who are already on KinSDK <a href="https://github.com/kinecosystem/kin-sdk-ios/releases/tag/1.0.2">1.0.2</a>, simply change KinSDK to KinBaseCompat in the Podfile:</p>
-<pre class="highlight plaintext"><code>pod 'KinBaseCompat', '~&gt; 0.1.0'
+<p>For developers who are already on KinSDK <a href="https://github.com/kinecosystem/kin-sdk-ios/releases/tag/1.0.2">1.0.2</a>, simply upgrade the version to 1.0.3 in the Podfile:</p>
+<pre class="highlight plaintext"><code>pod 'KinSDK', '~&gt; 1.0.3'
 </code></pre>
 
 <p>For developers wanting to check out the new APIs under KinBase:</p>
 <pre class="highlight plaintext"><code>pod 'KinBase', '~&gt; 0.1.0'
 </code></pre>
-<h2 id='documentation' class='heading'>Documentation</h2>
+<h2 id='generate-documentations-in-html' class='heading'>Generate documentations in HTML</h2>
 
-<p>Jazzy Documentation for all classes in all modules located <a href="https://kinecosystem.github.io/kin-ios/docs/index.html">here</a></p>
+<p>Install jazzy <code>gem install jazzy</code>
+Run <code>./generate_docs.sh</code>
+Docs are under <code>docs/</code></p>
 
           </section>
         </section>

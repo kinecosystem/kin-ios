@@ -26,6 +26,16 @@ public struct KinTransaction: Equatable {
         let resultXdrBytes: [Byte]?
         let pagingToken: PagingToken?
 
+        private init(recordType: RecordType,
+                     timestamp: TimeInterval,
+                     resultXdrBytes: [Byte]?,
+                     pagingToken: PagingToken?) {
+            self.recordType = recordType
+            self.timestamp = timestamp
+            self.resultXdrBytes = resultXdrBytes
+            self.pagingToken = pagingToken
+        }
+
         static func inFlight(ts: TimeInterval) -> Record {
             return Record(recordType: .inFlight,
                           timestamp: ts,
@@ -53,9 +63,14 @@ public struct KinTransaction: Equatable {
 
     let stellarTransaction: Transaction
 
-    public let envelopeXdrBytes: [Byte]
     public let record: Record
     public let network: KinNetwork
+    public let envelopeXdrBytes: [Byte]
+    public let invoiceList: InvoiceList?
+
+    public var envelopeXdrString: String {
+        return Data(envelopeXdrBytes).base64EncodedString()
+    }
 
     public var transactionHash: KinTransactionHash? {
         guard let data = try? stellarTransaction.getTransactionHashData(network: network.stellarNetwork) else {
@@ -78,29 +93,31 @@ public struct KinTransaction: Equatable {
     }
 
     public var memo: KinMemo {
-        guard case let Memo.text(text) = stellarTransaction.memo else {
-            return KinMemo.none
+        switch stellarTransaction.memo {
+        case .text(let text):
+            return .init(text: text)
+        case .hash(let data):
+            return .init(bytes: [Byte](data))
+        default:
+            return .none
         }
-
-        return KinMemo(text: text)
     }
 
     public var paymentOperations: [KinPaymentOperation] {
         return stellarTransaction.operations.compactMap { operation -> KinPaymentOperation? in
             guard let operationXdr = try? operation.toXDR(),
-                let sourceAccountId = operation.sourceAccount?.accountId,
                 case let .payment(paymentOperation) = operationXdr.body else {
                 return nil
             }
 
             return KinPaymentOperation(amount: Quark(paymentOperation.amount).kin,
-                                       source: sourceAccountId,
+                                       source: operation.sourceAccount?.accountId ?? "",
                                        destination: paymentOperation.destination.accountId)
         }
     }
 
     public var resultCode: ResultCode? {
-        guard record.recordType == .historical,
+        guard record.recordType == .historical || record.recordType == .acknowledged,
             let resultData = record.resultXdrBytes,
             let result = try? XDRDecoder.decode(TransactionResultXDR.self, data: resultData) else {
                 return nil
@@ -111,11 +128,13 @@ public struct KinTransaction: Equatable {
 
     init(envelopeXdrBytes: [Byte],
          record: Record,
-         network: KinNetwork) throws {
+         network: KinNetwork,
+         invoiceList: InvoiceList? = nil) throws {
         self.envelopeXdrBytes = envelopeXdrBytes
         self.record = record
         self.network = network
         self.stellarTransaction = try Transaction(envelopeXdr: Data(envelopeXdrBytes).base64EncodedString())
+        self.invoiceList = invoiceList
     }
 
     public static func inFlightTransaction(envelope: [Byte], network: KinNetwork) throws -> KinTransaction {
@@ -126,7 +145,8 @@ public struct KinTransaction: Equatable {
 
     public static func == (lhs: KinTransaction, rhs: KinTransaction) -> Bool {
         return lhs.envelopeXdrBytes == rhs.envelopeXdrBytes &&
-            lhs.record == rhs.record
+            lhs.record == rhs.record &&
+            lhs.invoiceList == rhs.invoiceList
     }
 }
 
@@ -138,8 +158,16 @@ extension KinTransaction {
 
         var offset: UInt8 = 0
 
-        return paymentOperations.map { operation -> KinPayment in
+        return paymentOperations.enumerated().map { (index, operation) -> KinPayment in
             let id = KinPayment.Id(transactionHash: transactionHash, offset: offset)
+            let invoice: Invoice? = {
+                guard let invoices = invoiceList?.invoices, invoices.count > index else {
+                    return nil
+                }
+
+                return invoices[index]
+            }()
+
             let payment = KinPayment(id: id,
                                      status: .success,
                                      sourceAccountId: operation.source,
@@ -147,7 +175,8 @@ extension KinTransaction {
                                      amount: operation.amount,
                                      fee: fee,
                                      memo: memo,
-                                     timestamp: record.timestamp)
+                                     timestamp: record.timestamp,
+                                     invoice: invoice)
             offset += 1
             return payment
         }
