@@ -12,7 +12,7 @@ import KinDesign
 
 extension Bundle {
     class func kinUx() -> Bundle? {
-        return Bundle(identifier: "org.kin..KinUX")
+        return Bundle(for: KinPresentationController.self)
     }
 }
 

@@ -20,6 +20,6 @@ public struct StandardConstants {
 
 public extension Bundle {
     class func kinDesign() -> Bundle? {
-        return Bundle(identifier: "org.kin..KinDesign")
+        return Bundle(for: KinAmountView.self)
     }
 }

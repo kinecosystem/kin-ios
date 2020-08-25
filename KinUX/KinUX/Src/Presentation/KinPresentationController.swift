@@ -42,7 +42,6 @@ public enum SheetTransitionCover: RawRepresentable {
     }
 }
 
-// TODO: clean up
 public class KinPresentationController: UIPresentationController {
     private var calculatedFrameOfPresentedViewInContainerView = CGRect.zero
     private var shouldSetFrameWhenAccessingPresentedView = false
