@@ -7,8 +7,7 @@ use_frameworks!
 def kin_base_dependencies
     pod 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
     pod 'PromisesSwift', '~> 1.2.8'
-    pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git', :branch => 'dev'
-#    pod 'KinGrpcApi', :path => 'KinGrpcApi.podspec'
+    pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git'
 end
 
 def kin_base_compat_dependencies
@@ -67,13 +66,6 @@ target 'KinSampleApp' do
 
   # For local development, comment out this and pull KinBase framework locally into project framework dependency, and reinstall pod
   kin_base_dependencies
-#  pod 'KinBase', :path => 'KinBase.podspec'
-#  pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git', :branch => 'ms2'
-#  pod 'KinBase', :git => 'git@github.com:kinecosystem/kin-ios.git'
-#  kin_base_dependencies
-
-  # Before KinGrpcApi is published, enable this if pulling KinBase remotely
-#  pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git'
 
   target 'KinSampleAppTests' do
     inherit! :search_paths
