@@ -42,11 +42,14 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
     let network: KinNetwork
 
     init(network: KinNetwork,
-         appInfoProvider: AppInfoProvider) {
+         appInfoProvider: AppInfoProvider,
+         storage: KinStorageType) {
         self.network = network
         let authContext = AppUserAuthContext(appInfoProvider: appInfoProvider)
+        let userAgentContext = UserAgentContext(storage: storage)
         let grpcServiceProvider = GrpcServiceProvider(host: network.agoraUrl,
-                                                      authContext: authContext)
+                                                      authContext: authContext,
+                                                      userAgentContext: userAgentContext)
         self.grpcAccountService = grpcServiceProvider.accountService
         self.grpcTransactionService = grpcServiceProvider.transactionService
     }

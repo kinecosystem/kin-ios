@@ -22,6 +22,7 @@ public class KinFileStorage  {
         static let transactionsFileName = "transactions"
         static let invoicesFileName = "invoices"
         static let minFeeUserDefaultsKey = "KinBase.MinFee"
+        static let cidUserDefaultsKey = "KinBase.CID"
     }
 
     private let fileManager = FileManager.default
@@ -304,6 +305,17 @@ extension KinFileStorage: KinStorageType {
 
     public func getMinFee() -> Quark? {
         return userDefaults.value(forKey: Constants.minFeeUserDefaultsKey) as? Quark
+    }
+    
+    public func getOrCreateCID() -> String {
+        let exisingCID = userDefaults.value(forKey: Constants.cidUserDefaultsKey) as? String
+        if (exisingCID != nil) {
+            return exisingCID!
+        } else {
+            let newCid = UUID().uuidString
+            userDefaults.set(newCid, forKey: Constants.cidUserDefaultsKey)
+            return newCid
+        }
     }
 
     public func clearStorage() -> Promise<Void> {

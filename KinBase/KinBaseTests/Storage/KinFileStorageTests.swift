@@ -386,6 +386,12 @@ class KinFileStorageTests: XCTestCase {
         sut.setMinFee(1000)
         XCTAssertEqual(sut.getMinFee(), 1000)
     }
+    
+    func testSetAndGetCID() {
+        let cid1 = sut.getOrCreateCID()
+        let cid2 = sut.getOrCreateCID()
+        XCTAssertEqual(cid1, cid2)
+    }
 
     func testAddAndGetInvoices() {
         let expectInvoiceLists = [StubObjects.stubInvoiceList1]

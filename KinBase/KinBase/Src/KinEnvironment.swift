@@ -112,8 +112,13 @@ public struct KinEnvironment {
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
             let networkHandler = NetworkOperationHandler()
 
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let storage = KinFileStorage(directory: documentDirectory,
+                                         network: network)
+            
             let grpcProxy = AgoraGrpcProxy(network: network,
-                                           appInfoProvider: appInfoProvider)
+                                           appInfoProvider: appInfoProvider,
+                                           storage: storage)
 
             let agoraAccountsApi = AgoraKinAccountsApi(agoraGrpc: grpcProxy)
             let agoraTransactionsApi = AgoraKinTransactionsApi(agoraGrpc: grpcProxy)
@@ -126,10 +131,6 @@ public struct KinEnvironment {
                                      transactionApi: agoraTransactionsApi,
                                      transactionWhitelistingApi: agoraTransactionsApi,
                                      streamingApi: agoraAccountsApi)
-
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let storage = KinFileStorage(directory: documentDirectory,
-                                         network: network)
 
             let testServiceInstance = KinTestService(friendBotApi: FriendBotApi(),
                                                      networkOperationHandler: networkHandler,

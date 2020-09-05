@@ -11,6 +11,10 @@ import Promises
 @testable import KinBase
 
 class MockKinStorage: KinStorageType {
+    func getOrCreateCID() -> String {
+        return UUID().uuidString
+    }
+    
     var stubGetAccountResult: KinAccount!
     var stubUpdateAccountResult: KinAccount!
     var stubAdvanceSequenceResult: KinAccount!

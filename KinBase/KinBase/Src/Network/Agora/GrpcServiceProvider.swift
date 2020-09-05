@@ -16,14 +16,14 @@ public class GrpcServiceProvider {
     private let host: String
     private let authContext: AppUserAuthContext
 
-    public init(host: String, authContext: AppUserAuthContext) {
+    public init(host: String, authContext: AppUserAuthContext, userAgentContext: UserAgentContext) {
         self.host = host
         self.authContext = authContext
 
         self.accountService = APBAccountV3Account(host: host)
 
         let options = GRPCMutableCallOptions()
-        options.interceptorFactories = [authContext]
+        options.interceptorFactories = [authContext, userAgentContext]
         self.transactionService = APBTransactionV3Transaction(host: host,
                                                               callOptions: options)
     }

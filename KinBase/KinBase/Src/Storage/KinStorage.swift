@@ -50,6 +50,8 @@ public protocol KinStorageType {
     func setMinFee(_ fee: Quark)
 
     func getMinFee() -> Quark?
+    
+    func getOrCreateCID() -> String
 
     func clearStorage() -> Promise<Void>
 }
