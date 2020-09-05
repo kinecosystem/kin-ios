@@ -100,7 +100,11 @@ public class KinService {
     private let transactionApi: KinTransactionApi
     private let transactionWhitelistingApi: KinTransactionWhitelistingApi
     private let streamingApi: KinStreamingApi
-
+    private let logger: KinLoggerFactory
+    private lazy var log: KinLogger = {
+        logger.getLogger(name: String(describing: self))
+    }()
+    
     public init(network: KinNetwork,
                 networkOperationHandler: NetworkOperationHandler,
                 dispatchQueue: DispatchQueue,
@@ -108,7 +112,8 @@ public class KinService {
                 accountCreationApi: KinAccountCreationApi,
                 transactionApi: KinTransactionApi,
                 transactionWhitelistingApi: KinTransactionWhitelistingApi,
-                streamingApi: KinStreamingApi) {
+                streamingApi: KinStreamingApi,
+                logger: KinLoggerFactory) {
         self.network = network
         self.networkOperationHandler = networkOperationHandler
         self.dispatchQueue = dispatchQueue
@@ -117,6 +122,15 @@ public class KinService {
         self.transactionApi = transactionApi
         self.transactionWhitelistingApi = transactionWhitelistingApi
         self.streamingApi = streamingApi
+        self.logger = logger
+    }
+    
+    private func requestPrint<RequestType : Any>(request: RequestType) {
+        log.debug(msg:"[Request]:\(request)")
+    }
+    
+    private func responsePrint<ResponseType : Any>(response: ResponseType) {
+        log.debug(msg:"[Response]:\(response)")
     }
 }
 
@@ -128,7 +142,10 @@ extension KinService: KinServiceType {
                 return
             }
 
-            self.accountCreationApi.createAccount(request: CreateAccountRequest(accountId: accountId)) { (response) in
+            let request = CreateAccountRequest(accountId: accountId)
+            self.requestPrint(request: request)
+            self.accountCreationApi.createAccount(request: request) { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let account = response.account {
@@ -156,7 +173,10 @@ extension KinService: KinServiceType {
                 return
             }
 
-            self.accountApi.getAccount(request: GetAccountRequest(accountId: accountId)) { response in
+            let request = GetAccountRequest(accountId: accountId)
+            self.requestPrint(request: request)
+            self.accountApi.getAccount(request: request) { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let account = response.account {
@@ -180,7 +200,9 @@ extension KinService: KinServiceType {
     }
 
     public func streamAccount(accountId: KinAccount.Id) -> Observable<KinAccount> {
-        return streamingApi.streamAccount(accountId)
+        return streamingApi.streamAccount(accountId).subscribe { [weak self] (account) in
+            self?.log.debug(msg:"streamAccount::Update \(account)")
+        }
     }
 
     public func getLatestTransactions(accountId: KinAccount.Id) -> Promise<[KinTransaction]> {
@@ -193,7 +215,9 @@ extension KinService: KinServiceType {
             let request = GetTransactionHistoryRequest(accountId: accountId,
                                                        cursor: nil,
                                                        order: .descending)
-            self.transactionApi.getTransactionHistory(request: request) { response in
+            self.requestPrint(request: request)
+            self.transactionApi.getTransactionHistory(request: request) { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let transactions = response.kinTransactions {
@@ -228,7 +252,9 @@ extension KinService: KinServiceType {
             let request = GetTransactionHistoryRequest(accountId: accountId,
                                                        cursor: pagingToken,
                                                        order: order)
-            self.transactionApi.getTransactionHistory(request: request) { response in
+            self.requestPrint(request: request)
+            self.transactionApi.getTransactionHistory(request: request) { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let transactions = response.kinTransactions {
@@ -259,7 +285,9 @@ extension KinService: KinServiceType {
             }
 
             let request = GetTransactionRequest(transactionHash: transactionHash)
-            self.transactionApi.getTransaction(request: request) { response in
+            self.requestPrint(request: request)
+            self.transactionApi.getTransaction(request: request) { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let transaction = response.kinTransaction {
@@ -289,7 +317,8 @@ extension KinService: KinServiceType {
                 return
             }
 
-            self.transactionApi.getTransactionMinFee { response in
+            self.transactionApi.getTransactionMinFee { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let fee = response.fee {
@@ -365,7 +394,9 @@ extension KinService: KinServiceType {
 
             let request = SubmitTransactionRequest(transactionEnvelopeXdr: transaction.envelopeXdrString,
                                                    invoiceList: transaction.invoiceList)
-            self.transactionApi.submitTransaction(request: request) { response in
+            self.requestPrint(request: request)
+            self.transactionApi.submitTransaction(request: request) { [weak self] response in
+                self?.responsePrint(response:response)
                 switch response.result {
                 case .ok:
                     if let transaction = response.kinTransaction {
@@ -404,6 +435,8 @@ extension KinService: KinServiceType {
     }
 
     public func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction> {
-        return streamingApi.streamNewTransactions(accountId: accountId)
+        return streamingApi.streamNewTransactions(accountId: accountId).subscribe { [weak self] (transaction) in
+            self?.log.debug(msg:"streamNewTransactions::Update \(transaction)")
+        }
     }
 }

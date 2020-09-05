@@ -32,7 +32,8 @@ public class PaymentFlowController {
                                              args: .init(invoice: invoice,
                                                          payerAccountId: payerAccount,
                                                          appInfo: processingAppInfo),
-                                             kinAccountContext: kinAccountContext)
+                                             kinAccountContext: kinAccountContext,
+                                             logger: kinAccountContext.env.logger)
 
         vc.attachViewModel(viewModel)
 

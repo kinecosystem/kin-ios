@@ -9,7 +9,13 @@
 import Foundation
 import stellarsdk
 
-public class KinAccount {
+extension KeyPair: CustomStringConvertible {
+    public var description: String {
+        return "KeyPair(accountId=\(accountId), secretSeed=XXXXXXXX<Private>XXXXXXXX)"
+    }
+}
+
+public class KinAccount : CustomStringConvertible {
     public typealias Key = KeyPair
     public typealias Id = String
 
@@ -42,6 +48,13 @@ public class KinAccount {
         self.status = status
         self.sequence = sequence
     }
+    
+    public var description: String {
+        get {
+            return "KinAccount(id=\(id)), key=\(key), balance=\(balance), status=\(status), sequence=\(String(describing: sequence))"
+        }
+    }
+
 }
 
 extension KinAccount: Equatable {

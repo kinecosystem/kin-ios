@@ -187,6 +187,12 @@ public class KinAccountContext {
             return KinAccountContext(environment: env, accountId: accountId)
         }
     }
+    
+    public let env: KinEnvironment
+    
+    private lazy var log = {
+        env.logger.getLogger(name: String(describing: self))
+    }()
 
     /// A service used to retrieve all account and payment data
     public let service: KinServiceType
@@ -248,6 +254,7 @@ public class KinAccountContext {
 
     init(environment: KinEnvironment,
          accountId: KinAccount.Id) {
+        self.env = environment
         self.service = environment.service
         self.storage = environment.storage
         self.dispatchQueue = environment.dispatchQueue
@@ -262,6 +269,7 @@ public class KinAccountContext {
 // MARK: KinAccountReadOperations
 extension KinAccountContext: KinAccountReadOperations {
     public func getAccount(forceUpdate: Bool = false) -> Promise<KinAccount> {
+        log.info(msg: #function)
         return storage.getAccount(accountId)
             .then(on: dispatchQueue) { account -> Promise<KinAccount> in
                 guard let account = account else {
@@ -286,6 +294,7 @@ extension KinAccountContext: KinAccountReadOperations {
     }
 
     public func observeBalance(mode: ObservationMode = .passive) -> Observable<KinBalance> {
+        log.info(msg: #function)
         switch mode {
         case .active, .activeNewOnly:
             setUpAccountStreamIfNecessary()
@@ -297,6 +306,7 @@ extension KinAccountContext: KinAccountReadOperations {
     }
 
     public func clearStorage() -> Promise<Void> {
+        log.info(msg: #function)
         return storage.removeAccount(accountId: accountId)
     }
 }
@@ -304,6 +314,7 @@ extension KinAccountContext: KinAccountReadOperations {
 // MARK: KinPaymentReadOperations
 extension KinAccountContext: KinPaymentReadOperations {
     public func observePayments(mode: ObservationMode = .passive) -> ListObservable<KinPayment> {
+        log.info(msg: #function)
         switch mode {
         case .passive:
             return paymentsSubject
@@ -325,6 +336,7 @@ extension KinAccountContext: KinPaymentReadOperations {
     }
 
     public func getPaymentsForTransactionHash(_ transactionHash: KinTransactionHash) -> Promise<[KinPayment]> {
+        log.info(msg: #function)
         return service.getTransaction(transactionHash: transactionHash)
             .then(on: dispatchQueue) { transaction -> Promise<[KinPayment]> in
                 return .init(transaction.kinPayments)
@@ -335,6 +347,7 @@ extension KinAccountContext: KinPaymentReadOperations {
 // MARK: KinPaymentWriteOperations
 extension KinAccountContext: KinPaymentWriteOperations {
     public func sendKinPayment(_ paymentItem: KinPaymentItem, memo: KinMemo) -> Promise<KinPayment> {
+        log.info(msg: #function)
         return sendKinPayments([paymentItem], memo: memo)
             .then(on: dispatchQueue) { payments -> Promise<KinPayment> in
                 return .init { fulfill, reject in
@@ -349,6 +362,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
     }
 
     public func sendKinPayments(_ payments: [KinPaymentItem], memo: KinMemo) -> Promise<[KinPayment]> {
+        log.info(msg: #function)
         let invoices = payments.compactMap { $0.invoice }
         let invoiceList = try? InvoiceList(invoices: invoices)
         var resultTransaction: KinTransaction?
@@ -397,6 +411,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
                            destinationAccount: KinAccount.Id,
                            invoice: Invoice,
                            type: KinBinaryMemo.TransferType = .spend) -> Promise<KinPayment> {
+        log.info(msg: #function)
         do {
             let invoiceList = try InvoiceList(invoices: [invoice])
             let agoraMemo = try KinBinaryMemo(typeId: type.rawValue,

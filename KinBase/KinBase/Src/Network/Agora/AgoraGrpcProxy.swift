@@ -40,11 +40,17 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
     private let grpcTransactionService: APBTransactionV3Transaction2
 
     let network: KinNetwork
+    private let logger: KinLoggerFactory
+    private lazy var log: KinLogger = {
+        logger.getLogger(name: String(describing: self))
+    }()
 
     init(network: KinNetwork,
          appInfoProvider: AppInfoProvider,
-         storage: KinStorageType) {
+         storage: KinStorageType,
+         logger: KinLoggerFactory) {
         self.network = network
+        self.logger = logger
         let authContext = AppUserAuthContext(appInfoProvider: appInfoProvider)
         let userAgentContext = UserAgentContext(storage: storage)
         let grpcServiceProvider = GrpcServiceProvider(host: network.agoraUrl,
@@ -57,12 +63,14 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
     private func callUnaryRPC<RequestType: GPBMessage, ResponseType: GPBMessage>
         (request: RequestType,
          protoMethod: @escaping GRPCUnaryCall<RequestType, ResponseType>) -> Promise<ResponseType> {
-        return Promise<ResponseType> { fulfill, reject in
+        return Promise<ResponseType> { [weak self] fulfill, reject in
             let handler = { (grpcResponse: ResponseType, error: Error?) in
                 if let error = error {
                     reject(error)
                     return
                 }
+                
+                self?.log.debug(msg:"AgoraGrpcProxy::response::\(grpcResponse)")
 
                 fulfill(grpcResponse)
             }
@@ -72,6 +80,8 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
                 reject(Errors.internalInconsistency)
                 return
             }
+            
+            self?.log.debug(msg:"AgoraGrpcProxy::request::\(request)")
 
             let call: GRPCUnaryProtoCall = protoMethod(request, responseHandler, nil)
             call.start()
@@ -84,16 +94,20 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
 
         let subject = ValueSubject<ResponseType>()
 
-        let handler = { (grpcResponse: ResponseType?, error: Error?) in
+        let handler = { [weak self] (grpcResponse: ResponseType?, error: Error?) in
             guard let grpcResponse = grpcResponse, error == nil else {
                 return
             }
+            
+            self?.log.debug(msg:"AgoraGrpcProxy::streamUpdate::\(grpcResponse)")
 
             subject.onNext(grpcResponse)
         }
 
         let streamResponseHandler = GRPCStreamResponseHandler<ResponseType>(responseHandler: handler)
 
+        self.log.debug(msg:"AgoraGrpcProxy::streamRequest::\(request)")
+        
         let call: GRPCUnaryProtoCall = protoMethod(request, streamResponseHandler, nil)
         call.start()
 

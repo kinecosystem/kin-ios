@@ -14,6 +14,7 @@ public struct KinEnvironment {
         case missingPrivateKey
     }
 
+    public var logger: KinLoggerFactory
     public let network: KinNetwork
     public let service: KinServiceType
     public let storage: KinStorageType
@@ -35,13 +36,15 @@ public struct KinEnvironment {
                 storage: KinStorageType,
                 networkHandler: NetworkOperationHandler,
                 dispatchQueue: DispatchQueue,
-                testService: KinTestServiceType? = nil) {
+                testService: KinTestServiceType? = nil,
+                logger: KinLoggerFactory) {
         self.network = network
         self.service = service
         self.storage = storage
         self.networkHandler = networkHandler
         self.dispatchQueue = dispatchQueue
         self.testService = testService
+        self.logger = logger
     }
 
     @available(*, deprecated, message: "Please use KinEnvironment.Agora instead. Horizon may dissapear in a future blockchain migration.")
@@ -55,7 +58,8 @@ public struct KinEnvironment {
                                    whitelistingApi: KinTransactionWhitelistingApi = DefaultHorizonKinTransactionWhitelistingApi()) -> KinEnvironment {
             return defaultEnvironmentSetup(network: .mainNet,
                                            accountCreationApi: accountCreationApi,
-                                           whitelistingApi: whitelistingApi)
+                                           whitelistingApi: whitelistingApi,
+                                           enableLogging: false)
         }
 
         /// A convinence function to get a default setup of the test environment.
@@ -63,13 +67,16 @@ public struct KinEnvironment {
         public static func testNet() -> KinEnvironment {
             return defaultEnvironmentSetup(network: .testNet,
                                            accountCreationApi: FriendBotApi(),
-                                           whitelistingApi: DefaultHorizonKinTransactionWhitelistingApi())
+                                           whitelistingApi: DefaultHorizonKinTransactionWhitelistingApi(),
+                                           enableLogging: true)
         }
 
         private static func defaultEnvironmentSetup(network: KinNetwork,
                                                     accountCreationApi: KinAccountCreationApi,
-                                                    whitelistingApi: KinTransactionWhitelistingApi) -> KinEnvironment {
+                                                    whitelistingApi: KinTransactionWhitelistingApi,
+                                                    enableLogging: Bool) -> KinEnvironment {
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
+            let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let horizonApi = HorizonKinApi(stellarSdkProxy: StellarSdkProxy(network: network))
             let networkHandler = NetworkOperationHandler()
             let service = KinService(network: network,
@@ -79,7 +86,8 @@ public struct KinEnvironment {
                                      accountCreationApi: accountCreationApi,
                                      transactionApi: horizonApi,
                                      transactionWhitelistingApi: whitelistingApi,
-                                     streamingApi: horizonApi)
+                                     streamingApi: horizonApi,
+                                     logger: logger)
             let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let storage = KinFileStorage(directory: documentDirectory,
                                          network: network)
@@ -92,24 +100,29 @@ public struct KinEnvironment {
                                   storage: storage,
                                   networkHandler: networkHandler,
                                   dispatchQueue: .promises,
-                                  testService: testService)
+                                  testService: testService,
+                                  logger: logger)
         }
     }
 
     public class Agora {
         public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider()) -> KinEnvironment {
             return defaultEnvironmentSetup(network: .mainNet,
-                                           appInfoProvider: appInfoProvider)
+                                           appInfoProvider: appInfoProvider,
+                                           enableLogging: false)
         }
 
         public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider()) -> KinEnvironment {
             return defaultEnvironmentSetup(network: .testNet,
-                                           appInfoProvider: appInfoProvider)
+                                           appInfoProvider: appInfoProvider,
+                                           enableLogging: true)
         }
 
         private static func defaultEnvironmentSetup(network: KinNetwork,
-                                                    appInfoProvider: AppInfoProvider) -> KinEnvironment {
+                                                    appInfoProvider: AppInfoProvider,
+                                                    enableLogging: Bool) -> KinEnvironment {
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
+            let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let networkHandler = NetworkOperationHandler()
 
             let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -118,7 +131,8 @@ public struct KinEnvironment {
             
             let grpcProxy = AgoraGrpcProxy(network: network,
                                            appInfoProvider: appInfoProvider,
-                                           storage: storage)
+                                           storage: storage,
+                                           logger: logger)
 
             let agoraAccountsApi = AgoraKinAccountsApi(agoraGrpc: grpcProxy)
             let agoraTransactionsApi = AgoraKinTransactionsApi(agoraGrpc: grpcProxy)
@@ -130,7 +144,8 @@ public struct KinEnvironment {
                                      accountCreationApi: agoraAccountsApi,
                                      transactionApi: agoraTransactionsApi,
                                      transactionWhitelistingApi: agoraTransactionsApi,
-                                     streamingApi: agoraAccountsApi)
+                                     streamingApi: agoraAccountsApi,
+                                     logger: logger)
 
             let testServiceInstance = KinTestService(friendBotApi: FriendBotApi(),
                                                      networkOperationHandler: networkHandler,
@@ -142,7 +157,8 @@ public struct KinEnvironment {
                                   storage: storage,
                                   networkHandler: networkHandler,
                                   dispatchQueue: .promises,
-                                  testService: testService)
+                                  testService: testService,
+                                  logger: logger)
         }
     }
 }
@@ -160,5 +176,9 @@ extension KinEnvironment {
         }
 
         return try storage.addAccount(KinAccount(key: key))
+    }
+    
+    mutating func setEnableLogging(enableLogging: Bool) {
+        logger.isLoggingEnabled = enableLogging
     }
 }

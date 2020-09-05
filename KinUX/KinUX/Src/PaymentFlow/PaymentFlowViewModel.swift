@@ -15,15 +15,23 @@ public class PaymentFlowViewModel: BaseViewModel<PaymentFlowViewModelArgs, Payme
     private let args: PaymentFlowViewModelArgs
     private let kinAccountContext: KinAccountContext
     private var account: KinAccount?
+    private let logger: KinLoggerFactory
+    private lazy var log: KinLogger = {
+        logger.getLogger(name: String(describing: self))
+    }()
 
     public init(navigator: Navigator,
                 args: PaymentFlowViewModelArgs,
-                kinAccountContext: KinAccountContext) {
+                kinAccountContext: KinAccountContext,
+                logger: KinLoggerFactory) {
         self.navigator = navigator
         self.args = args
         self.kinAccountContext = kinAccountContext
-
+        self.logger = logger
+        
         super.init()
+        
+        log.info(msg: "Navigated to: \(self)")
 
         updateState { _ in .`init` }
     }
@@ -33,6 +41,7 @@ public class PaymentFlowViewModel: BaseViewModel<PaymentFlowViewModelArgs, Payme
     }
 
     public override func onStateUpdated(_ state: StateType) {
+        log.info(msg: "\(#function):\(state)")
         if state == .`init` {
             setup()
         }
@@ -64,11 +73,13 @@ public class PaymentFlowViewModel: BaseViewModel<PaymentFlowViewModelArgs, Payme
     }
 
     public func onCancelTapped(onCompleted: () -> Void) {
+        log.info(msg: #function)
         // TODO use real balance
         updateState { _ in .closed }
     }
 
     public func onConfirmTapped() {
+        log.info(msg: #function)
         updateState { _ in
             weak var weakSelf = self
             kinAccountContext.payInvoice(processingAppIdx: args.appInfo.appIdx,

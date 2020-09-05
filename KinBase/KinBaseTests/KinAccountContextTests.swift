@@ -26,7 +26,8 @@ class KinAccountContextTests: XCTestCase {
                                  service: mockKinService,
                                  storage: mockKinStorage,
                                  networkHandler: NetworkOperationHandler(),
-                                 dispatchQueue: .main)
+                                 dispatchQueue: .main,
+                                 logger: KinLoggerFactoryImpl(isLoggingEnabled: true))
         disposeBag = DisposeBag()
     }
 

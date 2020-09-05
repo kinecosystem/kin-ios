@@ -93,7 +93,8 @@ class KinServiceTests: XCTestCase {
                          accountCreationApi: mockKinAccountCreationApi,
                          transactionApi: mockKinTransactionApi,
                          transactionWhitelistingApi: mockKinWhitelistingApi,
-                         streamingApi: mockKinStreamingApi)
+                         streamingApi: mockKinStreamingApi,
+                         logger: KinLoggerFactoryImpl(isLoggingEnabled: true))
     }
 
     func testCreateAccountSucceed() {
@@ -637,12 +638,12 @@ class KinServiceTests: XCTestCase {
     }
 
     func testStreamNewTransactions() {
-        mockKinStreamingApi.stubNewTransactionsStream = Observable<KinTransaction>()
+        mockKinStreamingApi.stubNewTransactionsStream = ValueSubject<KinTransaction>()
         XCTAssertNoThrow(sut.streamNewTransactions(accountId: "id"))
     }
 
     func testStreamAccount() {
-        mockKinStreamingApi.stubAccountStream = Observable<KinAccount>()
+        mockKinStreamingApi.stubAccountStream = ValueSubject<KinAccount>()
         XCTAssertNoThrow(sut.streamAccount(accountId: "id"))
     }
 

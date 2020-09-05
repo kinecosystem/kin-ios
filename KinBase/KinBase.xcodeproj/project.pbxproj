@@ -90,6 +90,7 @@
 		85F037002469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F036FF2469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift */; };
 		85F037042469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */; };
 		9342E2B924FF2DBB008449A2 /* UserAgentInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */; };
+		93A591232502CBC200E43C65 /* KinLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A591222502CBC200E43C65 /* KinLogger.swift */; };
 		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -205,6 +206,7 @@
 		85F036FF2469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinTransactionWhitelistingApi.swift; sourceTree = "<group>"; };
 		85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinTransactionWhitelistingApiTests.swift; sourceTree = "<group>"; };
 		9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentInterceptor.swift; sourceTree = "<group>"; };
+		93A591222502CBC200E43C65 /* KinLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinLogger.swift; sourceTree = "<group>"; };
 		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -408,6 +410,7 @@
 				859A760A2464AC240028555F /* ListObservable.swift */,
 				85763610249038B00011C356 /* ListSubject.swift */,
 				85737EF12443AFFB0012132E /* Helper.swift */,
+				93A591222502CBC200E43C65 /* KinLogger.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				9342E2B924FF2DBB008449A2 /* UserAgentInterceptor.swift in Sources */,
 				85737ED8243E59060012132E /* KinEnvironment.swift in Sources */,
 				85E7CBB324855A5A0088591F /* DefaultHorizonKinAccountCreationApi.swift in Sources */,
+				93A591232502CBC200E43C65 /* KinLogger.swift in Sources */,
 				853EC7A924EC5D38004E0BED /* KinTestService.swift in Sources */,
 				85737EE1243E62EE0012132E /* KinTransactionApi.swift in Sources */,
 				859A760B2464AC240028555F /* ListObservable.swift in Sources */,
