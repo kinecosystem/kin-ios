@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.source_files = 'KinBaseCompat/KinBaseCompat/Src/**/*.swift'
   s.resources = 'KinBaseCompat/KinBaseCompat/Src/KinBackupRestoreModule/*.{strings,xcassets}'
 
-  s.dependency 'KinBase', '~> 0.2.0'
+  s.dependency 'KinBase', '~> 0.3.0'
   s.dependency 'Sodium', '0.8.0'
 
   # Dependencies needed for KinGrpcApi

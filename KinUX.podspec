@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'KinUX/KinUX/Src/**/*'
 
-  s.dependency 'KinBase', '~> 0.2.0'
+  s.dependency 'KinBase', '~> 0.3.0'
   s.dependency 'KinDesign', '~> 0.2.1'
 
   # Dependencies needed for KinGrpcApi
