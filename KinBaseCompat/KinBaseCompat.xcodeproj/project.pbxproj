@@ -1054,7 +1054,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinBaseCompat;
 				PRODUCT_MODULE_NAME = KinSDK;
 				PRODUCT_NAME = KinSDK;
@@ -1084,7 +1084,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinBaseCompat;
 				PRODUCT_MODULE_NAME = KinSDK;
 				PRODUCT_NAME = KinSDK;
