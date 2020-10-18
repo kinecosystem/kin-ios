@@ -8,7 +8,7 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers.h>
+ #import <protobuf/GPBProtocolBuffers.h>
 #else
  #import "GPBProtocolBuffers.h"
 #endif
@@ -27,13 +27,12 @@
 
 CF_EXTERN_C_BEGIN
 
-@class APBCommonV3Invoice;
+@class APBCommonV3InvoiceError;
 @class APBCommonV3InvoiceList;
 @class APBCommonV3StellarAccountId;
 @class APBCommonV3TransactionHash;
 @class APBTransactionV3Cursor;
 @class APBTransactionV3HistoryItem;
-@class APBTransactionV3SubmitTransactionResponse_InvoiceError;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -131,43 +130,6 @@ GPBEnumDescriptor *APBTransactionV3SubmitTransactionResponse_Result_EnumDescript
  * the time this source was generated.
  **/
 BOOL APBTransactionV3SubmitTransactionResponse_Result_IsValidValue(int32_t value);
-
-#pragma mark - Enum APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason
-
-typedef GPB_ENUM(APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason) {
-  /**
-   * Value used if any message's field encounters a value that is not defined
-   * by this enum. The message will also have C functions to get/set the rawValue
-   * of the field.
-   **/
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_Unknown = 0,
-
-  /**
-   * The provided invoice has already been paid for.
-   *
-   * This is only applicable when the memo transaction type
-   * is SPEND.
-   **/
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_AlreadyPaid = 1,
-
-  /**
-   * The destination in the operation corresponding to this invoice
-   * is incorrect.
-   **/
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_WrongDestination = 2,
-
-  /** One or more SKUs in the invoice was not found. */
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_SkuNotFound = 3,
-};
-
-GPBEnumDescriptor *APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_EnumDescriptor(void);
-
-/**
- * Checks to see if the given value is defined by the enum or was not known at
- * the time this source was generated.
- **/
-BOOL APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_IsValidValue(int32_t value);
 
 #pragma mark - Enum APBTransactionV3GetTransactionResponse_State
 
@@ -323,7 +285,7 @@ typedef GPB_ENUM(APBTransactionV3SubmitTransactionResponse_FieldNumber) {
 @property(nonatomic, readwrite) APBTransactionV3SubmitTransactionResponse_Result result;
 
 /** Present when result = INVOICE_ERROR. */
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBTransactionV3SubmitTransactionResponse_InvoiceError*> *invoiceErrorsArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBCommonV3InvoiceError*> *invoiceErrorsArray;
 /** The number of items in @c invoiceErrorsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger invoiceErrorsArray_Count;
 
@@ -358,40 +320,6 @@ int32_t APBTransactionV3SubmitTransactionResponse_Result_RawValue(APBTransaction
  * was generated.
  **/
 void SetAPBTransactionV3SubmitTransactionResponse_Result_RawValue(APBTransactionV3SubmitTransactionResponse *message, int32_t value);
-
-#pragma mark - APBTransactionV3SubmitTransactionResponse_InvoiceError
-
-typedef GPB_ENUM(APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber) {
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_OpIndex = 1,
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_Invoice = 2,
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_Reason = 3,
-};
-
-@interface APBTransactionV3SubmitTransactionResponse_InvoiceError : GPBMessage
-
-/** The operation index the invoice corresponds to. */
-@property(nonatomic, readwrite) uint32_t opIndex;
-
-/** The invoice that was submitted. */
-@property(nonatomic, readwrite, strong, null_resettable) APBCommonV3Invoice *invoice;
-/** Test to see if @c invoice has been set. */
-@property(nonatomic, readwrite) BOOL hasInvoice;
-
-@property(nonatomic, readwrite) APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason reason;
-
-@end
-
-/**
- * Fetches the raw value of a @c APBTransactionV3SubmitTransactionResponse_InvoiceError's @c reason property, even
- * if the value was not defined by the enum at the time the code was generated.
- **/
-int32_t APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_RawValue(APBTransactionV3SubmitTransactionResponse_InvoiceError *message);
-/**
- * Sets the raw value of an @c APBTransactionV3SubmitTransactionResponse_InvoiceError's @c reason property, allowing
- * it to be set to a value that was not defined by the enum at the time the code
- * was generated.
- **/
-void SetAPBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_RawValue(APBTransactionV3SubmitTransactionResponse_InvoiceError *message, int32_t value);
 
 #pragma mark - APBTransactionV3GetTransactionRequest
 

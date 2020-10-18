@@ -8,7 +8,7 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers.h>
+ #import <protobuf/GPBProtocolBuffers.h>
 #else
  #import "GPBProtocolBuffers.h"
 #endif
@@ -97,6 +97,8 @@ BOOL KnownRegex_IsValidValue(int32_t value);
  * message fields associated with it that do support validation.
  **/
 + (GPBExtensionDescriptor *)disabled;
+/** Ignore skips generation of validation methods for this message. */
++ (GPBExtensionDescriptor *)ignored;
 /**
  * Required ensures that exactly one the field options in a oneof is set;
  * validation fails if no fields in the oneof are set.

@@ -8,7 +8,7 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers.h>
+ #import <protobuf/GPBProtocolBuffers.h>
 #else
  #import "GPBProtocolBuffers.h"
 #endif
@@ -813,9 +813,9 @@ typedef GPB_ENUM(GPBFileOptions_FieldNumber) {
 
 @property(nonatomic, readwrite) BOOL hasJavaMultipleFiles;
 /** This option does nothing. */
-@property(nonatomic, readwrite) BOOL javaGenerateEqualsAndHash DEPRECATED_ATTRIBUTE;
+@property(nonatomic, readwrite) BOOL javaGenerateEqualsAndHash GPB_DEPRECATED_MSG("google.protobuf.FileOptions.java_generate_equals_and_hash is deprecated (see google/protobuf/descriptor.proto).");
 
-@property(nonatomic, readwrite) BOOL hasJavaGenerateEqualsAndHash DEPRECATED_ATTRIBUTE;
+@property(nonatomic, readwrite) BOOL hasJavaGenerateEqualsAndHash GPB_DEPRECATED_MSG("google.protobuf.FileOptions.java_generate_equals_and_hash is deprecated (see google/protobuf/descriptor.proto).");
 /**
  * If set true, then the Java2 code generator will generate code that
  * throws an exception whenever an attempt is made to assign a non-UTF-8
@@ -1042,7 +1042,7 @@ typedef GPB_ENUM(GPBFieldOptions_FieldNumber) {
   GPBFieldOptions_FieldNumber_Deprecated = 3,
   GPBFieldOptions_FieldNumber_Lazy = 5,
   GPBFieldOptions_FieldNumber_Jstype = 6,
-  GPBFieldOptions_FieldNumber_Weak = 10,
+  GPBFieldOptions_FieldNumber_Weak_p = 10,
   GPBFieldOptions_FieldNumber_UninterpretedOptionArray = 999,
 };
 
@@ -1126,9 +1126,9 @@ typedef GPB_ENUM(GPBFieldOptions_FieldNumber) {
 
 @property(nonatomic, readwrite) BOOL hasDeprecated;
 /** For Google-internal migration only. Do not use. */
-@property(nonatomic, readwrite) BOOL weak;
+@property(nonatomic, readwrite) BOOL weak_p;
 
-@property(nonatomic, readwrite) BOOL hasWeak;
+@property(nonatomic, readwrite) BOOL hasWeak_p;
 /** The parser stores options it doesn't recognize here. See above. */
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<GPBUninterpretedOption*> *uninterpretedOptionArray;
 /** The number of items in @c uninterpretedOptionArray without causing the array to be created. */

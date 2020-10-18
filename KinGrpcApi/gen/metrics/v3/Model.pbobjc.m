@@ -8,12 +8,12 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers_RuntimeSupport.h>
+ #import <protobuf/GPBProtocolBuffers_RuntimeSupport.h>
 #else
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
- #import "metrics/v3/Model.pbobjc.h"
+#import "metrics/v3/Model.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push

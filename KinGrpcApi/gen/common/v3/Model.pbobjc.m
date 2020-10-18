@@ -8,13 +8,15 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers_RuntimeSupport.h>
+ #import <protobuf/GPBProtocolBuffers_RuntimeSupport.h>
 #else
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
- #import "common/v3/Model.pbobjc.h"
- #import "validate/Validate.pbobjc.h"
+#import <stdatomic.h>
+
+#import "common/v3/Model.pbobjc.h"
+#import "validate/Validate.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -89,7 +91,9 @@ typedef struct APBCommonV3StellarAccountId__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBCommonV3StellarAccountId__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -132,7 +136,9 @@ typedef struct APBCommonV3TransactionHash__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBCommonV3TransactionHash__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -175,7 +181,9 @@ typedef struct APBCommonV3InvoiceHash__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBCommonV3InvoiceHash__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -218,7 +226,9 @@ typedef struct APBCommonV3Invoice__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBCommonV3Invoice__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -295,7 +305,9 @@ typedef struct APBCommonV3Invoice_LineItem__storage_ {
                                    storageSize:sizeof(APBCommonV3Invoice_LineItem__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(APBCommonV3Invoice)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -338,13 +350,134 @@ typedef struct APBCommonV3InvoiceList__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBCommonV3InvoiceList__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
 }
 
 @end
+
+#pragma mark - APBCommonV3InvoiceError
+
+@implementation APBCommonV3InvoiceError
+
+@dynamic opIndex;
+@dynamic hasInvoice, invoice;
+@dynamic reason;
+
+typedef struct APBCommonV3InvoiceError__storage_ {
+  uint32_t _has_storage_[1];
+  uint32_t opIndex;
+  APBCommonV3InvoiceError_Reason reason;
+  APBCommonV3Invoice *invoice;
+} APBCommonV3InvoiceError__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "opIndex",
+        .dataTypeSpecific.className = NULL,
+        .number = APBCommonV3InvoiceError_FieldNumber_OpIndex,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(APBCommonV3InvoiceError__storage_, opIndex),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "invoice",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV3Invoice),
+        .number = APBCommonV3InvoiceError_FieldNumber_Invoice,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(APBCommonV3InvoiceError__storage_, invoice),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "reason",
+        .dataTypeSpecific.enumDescFunc = APBCommonV3InvoiceError_Reason_EnumDescriptor,
+        .number = APBCommonV3InvoiceError_FieldNumber_Reason,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(APBCommonV3InvoiceError__storage_, reason),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[APBCommonV3InvoiceError class]
+                                     rootClass:[APBCommonV3ModelRoot class]
+                                          file:APBCommonV3ModelRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(APBCommonV3InvoiceError__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+int32_t APBCommonV3InvoiceError_Reason_RawValue(APBCommonV3InvoiceError *message) {
+  GPBDescriptor *descriptor = [APBCommonV3InvoiceError descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBCommonV3InvoiceError_FieldNumber_Reason];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetAPBCommonV3InvoiceError_Reason_RawValue(APBCommonV3InvoiceError *message, int32_t value) {
+  GPBDescriptor *descriptor = [APBCommonV3InvoiceError descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBCommonV3InvoiceError_FieldNumber_Reason];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
+#pragma mark - Enum APBCommonV3InvoiceError_Reason
+
+GPBEnumDescriptor *APBCommonV3InvoiceError_Reason_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "Unknown\000AlreadyPaid\000WrongDestination\000Sku"
+        "NotFound\000";
+    static const int32_t values[] = {
+        APBCommonV3InvoiceError_Reason_Unknown,
+        APBCommonV3InvoiceError_Reason_AlreadyPaid,
+        APBCommonV3InvoiceError_Reason_WrongDestination,
+        APBCommonV3InvoiceError_Reason_SkuNotFound,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(APBCommonV3InvoiceError_Reason)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:APBCommonV3InvoiceError_Reason_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL APBCommonV3InvoiceError_Reason_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case APBCommonV3InvoiceError_Reason_Unknown:
+    case APBCommonV3InvoiceError_Reason_AlreadyPaid:
+    case APBCommonV3InvoiceError_Reason_WrongDestination:
+    case APBCommonV3InvoiceError_Reason_SkuNotFound:
+      return YES;
+    default:
+      return NO;
+  }
+}
 
 
 #pragma clang diagnostic pop

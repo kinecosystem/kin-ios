@@ -8,14 +8,16 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers_RuntimeSupport.h>
+ #import <protobuf/GPBProtocolBuffers_RuntimeSupport.h>
 #else
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
- #import "transaction/v3/TransactionService.pbobjc.h"
- #import "validate/Validate.pbobjc.h"
- #import "common/v3/Model.pbobjc.h"
+#import <stdatomic.h>
+
+#import "transaction/v3/TransactionService.pbobjc.h"
+#import "validate/Validate.pbobjc.h"
+#import "common/v3/Model.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -112,7 +114,9 @@ typedef struct APBTransactionV3GetHistoryRequest__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3GetHistoryRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -135,7 +139,7 @@ void SetAPBTransactionV3GetHistoryRequest_Direction_RawValue(APBTransactionV3Get
 #pragma mark - Enum APBTransactionV3GetHistoryRequest_Direction
 
 GPBEnumDescriptor *APBTransactionV3GetHistoryRequest_Direction_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Asc\000Desc\000";
@@ -149,7 +153,8 @@ GPBEnumDescriptor *APBTransactionV3GetHistoryRequest_Direction_EnumDescriptor(vo
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:APBTransactionV3GetHistoryRequest_Direction_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -212,7 +217,9 @@ typedef struct APBTransactionV3GetHistoryResponse__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3GetHistoryResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -235,7 +242,7 @@ void SetAPBTransactionV3GetHistoryResponse_Result_RawValue(APBTransactionV3GetHi
 #pragma mark - Enum APBTransactionV3GetHistoryResponse_Result
 
 GPBEnumDescriptor *APBTransactionV3GetHistoryResponse_Result_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Ok\000NotFound\000";
@@ -249,7 +256,8 @@ GPBEnumDescriptor *APBTransactionV3GetHistoryResponse_Result_EnumDescriptor(void
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:APBTransactionV3GetHistoryResponse_Result_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -312,7 +320,9 @@ typedef struct APBTransactionV3SubmitTransactionRequest__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3SubmitTransactionRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -356,7 +366,7 @@ typedef struct APBTransactionV3SubmitTransactionResponse__storage_ {
       },
       {
         .name = "invoiceErrorsArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(APBTransactionV3SubmitTransactionResponse_InvoiceError),
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV3InvoiceError),
         .number = APBTransactionV3SubmitTransactionResponse_FieldNumber_InvoiceErrorsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(APBTransactionV3SubmitTransactionResponse__storage_, invoiceErrorsArray),
@@ -399,7 +409,9 @@ typedef struct APBTransactionV3SubmitTransactionResponse__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3SubmitTransactionResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -422,7 +434,7 @@ void SetAPBTransactionV3SubmitTransactionResponse_Result_RawValue(APBTransaction
 #pragma mark - Enum APBTransactionV3SubmitTransactionResponse_Result
 
 GPBEnumDescriptor *APBTransactionV3SubmitTransactionResponse_Result_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Ok\000Failed\000Rejected\000InvoiceError\000";
@@ -438,7 +450,8 @@ GPBEnumDescriptor *APBTransactionV3SubmitTransactionResponse_Result_EnumDescript
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:APBTransactionV3SubmitTransactionResponse_Result_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -451,123 +464,6 @@ BOOL APBTransactionV3SubmitTransactionResponse_Result_IsValidValue(int32_t value
     case APBTransactionV3SubmitTransactionResponse_Result_Failed:
     case APBTransactionV3SubmitTransactionResponse_Result_Rejected:
     case APBTransactionV3SubmitTransactionResponse_Result_InvoiceError:
-      return YES;
-    default:
-      return NO;
-  }
-}
-
-#pragma mark - APBTransactionV3SubmitTransactionResponse_InvoiceError
-
-@implementation APBTransactionV3SubmitTransactionResponse_InvoiceError
-
-@dynamic opIndex;
-@dynamic hasInvoice, invoice;
-@dynamic reason;
-
-typedef struct APBTransactionV3SubmitTransactionResponse_InvoiceError__storage_ {
-  uint32_t _has_storage_[1];
-  uint32_t opIndex;
-  APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason reason;
-  APBCommonV3Invoice *invoice;
-} APBTransactionV3SubmitTransactionResponse_InvoiceError__storage_;
-
-// This method is threadsafe because it is initially called
-// in +initialize for each subclass.
-+ (GPBDescriptor *)descriptor {
-  static GPBDescriptor *descriptor = nil;
-  if (!descriptor) {
-    static GPBMessageFieldDescription fields[] = {
-      {
-        .name = "opIndex",
-        .dataTypeSpecific.className = NULL,
-        .number = APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_OpIndex,
-        .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBTransactionV3SubmitTransactionResponse_InvoiceError__storage_, opIndex),
-        .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeUInt32,
-      },
-      {
-        .name = "invoice",
-        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV3Invoice),
-        .number = APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_Invoice,
-        .hasIndex = 1,
-        .offset = (uint32_t)offsetof(APBTransactionV3SubmitTransactionResponse_InvoiceError__storage_, invoice),
-        .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeMessage,
-      },
-      {
-        .name = "reason",
-        .dataTypeSpecific.enumDescFunc = APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_EnumDescriptor,
-        .number = APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_Reason,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(APBTransactionV3SubmitTransactionResponse_InvoiceError__storage_, reason),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
-        .dataType = GPBDataTypeEnum,
-      },
-    };
-    GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBTransactionV3SubmitTransactionResponse_InvoiceError class]
-                                     rootClass:[APBTransactionV3TransactionServiceRoot class]
-                                          file:APBTransactionV3TransactionServiceRoot_FileDescriptor()
-                                        fields:fields
-                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(APBTransactionV3SubmitTransactionResponse_InvoiceError__storage_)
-                                         flags:GPBDescriptorInitializationFlag_None];
-    [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(APBTransactionV3SubmitTransactionResponse)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
-    descriptor = localDescriptor;
-  }
-  return descriptor;
-}
-
-@end
-
-int32_t APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_RawValue(APBTransactionV3SubmitTransactionResponse_InvoiceError *message) {
-  GPBDescriptor *descriptor = [APBTransactionV3SubmitTransactionResponse_InvoiceError descriptor];
-  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_Reason];
-  return GPBGetMessageInt32Field(message, field);
-}
-
-void SetAPBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_RawValue(APBTransactionV3SubmitTransactionResponse_InvoiceError *message, int32_t value) {
-  GPBDescriptor *descriptor = [APBTransactionV3SubmitTransactionResponse_InvoiceError descriptor];
-  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBTransactionV3SubmitTransactionResponse_InvoiceError_FieldNumber_Reason];
-  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
-}
-
-#pragma mark - Enum APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason
-
-GPBEnumDescriptor *APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
-  if (!descriptor) {
-    static const char *valueNames =
-        "Unknown\000AlreadyPaid\000WrongDestination\000Sku"
-        "NotFound\000";
-    static const int32_t values[] = {
-        APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_Unknown,
-        APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_AlreadyPaid,
-        APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_WrongDestination,
-        APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_SkuNotFound,
-    };
-    GPBEnumDescriptor *worker =
-        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason)
-                                       valueNames:valueNames
-                                           values:values
-                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
-      [worker release];
-    }
-  }
-  return descriptor;
-}
-
-BOOL APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_IsValidValue(int32_t value__) {
-  switch (value__) {
-    case APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_Unknown:
-    case APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_AlreadyPaid:
-    case APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_WrongDestination:
-    case APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason_SkuNotFound:
       return YES;
     default:
       return NO;
@@ -609,7 +505,9 @@ typedef struct APBTransactionV3GetTransactionRequest__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3GetTransactionRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -674,7 +572,9 @@ typedef struct APBTransactionV3GetTransactionResponse__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3GetTransactionResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -697,7 +597,7 @@ void SetAPBTransactionV3GetTransactionResponse_State_RawValue(APBTransactionV3Ge
 #pragma mark - Enum APBTransactionV3GetTransactionResponse_State
 
 GPBEnumDescriptor *APBTransactionV3GetTransactionResponse_State_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unknown\000Success\000";
@@ -711,7 +611,8 @@ GPBEnumDescriptor *APBTransactionV3GetTransactionResponse_State_EnumDescriptor(v
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:APBTransactionV3GetTransactionResponse_State_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -807,7 +708,9 @@ typedef struct APBTransactionV3HistoryItem__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3HistoryItem__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -850,7 +753,9 @@ typedef struct APBTransactionV3Cursor__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(APBTransactionV3Cursor__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;

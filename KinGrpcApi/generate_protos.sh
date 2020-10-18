@@ -17,10 +17,10 @@ MODEL_TEMP_PATH=$(mktemp -d -t 'kinprotostmp')
 IMPORT_PATHS="${MODEL_TEMP_PATH}/proto:${MODEL_TEMP_PATH}"
 
 PODS_ROOT="../Pods"
-#PROTOC="${PODS_ROOT}/!ProtoCompiler/protoc"
-#PLUGIN="${PODS_ROOT}/!ProtoCompiler-gRPCPlugin/grpc_objective_c_plugin"
-PROTOC="protoc"
-PLUGIN="grpc_objective_c_plugin"
+PROTOC="${PODS_ROOT}/!ProtoCompiler/protoc"
+PLUGIN="${PODS_ROOT}/!ProtoCompiler-gRPCPlugin/grpc_objective_c_plugin"
+#PROTOC="protoc"
+#PLUGIN="grpc_objective_c_plugin"
 
 function cleanup {
   rm -rf ${GIT_TEMP_PATH}
@@ -31,13 +31,26 @@ function cleanup {
 trap cleanup EXIT
 
 echo "Cloning kin-api into ${KIN_API_GIT_PATH}"
-git clone -b master --single-branch git@github.com:kinecosystem/agora-api-internal.git ${KIN_API_GIT_PATH}
+git clone -b solana --single-branch git@github.com:kinecosystem/agora-api-internal.git ${KIN_API_GIT_PATH}
 
 echo "Cloning protoc-gen-validate into ${VALIDATE_GIT_PATH}"
 git clone -b master --single-branch git@github.com:envoyproxy/protoc-gen-validate.git $VALIDATE_GIT_PATH
 
 # Find only the protos under /v3/.
 for path in $(find ${KIN_API_GIT_PATH}/proto -name 'v3' -type d -print0 | xargs -0 -n1); do
+  path_folder_name=$(echo ${path} | sed 's/.*\(proto\)/\1/g')
+  
+  source_folder_name=$(echo ${KIN_API_GIT_PATH}/${path_folder_name})
+  dest_folder_name=$(dirname ${MODEL_TEMP_PATH}/${path_folder_name})
+
+  mkdir -p ${dest_folder_name}
+  cp -r ${source_folder_name} ${dest_folder_name}
+
+  echo "Copying to ${dest_folder_name}"
+done
+
+# Find only the protos under /v4/.
+for path in $(find ${KIN_API_GIT_PATH}/proto -name 'v4' -type d -print0 | xargs -0 -n1); do
   path_folder_name=$(echo ${path} | sed 's/.*\(proto\)/\1/g')
   
   source_folder_name=$(echo ${KIN_API_GIT_PATH}/${path_folder_name})

@@ -8,12 +8,14 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers_RuntimeSupport.h>
+ #import <protobuf/GPBProtocolBuffers_RuntimeSupport.h>
 #else
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
- #import "google/protobuf/Descriptor.pbobjc.h"
+#import <stdatomic.h>
+
+#import "google/protobuf/Descriptor.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -78,7 +80,9 @@ typedef struct GPBFileDescriptorSet__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBFileDescriptorSet__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -242,7 +246,9 @@ typedef struct GPBFileDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBFileDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -384,7 +390,9 @@ typedef struct GPBDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -450,7 +458,9 @@ typedef struct GPBDescriptorProto_ExtensionRange__storage_ {
                                    storageSize:sizeof(GPBDescriptorProto_ExtensionRange__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(GPBDescriptorProto)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -505,7 +515,9 @@ typedef struct GPBDescriptorProto_ReservedRange__storage_ {
                                    storageSize:sizeof(GPBDescriptorProto_ReservedRange__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(GPBDescriptorProto)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -553,7 +565,9 @@ typedef struct GPBExtensionRangeOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -705,7 +719,9 @@ typedef struct GPBFieldDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
                                    storageSize:sizeof(GPBFieldDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_FieldsWithDefault];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -716,7 +732,7 @@ typedef struct GPBFieldDescriptorProto__storage_ {
 #pragma mark - Enum GPBFieldDescriptorProto_Type
 
 GPBEnumDescriptor *GPBFieldDescriptorProto_Type_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "TypeDouble\000TypeFloat\000TypeInt64\000TypeUint6"
@@ -750,7 +766,8 @@ GPBEnumDescriptor *GPBFieldDescriptorProto_Type_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:GPBFieldDescriptorProto_Type_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -786,7 +803,7 @@ BOOL GPBFieldDescriptorProto_Type_IsValidValue(int32_t value__) {
 #pragma mark - Enum GPBFieldDescriptorProto_Label
 
 GPBEnumDescriptor *GPBFieldDescriptorProto_Label_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "LabelOptional\000LabelRequired\000LabelRepeate"
@@ -802,7 +819,8 @@ GPBEnumDescriptor *GPBFieldDescriptorProto_Label_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:GPBFieldDescriptorProto_Label_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -866,7 +884,9 @@ typedef struct GPBOneofDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBOneofDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -953,7 +973,9 @@ typedef struct GPBEnumDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBEnumDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1008,7 +1030,9 @@ typedef struct GPBEnumDescriptorProto_EnumReservedRange__storage_ {
                                    storageSize:sizeof(GPBEnumDescriptorProto_EnumReservedRange__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(GPBEnumDescriptorProto)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1073,7 +1097,9 @@ typedef struct GPBEnumValueDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBEnumValueDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1138,7 +1164,9 @@ typedef struct GPBServiceDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBServiceDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1234,7 +1262,9 @@ typedef struct GPBMethodDescriptorProto__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBMethodDescriptorProto__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1514,7 +1544,9 @@ typedef struct GPBFileOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1525,7 +1557,7 @@ typedef struct GPBFileOptions__storage_ {
 #pragma mark - Enum GPBFileOptions_OptimizeMode
 
 GPBEnumDescriptor *GPBFileOptions_OptimizeMode_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Speed\000CodeSize\000LiteRuntime\000";
@@ -1540,7 +1572,8 @@ GPBEnumDescriptor *GPBFileOptions_OptimizeMode_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:GPBFileOptions_OptimizeMode_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -1638,7 +1671,9 @@ typedef struct GPBMessageOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1655,7 +1690,7 @@ typedef struct GPBMessageOptions__storage_ {
 @dynamic hasJstype, jstype;
 @dynamic hasLazy, lazy;
 @dynamic hasDeprecated, deprecated;
-@dynamic hasWeak, weak;
+@dynamic hasWeak_p, weak_p;
 @dynamic uninterpretedOptionArray, uninterpretedOptionArray_Count;
 
 typedef struct GPBFieldOptions__storage_ {
@@ -1717,9 +1752,9 @@ typedef struct GPBFieldOptions__storage_ {
         .dataType = GPBDataTypeEnum,
       },
       {
-        .name = "weak",
+        .name = "weak_p",
         .dataTypeSpecific.className = NULL,
-        .number = GPBFieldOptions_FieldNumber_Weak,
+        .number = GPBFieldOptions_FieldNumber_Weak_p,
         .hasIndex = 8,
         .offset = 9,  // Stored in _has_storage_ to save space.
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasDefaultValue),
@@ -1748,7 +1783,9 @@ typedef struct GPBFieldOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1759,7 +1796,7 @@ typedef struct GPBFieldOptions__storage_ {
 #pragma mark - Enum GPBFieldOptions_CType
 
 GPBEnumDescriptor *GPBFieldOptions_CType_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "String\000Cord\000StringPiece\000";
@@ -1774,7 +1811,8 @@ GPBEnumDescriptor *GPBFieldOptions_CType_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:GPBFieldOptions_CType_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -1795,7 +1833,7 @@ BOOL GPBFieldOptions_CType_IsValidValue(int32_t value__) {
 #pragma mark - Enum GPBFieldOptions_JSType
 
 GPBEnumDescriptor *GPBFieldOptions_JSType_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "JsNormal\000JsString\000JsNumber\000";
@@ -1810,7 +1848,8 @@ GPBEnumDescriptor *GPBFieldOptions_JSType_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:GPBFieldOptions_JSType_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -1868,7 +1907,9 @@ typedef struct GPBOneofOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1936,7 +1977,9 @@ typedef struct GPBEnumOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -1994,7 +2037,9 @@ typedef struct GPBEnumValueOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2052,7 +2097,9 @@ typedef struct GPBServiceOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2121,7 +2168,9 @@ typedef struct GPBMethodOptions__storage_ {
     };
     [localDescriptor setupExtensionRanges:ranges
                                     count:(uint32_t)(sizeof(ranges) / sizeof(GPBExtensionRange))];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2132,7 +2181,7 @@ typedef struct GPBMethodOptions__storage_ {
 #pragma mark - Enum GPBMethodOptions_IdempotencyLevel
 
 GPBEnumDescriptor *GPBMethodOptions_IdempotencyLevel_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "IdempotencyUnknown\000NoSideEffects\000Idempot"
@@ -2148,7 +2197,8 @@ GPBEnumDescriptor *GPBMethodOptions_IdempotencyLevel_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:GPBMethodOptions_IdempotencyLevel_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -2267,7 +2317,9 @@ typedef struct GPBUninterpretedOption__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBUninterpretedOption__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2321,7 +2373,9 @@ typedef struct GPBUninterpretedOption_NamePart__storage_ {
                                    storageSize:sizeof(GPBUninterpretedOption_NamePart__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(GPBUninterpretedOption)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2364,7 +2418,9 @@ typedef struct GPBSourceCodeInfo__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBSourceCodeInfo__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2452,7 +2508,9 @@ typedef struct GPBSourceCodeInfo_Location__storage_ {
                                    storageSize:sizeof(GPBSourceCodeInfo_Location__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(GPBSourceCodeInfo)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2495,7 +2553,9 @@ typedef struct GPBGeneratedCodeInfo__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GPBGeneratedCodeInfo__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -2572,7 +2632,9 @@ typedef struct GPBGeneratedCodeInfo_Annotation__storage_ {
                                    storageSize:sizeof(GPBGeneratedCodeInfo_Annotation__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(GPBGeneratedCodeInfo)];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
