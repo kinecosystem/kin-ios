@@ -213,7 +213,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   KinGrpcApi:
-    :commit: 8e59d7a8c40f9bc80fb1edf4584db17b8bb21aa4
+    :commit: 445f8d094cf3a760a45aca96ea2600746d216739
     :git: "git@github.com:kinecosystem/kin-ios.git"
 
 SPEC CHECKSUMS:
