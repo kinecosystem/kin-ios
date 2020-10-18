@@ -117,7 +117,7 @@ extension APBCommonV3InvoiceList {
     }
 }
 
-extension APBTransactionV3SubmitTransactionResponse_InvoiceError {
+extension APBCommonV3InvoiceError {
     var invoiceError: InvoiceError? {
         guard let modelInvoice = invoice.invoice else {
             return nil
@@ -129,7 +129,7 @@ extension APBTransactionV3SubmitTransactionResponse_InvoiceError {
     }
 }
 
-extension APBTransactionV3SubmitTransactionResponse_InvoiceError_Reason {
+extension APBCommonV3InvoiceError_Reason {
     var reason: InvoiceError.Reason {
         switch self {
         case .alreadyPaid:

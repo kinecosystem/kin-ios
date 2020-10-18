@@ -202,9 +202,9 @@ class AgoraKinTransactionsApiTests: XCTestCase {
     }
 
     func testSubmitTransactionInvoiceError() {
-        var invoiceErrors = [APBTransactionV3SubmitTransactionResponse_InvoiceError]()
+        var invoiceErrors = [APBCommonV3InvoiceError]()
         for i in 0...2 {
-            let error = APBTransactionV3SubmitTransactionResponse_InvoiceError()
+            let error = APBCommonV3InvoiceError()
             error.opIndex = UInt32(i)
             error.reason = .skuNotFound
             error.invoice = StubObjects.stubInvoiceProto

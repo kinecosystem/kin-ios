@@ -139,7 +139,7 @@ extension AgoraKinTransactionsApi: KinTransactionApi {
                     completion(response)
                 case .invoiceError:
                     let invoiceErrors = grpcResponse.invoiceErrorsArray.compactMap { item -> InvoiceError? in
-                        guard let error = item as? APBTransactionV3SubmitTransactionResponse_InvoiceError else {
+                        guard let error = item as? APBCommonV3InvoiceError else {
                             return nil
                         }
 
