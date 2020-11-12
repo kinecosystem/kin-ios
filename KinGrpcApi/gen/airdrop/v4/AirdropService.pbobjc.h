@@ -33,31 +33,31 @@ GPB_ENUM_FWD_DECLARE(APBCommonV4Commitment);
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - Enum APBAirdropV4RequestAirDropResponse_Result
+#pragma mark - Enum APBAirdropV4RequestAirdropResponse_Result
 
-typedef GPB_ENUM(APBAirdropV4RequestAirDropResponse_Result) {
+typedef GPB_ENUM(APBAirdropV4RequestAirdropResponse_Result) {
   /**
    * Value used if any message's field encounters a value that is not defined
    * by this enum. The message will also have C functions to get/set the rawValue
    * of the field.
    **/
-  APBAirdropV4RequestAirDropResponse_Result_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  APBAirdropV4RequestAirDropResponse_Result_Ok = 0,
+  APBAirdropV4RequestAirdropResponse_Result_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  APBAirdropV4RequestAirdropResponse_Result_Ok = 0,
 
   /** The target account does not exist. */
-  APBAirdropV4RequestAirDropResponse_Result_NotFound = 1,
+  APBAirdropV4RequestAirdropResponse_Result_NotFound = 1,
 
   /** The airdrop service does not have enough kin. */
-  APBAirdropV4RequestAirDropResponse_Result_InsufficientKin = 2,
+  APBAirdropV4RequestAirdropResponse_Result_InsufficientKin = 2,
 };
 
-GPBEnumDescriptor *APBAirdropV4RequestAirDropResponse_Result_EnumDescriptor(void);
+GPBEnumDescriptor *APBAirdropV4RequestAirdropResponse_Result_EnumDescriptor(void);
 
 /**
  * Checks to see if the given value is defined by the enum or was not known at
  * the time this source was generated.
  **/
-BOOL APBAirdropV4RequestAirDropResponse_Result_IsValidValue(int32_t value);
+BOOL APBAirdropV4RequestAirdropResponse_Result_IsValidValue(int32_t value);
 
 #pragma mark - APBAirdropV4AirdropServiceRoot
 
@@ -74,15 +74,15 @@ BOOL APBAirdropV4RequestAirDropResponse_Result_IsValidValue(int32_t value);
 @interface APBAirdropV4AirdropServiceRoot : GPBRootObject
 @end
 
-#pragma mark - APBAirdropV4RequestAirDropRequest
+#pragma mark - APBAirdropV4RequestAirdropRequest
 
-typedef GPB_ENUM(APBAirdropV4RequestAirDropRequest_FieldNumber) {
-  APBAirdropV4RequestAirDropRequest_FieldNumber_AccountId = 1,
-  APBAirdropV4RequestAirDropRequest_FieldNumber_Quarks = 2,
-  APBAirdropV4RequestAirDropRequest_FieldNumber_Commitment = 3,
+typedef GPB_ENUM(APBAirdropV4RequestAirdropRequest_FieldNumber) {
+  APBAirdropV4RequestAirdropRequest_FieldNumber_AccountId = 1,
+  APBAirdropV4RequestAirdropRequest_FieldNumber_Quarks = 2,
+  APBAirdropV4RequestAirdropRequest_FieldNumber_Commitment = 3,
 };
 
-@interface APBAirdropV4RequestAirDropRequest : GPBMessage
+@interface APBAirdropV4RequestAirdropRequest : GPBMessage
 
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV4SolanaAccountId *accountId;
 /** Test to see if @c accountId has been set. */
@@ -95,27 +95,27 @@ typedef GPB_ENUM(APBAirdropV4RequestAirDropRequest_FieldNumber) {
 @end
 
 /**
- * Fetches the raw value of a @c APBAirdropV4RequestAirDropRequest's @c commitment property, even
+ * Fetches the raw value of a @c APBAirdropV4RequestAirdropRequest's @c commitment property, even
  * if the value was not defined by the enum at the time the code was generated.
  **/
-int32_t APBAirdropV4RequestAirDropRequest_Commitment_RawValue(APBAirdropV4RequestAirDropRequest *message);
+int32_t APBAirdropV4RequestAirdropRequest_Commitment_RawValue(APBAirdropV4RequestAirdropRequest *message);
 /**
- * Sets the raw value of an @c APBAirdropV4RequestAirDropRequest's @c commitment property, allowing
+ * Sets the raw value of an @c APBAirdropV4RequestAirdropRequest's @c commitment property, allowing
  * it to be set to a value that was not defined by the enum at the time the code
  * was generated.
  **/
-void SetAPBAirdropV4RequestAirDropRequest_Commitment_RawValue(APBAirdropV4RequestAirDropRequest *message, int32_t value);
+void SetAPBAirdropV4RequestAirdropRequest_Commitment_RawValue(APBAirdropV4RequestAirdropRequest *message, int32_t value);
 
-#pragma mark - APBAirdropV4RequestAirDropResponse
+#pragma mark - APBAirdropV4RequestAirdropResponse
 
-typedef GPB_ENUM(APBAirdropV4RequestAirDropResponse_FieldNumber) {
-  APBAirdropV4RequestAirDropResponse_FieldNumber_Result = 1,
-  APBAirdropV4RequestAirDropResponse_FieldNumber_Signature = 2,
+typedef GPB_ENUM(APBAirdropV4RequestAirdropResponse_FieldNumber) {
+  APBAirdropV4RequestAirdropResponse_FieldNumber_Result = 1,
+  APBAirdropV4RequestAirdropResponse_FieldNumber_Signature = 2,
 };
 
-@interface APBAirdropV4RequestAirDropResponse : GPBMessage
+@interface APBAirdropV4RequestAirdropResponse : GPBMessage
 
-@property(nonatomic, readwrite) APBAirdropV4RequestAirDropResponse_Result result;
+@property(nonatomic, readwrite) APBAirdropV4RequestAirdropResponse_Result result;
 
 /** The signature of the transaction, if result == Result::OK. */
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV4TransactionSignature *signature;
@@ -125,16 +125,16 @@ typedef GPB_ENUM(APBAirdropV4RequestAirDropResponse_FieldNumber) {
 @end
 
 /**
- * Fetches the raw value of a @c APBAirdropV4RequestAirDropResponse's @c result property, even
+ * Fetches the raw value of a @c APBAirdropV4RequestAirdropResponse's @c result property, even
  * if the value was not defined by the enum at the time the code was generated.
  **/
-int32_t APBAirdropV4RequestAirDropResponse_Result_RawValue(APBAirdropV4RequestAirDropResponse *message);
+int32_t APBAirdropV4RequestAirdropResponse_Result_RawValue(APBAirdropV4RequestAirdropResponse *message);
 /**
- * Sets the raw value of an @c APBAirdropV4RequestAirDropResponse's @c result property, allowing
+ * Sets the raw value of an @c APBAirdropV4RequestAirdropResponse's @c result property, allowing
  * it to be set to a value that was not defined by the enum at the time the code
  * was generated.
  **/
-void SetAPBAirdropV4RequestAirDropResponse_Result_RawValue(APBAirdropV4RequestAirDropResponse *message, int32_t value);
+void SetAPBAirdropV4RequestAirdropResponse_Result_RawValue(APBAirdropV4RequestAirdropResponse *message, int32_t value);
 
 NS_ASSUME_NONNULL_END
 

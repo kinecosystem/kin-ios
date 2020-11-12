@@ -185,16 +185,16 @@ typedef struct APBCommonV4TransactionId__storage_ {
 
 @end
 
-#pragma mark - APBCommonV4BlockHash
+#pragma mark - APBCommonV4Blockhash
 
-@implementation APBCommonV4BlockHash
+@implementation APBCommonV4Blockhash
 
 @dynamic value;
 
-typedef struct APBCommonV4BlockHash__storage_ {
+typedef struct APBCommonV4Blockhash__storage_ {
   uint32_t _has_storage_[1];
   NSData *value;
-} APBCommonV4BlockHash__storage_;
+} APBCommonV4Blockhash__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -205,20 +205,20 @@ typedef struct APBCommonV4BlockHash__storage_ {
       {
         .name = "value",
         .dataTypeSpecific.className = NULL,
-        .number = APBCommonV4BlockHash_FieldNumber_Value,
+        .number = APBCommonV4Blockhash_FieldNumber_Value,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBCommonV4BlockHash__storage_, value),
+        .offset = (uint32_t)offsetof(APBCommonV4Blockhash__storage_, value),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBCommonV4BlockHash class]
+        [GPBDescriptor allocDescriptorForClass:[APBCommonV4Blockhash class]
                                      rootClass:[APBCommonV4ModelRoot class]
                                           file:APBCommonV4ModelRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(APBCommonV4BlockHash__storage_)
+                                   storageSize:sizeof(APBCommonV4Blockhash__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");

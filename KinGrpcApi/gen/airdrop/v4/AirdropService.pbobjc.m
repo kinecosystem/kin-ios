@@ -57,20 +57,20 @@ static GPBFileDescriptor *APBAirdropV4AirdropServiceRoot_FileDescriptor(void) {
   return descriptor;
 }
 
-#pragma mark - APBAirdropV4RequestAirDropRequest
+#pragma mark - APBAirdropV4RequestAirdropRequest
 
-@implementation APBAirdropV4RequestAirDropRequest
+@implementation APBAirdropV4RequestAirdropRequest
 
 @dynamic hasAccountId, accountId;
 @dynamic quarks;
 @dynamic commitment;
 
-typedef struct APBAirdropV4RequestAirDropRequest__storage_ {
+typedef struct APBAirdropV4RequestAirdropRequest__storage_ {
   uint32_t _has_storage_[1];
   APBCommonV4Commitment commitment;
   APBCommonV4SolanaAccountId *accountId;
   uint64_t quarks;
-} APBAirdropV4RequestAirDropRequest__storage_;
+} APBAirdropV4RequestAirdropRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -81,38 +81,38 @@ typedef struct APBAirdropV4RequestAirDropRequest__storage_ {
       {
         .name = "accountId",
         .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4SolanaAccountId),
-        .number = APBAirdropV4RequestAirDropRequest_FieldNumber_AccountId,
+        .number = APBAirdropV4RequestAirdropRequest_FieldNumber_AccountId,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirDropRequest__storage_, accountId),
+        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirdropRequest__storage_, accountId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "quarks",
         .dataTypeSpecific.className = NULL,
-        .number = APBAirdropV4RequestAirDropRequest_FieldNumber_Quarks,
+        .number = APBAirdropV4RequestAirdropRequest_FieldNumber_Quarks,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirDropRequest__storage_, quarks),
+        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirdropRequest__storage_, quarks),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "commitment",
         .dataTypeSpecific.enumDescFunc = APBCommonV4Commitment_EnumDescriptor,
-        .number = APBAirdropV4RequestAirDropRequest_FieldNumber_Commitment,
+        .number = APBAirdropV4RequestAirdropRequest_FieldNumber_Commitment,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirDropRequest__storage_, commitment),
+        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirdropRequest__storage_, commitment),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBAirdropV4RequestAirDropRequest class]
+        [GPBDescriptor allocDescriptorForClass:[APBAirdropV4RequestAirdropRequest class]
                                      rootClass:[APBAirdropV4AirdropServiceRoot class]
                                           file:APBAirdropV4AirdropServiceRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(APBAirdropV4RequestAirDropRequest__storage_)
+                                   storageSize:sizeof(APBAirdropV4RequestAirdropRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -124,30 +124,30 @@ typedef struct APBAirdropV4RequestAirDropRequest__storage_ {
 
 @end
 
-int32_t APBAirdropV4RequestAirDropRequest_Commitment_RawValue(APBAirdropV4RequestAirDropRequest *message) {
-  GPBDescriptor *descriptor = [APBAirdropV4RequestAirDropRequest descriptor];
-  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirDropRequest_FieldNumber_Commitment];
+int32_t APBAirdropV4RequestAirdropRequest_Commitment_RawValue(APBAirdropV4RequestAirdropRequest *message) {
+  GPBDescriptor *descriptor = [APBAirdropV4RequestAirdropRequest descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirdropRequest_FieldNumber_Commitment];
   return GPBGetMessageInt32Field(message, field);
 }
 
-void SetAPBAirdropV4RequestAirDropRequest_Commitment_RawValue(APBAirdropV4RequestAirDropRequest *message, int32_t value) {
-  GPBDescriptor *descriptor = [APBAirdropV4RequestAirDropRequest descriptor];
-  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirDropRequest_FieldNumber_Commitment];
+void SetAPBAirdropV4RequestAirdropRequest_Commitment_RawValue(APBAirdropV4RequestAirdropRequest *message, int32_t value) {
+  GPBDescriptor *descriptor = [APBAirdropV4RequestAirdropRequest descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirdropRequest_FieldNumber_Commitment];
   GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
-#pragma mark - APBAirdropV4RequestAirDropResponse
+#pragma mark - APBAirdropV4RequestAirdropResponse
 
-@implementation APBAirdropV4RequestAirDropResponse
+@implementation APBAirdropV4RequestAirdropResponse
 
 @dynamic result;
 @dynamic hasSignature, signature;
 
-typedef struct APBAirdropV4RequestAirDropResponse__storage_ {
+typedef struct APBAirdropV4RequestAirdropResponse__storage_ {
   uint32_t _has_storage_[1];
-  APBAirdropV4RequestAirDropResponse_Result result;
+  APBAirdropV4RequestAirdropResponse_Result result;
   APBCommonV4TransactionSignature *signature;
-} APBAirdropV4RequestAirDropResponse__storage_;
+} APBAirdropV4RequestAirdropResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -157,30 +157,30 @@ typedef struct APBAirdropV4RequestAirDropResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "result",
-        .dataTypeSpecific.enumDescFunc = APBAirdropV4RequestAirDropResponse_Result_EnumDescriptor,
-        .number = APBAirdropV4RequestAirDropResponse_FieldNumber_Result,
+        .dataTypeSpecific.enumDescFunc = APBAirdropV4RequestAirdropResponse_Result_EnumDescriptor,
+        .number = APBAirdropV4RequestAirdropResponse_FieldNumber_Result,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirDropResponse__storage_, result),
+        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirdropResponse__storage_, result),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
       {
         .name = "signature",
         .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4TransactionSignature),
-        .number = APBAirdropV4RequestAirDropResponse_FieldNumber_Signature,
+        .number = APBAirdropV4RequestAirdropResponse_FieldNumber_Signature,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirDropResponse__storage_, signature),
+        .offset = (uint32_t)offsetof(APBAirdropV4RequestAirdropResponse__storage_, signature),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBAirdropV4RequestAirDropResponse class]
+        [GPBDescriptor allocDescriptorForClass:[APBAirdropV4RequestAirdropResponse class]
                                      rootClass:[APBAirdropV4AirdropServiceRoot class]
                                           file:APBAirdropV4AirdropServiceRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(APBAirdropV4RequestAirDropResponse__storage_)
+                                   storageSize:sizeof(APBAirdropV4RequestAirdropResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -192,36 +192,36 @@ typedef struct APBAirdropV4RequestAirDropResponse__storage_ {
 
 @end
 
-int32_t APBAirdropV4RequestAirDropResponse_Result_RawValue(APBAirdropV4RequestAirDropResponse *message) {
-  GPBDescriptor *descriptor = [APBAirdropV4RequestAirDropResponse descriptor];
-  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirDropResponse_FieldNumber_Result];
+int32_t APBAirdropV4RequestAirdropResponse_Result_RawValue(APBAirdropV4RequestAirdropResponse *message) {
+  GPBDescriptor *descriptor = [APBAirdropV4RequestAirdropResponse descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirdropResponse_FieldNumber_Result];
   return GPBGetMessageInt32Field(message, field);
 }
 
-void SetAPBAirdropV4RequestAirDropResponse_Result_RawValue(APBAirdropV4RequestAirDropResponse *message, int32_t value) {
-  GPBDescriptor *descriptor = [APBAirdropV4RequestAirDropResponse descriptor];
-  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirDropResponse_FieldNumber_Result];
+void SetAPBAirdropV4RequestAirdropResponse_Result_RawValue(APBAirdropV4RequestAirdropResponse *message, int32_t value) {
+  GPBDescriptor *descriptor = [APBAirdropV4RequestAirdropResponse descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBAirdropV4RequestAirdropResponse_FieldNumber_Result];
   GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
-#pragma mark - Enum APBAirdropV4RequestAirDropResponse_Result
+#pragma mark - Enum APBAirdropV4RequestAirdropResponse_Result
 
-GPBEnumDescriptor *APBAirdropV4RequestAirDropResponse_Result_EnumDescriptor(void) {
+GPBEnumDescriptor *APBAirdropV4RequestAirdropResponse_Result_EnumDescriptor(void) {
   static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Ok\000NotFound\000InsufficientKin\000";
     static const int32_t values[] = {
-        APBAirdropV4RequestAirDropResponse_Result_Ok,
-        APBAirdropV4RequestAirDropResponse_Result_NotFound,
-        APBAirdropV4RequestAirDropResponse_Result_InsufficientKin,
+        APBAirdropV4RequestAirdropResponse_Result_Ok,
+        APBAirdropV4RequestAirdropResponse_Result_NotFound,
+        APBAirdropV4RequestAirdropResponse_Result_InsufficientKin,
     };
     GPBEnumDescriptor *worker =
-        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(APBAirdropV4RequestAirDropResponse_Result)
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(APBAirdropV4RequestAirdropResponse_Result)
                                        valueNames:valueNames
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:APBAirdropV4RequestAirDropResponse_Result_IsValidValue];
+                                     enumVerifier:APBAirdropV4RequestAirdropResponse_Result_IsValidValue];
     GPBEnumDescriptor *expected = nil;
     if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
@@ -230,11 +230,11 @@ GPBEnumDescriptor *APBAirdropV4RequestAirDropResponse_Result_EnumDescriptor(void
   return descriptor;
 }
 
-BOOL APBAirdropV4RequestAirDropResponse_Result_IsValidValue(int32_t value__) {
+BOOL APBAirdropV4RequestAirdropResponse_Result_IsValidValue(int32_t value__) {
   switch (value__) {
-    case APBAirdropV4RequestAirDropResponse_Result_Ok:
-    case APBAirdropV4RequestAirDropResponse_Result_NotFound:
-    case APBAirdropV4RequestAirDropResponse_Result_InsufficientKin:
+    case APBAirdropV4RequestAirdropResponse_Result_Ok:
+    case APBAirdropV4RequestAirdropResponse_Result_NotFound:
+    case APBAirdropV4RequestAirdropResponse_Result_InsufficientKin:
       return YES;
     default:
       return NO;

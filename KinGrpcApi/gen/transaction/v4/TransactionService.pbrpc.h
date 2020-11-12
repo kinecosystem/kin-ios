@@ -13,10 +13,10 @@
 @class APBTransactionV4GetHistoryResponse;
 @class APBTransactionV4GetMinimumBalanceForRentExemptionRequest;
 @class APBTransactionV4GetMinimumBalanceForRentExemptionResponse;
-@class APBTransactionV4GetMiniumumKinVersionRequest;
-@class APBTransactionV4GetMiniumumKinVersionResponse;
-@class APBTransactionV4GetRecentBlockHashRequest;
-@class APBTransactionV4GetRecentBlockHashResponse;
+@class APBTransactionV4GetMinimumKinVersionRequest;
+@class APBTransactionV4GetMinimumKinVersionResponse;
+@class APBTransactionV4GetRecentBlockhashRequest;
+@class APBTransactionV4GetRecentBlockhashResponse;
 @class APBTransactionV4GetServiceConfigRequest;
 @class APBTransactionV4GetServiceConfigResponse;
 @class APBTransactionV4GetTransactionRequest;
@@ -48,24 +48,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (GRPCUnaryProtoCall *)getServiceConfigWithMessage:(APBTransactionV4GetServiceConfigRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
-#pragma mark GetMiniumumKinVersion(GetMiniumumKinVersionRequest) returns (GetMiniumumKinVersionResponse)
+#pragma mark GetMinimumKinVersion(GetMinimumKinVersionRequest) returns (GetMinimumKinVersionResponse)
 
 /**
- * GetMiniumumKinVersion returns the minimum Kin version that is supported.
+ * GetMinimumKinVersion returns the minimum Kin version that is supported.
  * 
  * This version will _never_ decrease in non-test scenarios, as it indicates
  * a global migration has occured.
  */
-- (GRPCUnaryProtoCall *)getMiniumumKinVersionWithMessage:(APBTransactionV4GetMiniumumKinVersionRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
+- (GRPCUnaryProtoCall *)getMinimumKinVersionWithMessage:(APBTransactionV4GetMinimumKinVersionRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
-#pragma mark GetRecentBlockHash(GetRecentBlockHashRequest) returns (GetRecentBlockHashResponse)
+#pragma mark GetRecentBlockhash(GetRecentBlockhashRequest) returns (GetRecentBlockhashResponse)
 
 /**
- * GetRecentBlockHash returns a recent block hash from the underlying network,
- * which should be used when crafting transactions. If a transaction fails, it
- * is recommended that a new block hash is retrieved.
+ * GetRecentBlockhash returns a recent block hash from the underlying network,
+ * which should be used when crafting transactions. If a transaction fails with
+ * DuplicateSignature or InvalidNonce, it is recommended that a new block hash
+ * is retrieved.
+ * 
+ * Block hashes are expected to be valid for ~2 minutes.
  */
-- (GRPCUnaryProtoCall *)getRecentBlockHashWithMessage:(APBTransactionV4GetRecentBlockHashRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
+- (GRPCUnaryProtoCall *)getRecentBlockhashWithMessage:(APBTransactionV4GetRecentBlockhashRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
 #pragma mark GetMinimumBalanceForRentExemption(GetMinimumBalanceForRentExemptionRequest) returns (GetMinimumBalanceForRentExemptionResponse)
 
@@ -88,22 +91,22 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * SubmitTransaction submits a transaction.
  * 
- * If the memo does not conform to the Kin binary memo format,
- * the transaction is not eligible for whitelisting.
+ * The transaction may include a single Memo[1] instruction.
+ * If a memo instruction is specified, it must be at position 0
+ * in the instruction array.
  * 
- * If the memo _does_ conform to the Kin binary memo format,
- * the transaction may be whitelisted depending on app
- * configuration.
+ * If an invoice is provided, the Memo instruction must contain a
+ * Kin Binary memo[2], encoded as base64.
  * 
- * See: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
+ * [1]: https://spl.solana.com/memo
+ * [2]: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
  */
 - (GRPCUnaryProtoCall *)submitTransactionWithMessage:(APBTransactionV4SubmitTransactionRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
 #pragma mark GetTransaction(GetTransactionRequest) returns (GetTransactionResponse)
 
 /**
- * GetTransaction returns a transaction and additional off-chain
- * invoice data, if available.
+ * GetTransaction returns a transaction and additional off-chain invoice data, if available.
  */
 - (GRPCUnaryProtoCall *)getTransactionWithMessage:(APBTransactionV4GetTransactionRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
@@ -132,48 +135,54 @@ NS_ASSUME_NONNULL_BEGIN
 - (GRPCProtoCall *)RPCToGetServiceConfigWithRequest:(APBTransactionV4GetServiceConfigRequest *)request handler:(void(^)(APBTransactionV4GetServiceConfigResponse *_Nullable response, NSError *_Nullable error))handler;
 
 
-#pragma mark GetMiniumumKinVersion(GetMiniumumKinVersionRequest) returns (GetMiniumumKinVersionResponse)
+#pragma mark GetMinimumKinVersion(GetMinimumKinVersionRequest) returns (GetMinimumKinVersionResponse)
 
 /**
- * GetMiniumumKinVersion returns the minimum Kin version that is supported.
+ * GetMinimumKinVersion returns the minimum Kin version that is supported.
  * 
  * This version will _never_ decrease in non-test scenarios, as it indicates
  * a global migration has occured.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (void)getMiniumumKinVersionWithRequest:(APBTransactionV4GetMiniumumKinVersionRequest *)request handler:(void(^)(APBTransactionV4GetMiniumumKinVersionResponse *_Nullable response, NSError *_Nullable error))handler;
+- (void)getMinimumKinVersionWithRequest:(APBTransactionV4GetMinimumKinVersionRequest *)request handler:(void(^)(APBTransactionV4GetMinimumKinVersionResponse *_Nullable response, NSError *_Nullable error))handler;
 
 /**
- * GetMiniumumKinVersion returns the minimum Kin version that is supported.
+ * GetMinimumKinVersion returns the minimum Kin version that is supported.
  * 
  * This version will _never_ decrease in non-test scenarios, as it indicates
  * a global migration has occured.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (GRPCProtoCall *)RPCToGetMiniumumKinVersionWithRequest:(APBTransactionV4GetMiniumumKinVersionRequest *)request handler:(void(^)(APBTransactionV4GetMiniumumKinVersionResponse *_Nullable response, NSError *_Nullable error))handler;
+- (GRPCProtoCall *)RPCToGetMinimumKinVersionWithRequest:(APBTransactionV4GetMinimumKinVersionRequest *)request handler:(void(^)(APBTransactionV4GetMinimumKinVersionResponse *_Nullable response, NSError *_Nullable error))handler;
 
 
-#pragma mark GetRecentBlockHash(GetRecentBlockHashRequest) returns (GetRecentBlockHashResponse)
+#pragma mark GetRecentBlockhash(GetRecentBlockhashRequest) returns (GetRecentBlockhashResponse)
 
 /**
- * GetRecentBlockHash returns a recent block hash from the underlying network,
- * which should be used when crafting transactions. If a transaction fails, it
- * is recommended that a new block hash is retrieved.
+ * GetRecentBlockhash returns a recent block hash from the underlying network,
+ * which should be used when crafting transactions. If a transaction fails with
+ * DuplicateSignature or InvalidNonce, it is recommended that a new block hash
+ * is retrieved.
+ * 
+ * Block hashes are expected to be valid for ~2 minutes.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (void)getRecentBlockHashWithRequest:(APBTransactionV4GetRecentBlockHashRequest *)request handler:(void(^)(APBTransactionV4GetRecentBlockHashResponse *_Nullable response, NSError *_Nullable error))handler;
+- (void)getRecentBlockhashWithRequest:(APBTransactionV4GetRecentBlockhashRequest *)request handler:(void(^)(APBTransactionV4GetRecentBlockhashResponse *_Nullable response, NSError *_Nullable error))handler;
 
 /**
- * GetRecentBlockHash returns a recent block hash from the underlying network,
- * which should be used when crafting transactions. If a transaction fails, it
- * is recommended that a new block hash is retrieved.
+ * GetRecentBlockhash returns a recent block hash from the underlying network,
+ * which should be used when crafting transactions. If a transaction fails with
+ * DuplicateSignature or InvalidNonce, it is recommended that a new block hash
+ * is retrieved.
+ * 
+ * Block hashes are expected to be valid for ~2 minutes.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (GRPCProtoCall *)RPCToGetRecentBlockHashWithRequest:(APBTransactionV4GetRecentBlockHashRequest *)request handler:(void(^)(APBTransactionV4GetRecentBlockHashResponse *_Nullable response, NSError *_Nullable error))handler;
+- (GRPCProtoCall *)RPCToGetRecentBlockhashWithRequest:(APBTransactionV4GetRecentBlockhashRequest *)request handler:(void(^)(APBTransactionV4GetRecentBlockhashResponse *_Nullable response, NSError *_Nullable error))handler;
 
 
 #pragma mark GetMinimumBalanceForRentExemption(GetMinimumBalanceForRentExemptionRequest) returns (GetMinimumBalanceForRentExemptionResponse)
@@ -219,14 +228,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * SubmitTransaction submits a transaction.
  * 
- * If the memo does not conform to the Kin binary memo format,
- * the transaction is not eligible for whitelisting.
+ * The transaction may include a single Memo[1] instruction.
+ * If a memo instruction is specified, it must be at position 0
+ * in the instruction array.
  * 
- * If the memo _does_ conform to the Kin binary memo format,
- * the transaction may be whitelisted depending on app
- * configuration.
+ * If an invoice is provided, the Memo instruction must contain a
+ * Kin Binary memo[2], encoded as base64.
  * 
- * See: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
+ * [1]: https://spl.solana.com/memo
+ * [2]: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -235,14 +245,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * SubmitTransaction submits a transaction.
  * 
- * If the memo does not conform to the Kin binary memo format,
- * the transaction is not eligible for whitelisting.
+ * The transaction may include a single Memo[1] instruction.
+ * If a memo instruction is specified, it must be at position 0
+ * in the instruction array.
  * 
- * If the memo _does_ conform to the Kin binary memo format,
- * the transaction may be whitelisted depending on app
- * configuration.
+ * If an invoice is provided, the Memo instruction must contain a
+ * Kin Binary memo[2], encoded as base64.
  * 
- * See: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
+ * [1]: https://spl.solana.com/memo
+ * [2]: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -252,16 +263,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark GetTransaction(GetTransactionRequest) returns (GetTransactionResponse)
 
 /**
- * GetTransaction returns a transaction and additional off-chain
- * invoice data, if available.
+ * GetTransaction returns a transaction and additional off-chain invoice data, if available.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
 - (void)getTransactionWithRequest:(APBTransactionV4GetTransactionRequest *)request handler:(void(^)(APBTransactionV4GetTransactionResponse *_Nullable response, NSError *_Nullable error))handler;
 
 /**
- * GetTransaction returns a transaction and additional off-chain
- * invoice data, if available.
+ * GetTransaction returns a transaction and additional off-chain invoice data, if available.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */

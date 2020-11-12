@@ -54,37 +54,37 @@
 
 #pragma mark - Method Implementations
 
-#pragma mark RequestAirDrop(RequestAirDropRequest) returns (RequestAirDropResponse)
+#pragma mark RequestAirdrop(RequestAirdropRequest) returns (RequestAirdropResponse)
 
 /**
- * RequestAirDrop requests an air drop of kin to the target account.
+ * RequestAirdrop requests an air drop of kin to the target account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (void)requestAirDropWithRequest:(APBAirdropV4RequestAirDropRequest *)request handler:(void(^)(APBAirdropV4RequestAirDropResponse *_Nullable response, NSError *_Nullable error))handler{
-  [[self RPCToRequestAirDropWithRequest:request handler:handler] start];
+- (void)requestAirdropWithRequest:(APBAirdropV4RequestAirdropRequest *)request handler:(void(^)(APBAirdropV4RequestAirdropResponse *_Nullable response, NSError *_Nullable error))handler{
+  [[self RPCToRequestAirdropWithRequest:request handler:handler] start];
 }
 // Returns a not-yet-started RPC object.
 /**
- * RequestAirDrop requests an air drop of kin to the target account.
+ * RequestAirdrop requests an air drop of kin to the target account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (GRPCProtoCall *)RPCToRequestAirDropWithRequest:(APBAirdropV4RequestAirDropRequest *)request handler:(void(^)(APBAirdropV4RequestAirDropResponse *_Nullable response, NSError *_Nullable error))handler{
-  return [self RPCToMethod:@"RequestAirDrop"
+- (GRPCProtoCall *)RPCToRequestAirdropWithRequest:(APBAirdropV4RequestAirdropRequest *)request handler:(void(^)(APBAirdropV4RequestAirdropResponse *_Nullable response, NSError *_Nullable error))handler{
+  return [self RPCToMethod:@"RequestAirdrop"
             requestsWriter:[GRXWriter writerWithValue:request]
-             responseClass:[APBAirdropV4RequestAirDropResponse class]
+             responseClass:[APBAirdropV4RequestAirdropResponse class]
         responsesWriteable:[GRXWriteable writeableWithSingleHandler:handler]];
 }
 /**
- * RequestAirDrop requests an air drop of kin to the target account.
+ * RequestAirdrop requests an air drop of kin to the target account.
  */
-- (GRPCUnaryProtoCall *)requestAirDropWithMessage:(APBAirdropV4RequestAirDropRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions {
-  return [self RPCToMethod:@"RequestAirDrop"
+- (GRPCUnaryProtoCall *)requestAirdropWithMessage:(APBAirdropV4RequestAirdropRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions {
+  return [self RPCToMethod:@"RequestAirdrop"
                    message:message
            responseHandler:handler
                callOptions:callOptions
-             responseClass:[APBAirdropV4RequestAirDropResponse class]];
+             responseClass:[APBAirdropV4RequestAirdropResponse class]];
 }
 
 @end

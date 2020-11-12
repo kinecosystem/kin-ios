@@ -49,7 +49,18 @@ typedef GPB_ENUM(APBAccountV4CreateAccountResponse_Result) {
   APBAccountV4CreateAccountResponse_Result_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   APBAccountV4CreateAccountResponse_Result_Ok = 0,
   APBAccountV4CreateAccountResponse_Result_Exists = 1,
+
+  /**
+   * Indicates that the service will not subsidize the transaction, and that
+   * the caller should fund the transaction themselves.
+   **/
   APBAccountV4CreateAccountResponse_Result_PayerRequired = 2,
+
+  /**
+   * Indicates the nonce/blockhash used in the transaction is invalid, and should
+   * be refetched
+   **/
+  APBAccountV4CreateAccountResponse_Result_BadNonce = 3,
 };
 
 GPBEnumDescriptor *APBAccountV4CreateAccountResponse_Result_EnumDescriptor(void);
@@ -148,6 +159,23 @@ typedef GPB_ENUM(APBAccountV4CreateAccountRequest_FieldNumber) {
 
 @interface APBAccountV4CreateAccountRequest : GPBMessage
 
+/**
+ * Transaction should contain the following instructions:
+ *
+ *   1. SystemProgram::CreateAccount()
+ *   2. SplTokenProgram::InitializeAccount()
+ *   3. SplTokenProgram::SetAuthority()
+ *
+ * (3) only needs to be set if the service is subsidizing the
+ * account creation. In that case, a SetAuthority() instruction
+ * should be included that sets the CloseAuthority of the account
+ * to the subsidizer. This is to prevent farming of Sol by creating
+ * accounts. It should be noted that an account can only be closed
+ * if there is zero kin in the account.
+ *
+ * If the parameters are not for the Kin token, or there are
+ * any other instructions, InvalidArgument will be returned.
+ **/
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV4Transaction *transaction;
 /** Test to see if @c transaction has been set. */
 @property(nonatomic, readwrite) BOOL hasTransaction;
@@ -179,7 +207,7 @@ typedef GPB_ENUM(APBAccountV4CreateAccountResponse_FieldNumber) {
 
 @property(nonatomic, readwrite) APBAccountV4CreateAccountResponse_Result result;
 
-/** Will be present if the account was created or already existed. */
+/** Present iff the account was created or already existed. */
 @property(nonatomic, readwrite, strong, null_resettable) APBAccountV4AccountInfo *accountInfo;
 /** Test to see if @c accountInfo has been set. */
 @property(nonatomic, readwrite) BOOL hasAccountInfo;
@@ -282,7 +310,7 @@ typedef GPB_ENUM(APBAccountV4ResolveTokenAccountsResponse_FieldNumber) {
 /**
  * Zero or more accounts that are owned by the provided account id.
  *
- * If the provided account is also as token account, it will be first in the list.
+ * If the provided account is also a token account, it will be first in the list.
  * Otherwise, the list order should not be depended on, as there is no reliable way
  * to sort accounts based on creation time.
  **/
@@ -300,7 +328,6 @@ typedef GPB_ENUM(APBAccountV4GetEventsRequest_FieldNumber) {
 
 @interface APBAccountV4GetEventsRequest : GPBMessage
 
-/** The id of the account to stream events for */
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV4SolanaAccountId *accountId;
 /** Test to see if @c accountId has been set. */
 @property(nonatomic, readwrite) BOOL hasAccountId;

@@ -256,11 +256,12 @@ GPBEnumDescriptor *APBAccountV4CreateAccountResponse_Result_EnumDescriptor(void)
   static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
-        "Ok\000Exists\000PayerRequired\000";
+        "Ok\000Exists\000PayerRequired\000BadNonce\000";
     static const int32_t values[] = {
         APBAccountV4CreateAccountResponse_Result_Ok,
         APBAccountV4CreateAccountResponse_Result_Exists,
         APBAccountV4CreateAccountResponse_Result_PayerRequired,
+        APBAccountV4CreateAccountResponse_Result_BadNonce,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(APBAccountV4CreateAccountResponse_Result)
@@ -281,6 +282,7 @@ BOOL APBAccountV4CreateAccountResponse_Result_IsValidValue(int32_t value__) {
     case APBAccountV4CreateAccountResponse_Result_Ok:
     case APBAccountV4CreateAccountResponse_Result_Exists:
     case APBAccountV4CreateAccountResponse_Result_PayerRequired:
+    case APBAccountV4CreateAccountResponse_Result_BadNonce:
       return YES;
     default:
       return NO;

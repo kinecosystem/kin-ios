@@ -29,7 +29,7 @@ CF_EXTERN_C_BEGIN
 
 @class APBCommonV3InvoiceError;
 @class APBCommonV3InvoiceList;
-@class APBCommonV4BlockHash;
+@class APBCommonV4Blockhash;
 @class APBCommonV4SolanaAccountId;
 @class APBCommonV4StellarTransaction;
 @class APBCommonV4Transaction;
@@ -106,20 +106,32 @@ typedef GPB_ENUM(APBTransactionV4SubmitTransactionResponse_Result) {
   APBTransactionV4SubmitTransactionResponse_Result_Ok = 0,
 
   /**
+   * Indicates that the transaction has already been submitted.
+   *
+   * If the client is retrying a submission due to a transient
+   * failure, then this can occur if the submission in a previous
+   * attempt was successful. Otherwise, it may indicate that the
+   * transcation is indistinguishable from a previous transaction
+   * (i.e. same block hash, sender, dest, and amount), and the client
+   * should use a different recent block hash and try again.
+   **/
+  APBTransactionV4SubmitTransactionResponse_Result_AlreadySubmitted = 1,
+
+  /**
    * There was an issue with submitting the transaction
    * to the underlying chain. Clients should retry with
-   * a rebuilt transaction in case there is temporal
+   * a rebuilt transaction in case there are temporal
    * issues with the transaction, such as sequence number,
    * or some other chain-specific errors. The detail of
    * the error is present in the result xdr.
    **/
-  APBTransactionV4SubmitTransactionResponse_Result_Failed = 1,
+  APBTransactionV4SubmitTransactionResponse_Result_Failed = 2,
 
   /**
    * Indicates that the configured webhook for this transaction
    * rejected the transaction without a specified reason.
    **/
-  APBTransactionV4SubmitTransactionResponse_Result_Rejected = 2,
+  APBTransactionV4SubmitTransactionResponse_Result_Rejected = 3,
 
   /**
    * Indicates there was an error with one or more of the
@@ -127,8 +139,19 @@ typedef GPB_ENUM(APBTransactionV4SubmitTransactionResponse_Result) {
    *
    * See: invoice_errors.
    **/
-  APBTransactionV4SubmitTransactionResponse_Result_InvoiceError = 3,
-  APBTransactionV4SubmitTransactionResponse_Result_PayerRequired = 4,
+  APBTransactionV4SubmitTransactionResponse_Result_InvoiceError = 4,
+
+  /**
+   * Payer required indicates that the submitted transaction does not contain
+   * a signature at for the transaction funder account (the account at the 0th index).
+   *
+   * This can occur if the service does not have a subsdizier configured, or if
+   * the service refuses to subsidize this specific transaction. The latter
+   * case can occur during rate limiting situations. In this case, the client
+   * may either retry at a later time, or attempt to fund the transaction some
+   * other way.
+   **/
+  APBTransactionV4SubmitTransactionResponse_Result_PayerRequired = 5,
 };
 
 GPBEnumDescriptor *APBTransactionV4SubmitTransactionResponse_Result_EnumDescriptor(void);
@@ -150,8 +173,6 @@ typedef GPB_ENUM(APBTransactionV4GetTransactionResponse_State) {
   APBTransactionV4GetTransactionResponse_State_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
   APBTransactionV4GetTransactionResponse_State_Unknown = 0,
   APBTransactionV4GetTransactionResponse_State_Success = 1,
-
-  /** todo: failure reason? */
   APBTransactionV4GetTransactionResponse_State_Failed = 2,
   APBTransactionV4GetTransactionResponse_State_Pending = 3,
 };
@@ -203,7 +224,7 @@ typedef GPB_ENUM(APBTransactionV4GetServiceConfigResponse_FieldNumber) {
 /** Test to see if @c subsidizerAccount has been set. */
 @property(nonatomic, readwrite) BOOL hasSubsidizerAccount;
 
-/** todo: remove after we've locked in some tokens. */
+/** note: after release these values cannot change, and will be static per environment. */
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV4SolanaAccountId *tokenProgram;
 /** Test to see if @c tokenProgram has been set. */
 @property(nonatomic, readwrite) BOOL hasTokenProgram;
@@ -214,41 +235,41 @@ typedef GPB_ENUM(APBTransactionV4GetServiceConfigResponse_FieldNumber) {
 
 @end
 
-#pragma mark - APBTransactionV4GetMiniumumKinVersionRequest
+#pragma mark - APBTransactionV4GetMinimumKinVersionRequest
 
-@interface APBTransactionV4GetMiniumumKinVersionRequest : GPBMessage
+@interface APBTransactionV4GetMinimumKinVersionRequest : GPBMessage
 
 @end
 
-#pragma mark - APBTransactionV4GetMiniumumKinVersionResponse
+#pragma mark - APBTransactionV4GetMinimumKinVersionResponse
 
-typedef GPB_ENUM(APBTransactionV4GetMiniumumKinVersionResponse_FieldNumber) {
-  APBTransactionV4GetMiniumumKinVersionResponse_FieldNumber_Version = 1,
+typedef GPB_ENUM(APBTransactionV4GetMinimumKinVersionResponse_FieldNumber) {
+  APBTransactionV4GetMinimumKinVersionResponse_FieldNumber_Version = 1,
 };
 
-@interface APBTransactionV4GetMiniumumKinVersionResponse : GPBMessage
+@interface APBTransactionV4GetMinimumKinVersionResponse : GPBMessage
 
 @property(nonatomic, readwrite) uint32_t version;
 
 @end
 
-#pragma mark - APBTransactionV4GetRecentBlockHashRequest
+#pragma mark - APBTransactionV4GetRecentBlockhashRequest
 
-@interface APBTransactionV4GetRecentBlockHashRequest : GPBMessage
+@interface APBTransactionV4GetRecentBlockhashRequest : GPBMessage
 
 @end
 
-#pragma mark - APBTransactionV4GetRecentBlockHashResponse
+#pragma mark - APBTransactionV4GetRecentBlockhashResponse
 
-typedef GPB_ENUM(APBTransactionV4GetRecentBlockHashResponse_FieldNumber) {
-  APBTransactionV4GetRecentBlockHashResponse_FieldNumber_BlockHash = 1,
+typedef GPB_ENUM(APBTransactionV4GetRecentBlockhashResponse_FieldNumber) {
+  APBTransactionV4GetRecentBlockhashResponse_FieldNumber_Blockhash = 1,
 };
 
-@interface APBTransactionV4GetRecentBlockHashResponse : GPBMessage
+@interface APBTransactionV4GetRecentBlockhashResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4BlockHash *blockHash;
-/** Test to see if @c blockHash has been set. */
-@property(nonatomic, readwrite) BOOL hasBlockHash;
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4Blockhash *blockhash;
+/** Test to see if @c blockhash has been set. */
+@property(nonatomic, readwrite) BOOL hasBlockhash;
 
 @end
 
@@ -440,15 +461,15 @@ void SetAPBTransactionV4SubmitTransactionResponse_Result_RawValue(APBTransaction
 #pragma mark - APBTransactionV4GetTransactionRequest
 
 typedef GPB_ENUM(APBTransactionV4GetTransactionRequest_FieldNumber) {
-  APBTransactionV4GetTransactionRequest_FieldNumber_TransactionSignature = 1,
+  APBTransactionV4GetTransactionRequest_FieldNumber_TransactionId = 1,
   APBTransactionV4GetTransactionRequest_FieldNumber_Commitment = 2,
 };
 
 @interface APBTransactionV4GetTransactionRequest : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4TransactionSignature *transactionSignature;
-/** Test to see if @c transactionSignature has been set. */
-@property(nonatomic, readwrite) BOOL hasTransactionSignature;
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4TransactionId *transactionId;
+/** Test to see if @c transactionId has been set. */
+@property(nonatomic, readwrite) BOOL hasTransactionId;
 
 @property(nonatomic, readwrite) enum APBCommonV4Commitment commitment;
 
@@ -541,7 +562,6 @@ typedef GPB_ENUM(APBTransactionV4HistoryItem_RawTransaction_OneOfCase) {
 
 @interface APBTransactionV4HistoryItem : GPBMessage
 
-/** The hash of the transaction. */
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV4TransactionId *transactionId;
 /** Test to see if @c transactionId has been set. */
 @property(nonatomic, readwrite) BOOL hasTransactionId;
@@ -567,11 +587,11 @@ typedef GPB_ENUM(APBTransactionV4HistoryItem_RawTransaction_OneOfCase) {
  * The set of payments contained in the raw_transaction.
  *
  * Payment is an abstract view over a StellarPayment or
- * a Solana transafer. In the Stellar case, the Stellar
+ * a Solana transfer. In the Stellar case, the Stellar
  * accounts will be mapped to a SolanaAccountId.
  *
  * Note: A transaction _may_ not contain any transfers, in
- * which case `transfers` will be empty.
+ * which case `payments` will be empty.
  **/
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBTransactionV4HistoryItem_Payment*> *paymentsArray;
 /** The number of items in @c paymentsArray without causing the array to be created. */
@@ -614,11 +634,7 @@ typedef GPB_ENUM(APBTransactionV4HistoryItem_Payment_FieldNumber) {
 /** Amount in quarks */
 @property(nonatomic, readwrite) int64_t amount;
 
-/**
- * The index of the transfer within the transaction.
- *
- * todo: do we need this?
- **/
+/** The index of the transfer within the transaction. */
 @property(nonatomic, readwrite) uint32_t index;
 
 @end

@@ -31,7 +31,7 @@ function cleanup {
 trap cleanup EXIT
 
 echo "Cloning kin-api into ${KIN_API_GIT_PATH}"
-git clone -b solana --single-branch git@github.com:kinecosystem/agora-api-internal.git ${KIN_API_GIT_PATH}
+git clone -b master --single-branch git@github.com:kinecosystem/agora-api-internal.git ${KIN_API_GIT_PATH}
 
 echo "Cloning protoc-gen-validate into ${VALIDATE_GIT_PATH}"
 git clone -b master --single-branch git@github.com:envoyproxy/protoc-gen-validate.git $VALIDATE_GIT_PATH

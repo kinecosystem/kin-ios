@@ -80,8 +80,8 @@ typedef GPB_ENUM(APBCommonV4TransactionError_Reason) {
   /**
    * The error could not be mapped by the service.
    *
-   * In this situation, the error may be propogated out
-   * band (i.e. via error status), or be looked up using
+   * In this situation, the error may be propagated out
+   * of band (i.e. via error status), or be looked up using
    * low level RPCs.
    **/
   APBCommonV4TransactionError_Reason_Unknown = 1,
@@ -91,7 +91,7 @@ typedef GPB_ENUM(APBCommonV4TransactionError_Reason) {
 
   /**
    * Corresponds to an invalid sequence number in stellar,
-   * and or a bad / expired blockhash in solana.
+   * or a bad / expired blockhash in solana.
    **/
   APBCommonV4TransactionError_Reason_BadNonce = 3,
 
@@ -154,19 +154,19 @@ typedef GPB_ENUM(APBCommonV4TransactionId_FieldNumber) {
 
 /**
  * Value is either a 32-byte transaction hash, or a 64-byte transaction signature.
- * Values that are neither 32 or 64 bytes are considered invalid.
+ * Values that are neither 32 nor 64 bytes are considered invalid.
  **/
 @property(nonatomic, readwrite, copy, null_resettable) NSData *value;
 
 @end
 
-#pragma mark - APBCommonV4BlockHash
+#pragma mark - APBCommonV4Blockhash
 
-typedef GPB_ENUM(APBCommonV4BlockHash_FieldNumber) {
-  APBCommonV4BlockHash_FieldNumber_Value = 1,
+typedef GPB_ENUM(APBCommonV4Blockhash_FieldNumber) {
+  APBCommonV4Blockhash_FieldNumber_Value = 1,
 };
 
-@interface APBCommonV4BlockHash : GPBMessage
+@interface APBCommonV4Blockhash : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *value;
 
@@ -220,8 +220,8 @@ typedef GPB_ENUM(APBCommonV4TransactionError_FieldNumber) {
 
 /**
  * Raw is the raw error returned from the underlying RPC
- * mechanisms with Solana. There are no stability guarentees
- * to the contents of this field.
+ * mechanisms with Solana. There are no stability guarantees
+ * for the contents of this field.
  **/
 @property(nonatomic, readwrite, copy, null_resettable) NSData *raw;
 
@@ -242,8 +242,8 @@ void SetAPBCommonV4TransactionError_Reason_RawValue(APBCommonV4TransactionError 
 #pragma mark - APBCommonV4StellarTransaction
 
 typedef GPB_ENUM(APBCommonV4StellarTransaction_FieldNumber) {
-  APBCommonV4StellarTransaction_FieldNumber_ResultXdr = 2,
-  APBCommonV4StellarTransaction_FieldNumber_EnvelopeXdr = 3,
+  APBCommonV4StellarTransaction_FieldNumber_ResultXdr = 1,
+  APBCommonV4StellarTransaction_FieldNumber_EnvelopeXdr = 2,
 };
 
 @interface APBCommonV4StellarTransaction : GPBMessage

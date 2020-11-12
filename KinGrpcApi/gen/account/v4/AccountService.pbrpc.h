@@ -37,8 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark CreateAccount(CreateAccountRequest) returns (CreateAccountResponse)
 
 /**
- * CreateAccount creates an account using a the service's configured seed
- * account.
+ * CreateAccount creates a kin token account.
  */
 - (GRPCUnaryProtoCall *)createAccountWithMessage:(APBAccountV4CreateAccountRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
@@ -52,8 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark ResolveTokenAccounts(ResolveTokenAccountsRequest) returns (ResolveTokenAccountsResponse)
 
 /**
- * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified
- * account ID.
+ * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified account ID.
  */
 - (GRPCUnaryProtoCall *)resolveTokenAccountsWithMessage:(APBAccountV4ResolveTokenAccountsRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
@@ -77,16 +75,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark CreateAccount(CreateAccountRequest) returns (CreateAccountResponse)
 
 /**
- * CreateAccount creates an account using a the service's configured seed
- * account.
+ * CreateAccount creates a kin token account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
 - (void)createAccountWithRequest:(APBAccountV4CreateAccountRequest *)request handler:(void(^)(APBAccountV4CreateAccountResponse *_Nullable response, NSError *_Nullable error))handler;
 
 /**
- * CreateAccount creates an account using a the service's configured seed
- * account.
+ * CreateAccount creates a kin token account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -113,16 +109,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark ResolveTokenAccounts(ResolveTokenAccountsRequest) returns (ResolveTokenAccountsResponse)
 
 /**
- * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified
- * account ID.
+ * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified account ID.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
 - (void)resolveTokenAccountsWithRequest:(APBAccountV4ResolveTokenAccountsRequest *)request handler:(void(^)(APBAccountV4ResolveTokenAccountsResponse *_Nullable response, NSError *_Nullable error))handler;
 
 /**
- * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified
- * account ID.
+ * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified account ID.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */

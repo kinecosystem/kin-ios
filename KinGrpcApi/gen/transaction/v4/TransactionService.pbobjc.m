@@ -158,14 +158,14 @@ typedef struct APBTransactionV4GetServiceConfigResponse__storage_ {
 
 @end
 
-#pragma mark - APBTransactionV4GetMiniumumKinVersionRequest
+#pragma mark - APBTransactionV4GetMinimumKinVersionRequest
 
-@implementation APBTransactionV4GetMiniumumKinVersionRequest
+@implementation APBTransactionV4GetMinimumKinVersionRequest
 
 
-typedef struct APBTransactionV4GetMiniumumKinVersionRequest__storage_ {
+typedef struct APBTransactionV4GetMinimumKinVersionRequest__storage_ {
   uint32_t _has_storage_[1];
-} APBTransactionV4GetMiniumumKinVersionRequest__storage_;
+} APBTransactionV4GetMinimumKinVersionRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -173,12 +173,12 @@ typedef struct APBTransactionV4GetMiniumumKinVersionRequest__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetMiniumumKinVersionRequest class]
+        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetMinimumKinVersionRequest class]
                                      rootClass:[APBTransactionV4TransactionServiceRoot class]
                                           file:APBTransactionV4TransactionServiceRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(APBTransactionV4GetMiniumumKinVersionRequest__storage_)
+                                   storageSize:sizeof(APBTransactionV4GetMinimumKinVersionRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -190,16 +190,16 @@ typedef struct APBTransactionV4GetMiniumumKinVersionRequest__storage_ {
 
 @end
 
-#pragma mark - APBTransactionV4GetMiniumumKinVersionResponse
+#pragma mark - APBTransactionV4GetMinimumKinVersionResponse
 
-@implementation APBTransactionV4GetMiniumumKinVersionResponse
+@implementation APBTransactionV4GetMinimumKinVersionResponse
 
 @dynamic version;
 
-typedef struct APBTransactionV4GetMiniumumKinVersionResponse__storage_ {
+typedef struct APBTransactionV4GetMinimumKinVersionResponse__storage_ {
   uint32_t _has_storage_[1];
   uint32_t version;
-} APBTransactionV4GetMiniumumKinVersionResponse__storage_;
+} APBTransactionV4GetMinimumKinVersionResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -210,20 +210,20 @@ typedef struct APBTransactionV4GetMiniumumKinVersionResponse__storage_ {
       {
         .name = "version",
         .dataTypeSpecific.className = NULL,
-        .number = APBTransactionV4GetMiniumumKinVersionResponse_FieldNumber_Version,
+        .number = APBTransactionV4GetMinimumKinVersionResponse_FieldNumber_Version,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBTransactionV4GetMiniumumKinVersionResponse__storage_, version),
+        .offset = (uint32_t)offsetof(APBTransactionV4GetMinimumKinVersionResponse__storage_, version),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetMiniumumKinVersionResponse class]
+        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetMinimumKinVersionResponse class]
                                      rootClass:[APBTransactionV4TransactionServiceRoot class]
                                           file:APBTransactionV4TransactionServiceRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(APBTransactionV4GetMiniumumKinVersionResponse__storage_)
+                                   storageSize:sizeof(APBTransactionV4GetMinimumKinVersionResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -235,14 +235,14 @@ typedef struct APBTransactionV4GetMiniumumKinVersionResponse__storage_ {
 
 @end
 
-#pragma mark - APBTransactionV4GetRecentBlockHashRequest
+#pragma mark - APBTransactionV4GetRecentBlockhashRequest
 
-@implementation APBTransactionV4GetRecentBlockHashRequest
+@implementation APBTransactionV4GetRecentBlockhashRequest
 
 
-typedef struct APBTransactionV4GetRecentBlockHashRequest__storage_ {
+typedef struct APBTransactionV4GetRecentBlockhashRequest__storage_ {
   uint32_t _has_storage_[1];
-} APBTransactionV4GetRecentBlockHashRequest__storage_;
+} APBTransactionV4GetRecentBlockhashRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -250,12 +250,12 @@ typedef struct APBTransactionV4GetRecentBlockHashRequest__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetRecentBlockHashRequest class]
+        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetRecentBlockhashRequest class]
                                      rootClass:[APBTransactionV4TransactionServiceRoot class]
                                           file:APBTransactionV4TransactionServiceRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(APBTransactionV4GetRecentBlockHashRequest__storage_)
+                                   storageSize:sizeof(APBTransactionV4GetRecentBlockhashRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -267,16 +267,16 @@ typedef struct APBTransactionV4GetRecentBlockHashRequest__storage_ {
 
 @end
 
-#pragma mark - APBTransactionV4GetRecentBlockHashResponse
+#pragma mark - APBTransactionV4GetRecentBlockhashResponse
 
-@implementation APBTransactionV4GetRecentBlockHashResponse
+@implementation APBTransactionV4GetRecentBlockhashResponse
 
-@dynamic hasBlockHash, blockHash;
+@dynamic hasBlockhash, blockhash;
 
-typedef struct APBTransactionV4GetRecentBlockHashResponse__storage_ {
+typedef struct APBTransactionV4GetRecentBlockhashResponse__storage_ {
   uint32_t _has_storage_[1];
-  APBCommonV4BlockHash *blockHash;
-} APBTransactionV4GetRecentBlockHashResponse__storage_;
+  APBCommonV4Blockhash *blockhash;
+} APBTransactionV4GetRecentBlockhashResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -285,22 +285,22 @@ typedef struct APBTransactionV4GetRecentBlockHashResponse__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "blockHash",
-        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4BlockHash),
-        .number = APBTransactionV4GetRecentBlockHashResponse_FieldNumber_BlockHash,
+        .name = "blockhash",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4Blockhash),
+        .number = APBTransactionV4GetRecentBlockhashResponse_FieldNumber_Blockhash,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBTransactionV4GetRecentBlockHashResponse__storage_, blockHash),
+        .offset = (uint32_t)offsetof(APBTransactionV4GetRecentBlockhashResponse__storage_, blockhash),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetRecentBlockHashResponse class]
+        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4GetRecentBlockhashResponse class]
                                      rootClass:[APBTransactionV4TransactionServiceRoot class]
                                           file:APBTransactionV4TransactionServiceRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(APBTransactionV4GetRecentBlockHashResponse__storage_)
+                                   storageSize:sizeof(APBTransactionV4GetRecentBlockhashResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -794,10 +794,11 @@ GPBEnumDescriptor *APBTransactionV4SubmitTransactionResponse_Result_EnumDescript
   static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
-        "Ok\000Failed\000Rejected\000InvoiceError\000PayerReq"
-        "uired\000";
+        "Ok\000AlreadySubmitted\000Failed\000Rejected\000Invo"
+        "iceError\000PayerRequired\000";
     static const int32_t values[] = {
         APBTransactionV4SubmitTransactionResponse_Result_Ok,
+        APBTransactionV4SubmitTransactionResponse_Result_AlreadySubmitted,
         APBTransactionV4SubmitTransactionResponse_Result_Failed,
         APBTransactionV4SubmitTransactionResponse_Result_Rejected,
         APBTransactionV4SubmitTransactionResponse_Result_InvoiceError,
@@ -820,6 +821,7 @@ GPBEnumDescriptor *APBTransactionV4SubmitTransactionResponse_Result_EnumDescript
 BOOL APBTransactionV4SubmitTransactionResponse_Result_IsValidValue(int32_t value__) {
   switch (value__) {
     case APBTransactionV4SubmitTransactionResponse_Result_Ok:
+    case APBTransactionV4SubmitTransactionResponse_Result_AlreadySubmitted:
     case APBTransactionV4SubmitTransactionResponse_Result_Failed:
     case APBTransactionV4SubmitTransactionResponse_Result_Rejected:
     case APBTransactionV4SubmitTransactionResponse_Result_InvoiceError:
@@ -834,13 +836,13 @@ BOOL APBTransactionV4SubmitTransactionResponse_Result_IsValidValue(int32_t value
 
 @implementation APBTransactionV4GetTransactionRequest
 
-@dynamic hasTransactionSignature, transactionSignature;
+@dynamic hasTransactionId, transactionId;
 @dynamic commitment;
 
 typedef struct APBTransactionV4GetTransactionRequest__storage_ {
   uint32_t _has_storage_[1];
   APBCommonV4Commitment commitment;
-  APBCommonV4TransactionSignature *transactionSignature;
+  APBCommonV4TransactionId *transactionId;
 } APBTransactionV4GetTransactionRequest__storage_;
 
 // This method is threadsafe because it is initially called
@@ -850,11 +852,11 @@ typedef struct APBTransactionV4GetTransactionRequest__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "transactionSignature",
-        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4TransactionSignature),
-        .number = APBTransactionV4GetTransactionRequest_FieldNumber_TransactionSignature,
+        .name = "transactionId",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4TransactionId),
+        .number = APBTransactionV4GetTransactionRequest_FieldNumber_TransactionId,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(APBTransactionV4GetTransactionRequest__storage_, transactionSignature),
+        .offset = (uint32_t)offsetof(APBTransactionV4GetTransactionRequest__storage_, transactionId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

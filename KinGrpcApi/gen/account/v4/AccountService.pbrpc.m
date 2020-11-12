@@ -57,8 +57,7 @@
 #pragma mark CreateAccount(CreateAccountRequest) returns (CreateAccountResponse)
 
 /**
- * CreateAccount creates an account using a the service's configured seed
- * account.
+ * CreateAccount creates a kin token account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -67,8 +66,7 @@
 }
 // Returns a not-yet-started RPC object.
 /**
- * CreateAccount creates an account using a the service's configured seed
- * account.
+ * CreateAccount creates a kin token account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -79,8 +77,7 @@
         responsesWriteable:[GRXWriteable writeableWithSingleHandler:handler]];
 }
 /**
- * CreateAccount creates an account using a the service's configured seed
- * account.
+ * CreateAccount creates a kin token account.
  */
 - (GRPCUnaryProtoCall *)createAccountWithMessage:(APBAccountV4CreateAccountRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions {
   return [self RPCToMethod:@"CreateAccount"
@@ -126,8 +123,7 @@
 #pragma mark ResolveTokenAccounts(ResolveTokenAccountsRequest) returns (ResolveTokenAccountsResponse)
 
 /**
- * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified
- * account ID.
+ * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified account ID.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -136,8 +132,7 @@
 }
 // Returns a not-yet-started RPC object.
 /**
- * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified
- * account ID.
+ * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified account ID.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -148,8 +143,7 @@
         responsesWriteable:[GRXWriteable writeableWithSingleHandler:handler]];
 }
 /**
- * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified
- * account ID.
+ * ResolveTokenAccounts resolves a set of Token Accounts owned by the specified account ID.
  */
 - (GRPCUnaryProtoCall *)resolveTokenAccountsWithMessage:(APBAccountV4ResolveTokenAccountsRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions {
   return [self RPCToMethod:@"ResolveTokenAccounts"

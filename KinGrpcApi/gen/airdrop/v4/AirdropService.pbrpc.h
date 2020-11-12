@@ -9,8 +9,8 @@
 #import <RxLibrary/GRXWriter.h>
 #endif
 
-@class APBAirdropV4RequestAirDropRequest;
-@class APBAirdropV4RequestAirDropResponse;
+@class APBAirdropV4RequestAirdropRequest;
+@class APBAirdropV4RequestAirdropResponse;
 
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
   #import "validate/Validate.pbobjc.h"
@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol APBAirdropV4Airdrop2 <NSObject>
 
-#pragma mark RequestAirDrop(RequestAirDropRequest) returns (RequestAirDropResponse)
+#pragma mark RequestAirdrop(RequestAirdropRequest) returns (RequestAirdropResponse)
 
 /**
- * RequestAirDrop requests an air drop of kin to the target account.
+ * RequestAirdrop requests an air drop of kin to the target account.
  */
-- (GRPCUnaryProtoCall *)requestAirDropWithMessage:(APBAirdropV4RequestAirDropRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
+- (GRPCUnaryProtoCall *)requestAirdropWithMessage:(APBAirdropV4RequestAirdropRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
 @end
 
@@ -43,21 +43,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @protocol APBAirdropV4Airdrop <NSObject>
 
-#pragma mark RequestAirDrop(RequestAirDropRequest) returns (RequestAirDropResponse)
+#pragma mark RequestAirdrop(RequestAirdropRequest) returns (RequestAirdropResponse)
 
 /**
- * RequestAirDrop requests an air drop of kin to the target account.
+ * RequestAirdrop requests an air drop of kin to the target account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (void)requestAirDropWithRequest:(APBAirdropV4RequestAirDropRequest *)request handler:(void(^)(APBAirdropV4RequestAirDropResponse *_Nullable response, NSError *_Nullable error))handler;
+- (void)requestAirdropWithRequest:(APBAirdropV4RequestAirdropRequest *)request handler:(void(^)(APBAirdropV4RequestAirdropResponse *_Nullable response, NSError *_Nullable error))handler;
 
 /**
- * RequestAirDrop requests an air drop of kin to the target account.
+ * RequestAirdrop requests an air drop of kin to the target account.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
-- (GRPCProtoCall *)RPCToRequestAirDropWithRequest:(APBAirdropV4RequestAirDropRequest *)request handler:(void(^)(APBAirdropV4RequestAirDropResponse *_Nullable response, NSError *_Nullable error))handler;
+- (GRPCProtoCall *)RPCToRequestAirdropWithRequest:(APBAirdropV4RequestAirdropRequest *)request handler:(void(^)(APBAirdropV4RequestAirdropResponse *_Nullable response, NSError *_Nullable error))handler;
 
 
 @end
