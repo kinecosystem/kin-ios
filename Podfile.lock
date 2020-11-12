@@ -186,7 +186,7 @@ PODS:
 
 DEPENDENCIES:
   - kin-stellar-ios-mac-sdk (~> 1.7.5)
-  - "KinGrpcApi (from `git@github.com:kinecosystem/kin-ios.git`, branch `feature/solana`)"
+  - "KinGrpcApi (from `git@github.com:kinecosystem/kin-ios.git`, branch `agoraApiUpdateV0_23_0`)"
   - PromisesSwift (~> 1.2.8)
   - Sodium (= 0.8.0)
 
@@ -208,12 +208,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   KinGrpcApi:
-    :branch: feature/solana
+    :branch: agoraApiUpdateV0_23_0
     :git: "git@github.com:kinecosystem/kin-ios.git"
 
 CHECKOUT OPTIONS:
   KinGrpcApi:
-    :commit: 445f8d094cf3a760a45aca96ea2600746d216739
+    :commit: ce4494eff2755c171efbd372ae3e2f2855ce54a3
     :git: "git@github.com:kinecosystem/kin-ios.git"
 
 SPEC CHECKSUMS:
@@ -232,6 +232,6 @@ SPEC CHECKSUMS:
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: 07a59820e2c452a8652ece2c1ca94c35bf93647a
+PODFILE CHECKSUM: 818bfcf6c2062e33e7cae656942fe0d356217785
 
 COCOAPODS: 1.9.3
