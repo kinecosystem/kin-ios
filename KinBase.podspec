@@ -29,6 +29,8 @@ Pod::Spec.new do |s|
   s.dependency 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
   s.dependency 'PromisesSwift', '~> 1.2.8'
   s.dependency 'KinGrpcApi', '~> 0.4.0'
+  s.dependency 'Base58Swift', '~> 2.1.10'
+  s.dependency 'Sodium', '~> 0.8.0'
 
   # Dependencies needed for KinGrpcApi
   s.dependency 'gRPC-ProtoRPC'
