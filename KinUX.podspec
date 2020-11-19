@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinUX'
-  s.version          = '0.2.1'
+  s.version          = '0.4.0'
   s.summary          = 'UX Library for Kin SDK iOS'
 
   s.description      = <<-DESC
@@ -20,8 +20,8 @@ Pod::Spec.new do |s|
 
   s.source_files = 'KinUX/KinUX/Src/**/*'
 
-  s.dependency 'KinBase', '~> 0.3.0'
-  s.dependency 'KinDesign', '~> 0.2.1'
+  s.dependency 'KinBase', '~> 0.4.0'
+  s.dependency 'KinDesign', '~> 0.4.0'
 
   # Dependencies needed for KinGrpcApi
   s.dependency 'gRPC-ProtoRPC'
