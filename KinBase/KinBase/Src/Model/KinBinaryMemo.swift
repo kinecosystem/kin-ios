@@ -140,7 +140,7 @@ public struct KinBinaryMemo {
         self.foreignKeyBytes = foreignKeyBytesPadded
     }
 
-    public init(data: Data) throws {
+    public init?(data: Data) throws {
         let bytes = [Byte](data)
         var firstFourBytes: Int = 0
         _ = withUnsafeMutableBytes(of: &firstFourBytes) {

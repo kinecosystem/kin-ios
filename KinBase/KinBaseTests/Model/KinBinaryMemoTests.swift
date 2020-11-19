@@ -18,7 +18,7 @@ class KinBinaryMemoTests: XCTestCase {
                                            appIdx: 10,
                                            foreignKeyBytes: [0xAE, 0xFD])
         let encoded: Data = agoraMemo.encode()
-        let decoded = try! KinBinaryMemo(data: encoded)
+        let decoded = try! KinBinaryMemo(data: encoded)!
         XCTAssertEqual(agoraMemo.foreignKeyBytes, decoded.foreignKeyBytes)
     }
 
@@ -30,7 +30,7 @@ class KinBinaryMemoTests: XCTestCase {
                                            appIdx: 10,
                                            foreignKeyBytes: [Byte](UUID().uuidString.data(using: .utf8)!))
             let encoded: Data = agoraMemo.encode()
-            let decoded = try! KinBinaryMemo(data: encoded)
+            let decoded = try! KinBinaryMemo(data: encoded)!
             XCTAssertEqual(agoraMemo.foreignKeyBytes, decoded.foreignKeyBytes)
         }
     }
@@ -47,7 +47,7 @@ class KinBinaryMemoTests: XCTestCase {
                                            appIdx: 10,
                                            foreignKeyBytes: foreignKeyBytes)
             let encoded: Data = agoraMemo.encode()
-            let decoded = try! KinBinaryMemo(data: encoded)
+            let decoded = try! KinBinaryMemo(data: encoded)!
             XCTAssertEqual(agoraMemo.foreignKeyBytes, decoded.foreignKeyBytes)
         }
     }
@@ -62,7 +62,7 @@ class KinBinaryMemoTests: XCTestCase {
                                            appIdx: i,
                                            foreignKeyBytes: foreignKeyBytes)
             let encoded: Data = agoraMemo.encode()
-            let decoded = try! KinBinaryMemo(data: encoded)
+            let decoded = try! KinBinaryMemo(data: encoded)!
 
             XCTAssertEqual(decoded.magicByteIndicator, 3)
             XCTAssertEqual(decoded.version, 7)

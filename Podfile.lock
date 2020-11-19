@@ -118,6 +118,9 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Base58Swift (2.1.10):
+    - BigInt (~> 5.0.0)
+  - BigInt (5.0.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -178,23 +181,27 @@ PODS:
     - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
     - gRPC-ProtoRPC (~> 1.28.0)
     - KinGrpcApi/Messages
-  - PromisesObjC (1.2.9)
-  - PromisesSwift (1.2.9):
-    - PromisesObjC (= 1.2.9)
+  - PromisesObjC (1.2.11)
+  - PromisesSwift (1.2.11):
+    - PromisesObjC (= 1.2.11)
   - Protobuf (3.11.4)
   - Sodium (0.8.0)
 
 DEPENDENCIES:
+  - Base58Swift (~> 2.1.10)
   - kin-stellar-ios-mac-sdk (~> 1.7.5)
-  - "KinGrpcApi (from `git@github.com:kinecosystem/kin-ios.git`, branch `agoraApiUpdateV0_23_0`)"
+  - "KinGrpcApi (from `git@github.com:kinecosystem/kin-ios.git`, tag `KinGrpcApi_0.4.0`)"
   - PromisesSwift (~> 1.2.8)
   - Sodium (= 0.8.0)
+  - Sodium (~> 0.8.0)
 
 SPEC REPOS:
   trunk:
     - "!ProtoCompiler"
     - "!ProtoCompiler-gRPCPlugin"
     - abseil
+    - Base58Swift
+    - BigInt
     - BoringSSL-GRPC
     - gRPC
     - gRPC-Core
@@ -208,18 +215,20 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   KinGrpcApi:
-    :branch: agoraApiUpdateV0_23_0
     :git: "git@github.com:kinecosystem/kin-ios.git"
+    :tag: KinGrpcApi_0.4.0
 
 CHECKOUT OPTIONS:
   KinGrpcApi:
-    :commit: ce4494eff2755c171efbd372ae3e2f2855ce54a3
     :git: "git@github.com:kinecosystem/kin-ios.git"
+    :tag: KinGrpcApi_0.4.0
 
 SPEC CHECKSUMS:
   "!ProtoCompiler": da24805d8339f352ec7bb4cb4df2db6a3be45665
   "!ProtoCompiler-gRPCPlugin": 5b943196cbcceb70b0307c7f344d843aa506aea0
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Base58Swift: 53d551f0b33d9478fa63b3445e453a772d6b31a7
+  BigInt: 74b4d88367b0e819d9f77393549226d36faeb0d8
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   gRPC: bc33d0d34a369a3466f6db65119532d110bead9e
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
@@ -227,11 +236,11 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: d3e2f7e4c3c36dc1b45b7c47f6961f894c9d6810
   kin-stellar-ios-mac-sdk: b3069fd5023286c49a4f593d0b094e9ce609ddbe
   KinGrpcApi: e9f44c26aff1948cd86e0e7157711862b950111a
-  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  PromisesSwift: 991ad88e9851c45410d6697d1fe5df88fd3deb08
+  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  PromisesSwift: fed4eb6f7a29846a22624d1b86b77e1dedb88724
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: 818bfcf6c2062e33e7cae656942fe0d356217785
+PODFILE CHECKSUM: 7fcc9dc1f914014c9d599d944aa83362706d6fc3
 
 COCOAPODS: 1.9.3

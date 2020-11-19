@@ -13,6 +13,8 @@ import KinGrpcApi
 
 class MockAgoraAccountServiceGrpcProxy: AgoraAccountServiceGrpcProxy {
     var network: KinNetwork = .testNet
+
+    // V3 Apis
     var stubGetAccountInfoResponsePromise: Promise<APBAccountV3GetAccountInfoResponse>?
     var stubCreateAccountResponsePromise: Promise<APBAccountV3CreateAccountResponse>?
     var stubEventsObservable: Observable<APBAccountV3Events>?
@@ -27,6 +29,28 @@ class MockAgoraAccountServiceGrpcProxy: AgoraAccountServiceGrpcProxy {
 
     func getEvents(_ request: APBAccountV3GetEventsRequest) -> Observable<APBAccountV3Events> {
         return stubEventsObservable!
+    }
+    
+    // V4 Apis
+    var stubGetAccountInfoResponsePromiseV4: Promise<APBAccountV4GetAccountInfoResponse>?
+    var stubCreateAccountResponsePromiseV4: Promise<APBAccountV4CreateAccountResponse>?
+    var stubEventsObservableV4: Observable<APBAccountV4Events>?
+    var stubResolveTokenAccountsResponsePromiseV4: Promise<APBAccountV4ResolveTokenAccountsResponse>?
+    
+    func createAccount(_ request: APBAccountV4CreateAccountRequest) -> Promise<APBAccountV4CreateAccountResponse> {
+        return stubCreateAccountResponsePromiseV4!
+    }
+    
+    func getAccountInfo(_ request: APBAccountV4GetAccountInfoRequest) -> Promise<APBAccountV4GetAccountInfoResponse> {
+        return stubGetAccountInfoResponsePromiseV4!
+    }
+    
+    func getEvents(_ request: APBAccountV4GetEventsRequest) -> Observable<APBAccountV4Events> {
+        return stubEventsObservableV4!
+    }
+    
+    func resolveTokenAccounts(_ request: APBAccountV4ResolveTokenAccountsRequest) -> Promise<APBAccountV4ResolveTokenAccountsResponse> {
+        return stubResolveTokenAccountsResponsePromiseV4!
     }
 }
 
@@ -80,12 +104,26 @@ class AgoraKinAccountsApiTests: XCTestCase {
     }
 
     func testCreateAccountTransientFailure() {
-        mockAccountServiceGrpc.stubCreateAccountResponsePromise = Promise<APBAccountV3CreateAccountResponse>(AgoraKinAccountsApi.Errors.unknown)
+        mockAccountServiceGrpc.stubCreateAccountResponsePromise = Promise<APBAccountV3CreateAccountResponse>(GrpcErrors.cancelled.asError())
 
         let request = CreateAccountRequest(accountId: StubObjects.accountId1)
         let expect = expectation(description: "response")
         sut.createAccount(request: request) { response in
             XCTAssertEqual(response.result, CreateAccountResponse.Result.transientFailure)
+            XCTAssertNotNil(response.error)
+            expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testCreateAccountUndefinedFailure() {
+        mockAccountServiceGrpc.stubCreateAccountResponsePromise = Promise<APBAccountV3CreateAccountResponse>(AgoraKinAccountsApi.Errors.unknown)
+
+        let request = CreateAccountRequest(accountId: StubObjects.accountId1)
+        let expect = expectation(description: "response")
+        sut.createAccount(request: request) { response in
+            XCTAssertEqual(response.result, CreateAccountResponse.Result.undefinedError)
             XCTAssertNotNil(response.error)
             expect.fulfill()
         }
@@ -133,12 +171,26 @@ class AgoraKinAccountsApiTests: XCTestCase {
     }
 
     func testGetAccountInfoTransientFailure() {
-        mockAccountServiceGrpc.stubGetAccountInfoResponsePromise = Promise<APBAccountV3GetAccountInfoResponse>(AgoraKinAccountsApi.Errors.unknown)
+        mockAccountServiceGrpc.stubGetAccountInfoResponsePromise = Promise<APBAccountV3GetAccountInfoResponse>(GrpcErrors.cancelled.asError())
 
         let request = GetAccountRequest(accountId: StubObjects.accountId1)
         let expect = expectation(description: "response")
         sut.getAccount(request: request) { response in
             XCTAssertEqual(response.result, GetAccountResponse.Result.transientFailure)
+            XCTAssertNotNil(response.error)
+            expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testGetAccountInfoUndefinedFailure() {
+        mockAccountServiceGrpc.stubGetAccountInfoResponsePromise = Promise<APBAccountV3GetAccountInfoResponse>(AgoraKinAccountsApi.Errors.unknown)
+
+        let request = GetAccountRequest(accountId: StubObjects.accountId1)
+        let expect = expectation(description: "response")
+        sut.getAccount(request: request) { response in
+            XCTAssertEqual(response.result, GetAccountResponse.Result.undefinedError)
             XCTAssertNotNil(response.error)
             expect.fulfill()
         }

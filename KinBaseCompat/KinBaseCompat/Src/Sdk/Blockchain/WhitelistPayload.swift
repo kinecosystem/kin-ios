@@ -53,8 +53,18 @@ extension WhitelistEnvelope: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
         let transactionEnvelopeData = try values.decode(Data.self, forKey: .transactionEnvelope)
-        transactionEnvelope = TransactionEnvelope(envelopeXdrBytes: [Byte](transactionEnvelopeData))
         networkId = try values.decode(Network.Id.self, forKey: .networkId)
+        var kinNetwork: KinNetwork
+        if (networkId == KinNetwork.mainNet.id) {
+            kinNetwork = KinNetwork.mainNet
+        } else {
+            kinNetwork = KinNetwork.testNet
+        }
+        let transaction = try! KinTransaction(envelopeXdrBytes: [Byte](transactionEnvelopeData),
+                                              record: Record.inFlight(ts: Date().timeIntervalSince1970),
+                                              network: kinNetwork)
+        transactionEnvelope = TransactionEnvelope(envelopeXdrBytes: [Byte](transactionEnvelopeData), transaction: transaction)
+        
     }
 }
 

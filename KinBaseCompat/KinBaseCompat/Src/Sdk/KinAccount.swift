@@ -146,7 +146,9 @@ public final class KinAccount {
 
         // Build transaction
         if let account = kinBaseAccount {
-            kinService.buildAndSignTransaction(sourceKinAccount: account,
+            kinService.buildAndSignTransaction(ownerKey: account.key,
+                                               sourceKey: account.key,
+                                               nonce: account.sequenceNumber,
                                                paymentItems: paymentItems,
                                                memo: kinMemo,
                                                fee: KinBase.Quark(fee))
@@ -160,7 +162,9 @@ public final class KinAccount {
                     }
 
                     self.kinBaseAccount = account
-                    return self.kinService.buildAndSignTransaction(sourceKinAccount: account,
+                    return self.kinService.buildAndSignTransaction(ownerKey: account.key,
+                                                                   sourceKey: account.key,
+                                                                   nonce: account.sequenceNumber,
                                                                    paymentItems: paymentItems,
                                                                    memo: kinMemo,
                                                                    fee: KinBase.Quark(fee))
@@ -207,22 +211,17 @@ public final class KinAccount {
             completion(nil, KinError.accountDeleted)
             return
         }
-
-        do {
-            let transactionToSend = try KinTransaction.inFlightTransaction(envelope: envelope.envelopeXdrBytes,
-                                                                           network: network)
-            kinService.submitTransaction(transaction: transactionToSend)
-                .then { completion($0.transactionHash?.description, nil) }
-                .catch { error in
-                    if let kinServiceError = error as? KinService.Errors,
-                        case .insufficientBalance = kinServiceError {
-                        completion(nil, KinError.insufficientFunds)
-                    } else {
-                        completion(nil, error)
-                    }
+            
+        let paymentItems = envelope.transaction.paymentOperations.map { it in KinPaymentItem(amount: it.amount, destAccountId: it.destination) }
+        kinAccountContext.sendKinPayments(paymentItems, memo: envelope.transaction.memo)
+            .then { it in completion(it.first?.id.transactionHash.description, nil) }
+            .catch { error in
+                if let kinServiceError = error as? KinService.Errors,
+                    case .insufficientBalance = kinServiceError {
+                    completion(nil, KinError.insufficientFunds)
+                } else {
+                    completion(nil, error)
                 }
-        } catch let error {
-            completion(nil, error)
         }
     }
 

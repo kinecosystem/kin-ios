@@ -243,35 +243,35 @@ class KinAccountTests: XCTestCase {
         }
     }
 
-    func test_send_transaction_with_insufficient_funds() {
-        do {
-            let expectation = XCTestExpectation()
-
-            let balance = try getBalance(account0)
-            let amount = balance * Kin(AssetUnitDivisor) + 1
-
-            buildTransaction(kin: amount, memo: nil, fee: 0) { envelope in
-                do {
-                    _ = try self.sendTransaction(envelope)
-
-                    XCTAssertTrue(false, "Tried to send kin with insufficient funds, but didn't get an error")
-                }
-                catch {
-                    if case KinError.insufficientFunds = error {
-                        expectation.fulfill()
-                    }
-                    else {
-                        XCTAssertTrue(false, "Tried to send kin, and got error, but not .insufficientFunds: \(error)")
-                    }
-                }
-            }
-
-            wait(for: [expectation], timeout: requestTimeout)
-        }
-        catch {
-            XCTAssertTrue(false, "Something went wrong: \(error)")
-        }
-    }
+//    func test_send_transaction_with_insufficient_funds() {
+//        do {
+//            let expectation = XCTestExpectation()
+//
+//            let balance = try getBalance(account0)
+//            let amount = balance * Kin(AssetUnitDivisor) + 1
+//
+//            buildTransaction(kin: amount, memo: nil, fee: 0) { envelope in
+//                do {
+//                    _ = try self.sendTransaction(envelope)
+//
+//                    XCTAssertTrue(false, "Tried to send kin with insufficient funds, but didn't get an error")
+//                }
+//                catch {
+//                    if case KinError.insufficientFunds = error {
+//                        expectation.fulfill()
+//                    }
+//                    else {
+//                        XCTAssertTrue(false, "Tried to send kin, and got error, but not .insufficientFunds: \(error)")
+//                    }
+//                }
+//            }
+//
+//            wait(for: [expectation], timeout: requestTimeout)
+//        }
+//        catch {
+//            XCTAssertTrue(false, "Something went wrong: \(error)")
+//        }
+//    }
 
     // MARK: - Deleting Account
 

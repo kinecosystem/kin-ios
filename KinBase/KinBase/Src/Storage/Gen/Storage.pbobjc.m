@@ -8,12 +8,14 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers_RuntimeSupport.h>
+ #import <protobuf/GPBProtocolBuffers_RuntimeSupport.h>
 #else
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
- #import "Storage.pbobjc.h"
+#import <stdatomic.h>
+
+#import "Storage.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -78,7 +80,9 @@ typedef struct KinStoragePrivateKey__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStoragePrivateKey__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -121,7 +125,9 @@ typedef struct KinStoragePublicKey__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStoragePublicKey__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -175,7 +181,9 @@ typedef struct KinStorageKinBalance__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStorageKinBalance__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -192,6 +200,7 @@ typedef struct KinStorageKinBalance__storage_ {
 @dynamic hasBalance, balance;
 @dynamic status;
 @dynamic sequenceNumber;
+@dynamic accountsArray, accountsArray_Count;
 
 typedef struct KinStorageKinAccount__storage_ {
   uint32_t _has_storage_[1];
@@ -199,6 +208,7 @@ typedef struct KinStorageKinAccount__storage_ {
   KinStoragePublicKey *publicKey;
   KinStoragePrivateKey *privateKey;
   KinStorageKinBalance *balance;
+  NSMutableArray *accountsArray;
   int64_t sequenceNumber;
 } KinStorageKinAccount__storage_;
 
@@ -253,6 +263,15 @@ typedef struct KinStorageKinAccount__storage_ {
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
+      {
+        .name = "accountsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(KinStoragePublicKey),
+        .number = KinStorageKinAccount_FieldNumber_AccountsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(KinStorageKinAccount__storage_, accountsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[KinStorageKinAccount class]
@@ -262,7 +281,9 @@ typedef struct KinStorageKinAccount__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStorageKinAccount__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -285,7 +306,7 @@ void SetKinStorageKinAccount_Status_RawValue(KinStorageKinAccount *message, int3
 #pragma mark - Enum KinStorageKinAccount_Status
 
 GPBEnumDescriptor *KinStorageKinAccount_Status_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unregistered\000Registered\000";
@@ -299,7 +320,8 @@ GPBEnumDescriptor *KinStorageKinAccount_Status_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:KinStorageKinAccount_Status_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -395,7 +417,9 @@ typedef struct KinStorageKinTransaction__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStorageKinTransaction__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -418,7 +442,7 @@ void SetKinStorageKinTransaction_Status_RawValue(KinStorageKinTransaction *messa
 #pragma mark - Enum KinStorageKinTransaction_Status
 
 GPBEnumDescriptor *KinStorageKinTransaction_Status_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unknown\000Inflight\000Acknowledged\000Historical"
@@ -435,7 +459,8 @@ GPBEnumDescriptor *KinStorageKinTransaction_Status_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:KinStorageKinTransaction_Status_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -511,7 +536,9 @@ typedef struct KinStorageKinTransactions__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStorageKinTransactions__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -559,7 +586,9 @@ typedef struct KinStorageInvoiceListBlob__storage_ {
         "\001\001\022\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -607,7 +636,9 @@ typedef struct KinStorageInvoices__storage_ {
         "\001\001\014\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
-    NSAssert(descriptor == nil, @"Startup recursed!");
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;
@@ -620,10 +651,14 @@ typedef struct KinStorageInvoices__storage_ {
 @implementation KinStorageKinConfig
 
 @dynamic minFee;
+@dynamic cid;
+@dynamic minApiVersion;
 
 typedef struct KinStorageKinConfig__storage_ {
   uint32_t _has_storage_[1];
+  NSString *cid;
   int64_t minFee;
+  int64_t minApiVersion;
 } KinStorageKinConfig__storage_;
 
 // This method is threadsafe because it is initially called
@@ -641,6 +676,24 @@ typedef struct KinStorageKinConfig__storage_ {
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
+      {
+        .name = "cid",
+        .dataTypeSpecific.className = NULL,
+        .number = KinStorageKinConfig_FieldNumber_Cid,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(KinStorageKinConfig__storage_, cid),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "minApiVersion",
+        .dataTypeSpecific.className = NULL,
+        .number = KinStorageKinConfig_FieldNumber_MinApiVersion,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(KinStorageKinConfig__storage_, minApiVersion),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeInt64,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[KinStorageKinConfig class]
@@ -650,7 +703,14 @@ typedef struct KinStorageKinConfig__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(KinStorageKinConfig__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-    NSAssert(descriptor == nil, @"Startup recursed!");
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\003\r\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
     descriptor = localDescriptor;
   }
   return descriptor;

@@ -207,7 +207,7 @@ class HorizonKinApiTests: XCTestCase {
             XCTAssertEqual(response.kinTransaction?.envelopeXdrBytes, expectTransaction.envelopeXdrBytes)
             XCTAssertEqual(response.kinTransaction?.record.recordType, expectTransaction.record.recordType)
             XCTAssertEqual(response.kinTransaction?.record.resultXdrBytes, expectTransaction.record.resultXdrBytes)
-            XCTAssertEqual(response.kinTransaction?.resultCode, KinTransaction.ResultCode.success)
+            XCTAssertEqual(response.kinTransaction?.resultCode, ResultCode.success)
             expect.fulfill()
         }
         waitForExpectations(timeout: 1)
@@ -278,7 +278,7 @@ class HorizonKinApiTests: XCTestCase {
         mockStellarSdk.stubTransactionDetailsResponse = transactionResponseEnum
 
         let expectTransaction = try! transactionResponse.toHistoricalKinTransaction(network: .testNet)
-        let data = try! expectTransaction.stellarTransaction.getTransactionHashData(network: KinNetwork.testNet.stellarNetwork)
+        let data = try! Transaction(envelopeXdr: expectTransaction.envelopeXdrString).getTransactionHashData(network: KinNetwork.testNet.stellarNetwork)
         let transactionHash = KinTransactionHash(data)
         let request = GetTransactionRequest(transactionHash: transactionHash)
 
@@ -572,7 +572,7 @@ class HorizonKinApiTests: XCTestCase {
             XCTAssertNil(response.error)
             XCTAssertEqual(response.kinTransactions?.count, 2)
             XCTAssertEqual(response.kinTransactions?[0], expectTransaction1)
-            XCTAssertEqual(response.kinTransactions?[0].resultCode, KinTransaction.ResultCode.success)
+            XCTAssertEqual(response.kinTransactions?[0].resultCode, ResultCode.success)
             XCTAssertEqual(response.kinTransactions?[1], expectTransaction2)
             expect.fulfill()
         }

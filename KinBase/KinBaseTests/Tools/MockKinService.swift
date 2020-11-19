@@ -11,18 +11,22 @@ import Promises
 @testable import KinBase
 
 class MockKinService: KinServiceType {
+
+
     var stubGetAccountResult: KinAccount?
     var stubGetAccountResultPromise: Promise<KinAccount>?
     var stubCreateAccountResult: KinAccount?
     var stubGetTransactionResult: KinTransaction?
     var stubBuildAndSignTransactionResult: KinTransaction?
     var stubSubmitTransactionResult: Promise<KinTransaction>?
+    var stubBuildSignAndSubmitTransactionResult: Promise<KinTransaction>?
     var stubStreamAccountObservable: Observable<KinAccount>?
     var stubStreamTransactionObservable: Observable<KinTransaction>?
     var stubGetLatestTransactions: [KinTransaction]?
     var stubGetTransactionPageResult: [KinTransaction]?
     var stubCanWhitelistTransactionResult: Bool?
     var stubMinFee: Quark?
+    var stubResolveTokenAccounts: Promise<[KinAccount.Key]>?
 
     init() { }
 
@@ -34,7 +38,7 @@ class MockKinService: KinServiceType {
         return stubGetAccountResultPromise!
     }
 
-    func createAccount(accountId: KinAccount.Id) -> Promise<KinAccount> {
+    func createAccount(accountId: KinAccount.Id, signer: KinAccount.Key) -> Promise<KinAccount> {
         return .init(stubCreateAccountResult!)
     }
 
@@ -61,16 +65,29 @@ class MockKinService: KinServiceType {
     func canWhitelistTransactions() -> Promise<Bool> {
         return .init(stubCanWhitelistTransactionResult!)
     }
-
-    func buildAndSignTransaction(sourceKinAccount: KinAccount, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
+    
+    func buildAndSignTransaction(ownerKey: KinAccount.Key, sourceKey: KinAccount.Key, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
         return .init(stubBuildAndSignTransactionResult!)
     }
-
+    
     func submitTransaction(transaction: KinTransaction) -> Promise<KinTransaction> {
         return stubSubmitTransactionResult!
+    }
+    
+    func buildSignAndSubmitTransaction(buildAndSignTransaction: @escaping () -> Promise<KinTransaction>) -> Promise<KinTransaction> {
+        return buildAndSignTransaction()
+            .then { it in self.submitTransaction(transaction: it)}
     }
 
     func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction> {
         return stubStreamTransactionObservable!
+    }
+    
+    func resolveTokenAccounts(accountId: KinAccount.Id) -> Promise<[KinAccount.Key]> {
+        return stubResolveTokenAccounts ?? Promise { [KinAccount.Key](arrayLiteral: accountId.asPublicKey().keypair) }
+    }
+    
+    func invalidateRecentBlockHashCache() {
+        
     }
 }

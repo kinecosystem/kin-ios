@@ -109,7 +109,7 @@ class KinServiceTests: XCTestCase {
         mockKinAccountCreationApi.stubCreateAccountResponse = stubResponse
 
         let expect = expectation(description: "callback")
-        sut.createAccount(accountId: "").then { account in
+        sut.createAccount(accountId: "", signer: expectAccount.key).then { account in
             XCTAssertEqual(account, expectAccount)
             expect.fulfill()
         }
@@ -125,7 +125,7 @@ class KinServiceTests: XCTestCase {
         mockKinAccountCreationApi.stubCreateAccountResponse = stubResponse
 
         let expect = expectation(description: "callback")
-        sut.createAccount(accountId: "").catch { error in
+        sut.createAccount(accountId: "", signer: try! KinAccount.Key.generateRandomKeyPair()).catch { error in
             XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
             expect.fulfill()
         }
@@ -254,13 +254,13 @@ class KinServiceTests: XCTestCase {
         let paymentItems = [KinPaymentItem(amount: Kin(123), destAccountId: destAccountId)]
 
         let expect = expectation(description: "callback")
-        sut.buildAndSignTransaction(sourceKinAccount: account,
+        sut.buildAndSignTransaction(ownerKey: account.key, sourceKey: account.key, nonce: account.sequenceNumber,
                                     paymentItems: paymentItems,
                                     memo: KinMemo(text: "ohi"),
                                     fee: Quark(100))
             .then { transaction in
                 XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)
-                XCTAssertEqual(transaction.record.recordType, KinTransaction.Record.RecordType.inFlight)
+                XCTAssertEqual(transaction.record.recordType, Record.RecordType.inFlight)
                 expect.fulfill()
         }
 
@@ -290,13 +290,13 @@ class KinServiceTests: XCTestCase {
                                        foreignKeyBytes: invoiceList.id.decode())
 
         let expect = expectation(description: "callback")
-        sut.buildAndSignTransaction(sourceKinAccount: account,
+        sut.buildAndSignTransaction(ownerKey: account.key, sourceKey: account.key, nonce: account.sequenceNumber,
                                     paymentItems: paymentItems,
                                     memo: agoraMemo.kinMemo,
                                     fee: Quark(100))
             .then { transaction in
                 XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)
-                XCTAssertEqual(transaction.record.recordType, KinTransaction.Record.RecordType.inFlight)
+                XCTAssertEqual(transaction.record.recordType, Record.RecordType.inFlight)
                 expect.fulfill()
             }
 
@@ -314,10 +314,10 @@ class KinServiceTests: XCTestCase {
         let paymentItems = [KinPaymentItem(amount: Kin(123), destAccountId: destAccountId)]
 
         let expect = expectation(description: "callback")
-        sut.buildAndSignTransaction(sourceKinAccount: account,
-                                                      paymentItems: paymentItems,
-                                                      memo: KinMemo(text: "ohi"),
-                                                      fee: Quark(100))
+        sut.buildAndSignTransaction(ownerKey: account.key, sourceKey: account.key, nonce: account.sequenceNumber,
+                                    paymentItems: paymentItems,
+                                    memo: KinMemo(text: "ohi"),
+                                    fee: Quark(100))
             .catch { error in
                 expect.fulfill()
             }

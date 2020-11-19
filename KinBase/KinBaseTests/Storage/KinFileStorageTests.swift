@@ -44,6 +44,47 @@ class KinFileStorageTests: XCTestCase {
 
         wait(for: [expectRetrieve], timeout: 1)
     }
+    
+    func testAddAndRetrieveAndUpdateWithWithTokenAccountsSucceed() {
+        let key = try! KeyPair.generateRandomKeyPair()
+        let expectAccount = KinAccount(key: key,
+                                       balance: KinBalance(Kin(string: "9999.99400")!),
+                                       status: .registered,
+                                       sequence: 24497836326387718)
+        let expectAdd = expectation(description: "account added")
+        sut.addAccount(expectAccount).then { account in
+            XCTAssertEqual(account, expectAccount)
+            expectAdd.fulfill()
+        }
+
+        wait(for: [expectAdd], timeout: 1)
+
+        let expectRetrieve = expectation(description: "account retrieved")
+        sut.getAccount(key.accountId).then { account in
+            XCTAssertEqual(account, expectAccount)
+            expectRetrieve.fulfill()
+        }
+        
+        wait(for: [expectRetrieve], timeout: 1)
+        
+        let tokenAcccount = try! KeyPair.generateRandomKeyPair().asPublicKey().keypair
+        let expectUpdate = expectation(description: "account updated with token accounts")
+        sut.updateAccount(expectAccount.copy(tokenAccounts: [KinAccount.Key](arrayLiteral: tokenAcccount))).then { account in
+            XCTAssertEqual(account, expectAccount.copy(tokenAccounts: [KinAccount.Key](arrayLiteral: tokenAcccount)))
+            expectUpdate.fulfill()
+        }
+        
+        wait(for: [expectUpdate], timeout: 1)
+    
+        let expectRetrieveAfterUpdating = expectation(description: "account retrieved after updating")
+        sut.getAccount(key.accountId).then { account in
+            XCTAssertEqual(account, expectAccount.copy(tokenAccounts: [KinAccount.Key](arrayLiteral: tokenAcccount)))
+            expectRetrieveAfterUpdating.fulfill()
+        }
+        
+        wait(for: [expectRetrieveAfterUpdating], timeout: 1)
+
+    }
 
     func testAddAndRetrieveAccountNoPrivateKeySucceed() {
         let key = try! KeyPair.generateRandomKeyPair()

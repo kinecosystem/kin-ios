@@ -48,6 +48,7 @@ class KinWalletInvoiceViewController: UIViewController {
 }
 
 extension KinWalletInvoiceViewController: InvoiceTableViewControllerDelegate {
+    
     func invoiceTablePayTapped() {
         paymentFlowController = PaymentFlowController(kinAccountContext: accountContext,
                                                       hostViewController: self)
@@ -55,7 +56,7 @@ extension KinWalletInvoiceViewController: InvoiceTableViewControllerDelegate {
         let data = UIImage(named: "ic_launcher")!.pngData()!
 
         let appInfo = AppInfo(appIdx: .testApp,
-                              kinAccountId: "GDHCB4VCNNFIMZI3BVHLA2FVASECBR2ZXHOAXEBBFVUH5G2YAD7V3JVH",
+                              kinAccountId: "GDV4TKOCDBHB3XGCKAXWYETQRIN4RTJKSD6FQV43E2AUHORR56B4YDC4",
                               name: "Test App",
                               appIconData: data)
 

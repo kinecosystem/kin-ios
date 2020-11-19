@@ -23,6 +23,7 @@ public class KinFileStorage  {
         static let invoicesFileName = "invoices"
         static let minFeeUserDefaultsKey = "KinBase.MinFee"
         static let cidUserDefaultsKey = "KinBase.CID"
+        static let minApiVersionUserDefaultsKey = "KinBase.minApiVersion"
     }
 
     private let fileManager = FileManager.default
@@ -80,11 +81,11 @@ extension KinFileStorage: KinStorageType {
                     return self.addAccount(account)
                 }
 
-                let key = storedAccount.key.privateKey != nil ? storedAccount.key : account.key
-                let updatedAccount = KinAccount(key: key,
-                                                balance: account.balance,
-                                                status: account.status,
-                                                sequence: account.sequence)
+//                let key = storedAccount.key.privateKey != nil ? storedAccount.key : account.key
+                let updatedAccount = storedAccount.copy(balance: account.balance,
+                                                        status: account.status,
+                                                        sequence: account.sequenceNumber,
+                                                        tokenAccounts: account.tokenAccounts)
                 return self.addAccount(updatedAccount)
             }
     }
@@ -114,10 +115,7 @@ extension KinFileStorage: KinStorageType {
                         return .init(Errors.unregisteredAccount)
                 }
 
-                let updatedAccount = KinAccount(key: account.key,
-                                                balance: account.balance,
-                                                status: account.status,
-                                                sequence: sequence + 1)
+                let updatedAccount = account.copy(sequence: sequence + 1)
 
                 return self.updateAccount(updatedAccount)
             }
@@ -136,11 +134,8 @@ extension KinFileStorage: KinStorageType {
                         return .init(Errors.unregisteredAccount)
                 }
 
-                let deductedBalance = KinBalance(account.balance.amount - amount)
-                let updatedAccount = KinAccount(key: account.key,
-                                                balance: deductedBalance,
-                                                status: account.status,
-                                                sequence: account.sequence)
+                let deductedBalance = KinBalance(max(0, account.balance.amount - amount))
+                let updatedAccount = account.copy(balance: deductedBalance)
 
                 return self.updateAccount(updatedAccount)
         }
@@ -166,7 +161,7 @@ extension KinFileStorage: KinStorageType {
     // MARK: Transaction Operations
     public func storeTransactions(accountId: KinAccount.Id,
                                   transactions: [KinTransaction]) -> Promise<[KinTransaction]> {
-        var headPagingToken: KinTransaction.PagingToken?
+        var headPagingToken: PagingToken?
         for item in transactions {
             if item.record.recordType == .historical {
                 headPagingToken = item.record.pagingToken
@@ -174,7 +169,7 @@ extension KinFileStorage: KinStorageType {
             }
         }
 
-        var tailPagingToken: KinTransaction.PagingToken?
+        var tailPagingToken: PagingToken?
         for item in transactions.reversed() {
             if item.record.recordType == .historical {
                 tailPagingToken = item.record.pagingToken
@@ -317,9 +312,25 @@ extension KinFileStorage: KinStorageType {
             return newCid
         }
     }
+    
+    public func setMinApiVersion(apiVersion: Int) -> Promise<Int> {
+        return Promise { [weak self] fulfill, reject in
+            self?.userDefaults.set(apiVersion, forKey: Constants.minApiVersionUserDefaultsKey)
+           fulfill(apiVersion)
+        }
+    }
+
+    public func getMinApiVersion() -> Promise<Int?> {
+        return Promise { [weak self] fulfill, reject in
+            let minApiVer = self?.userDefaults.integer(forKey: Constants.minApiVersionUserDefaultsKey)
+            fulfill(minApiVer)
+        }
+    }
 
     public func clearStorage() -> Promise<Void> {
         userDefaults.removeObject(forKey: Constants.minFeeUserDefaultsKey)
+        userDefaults.removeObject(forKey: Constants.minApiVersionUserDefaultsKey)
+        userDefaults.removeObject(forKey: Constants.cidUserDefaultsKey)
         return removeFileOrDirectory(kinStorageDirectory)
     }
 }
@@ -341,7 +352,7 @@ private extension KinFileStorage {
     }
 
     func directoryForAccount(_ accountId: KinAccount.Id) -> URL {
-        return directoryForAllAccounts.appendingPathComponent(String(accountId.hashValue), isDirectory: true)
+        return directoryForAllAccounts.appendingPathComponent(accountId, isDirectory: true)
     }
 
     func pathForAccountInfoFile(_ accountId: KinAccount.Id) -> URL {
@@ -404,7 +415,8 @@ private extension KinFileStorage {
                 let mergedAccount = KinAccount(key: key,
                                                balance: account.balance,
                                                status: account.status,
-                                               sequence: account.sequence)
+                                               sequence: account.sequence,
+                                               tokenAccounts: account.tokenAccounts)
                 fulfill(mergedAccount)
                 return
             }

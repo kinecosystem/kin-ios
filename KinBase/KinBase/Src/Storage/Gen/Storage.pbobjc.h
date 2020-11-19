@@ -8,7 +8,7 @@
 #endif
 
 #if GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
- #import <Protobuf/GPBProtocolBuffers.h>
+ #import <protobuf/GPBProtocolBuffers.h>
 #else
  #import "GPBProtocolBuffers.h"
 #endif
@@ -141,6 +141,7 @@ typedef GPB_ENUM(KinStorageKinAccount_FieldNumber) {
   KinStorageKinAccount_FieldNumber_Balance = 3,
   KinStorageKinAccount_FieldNumber_Status = 4,
   KinStorageKinAccount_FieldNumber_SequenceNumber = 5,
+  KinStorageKinAccount_FieldNumber_AccountsArray = 6,
 };
 
 @interface KinStorageKinAccount : GPBMessage
@@ -160,6 +161,10 @@ typedef GPB_ENUM(KinStorageKinAccount_FieldNumber) {
 @property(nonatomic, readwrite) KinStorageKinAccount_Status status;
 
 @property(nonatomic, readwrite) int64_t sequenceNumber;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<KinStoragePublicKey*> *accountsArray;
+/** The number of items in @c accountsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger accountsArray_Count;
 
 @end
 
@@ -265,11 +270,17 @@ typedef GPB_ENUM(KinStorageInvoices_FieldNumber) {
 
 typedef GPB_ENUM(KinStorageKinConfig_FieldNumber) {
   KinStorageKinConfig_FieldNumber_MinFee = 1,
+  KinStorageKinConfig_FieldNumber_Cid = 2,
+  KinStorageKinConfig_FieldNumber_MinApiVersion = 3,
 };
 
 @interface KinStorageKinConfig : GPBMessage
 
 @property(nonatomic, readwrite) int64_t minFee;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
+
+@property(nonatomic, readwrite) int64_t minApiVersion;
 
 @end
 

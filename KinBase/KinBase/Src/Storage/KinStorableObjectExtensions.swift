@@ -46,11 +46,12 @@ extension KinAccount {
         storable.balance = balance.storableObject
         storable.status = status.storableObject
         storable.sequenceNumber = sequence ?? 0
+        storable.accountsArray = NSMutableArray(array: tokenAccounts.map { it in it.publicKey.storableObject })
         return storable
     }
 }
 
-extension KinTransaction.Record.RecordType {
+extension Record.RecordType {
     var storableObject: KinStorageKinTransaction_Status {
         switch self {
         case .inFlight:
@@ -139,16 +140,23 @@ extension KinStorageKinAccount {
 
         let key = KinAccount.Key(publicKey: pk)
         let kinBalance = hasBalance ? balance.kinBalance : KinBalance.zero
+        var tokenAccounts = [KinAccount.Key]()
+        accountsArray.forEach { it in
+            if let element = it as? KinStoragePublicKey {
+                tokenAccounts.append(KinAccount.Key(publicKey:element.publicKey!))
+            }
+        }
         let account = KinAccount(key: key,
                                  balance: kinBalance,
                                  status: status.kinAccountStatus,
-                                 sequence: sequenceNumber)
+                                 sequence: sequenceNumber,
+                                 tokenAccounts: tokenAccounts)
         return account
     }
 }
 
 extension KinStorageKinTransaction_Status {
-    var kinTransactionRecordType: KinTransaction.Record.RecordType {
+    var kinTransactionRecordType: Record.RecordType {
         switch self {
         case .inflight:
             return .inFlight
@@ -164,7 +172,7 @@ extension KinStorageKinTransaction_Status {
 
 extension KinStorageKinTransaction {
     func kinTransaction(network: KinNetwork) -> KinTransaction? {
-        let record: KinTransaction.Record
+        let record: Record
         switch status.kinTransactionRecordType {
         case .inFlight:
             record = .inFlight(ts: TimeInterval(timestamp))

@@ -18,11 +18,11 @@ class KinClientInternal {
 
     private let kinEnvironment: KinEnvironment
 
-    init(with nodeProviderUrl: URL, network: Network, appId: AppId) {
+    init(with nodeProviderUrl: URL, network: Network, appId: AppId, testMigration: Bool = false) {
         self.url = nodeProviderUrl
         self.network = network
         self.appId = appId
-        self.kinEnvironment = network == .mainNet ? KinEnvironment.Agora.mainNet() : KinEnvironment.Agora.testNet()
+        self.kinEnvironment = network == .mainNet ? KinEnvironment.Agora.mainNet() : KinEnvironment.Agora.testNet(testMigration: testMigration)
         self.accounts = KinAccounts(kinEnvironment: kinEnvironment,
                                     appId: appId)
     }

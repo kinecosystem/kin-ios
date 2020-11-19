@@ -63,7 +63,13 @@ extension AgoraKinTransactionsApi: KinTransactionApi {
                 }
             }
             .catch { error in
-                let response = GetTransactionHistoryResponse(result: .transientFailure,
+                var result = GetTransactionHistoryResponse.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                let response = GetTransactionHistoryResponse(result: result,
                                                              error: error,
                                                              kinTransactions: nil)
                 completion(response)
@@ -90,7 +96,14 @@ extension AgoraKinTransactionsApi: KinTransactionApi {
                 }
             }
             .catch { error in
-                let response = GetTransactionResponse(result: .transientFailure,
+                var result = GetTransactionResponse.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                
+                let response = GetTransactionResponse(result: result,
                                                       error: error,
                                                       kinTransaction: nil)
                 completion(response)
@@ -163,7 +176,14 @@ extension AgoraKinTransactionsApi: KinTransactionApi {
                 }
             }
             .catch { error in
-                let response = SubmitTransactionResponse(result: .transientFailure,
+                var result = SubmitTransactionResponse.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                
+                let response = SubmitTransactionResponse(result: result,
                                                          error: error,
                                                          kinTransaction: nil)
                 completion(response)
@@ -177,6 +197,224 @@ extension AgoraKinTransactionsApi: KinTransactionApi {
                                                        fee: Quark(100))
         completion(response)
     }
+}
+
+extension AgoraKinTransactionsApi: KinTransactionApiV4 {
+    public func getMinKinVersion(request: GetMinimumKinVersionRequestV4, completion: @escaping (GetMinimumKinVersionResponseV4) -> Void) {
+        agoraGrpc.getMinimumVersion(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4GetMinimumKinVersionResponse) in
+                completion(GetMinimumKinVersionResponseV4(result: GetMinimumKinVersionResponseV4.Result.ok, error: nil, version: Int(grpcResponse.version)))
+            }
+    }
+    
+    public func getServiceConfig(request: GetServiceConfigRequestV4, completion: @escaping (GetServiceConfigResponseV4) -> Void) {
+        agoraGrpc.getServiceConfig(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4GetServiceConfigResponse)  in
+                  let subsidizer = grpcResponse.subsidizerAccount.solanaPublicKey
+                  let tokenProgram = grpcResponse.tokenProgram.solanaPublicKey
+                  let token = grpcResponse.token.solanaPublicKey
+                
+                completion(GetServiceConfigResponseV4(result: GetServiceConfigResponseV4.Result.ok, subsidizerAccount: subsidizer, tokenProgram: tokenProgram, token: token))
+            }
+            .catch { error in
+                var result = GetServiceConfigResponseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                completion(GetServiceConfigResponseV4(result: result, subsidizerAccount: nil, tokenProgram: nil, token: nil))
+            }
+    }
+    
+    public func getRecentBlockHash(request: GetRecentBlockHashRequestV4, completion: @escaping (GetRecentBlockHashResonseV4) -> Void) {
+        agoraGrpc.getRecentBlockHashRequest(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4GetRecentBlockhashResponse)  in
+                let recentBlockHash = Hash([Byte](grpcResponse.blockhash.value))
+                
+                completion(GetRecentBlockHashResonseV4(result: GetRecentBlockHashResonseV4.Result.ok, blockHash: recentBlockHash))
+            }
+            .catch { error in
+                var result = GetRecentBlockHashResonseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                completion(GetRecentBlockHashResonseV4(result: result, blockHash: nil))
+            }
+    }
+    
+    public func getMinimumBalanceForRentExemption(request: GetMinimumBalanceForRentExemptionRequestV4, completion: @escaping (GetMinimumBalanceForRentExemptionResponseV4) -> Void) {
+        agoraGrpc.getMinimumBalanceForRentExemptionRequest(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4GetMinimumBalanceForRentExemptionResponse)  in
+                completion(GetMinimumBalanceForRentExemptionResponseV4(result: GetMinimumBalanceForRentExemptionResponseV4.Result.ok, lamports: grpcResponse.lamports))
+            }
+            .catch { error in
+                var result = GetMinimumBalanceForRentExemptionResponseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                completion(GetMinimumBalanceForRentExemptionResponseV4(result: result, lamports: 0))
+            }
+    }
+    
+    public func getTransactionHistory(request: GetTransactionHistoryRequestV4, completion: @escaping (GetTransactionHistoryResponseV4) -> Void) {
+        let network = agoraGrpc.network
+        agoraGrpc.getHistory(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4GetHistoryResponse)  in
+                switch grpcResponse.result {
+                case .ok:
+                    let transactions = grpcResponse.itemsArray
+                        .compactMap { item -> KinTransaction? in
+                            guard let item = item as? APBTransactionV4HistoryItem else {
+                                return nil
+                            }
+
+                            return item.toKinTransactionHistorical(network: network)
+                    }
+                    let response = GetTransactionHistoryResponseV4(result: .ok,
+                                                                 error: nil,
+                                                                 kinTransactions: transactions)
+                    completion(response)
+                default:
+                    let response = GetTransactionHistoryResponseV4(result: .notFound,
+                                                                 error: nil,
+                                                                 kinTransactions: nil)
+                    completion(response)
+                }
+            }
+            .catch { error in
+                var result = GetTransactionHistoryResponseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                let response = GetTransactionHistoryResponseV4(result: result,
+                                                             error: error,
+                                                             kinTransactions: nil)
+                completion(response)
+            }
+    }
+    
+    public func getTransaction(request: GetTransactionRequestV4, completion: @escaping (GetTransactionResponseV4) -> Void) {
+        let network = agoraGrpc.network
+        agoraGrpc.getTransaction(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4GetTransactionResponse)  in
+                switch grpcResponse.state {
+                case .success:
+                    let transaction = grpcResponse.hasItem ? grpcResponse.item.toKinTransactionHistorical(network: network) : nil
+                    let response = GetTransactionResponseV4(result: .ok,
+                                                          error: nil,
+                                                          kinTransaction: transaction)
+                    completion(response)
+                default:
+                    let response = GetTransactionResponseV4(result: .notFound,
+                                                          error: nil,
+                                                          kinTransaction: nil)
+                    completion(response)
+                }
+            }
+            .catch { error in
+                var result = GetTransactionResponseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                let response = GetTransactionResponseV4(result: result,
+                                                      error: error,
+                                                      kinTransaction: nil)
+                completion(response)
+            }
+    }
+    
+    public func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponseV4) -> Void) {
+        let response = GetMinFeeForTransactionResponseV4(result: .ok,
+                                                       error: nil,
+                                                       fee: Quark(0))
+        completion(response)
+    }
+    
+    public func submitTransaction(request: SubmitTransactionRequestV4, completion: @escaping (SubmitTransactionResponseV4) -> Void) {
+        let network = agoraGrpc.network
+        agoraGrpc.submitTransaction(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4SubmitTransactionResponse)  in
+                switch grpcResponse.result {
+                case .ok:
+                    guard let transaction =
+                        grpcResponse.toKinTransactionAcknowledged(solanaTransaction: request.transaction,
+                                                                  network: network) else {
+                            fallthrough
+                    }
+
+                    let response = SubmitTransactionResponseV4(result: .ok,
+                                                             error: nil,
+                                                             kinTransaction: transaction)
+                    completion(response)
+                case .failed:
+                    var result: SubmitTransactionResponseV4.Result = .transientFailure
+                    if let transactionResult = try? XDRDecoder.decode(TransactionResultXDR.self,
+                                                                      data: grpcResponse.transactionError.resultXdr) {
+                        switch transactionResult.code {
+                        case .insufficientBalance:
+                            result = .insufficientBalance
+                        case .insufficientFee:
+                            result = .insufficientFee
+                        case .noAccount:
+                            result = .noAccount
+                        case .badSeq:
+                            result = .badSequenceNumber
+                        default:
+                            break
+                        }
+                    }
+
+                    let response = SubmitTransactionResponseV4(result: result,
+                                                             error: nil,
+                                                             kinTransaction: nil)
+
+                    completion(response)
+                case .invoiceError:
+                    let invoiceErrors = grpcResponse.invoiceErrorsArray.compactMap { item -> InvoiceError? in
+                        guard let error = item as? APBCommonV3InvoiceError else {
+                            return nil
+                        }
+
+                        return error.invoiceError
+                    }
+
+                    let response = SubmitTransactionResponseV4(result: .invoiceError,
+                                                             error: Errors.invoiceErrors(errors: invoiceErrors),
+                                                             kinTransaction: nil)
+                    completion(response)
+                case .rejected:
+                    let response = SubmitTransactionResponseV4(result: .webhookRejected,
+                                                             error: nil,
+                                                             kinTransaction: nil)
+                    completion(response)
+                default:
+                    let response = SubmitTransactionResponseV4(result: .undefinedError,
+                                                             error: nil,
+                                                             kinTransaction: nil)
+                    completion(response)
+                }
+            }
+            .catch { error in
+                var result = SubmitTransactionResponseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                completion(SubmitTransactionResponseV4(result: result, error: error, kinTransaction: nil))
+            }
+    }
+    
+
 }
 
 extension AgoraKinTransactionsApi: KinTransactionWhitelistingApi {

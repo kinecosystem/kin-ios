@@ -11,10 +11,6 @@ import Promises
 @testable import KinBase
 
 class MockKinStorage: KinStorageType {
-    func getOrCreateCID() -> String {
-        return UUID().uuidString
-    }
-    
     var stubGetAccountResult: KinAccount!
     var stubUpdateAccountResult: KinAccount!
     var stubAdvanceSequenceResult: KinAccount!
@@ -28,6 +24,8 @@ class MockKinStorage: KinStorageType {
     var transactionInserted: KinTransaction!
     var storageCleared = false
     var accountRemoved: KinAccount.Id?
+    var stubSetMinApiVersionResult: Promise<Int>!
+    var stubGetMinApiVersionResult: Promise<Int?>!
 
     init() { }
 
@@ -106,5 +104,17 @@ class MockKinStorage: KinStorageType {
 
     func getMinFee() -> Quark? {
         return stubGetFeeResult
+    }
+    
+    func setMinApiVersion(apiVersion: Int) -> Promise<Int> {
+        return stubSetMinApiVersionResult
+    }
+    
+    func getMinApiVersion() -> Promise<Int?> {
+        return stubGetMinApiVersionResult
+    }
+    
+    func getOrCreateCID() -> String {
+        return UUID().uuidString
     }
 }

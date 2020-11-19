@@ -63,4 +63,8 @@ public struct KinPaymentItem {
         self.destAccountId = destAccountId
         self.invoice = invoice
     }
+    
+    public func copy(amount: Kin? = nil, destAccountId: KinAccount.Id? = nil, invoice: Invoice? = nil) -> KinPaymentItem {
+        return KinPaymentItem(amount: amount ?? self.amount, destAccountId: destAccountId ?? self.destAccountId, invoice: invoice ?? self.invoice)
+    }
 }

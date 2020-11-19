@@ -181,43 +181,6 @@ class KinAccountContextTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
-    func testGetAccountInStorageUnregistered() {
-        let key = try! KeyPair.generateRandomKeyPair()
-        sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
-
-        let storageAccount = KinAccount(key: key,
-                                        balance: .zero,
-                                        status: .unregistered,
-                                        sequence: nil)
-
-        mockKinStorage.stubGetAccountResult = storageAccount
-
-        mockKinService.stubGetAccountResultPromise = .init(KinService.Errors.unknown)
-
-        let serviceAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                             balance: .zero,
-                                             status: .registered,
-                                             sequence: 1)
-
-        mockKinService.stubCreateAccountResult = serviceAccount
-
-        let expectAccount = KinAccount(key: key,
-                                       balance: .zero,
-                                       status: .registered,
-                                       sequence: 1)
-
-        mockKinStorage.stubUpdateAccountResult = expectAccount
-
-        let expect = expectation(description: "callback")
-        sut.getAccount().then { account in
-            XCTAssertEqual(account, expectAccount)
-            expect.fulfill()
-        }
-
-        waitForExpectations(timeout: 1)
-    }
-
     func testGetPaymentsForTransactionHashSucceed() {
         sut = KinAccountContext(environment: mockEnv,
                                 accountId: StubObjects.accountId1)

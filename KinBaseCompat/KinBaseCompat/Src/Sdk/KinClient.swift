@@ -21,8 +21,8 @@ public final class KinClient {
          - Parameter provider: The `ServiceProvider` instance that provides the `URL` and `Network`.
          - Parameter appId: The `AppId` of the host application.
          */
-    public convenience init(provider: ServiceProvider, appId: AppId) {
-        self.init(with: provider.url, network: provider.network, appId: appId)
+    public convenience init(provider: ServiceProvider, appId: AppId, testMigration: Bool = false) {
+        self.init(with: provider.url, network: provider.network, appId: appId, testMigration: testMigration)
     }
 
     /**
@@ -34,10 +34,12 @@ public final class KinClient {
          */
     public init(with nodeProviderUrl: URL,
                 network: Network,
-                appId: AppId) {
+                appId: AppId,
+                testMigration: Bool = false) {
         self.kinClientInternal = KinClientInternal(with: nodeProviderUrl,
                                                    network: network,
-                                                   appId: appId)
+                                                   appId: appId,
+                                                   testMigration: testMigration)
     }
 
     /**

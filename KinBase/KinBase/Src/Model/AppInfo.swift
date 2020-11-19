@@ -9,8 +9,12 @@
 import Foundation
 
 public struct AppIndex {
-    public static let testApp: AppIndex = .init(value: 1)
+    public static let testApp: AppIndex = .init(value: 0)
     public let value: UInt16
+    
+    public init(value: UInt16) {
+        self.value = value
+    }
 }
 
 public struct AppInfo {

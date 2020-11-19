@@ -31,6 +31,8 @@ public class KinAccount : CustomStringConvertible {
             return key.accountId
         }
     }
+    
+    public var tokenAccounts: [Key]
 
     public var balance: KinBalance
 
@@ -42,19 +44,28 @@ public class KinAccount : CustomStringConvertible {
     init(key: Key,
          balance: KinBalance = KinBalance.zero,
          status: Status = .unregistered,
-         sequence: Int64? = nil) {
+         sequence: Int64? = nil,
+         tokenAccounts: [Key] = [Key]()) {
         self.key = key
         self.balance = balance
         self.status = status
         self.sequence = sequence
+        self.tokenAccounts = tokenAccounts
+    }
+    
+    public func copy(key: Key? = nil,
+         balance: KinBalance? = nil,
+         status: Status? = nil,
+         sequence: Int64? = nil,
+         tokenAccounts: [Key]? = nil) -> KinAccount {
+        return KinAccount(key: key ?? self.key, balance: balance ?? self.balance, status: status ?? self.status, sequence: sequence ?? self.sequence, tokenAccounts: tokenAccounts ?? self.tokenAccounts)
     }
     
     public var description: String {
         get {
-            return "KinAccount(id=\(id)), key=\(key), balance=\(balance), status=\(status), sequence=\(String(describing: sequence))"
+            return "KinAccount(id=\(id)), key=\(key), balance=\(balance), status=\(status), sequence=\(String(describing: sequence)), accounts=\(tokenAccounts)))"
         }
     }
-
 }
 
 extension KinAccount: Equatable {
@@ -63,7 +74,8 @@ extension KinAccount: Equatable {
             lhs.key == rhs.key &&
             lhs.balance == rhs.balance &&
             lhs.status == rhs.status &&
-            lhs.sequence == rhs.sequence
+            lhs.sequence == rhs.sequence &&
+            lhs.tokenAccounts == rhs.tokenAccounts
     }
 }
 
@@ -92,6 +104,7 @@ extension KinAccount {
         return KinAccount(key: key,
                           balance: account.balance,
                           status: account.status,
-                          sequence: account.sequence)
+                          sequence: account.sequence,
+                          tokenAccounts: account.tokenAccounts)
     }
 }

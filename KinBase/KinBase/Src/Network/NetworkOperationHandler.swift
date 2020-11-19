@@ -195,4 +195,21 @@ public extension NetworkOperationHandler {
 
         return promise
     }
+    
+    func queueWorkWithPromise<T>(_ workBuilder: @escaping () -> Promise<T>) -> Promise<T> {
+        let promise = Promise<T>.init { (resolve, reject) in
+            let operation = NetworkOperation<T>(onSuccess: resolve, onError: reject) { (callback) in
+                workBuilder().then { it in
+                    callback.onSuccess(it)
+                }.catch { it in
+                    guard let onError = callback.onError else {
+                        return
+                    }
+                    onError(it)
+                }
+            }
+            _ = self.queueOperation(op: operation)
+        }
+        return promise
+    }
 }

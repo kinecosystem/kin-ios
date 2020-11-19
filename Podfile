@@ -7,7 +7,9 @@ use_frameworks!
 def kin_base_dependencies
     pod 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
     pod 'PromisesSwift', '~> 1.2.8'
-    pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git', :branch => 'agoraApiUpdateV0_23_0'
+    pod 'Sodium', '~> 0.8.0'
+    pod 'Base58Swift', '~> 2.1.10'
+    pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git', :tag => 'KinGrpcApi_0.4.0'
 end
 
 def kin_base_compat_dependencies

@@ -89,8 +89,26 @@
 		85EEEB8224BE237A002AAC29 /* KinBinaryMemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */; };
 		85F037002469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F036FF2469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift */; };
 		85F037042469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */; };
+		930A9F2D254345E900F84156 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A9F2C254345E900F84156 /* Utils.swift */; };
+		930F62B8255F564100E6A8CF /* UpgradeApiV4Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F62B7255F564100E6A8CF /* UpgradeApiV4Interceptor.swift */; };
 		9342E2B924FF2DBB008449A2 /* UserAgentInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */; };
+		9387E03025434CB900D44509 /* KinServiceV4IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E02F25434CB900D44509 /* KinServiceV4IntegrationTests.swift */; };
+		9387E0362543EA2600D44509 /* KinAirdropApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E0352543EA2600D44509 /* KinAirdropApi.swift */; };
+		9387E0382543EAA800D44509 /* AgoraKinAidropApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E0372543EAA800D44509 /* AgoraKinAidropApi.swift */; };
+		9387E03A254A1D5100D44509 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E039254A1D5100D44509 /* Cache.swift */; };
+		9387E083254B6F5700D44509 /* KinServiceTestsV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E082254B6F5600D44509 /* KinServiceTestsV4.swift */; };
 		93A591232502CBC200E43C65 /* KinLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A591222502CBC200E43C65 /* KinLogger.swift */; };
+		93E9B1A1253FD7D000DFD776 /* Programs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9B1A0253FD7D000DFD776 /* Programs.swift */; };
+		93E9B1A3253FE42300DFD776 /* ProgramsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9B1A2253FE42300DFD776 /* ProgramsTests.swift */; };
+		93F66F0F253BEC3800E14D59 /* SolanaKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F06253BEC3800E14D59 /* SolanaKeyPair.swift */; };
+		93F66F10253BEC3800E14D59 /* SolanaTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F07253BEC3800E14D59 /* SolanaTransaction.swift */; };
+		93F66F11253BEC3800E14D59 /* ShortVec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F08253BEC3800E14D59 /* ShortVec.swift */; };
+		93F66F12253BEC3800E14D59 /* SolanaCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F09253BEC3800E14D59 /* SolanaCodable.swift */; };
+		93F66F1D253BEC4600E14D59 /* SolanaCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */; };
+		93F66F1E253BEC4600E14D59 /* TransactionEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */; };
+		93F66F1F253BEC4600E14D59 /* SolanaKeyPairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1B253BEC4600E14D59 /* SolanaKeyPairTests.swift */; };
+		93F66F20253BEC4600E14D59 /* ShortVecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */; };
+		93F66F24253BF35D00E14D59 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F23253BF35D00E14D59 /* Instruction.swift */; };
 		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -205,8 +223,26 @@
 		85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBinaryMemoTests.swift; sourceTree = "<group>"; };
 		85F036FF2469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinTransactionWhitelistingApi.swift; sourceTree = "<group>"; };
 		85F037032469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHorizonKinTransactionWhitelistingApiTests.swift; sourceTree = "<group>"; };
+		930A9F2C254345E900F84156 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		930F62B7255F564100E6A8CF /* UpgradeApiV4Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeApiV4Interceptor.swift; sourceTree = "<group>"; };
 		9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentInterceptor.swift; sourceTree = "<group>"; };
+		9387E02F25434CB900D44509 /* KinServiceV4IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceV4IntegrationTests.swift; sourceTree = "<group>"; };
+		9387E0352543EA2600D44509 /* KinAirdropApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinAirdropApi.swift; sourceTree = "<group>"; };
+		9387E0372543EAA800D44509 /* AgoraKinAidropApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinAidropApi.swift; sourceTree = "<group>"; };
+		9387E039254A1D5100D44509 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		9387E082254B6F5600D44509 /* KinServiceTestsV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceTestsV4.swift; sourceTree = "<group>"; };
 		93A591222502CBC200E43C65 /* KinLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinLogger.swift; sourceTree = "<group>"; };
+		93E9B1A0253FD7D000DFD776 /* Programs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Programs.swift; sourceTree = "<group>"; };
+		93E9B1A2253FE42300DFD776 /* ProgramsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsTests.swift; sourceTree = "<group>"; };
+		93F66F06253BEC3800E14D59 /* SolanaKeyPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaKeyPair.swift; sourceTree = "<group>"; };
+		93F66F07253BEC3800E14D59 /* SolanaTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaTransaction.swift; sourceTree = "<group>"; };
+		93F66F08253BEC3800E14D59 /* ShortVec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVec.swift; sourceTree = "<group>"; };
+		93F66F09253BEC3800E14D59 /* SolanaCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaCodable.swift; sourceTree = "<group>"; };
+		93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaCodableTests.swift; sourceTree = "<group>"; };
+		93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionEncodingTests.swift; sourceTree = "<group>"; };
+		93F66F1B253BEC4600E14D59 /* SolanaKeyPairTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaKeyPairTests.swift; sourceTree = "<group>"; };
+		93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVecTests.swift; sourceTree = "<group>"; };
+		93F66F23253BF35D00E14D59 /* Instruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -317,6 +353,7 @@
 				85737EE0243E62EE0012132E /* KinTransactionApi.swift */,
 				85737EE2243E635A0012132E /* KinTransactionWhitelistingApi.swift */,
 				85572FA924B3CABB003734CB /* KinStreamingApi.swift */,
+				9387E0352543EA2600D44509 /* KinAirdropApi.swift */,
 			);
 			path = KinApi;
 			sourceTree = "<group>";
@@ -330,6 +367,7 @@
 				85572F9924A80AEA003734CB /* ModelToProto.swift */,
 				85572F9B24A80E8C003734CB /* ProtoToModel.swift */,
 				853EC7B624EF569F004E0BED /* GrpcServiceProvider.swift */,
+				9387E0372543EAA800D44509 /* AgoraKinAidropApi.swift */,
 			);
 			path = Agora;
 			sourceTree = "<group>";
@@ -338,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				8518B10D244C9BE300EC329B /* KinServiceTests.swift */,
+				9387E082254B6F5600D44509 /* KinServiceTestsV4.swift */,
 				858A245D248AB32E002EB843 /* NetworkOperationHandlerTests.swift */,
 				8525B83B24DE31F0008277AB /* AppUserAuthInterceptorTests.swift */,
 				853EC7B424EDCC06004E0BED /* KinTestServiceTests.swift */,
@@ -411,6 +450,7 @@
 				85763610249038B00011C356 /* ListSubject.swift */,
 				85737EF12443AFFB0012132E /* Helper.swift */,
 				93A591222502CBC200E43C65 /* KinLogger.swift */,
+				9387E039254A1D5100D44509 /* Cache.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -427,6 +467,7 @@
 				858A245B24897D0D002EB843 /* BackoffStrategy.swift */,
 				8525B7F324DCCF1F008277AB /* AppUserAuthInterceptor.swift */,
 				9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */,
+				930F62B7255F564100E6A8CF /* UpgradeApiV4Interceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -481,6 +522,7 @@
 		85B0240A2371CC7700829FD6 /* KinBaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				93F66F17253BEC4600E14D59 /* Solana */,
 				85572F9F24A823D0003734CB /* Storage */,
 				85572F9D24A823AF003734CB /* Network */,
 				85EEEB7E24BE233E002AAC29 /* Model */,
@@ -496,6 +538,7 @@
 		85B024172371CCBC00829FD6 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				93F66F04253BEC3800E14D59 /* Solana */,
 				85737EDB243E62890012132E /* Network */,
 				855B76E324366E650037F407 /* Model */,
 				851B27882432820D004EE486 /* Storage */,
@@ -515,6 +558,49 @@
 				853EC7AE24EDBE6D004E0BED /* InvoiceTests.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		93F66F04253BEC3800E14D59 /* Solana */ = {
+			isa = PBXGroup;
+			children = (
+				93F66F05253BEC3800E14D59 /* Encoding */,
+			);
+			path = Solana;
+			sourceTree = "<group>";
+		};
+		93F66F05253BEC3800E14D59 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				93F66F06253BEC3800E14D59 /* SolanaKeyPair.swift */,
+				93F66F07253BEC3800E14D59 /* SolanaTransaction.swift */,
+				93F66F08253BEC3800E14D59 /* ShortVec.swift */,
+				93F66F09253BEC3800E14D59 /* SolanaCodable.swift */,
+				93F66F23253BF35D00E14D59 /* Instruction.swift */,
+				93E9B1A0253FD7D000DFD776 /* Programs.swift */,
+				930A9F2C254345E900F84156 /* Utils.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		93F66F17253BEC4600E14D59 /* Solana */ = {
+			isa = PBXGroup;
+			children = (
+				93F66F18253BEC4600E14D59 /* Encoding */,
+			);
+			path = Solana;
+			sourceTree = "<group>";
+		};
+		93F66F18253BEC4600E14D59 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				9387E02F25434CB900D44509 /* KinServiceV4IntegrationTests.swift */,
+				93E9B1A2253FE42300DFD776 /* ProgramsTests.swift */,
+				93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */,
+				93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */,
+				93F66F1B253BEC4600E14D59 /* SolanaKeyPairTests.swift */,
+				93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */,
+			);
+			path = Encoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -740,9 +826,12 @@
 			files = (
 				8525B7F424DCCF1F008277AB /* AppUserAuthInterceptor.swift in Sources */,
 				851B278724328089004EE486 /* FriendBotApi.swift in Sources */,
+				93E9B1A1253FD7D000DFD776 /* Programs.swift in Sources */,
+				93F66F12253BEC3800E14D59 /* SolanaCodable.swift in Sources */,
 				85737EEC24439FD90012132E /* Observable.swift in Sources */,
 				851B278A2432821D004EE486 /* SecureKeyStorage.swift in Sources */,
 				85737EF22443AFFB0012132E /* Helper.swift in Sources */,
+				930F62B8255F564100E6A8CF /* UpgradeApiV4Interceptor.swift in Sources */,
 				85737ED4243E4EE30012132E /* KinTypes.swift in Sources */,
 				85737EE3243E635A0012132E /* KinTransactionWhitelistingApi.swift in Sources */,
 				851E7BB824A2A61A00B800C8 /* AgoraKinTransactionsApi.swift in Sources */,
@@ -752,8 +841,10 @@
 				85F037002469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift in Sources */,
 				85737EDD243E629C0012132E /* KinAccountApi.swift in Sources */,
 				851E7BB624A2A5FD00B800C8 /* AgoraKinAccountsApi.swift in Sources */,
+				93F66F10253BEC3800E14D59 /* SolanaTransaction.swift in Sources */,
 				85572F9C24A80E8C003734CB /* ProtoToModel.swift in Sources */,
 				855B76E72436775C0037F407 /* KinTransaction.swift in Sources */,
+				93F66F11253BEC3800E14D59 /* ShortVec.swift in Sources */,
 				85737ECF243E1D1D0012132E /* KinMemo.swift in Sources */,
 				85EEEB7724BB748A002AAC29 /* Invoices.swift in Sources */,
 				853EC7B724EF569F004E0BED /* GrpcServiceProvider.swift in Sources */,
@@ -761,17 +852,22 @@
 				85713C2D2450A83E005F5A48 /* Storage.pbobjc.m in Sources */,
 				85572F9A24A80AEA003734CB /* ModelToProto.swift in Sources */,
 				9342E2B924FF2DBB008449A2 /* UserAgentInterceptor.swift in Sources */,
+				93F66F24253BF35D00E14D59 /* Instruction.swift in Sources */,
+				9387E03A254A1D5100D44509 /* Cache.swift in Sources */,
+				93F66F0F253BEC3800E14D59 /* SolanaKeyPair.swift in Sources */,
 				85737ED8243E59060012132E /* KinEnvironment.swift in Sources */,
 				85E7CBB324855A5A0088591F /* DefaultHorizonKinAccountCreationApi.swift in Sources */,
 				93A591232502CBC200E43C65 /* KinLogger.swift in Sources */,
 				853EC7A924EC5D38004E0BED /* KinTestService.swift in Sources */,
 				85737EE1243E62EE0012132E /* KinTransactionApi.swift in Sources */,
 				859A760B2464AC240028555F /* ListObservable.swift in Sources */,
+				9387E0362543EA2600D44509 /* KinAirdropApi.swift in Sources */,
 				8525B7EF24DB5101008277AB /* AppInfo.swift in Sources */,
 				855B76E524366E710037F407 /* KinAccount.swift in Sources */,
 				85737EEE2443A15A0012132E /* KinBalance.swift in Sources */,
 				8525B7F624DCD835008277AB /* AppInfoProvider.swift in Sources */,
 				85EEEB7B24BB7554002AAC29 /* SHA224Hash.swift in Sources */,
+				930A9F2D254345E900F84156 /* Utils.swift in Sources */,
 				85713C332450CE8C005F5A48 /* KinStorableObjectExtensions.swift in Sources */,
 				85572FAA24B3CABB003734CB /* KinStreamingApi.swift in Sources */,
 				85737ED6243E587C0012132E /* KinPayment.swift in Sources */,
@@ -785,6 +881,7 @@
 				854C64AC24478C0600CF398D /* KinOperation.swift in Sources */,
 				851B278324326C0B004EE486 /* HorizonKinApi.swift in Sources */,
 				85737EBF243D7C8A0012132E /* KinAccountContext.swift in Sources */,
+				9387E0382543EAA800D44509 /* AgoraKinAidropApi.swift in Sources */,
 				851B278E24328513004EE486 /* StellarSdkExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,6 +896,7 @@
 				851BC5BB248F0E5E00EC6609 /* KinEnvironmentTests.swift in Sources */,
 				853EC7AD24EDB900004E0BED /* AppInfoTests.swift in Sources */,
 				853EC7AF24EDBE6D004E0BED /* InvoiceTests.swift in Sources */,
+				93F66F1D253BEC4600E14D59 /* SolanaCodableTests.swift in Sources */,
 				8518B10E244C9BE300EC329B /* KinServiceTests.swift in Sources */,
 				8518B110244C9D2200EC329B /* MockStellarSdkProxy.swift in Sources */,
 				853EC7B324EDCB4C004E0BED /* MockFriendBotApi.swift in Sources */,
@@ -806,17 +904,23 @@
 				85737EE7243F9DB00012132E /* FriendBotApiTests.swift in Sources */,
 				859A760924620DFE0028555F /* MockAccountsStreamItem.swift in Sources */,
 				851B278C24328225004EE486 /* KeyChainStorageTests.swift in Sources */,
+				9387E083254B6F5700D44509 /* KinServiceTestsV4.swift in Sources */,
+				93F66F1F253BEC4600E14D59 /* SolanaKeyPairTests.swift in Sources */,
 				851BC5B9248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift in Sources */,
 				85EEEB8224BE237A002AAC29 /* KinBinaryMemoTests.swift in Sources */,
 				8525B83C24DE31F0008277AB /* AppUserAuthInterceptorTests.swift in Sources */,
 				853EC7B524EDCC06004E0BED /* KinTestServiceTests.swift in Sources */,
+				93F66F20253BEC4600E14D59 /* ShortVecTests.swift in Sources */,
 				851B278524326FC7004EE486 /* HorizonKinApiTests.swift in Sources */,
 				858A245E248AB32F002EB843 /* NetworkOperationHandlerTests.swift in Sources */,
+				9387E03025434CB900D44509 /* KinServiceV4IntegrationTests.swift in Sources */,
 				858ECDB6245A0413006AF3D6 /* KinTransactionTests.swift in Sources */,
+				93E9B1A3253FE42300DFD776 /* ProgramsTests.swift in Sources */,
 				85572FA224A8241C003734CB /* AgoraKinAccountsApiTests.swift in Sources */,
 				858ECDAC245784A7006AF3D6 /* MockKinService.swift in Sources */,
 				858ECDAA245783FA006AF3D6 /* KinAccountContextTests.swift in Sources */,
 				858ECDAE245784D3006AF3D6 /* MockKinStorage.swift in Sources */,
+				93F66F1E253BEC4600E14D59 /* TransactionEncodingTests.swift in Sources */,
 				85713C3524520958005F5A48 /* KinFileStorageTests.swift in Sources */,
 				85572FA824AB90C2003734CB /* AgoraKinTransactionsApiTests.swift in Sources */,
 			);
@@ -1034,7 +1138,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -1075,7 +1179,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",

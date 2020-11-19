@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinBase'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.summary          = 'Kin SDK for iOS'
 
   s.description      = <<-DESC
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
   s.dependency 'PromisesSwift', '~> 1.2.8'
-  s.dependency 'KinGrpcApi', '~> 0.2.0'
+  s.dependency 'KinGrpcApi', '~> 0.4.0'
 
   # Dependencies needed for KinGrpcApi
   s.dependency 'gRPC-ProtoRPC'

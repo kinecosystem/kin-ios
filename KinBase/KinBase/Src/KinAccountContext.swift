@@ -25,6 +25,11 @@ public enum ObservationMode {
     case activeNewOnly
 }
 
+public enum AccountSpec {
+    case preferred
+    case exact
+}
+
 public protocol KinAccountReadOperations {
     /**
      Returns the account info
@@ -98,7 +103,9 @@ public protocol KinPaymentWriteOperations {
      - Returns: a `Promise` with the blockchain confirmed `KinPayment`s or an error
      */
     func sendKinPayments(_ payments: [KinPaymentItem],
-                         memo: KinMemo)
+                         memo: KinMemo,
+                         sourceAccountSpec: AccountSpec,
+                         destinationAccountSpec: AccountSpec)
         -> Promise<[KinPayment]>
 
     func payInvoice(processingAppIdx: AppIndex,
@@ -271,21 +278,41 @@ extension KinAccountContext: KinAccountReadOperations {
     public func getAccount(forceUpdate: Bool = false) -> Promise<KinAccount> {
         log.info(msg: #function)
         return storage.getAccount(accountId)
-            .then(on: dispatchQueue) { account -> Promise<KinAccount> in
-                guard let account = account else {
+            .then(on: dispatchQueue) { storedAccount -> Promise<KinAccount> in
+                func getAccountAndRecover() -> Promise<KinAccount> {
                     return self.service.getAccount(accountId: self.accountId)
+                    .recover { error -> Promise<KinAccount> in
+                        guard let serviceError = error as? KinServiceV4.Errors, serviceError == KinServiceV4.Errors.itemNotFound else {
+                            return Promise(error)
+                        }
+                        return self.service.resolveTokenAccounts(accountId: self.accountId).then { accounts in
+                            let maybeResolvedAccountId = accounts.first?.accountId ?? self.accountId
+                            return self.service.getAccount(accountId: maybeResolvedAccountId).then { it -> KinAccount in
+                                // b/c we want to update our on hand account with the resolved accountInfo details on solana
+                                return it.copy(
+                                    key: try! KinAccount.Key(accountId: self.accountId),
+                                    tokenAccounts: accounts
+                                )
+                            }
+                            .then { it in self.storage.updateAccount(it) }
+                        }
+                    }
+                }
+                guard let account = storedAccount else {
+                    return getAccountAndRecover()
                 }
 
                 switch account.status {
                 case .unregistered:
-                    return self.service.getAccount(accountId: self.accountId)
-                        .then(on: self.dispatchQueue) { self.storage.updateAccount($0) }
-                        .recover(on: self.dispatchQueue) { _ in self.registerAccount(account: account) }
-                        .recover(on: self.dispatchQueue) { _ in return account }
+                    return self.registerAccount(account: account)
+                        .then(on: self.dispatchQueue) { _ in getAccountAndRecover() }
+//                    return getAccountAndRecover()
+//                        .then(on: self.dispatchQueue) { self.storage.updateAccount($0) }
+//                        .recover(on: self.dispatchQueue) { _ in self.registerAccount(account: account) }
+//                        .recover(on: self.dispatchQueue) { _ in return account }
                 case .registered:
                     if forceUpdate {
-                        return self.service.getAccount(accountId: self.accountId)
-                            .then(on: self.dispatchQueue) { self.storage.updateAccount($0) }
+                        return getAccountAndRecover()
                     } else {
                         return .init(account)
                     }
@@ -360,51 +387,165 @@ extension KinAccountContext: KinPaymentWriteOperations {
                 }
         }
     }
-
-    public func sendKinPayments(_ payments: [KinPaymentItem], memo: KinMemo) -> Promise<[KinPayment]> {
+    
+    private struct SourceAccountSigningData {
+        let nonce: Int64
+        let ownerKey: KinAccount.Key // Private Key
+        let sourceKey: KinAccount.Key // Public Key
+    
+        init(_ nonce: Int64, _ ownerKey: KinAccount.Key, _ sourceKey: KinAccount.Key) {
+            self.nonce = nonce
+            self.ownerKey = ownerKey
+            self.sourceKey = sourceKey
+        }
+    }
+    
+    public func sendKinPayments(_ payments: [KinPaymentItem], memo: KinMemo, sourceAccountSpec: AccountSpec = .preferred, destinationAccountSpec: AccountSpec = .preferred) -> Promise<[KinPayment]> {
         log.info(msg: #function)
         let invoices = payments.compactMap { $0.invoice }
         let invoiceList = try? InvoiceList(invoices: invoices)
         var resultTransaction: KinTransaction?
-
-        return all(getAccount(), getFee())
-            .then(on: dispatchQueue) { account, fee -> Promise<KinTransaction> in
-                self.service.buildAndSignTransaction(sourceKinAccount: account,
-                                                     paymentItems: payments,
-                                                     memo: memo,
-                                                     fee: fee)
-            }
-            .then(on: dispatchQueue) { signedTransaction -> Promise<KinTransaction> in
-                guard let transaction = try? KinTransaction(envelopeXdrBytes: signedTransaction.envelopeXdrBytes,
-                                                            record: signedTransaction.record,
-                                                            network: signedTransaction.network,
-                                                            invoiceList: invoiceList) else {
-                        throw Errors.unknown
+        let MAX_ATTEMPTS = 10
+        var attemptNumber = 0
+        let invalidAccountErrorRetryStrategy = BackoffStrategy.fixed(after: 3, maxAttempts: MAX_ATTEMPTS)
+        
+        func buildAttempt() -> Promise<KinTransaction> {
+            return all(self.getAccount(), self.getFee())
+                .then(on: self.dispatchQueue) { account, fee -> Promise<KinTransaction> in
+                    var sourceAccountPromise: Promise<SourceAccountSigningData>
+                    
+                    if ((attemptNumber == 0 && account.tokenAccounts.isEmpty) || sourceAccountSpec == .exact) {
+                        sourceAccountPromise = Promise {
+                            SourceAccountSigningData(
+                                account.sequence ?? 0,
+                                account.key,
+                                account.key
+                            )
+                        }
+                    } else {
+                        sourceAccountPromise = self.service.resolveTokenAccounts(accountId: self.accountId)
+                            .then { it in self.storage.updateAccount(account.copy(tokenAccounts: it)) }
+                            .then { resolvedAccount in
+                                SourceAccountSigningData(
+                                    resolvedAccount.sequence ?? 0,
+                                    resolvedAccount.key,
+                                    resolvedAccount.tokenAccounts.first ?? resolvedAccount.key
+                                )
+                            }
+                    }
+                    
+                    var paymentItemsPromise: Promise<[KinPaymentItem]>
+                    
+                    if (attemptNumber == 0 || destinationAccountSpec == .exact) {
+                        paymentItemsPromise = Promise { payments }
+                    } else {
+                        paymentItemsPromise = all(
+                            payments.map { paymentItem in
+                                self.service.resolveTokenAccounts(accountId: paymentItem.destAccountId)
+                                    .then { (it:[KinAccount.Key]) -> KinPaymentItem in
+                                        paymentItem.copy(destAccountId: it.first?.accountId)
+                                    }
+                                    .recover { _ in Promise { paymentItem } }
+                            }
+                        )
+                    }
+                    
+                    return sourceAccountPromise.then { accountData in
+                        paymentItemsPromise.then { it in
+                            attemptNumber = attemptNumber + 1
+                            return self.getFee()
+                                .then { fee in
+                                    self.service.buildAndSignTransaction(
+                                        ownerKey: accountData.ownerKey,
+                                        sourceKey: accountData.sourceKey,
+                                        nonce: accountData.nonce,
+                                        paymentItems: it,
+                                        memo: memo,
+                                        fee: fee // feeOverride ?: fee
+                                    )
+                            }
+//                            .then { it in
+//                                    if (it is StellarKinTransaction) {
+//                                        let tx = org.kin.stellarfork.Transaction.fromEnvelopeXdr(Base64.encodeBase64String(it.bytesValue), it.networkEnvironment.getNetwork())
+//                                        if (signaturesOverride.isNotEmpty()) {
+//                                            tx.signatures = signaturesOverride
+//                                        }
+//
+//                                        it.copy(bytesValue = Base64.decodeBase64(tx.toEnvelopeXdrBase64())!!)
+//                                    } else it
+//                                }
+//                            }
+                        }
+                    }
                 }
-
-                return self.service.submitTransaction(transaction: transaction)
-            }
-            .then(on: dispatchQueue) { transaction -> Promise<KinAccount> in
-                resultTransaction = transaction
-                return self.storage.advanceSequence(accountId: self.accountId)
-            }
-            .then(on: dispatchQueue) { _ in
-                self.storage.insertNewTransaction(accountId: self.accountId,
-                                                  newTransaction: resultTransaction!)
-            }
-            .then(on: dispatchQueue) { [weak self] transactions -> [KinPayment] in
-                guard let self = self, let transaction = transactions.first else {
-                    throw Errors.unknown
+        }
+        
+        func attempt() -> Promise<[KinPayment]> {
+            func buildSignSubmit() -> Promise<KinTransaction> {
+                return buildAttempt().then { signedTransaction -> Promise<KinTransaction> in
+                    guard let transaction: KinTransaction = try? KinTransaction(envelopeXdrBytes: signedTransaction.envelopeXdrBytes, record: signedTransaction.record, network: signedTransaction.network, invoiceList: invoiceList) else {
+                        return Promise(Errors.unknown)
+                    }
+                    return Promise { transaction }
                 }
-
-                let payments = transaction.kinPayments
-                let amountToDeduct = payments.reduce(Kin.zero) { $0 + $1.amount }
-
-                let account = try await(self.storage.deductFromAccountBalance(accountId: self.accountId,
-                                                                              amount: amountToDeduct))
-                self.balanceSubject.onNext(account.balance)
-                return payments
             }
+            return self.service.buildSignAndSubmitTransaction(buildAndSignTransaction:buildSignSubmit)
+                .then(on: self.dispatchQueue) { transaction -> Promise<KinAccount> in
+                        resultTransaction = transaction
+                        return self.storage.advanceSequence(accountId: self.accountId)
+                }
+                .then(on: self.dispatchQueue) { _ in
+                        self.storage.insertNewTransaction(accountId: self.accountId,
+                                                          newTransaction: resultTransaction!)
+                }
+                .then(on: self.dispatchQueue) { [weak self] transactions -> [KinPayment] in
+                        guard let self = self, let transaction = transactions.first else {
+                            throw Errors.unknown
+                        }
+                        
+                        let payments = transaction.kinPayments
+                    
+                        // If we have an active stream then we rely on that update for balance changes
+                        if (self.accountObservable == nil) {
+                            let amountToDeduct = payments.reduce(Kin.zero) { $0 + $1.amount }
+
+                            let account = try await(self.storage.deductFromAccountBalance(accountId: self.accountId,
+                                                                                          amount: amountToDeduct))
+                            self.balanceSubject.onNext(account.balance)
+                        }
+                       
+                        return payments
+                }.recover { [weak self] (error: Error) -> Promise<[KinPayment]> in
+                        guard let self = self else {
+                            return Promise.init(Errors.unknown)
+                        }
+                        
+                        guard attemptNumber < MAX_ATTEMPTS else {
+                            return Promise.init(error)
+                        }
+                        
+                        if (error as? KinServiceV4.Errors == KinServiceV4.Errors.badSequenceNumber) {
+                            self.service.invalidateRecentBlockHashCache()
+                            return attempt()
+                        } else if (error as? KinService.Errors == KinService.Errors.badSequenceNumber) {
+                            if ((self.service as? KinServiceWrapper)?.metaServiceApi.configuredMinApi == 4) {
+                                self.service.invalidateRecentBlockHashCache()
+                                return attempt()
+                            } else {
+                                return self.getAccount(forceUpdate: true).then { _ in
+                                    return attempt()
+                                }
+                            }
+                        } else if (error as? KinServiceV4.Errors == KinServiceV4.Errors.invalidAccount) {
+                            Thread.sleep(until: Date().addingTimeInterval((try? invalidAccountErrorRetryStrategy.nextDelay()) ?? 0))
+                            return attempt()
+                        } else {
+                            return Promise.init(error)
+                        }
+                }
+        }
+        
+        return attempt()
     }
 
     public func payInvoice(processingAppIdx: AppIndex,
@@ -442,7 +583,7 @@ extension KinAccountContext {
     }
 
     private func registerAccount(account: KinAccount) -> Promise<KinAccount> {
-        return service.createAccount(accountId: account.id)
+        return service.createAccount(accountId: account.id, signer: account.key)
             .then(on: dispatchQueue) { registeredAccount -> KinAccount in
                 return account.merge(registeredAccount)
             }
@@ -474,7 +615,7 @@ extension KinAccountContext {
     }
 
     private func fetchUpdatedBalance() -> Promise<KinBalance> {
-        return service.getAccount(accountId: accountId)
+        return getAccount(forceUpdate: true)
             .then { self.storage.updateAccount($0) }
             .then { $0.balance }
             .then { self.balanceSubject.onNext($0) }

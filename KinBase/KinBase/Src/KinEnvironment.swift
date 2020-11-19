@@ -8,6 +8,7 @@
 
 import Foundation
 import Promises
+import KinGrpcApi
 
 public struct KinEnvironment {
     public enum Errors: Error {
@@ -106,21 +107,27 @@ public struct KinEnvironment {
     }
 
     public class Agora {
-        public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider()) -> KinEnvironment {
+        public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = false, minApiVersion: Int = 3) -> KinEnvironment {
             return defaultEnvironmentSetup(network: .mainNet,
                                            appInfoProvider: appInfoProvider,
-                                           enableLogging: false)
+                                           enableLogging: enableLogging,
+                                           minApiVersion: minApiVersion,
+                                           testMigration: false)
         }
 
-        public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider()) -> KinEnvironment {
+        public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = true, minApiVersion: Int = 3, testMigration: Bool = false) -> KinEnvironment {
             return defaultEnvironmentSetup(network: .testNet,
                                            appInfoProvider: appInfoProvider,
-                                           enableLogging: true)
+                                           enableLogging: enableLogging,
+                                           minApiVersion: minApiVersion,
+                                           testMigration: testMigration)
         }
 
         private static func defaultEnvironmentSetup(network: KinNetwork,
                                                     appInfoProvider: AppInfoProvider,
-                                                    enableLogging: Bool) -> KinEnvironment {
+                                                    enableLogging: Bool,
+                                                    minApiVersion: Int,
+                                                    testMigration: Bool) -> KinEnvironment {
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
             let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let networkHandler = NetworkOperationHandler()
@@ -128,28 +135,51 @@ public struct KinEnvironment {
             let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let storage = KinFileStorage(directory: documentDirectory,
                                          network: network)
-            
+        
+            var interceptors = [GRPCInterceptorFactory]()
+            if (testMigration) {
+                interceptors.append(UpgradeApiV4Context())
+            }
             let grpcProxy = AgoraGrpcProxy(network: network,
                                            appInfoProvider: appInfoProvider,
                                            storage: storage,
-                                           logger: logger)
+                                           logger: logger,
+                                           interceptorFactories: interceptors)
 
             let agoraAccountsApi = AgoraKinAccountsApi(agoraGrpc: grpcProxy)
             let agoraTransactionsApi = AgoraKinTransactionsApi(agoraGrpc: grpcProxy)
 
-            let service = KinService(network: network,
-                                     networkOperationHandler: networkHandler,
-                                     dispatchQueue: .promises,
-                                     accountApi: agoraAccountsApi,
-                                     accountCreationApi: agoraAccountsApi,
-                                     transactionApi: agoraTransactionsApi,
-                                     transactionWhitelistingApi: agoraTransactionsApi,
-                                     streamingApi: agoraAccountsApi,
-                                     logger: logger)
+            let serviceV3 = KinService(network: network,
+                                       networkOperationHandler: networkHandler,
+                                       dispatchQueue: .promises,
+                                       accountApi: agoraAccountsApi,
+                                       accountCreationApi: agoraAccountsApi,
+                                       transactionApi: agoraTransactionsApi,
+                                       transactionWhitelistingApi: agoraTransactionsApi,
+                                       streamingApi: agoraAccountsApi,
+                                       logger: logger)
+            
+            let serviceV4 = KinServiceV4(network: network,
+                                         networkOperationHandler: networkHandler,
+                                         dispatchQueue: .promises,
+                                         accountApi: agoraAccountsApi,
+                                         accountCreationApi: agoraAccountsApi,
+                                         transactionApi: agoraTransactionsApi,
+                                         streamingApi: agoraAccountsApi,
+                                         logger: logger)
+            
+            let metaServiceApi = MetaServiceApi(configuredMinApi: minApiVersion, opHandler: networkHandler, api: agoraTransactionsApi, storage: storage)
+            metaServiceApi.postInit().then{_ in }
+            let service: KinServiceType =  KinServiceWrapper(kinServiceV3: serviceV3, kinServiceV4: serviceV4, metaServiceApi: metaServiceApi) //minApiVersion == 4 ? serviceV4 : serviceV3
 
-            let testServiceInstance = KinTestService(friendBotApi: FriendBotApi(),
-                                                     networkOperationHandler: networkHandler,
-                                                     dispatchQueue: .promises)
+            let testServiceV3 = KinTestService(friendBotApi: FriendBotApi(),
+                                               networkOperationHandler: networkHandler,
+                                               dispatchQueue: .promises)
+            let testServiceV4 = KinTestServiceV4(airdropApi: AgoraKinAirdropApi(agoraGrpc: grpcProxy),
+                                                 networkOperationHandler: networkHandler,
+                                                 dispatchQueue: .promises)
+            let testServiceInstance: KinTestServiceType = minApiVersion == 4 ? testServiceV4 : testServiceV3
+            
             let testService: KinTestServiceType? = network == KinNetwork.testNet ? testServiceInstance : nil
 
             return KinEnvironment(network: network,

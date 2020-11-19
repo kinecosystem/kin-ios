@@ -89,8 +89,10 @@ public enum Memo {
  */
 public struct TransactionEnvelope {
     public let envelopeXdrBytes: [Byte]
+    public let transaction: KinTransaction
 
-    public init(envelopeXdrBytes: [Byte]) {
+    public init(envelopeXdrBytes: [Byte], transaction: KinTransaction) {
         self.envelopeXdrBytes = envelopeXdrBytes
+        self.transaction = transaction
     }
 }

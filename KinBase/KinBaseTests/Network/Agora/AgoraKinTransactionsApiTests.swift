@@ -28,6 +28,43 @@ class MockAgoraTransactionServiceGrpcProxy: AgoraTransactionServiceGrpcProxy {
     func getTransaction(_ request: APBTransactionV3GetTransactionRequest) -> Promise<APBTransactionV3GetTransactionResponse> {
         return stubGetTransactionResponsePromise!
     }
+    
+    // V4 Apis
+    var stubGetHistoryResponsePromiseV4: Promise<APBTransactionV4GetHistoryResponse>?
+    var stubSubmitTransactionResponsePromiseV4: Promise<APBTransactionV4SubmitTransactionResponse>?
+    var stubGetTransactionResponsePromiseV4: Promise<APBTransactionV4GetTransactionResponse>?
+    var stubGetServiceConfigResponsePromise: Promise<APBTransactionV4GetServiceConfigResponse>?
+    var stubGetMinBalanceForRentExemptionResponsePromise: Promise<APBTransactionV4GetMinimumBalanceForRentExemptionResponse>?
+    var stubGetRecentBlockHashResponsePromise: Promise<APBTransactionV4GetRecentBlockhashResponse>?
+    var stubGetMinVersionePromise: Promise<APBTransactionV4GetMinimumKinVersionResponse>?
+    
+    func getHistory(_ request: APBTransactionV4GetHistoryRequest) -> Promise<APBTransactionV4GetHistoryResponse> {
+        return stubGetHistoryResponsePromiseV4!
+    }
+    
+    func submitTransaction(_ request: APBTransactionV4SubmitTransactionRequest) -> Promise<APBTransactionV4SubmitTransactionResponse> {
+        return stubSubmitTransactionResponsePromiseV4!
+    }
+    
+    func getTransaction(_ request: APBTransactionV4GetTransactionRequest) -> Promise<APBTransactionV4GetTransactionResponse> {
+        return stubGetTransactionResponsePromiseV4!
+    }
+    
+    func getServiceConfig(_ request: APBTransactionV4GetServiceConfigRequest) -> Promise<APBTransactionV4GetServiceConfigResponse> {
+        return stubGetServiceConfigResponsePromise!
+    }
+    
+    func getMinimumBalanceForRentExemptionRequest(_ request: APBTransactionV4GetMinimumBalanceForRentExemptionRequest) -> Promise<APBTransactionV4GetMinimumBalanceForRentExemptionResponse> {
+        return stubGetMinBalanceForRentExemptionResponsePromise!
+    }
+    
+    func getRecentBlockHashRequest(_ request: APBTransactionV4GetRecentBlockhashRequest) -> Promise<APBTransactionV4GetRecentBlockhashResponse> {
+        return stubGetRecentBlockHashResponsePromise!
+    }
+    
+    func getMinimumVersion(_ request: APBTransactionV4GetMinimumKinVersionRequest) -> Promise<APBTransactionV4GetMinimumKinVersionResponse> {
+        return stubGetMinVersionePromise!
+    }
 }
 
 class AgoraKinTransactionsApiTests: XCTestCase {
@@ -90,7 +127,7 @@ class AgoraKinTransactionsApiTests: XCTestCase {
     }
 
     func testGetHistoryTransientFailure() {
-        mockTransactionServiceGrpc.stubGetHistoryResponsePromise = .init(AgoraKinTransactionsApi.Errors.unknown)
+        mockTransactionServiceGrpc.stubGetHistoryResponsePromise = .init(GrpcErrors.cancelled.asError())
 
         let expect = expectation(description: "transactions")
         let request = GetTransactionHistoryRequest(accountId: StubObjects.accountId1,
@@ -98,6 +135,22 @@ class AgoraKinTransactionsApiTests: XCTestCase {
                                                    order: .ascending)
         sut.getTransactionHistory(request: request) { response in
             XCTAssertEqual(response.result, GetTransactionHistoryResponse.Result.transientFailure)
+            XCTAssertNotNil(response.error)
+            expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testGetHistoryUnknownFailure() {
+        mockTransactionServiceGrpc.stubGetHistoryResponsePromise = .init(AgoraKinTransactionsApi.Errors.unknown)
+
+        let expect = expectation(description: "transactions")
+        let request = GetTransactionHistoryRequest(accountId: StubObjects.accountId1,
+                                                   cursor: nil,
+                                                   order: .ascending)
+        sut.getTransactionHistory(request: request) { response in
+            XCTAssertEqual(response.result, GetTransactionHistoryResponse.Result.undefinedError)
             XCTAssertNotNil(response.error)
             expect.fulfill()
         }
@@ -150,12 +203,27 @@ class AgoraKinTransactionsApiTests: XCTestCase {
 
     func testGetTransactionTransientFailure() {
         let transaction = StubObjects.historicalTransaction(from: StubObjects.transactionEvelope1)
-        mockTransactionServiceGrpc.stubGetTransactionResponsePromise = .init(AgoraKinTransactionsApi.Errors.unknown)
+        mockTransactionServiceGrpc.stubGetTransactionResponsePromise = .init(GrpcErrors.cancelled.asError())
 
         let expect = expectation(description: "transactions")
         let request = GetTransactionRequest(transactionHash: transaction.transactionHash!)
         sut.getTransaction(request: request) { response in
             XCTAssertEqual(response.result, GetTransactionResponse.Result.transientFailure)
+            XCTAssertNotNil(response.error)
+            expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testGetTransactionUnknownFailure() {
+        let transaction = StubObjects.historicalTransaction(from: StubObjects.transactionEvelope1)
+        mockTransactionServiceGrpc.stubGetTransactionResponsePromise = .init(AgoraKinTransactionsApi.Errors.unknown)
+
+        let expect = expectation(description: "transactions")
+        let request = GetTransactionRequest(transactionHash: transaction.transactionHash!)
+        sut.getTransaction(request: request) { response in
+            XCTAssertEqual(response.result, GetTransactionResponse.Result.undefinedError)
             XCTAssertNotNil(response.error)
             expect.fulfill()
         }
@@ -230,7 +298,7 @@ class AgoraKinTransactionsApiTests: XCTestCase {
     }
 
     func testSubmitTransactionTransientFailure() {
-        mockTransactionServiceGrpc.stubSubmitTransactionResponsePromise = .init(AgoraKinTransactionsApi.Errors.unknown)
+        mockTransactionServiceGrpc.stubSubmitTransactionResponsePromise = .init(GrpcErrors.cancelled.asError())
 
         let expect = expectation(description: "submit")
         let request = SubmitTransactionRequest(transactionEnvelopeXdr: StubObjects.transactionEvelope1)
@@ -243,10 +311,25 @@ class AgoraKinTransactionsApiTests: XCTestCase {
 
         waitForExpectations(timeout: 1)
     }
+    
+    func testSubmitTransactionUnknownFailure() {
+           mockTransactionServiceGrpc.stubSubmitTransactionResponsePromise = .init(AgoraKinTransactionsApi.Errors.unknown)
+
+           let expect = expectation(description: "submit")
+           let request = SubmitTransactionRequest(transactionEnvelopeXdr: StubObjects.transactionEvelope1)
+           sut.submitTransaction(request: request) { response in
+               XCTAssertEqual(response.result, SubmitTransactionResponse.Result.undefinedError)
+               XCTAssertNil(response.kinTransaction)
+               XCTAssertNotNil(response.error)
+               expect.fulfill()
+           }
+
+           waitForExpectations(timeout: 1)
+       }
 
     func testGetTransactionMinFeeOk() {
         let expect = expectation(description: "min fee")
-        sut.getTransactionMinFee(completion: { response in
+        sut.getTransactionMinFee(completion: { (response: GetMinFeeForTransactionResponse) in
             XCTAssertEqual(response.result, GetMinFeeForTransactionResponse.Result.ok)
             XCTAssertEqual(response.fee, Quark(100))
             expect.fulfill()

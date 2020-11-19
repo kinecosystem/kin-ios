@@ -41,7 +41,7 @@ public class Transaction {
     }
 
     public func envelope() -> TransactionEnvelope {
-        return TransactionEnvelope(envelopeXdrBytes: transaction.envelopeXdrBytes)
+        return TransactionEnvelope(envelopeXdrBytes: transaction.envelopeXdrBytes, transaction: transaction)
     }
 
     public func whitelistPayload(networkId: Network.Id) -> WhitelistEnvelope {

@@ -49,7 +49,10 @@ class SendTransactionViewController: UIViewController {
             }
 
             do {
-                promise.signal(TransactionEnvelope(envelopeXdrBytes: [Byte](d)))
+                let transaction = try! KinTransaction(envelopeXdrBytes: [Byte](d),
+                                                      record: Record.inFlight(ts: Date().timeIntervalSince1970),
+                                                      network: KinNetwork.testNet)
+                promise.signal(TransactionEnvelope(envelopeXdrBytes: [Byte](d), transaction: transaction))
             }
             catch {
                 promise.signal(error)
