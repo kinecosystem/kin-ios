@@ -14,7 +14,7 @@ pod 'KinSDK', '~> 1.0.2', :subspecs => ['BackupRestore']
 ```
 Now, replace that with the following and do a clean build:
 ```
-pod 'KinBaseCompat', '~> 0.4.0'
+pod 'KinBaseCompat', '~> 0.4.1'
 ```
 
 If you're not using [kin-sdk-ios](https://github.com/kinecosystem/kin-sdk-ios), please checkout [KinBase](../KinBase/README.md).
