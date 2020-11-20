@@ -41,7 +41,7 @@ class KinEnvironmentTests: XCTestCase {
         _ = try! await(sut.storage.clearStorage())
 
         let key = try! KinAccount.Key(secretSeed: StubObjects.seed1)
-        _ = try! sut.importPrivateKey(key)
+        try! sut.importPrivateKey(key)
 
         let expect = expectation(description: "completion")
         sut.allAccountIds().then { ids in

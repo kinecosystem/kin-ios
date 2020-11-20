@@ -11,6 +11,7 @@ import XCTest
 import stellarsdk
 import Promises
 import Base58Swift
+import KinGrpcApi
 @testable import KinBase
 
 class KinServiceV4IntegrationTests: XCTestCase {
@@ -40,7 +41,7 @@ class KinServiceV4IntegrationTests: XCTestCase {
         let grpcProxy = AgoraGrpcProxy(network: .testNet,
                                        appInfoProvider: appInfoProvider,
                                        storage: storage,
-                                       logger: logger)
+                                       logger: logger, interceptorFactories: [GRPCInterceptorFactory]())
 
         
         

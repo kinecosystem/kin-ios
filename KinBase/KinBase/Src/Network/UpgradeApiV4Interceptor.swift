@@ -26,11 +26,17 @@ public class UpgradeApiV4Interceptor: GRPCInterceptor {
     }
 
     public override func start(with requestOptions: GRPCRequestOptions, callOptions: GRPCCallOptions) {
-        let callOptionsWithCreds = callOptions.mutableCopy() as! GRPCMutableCallOptions
+        let newCallOptions = callOptions.mutableCopy() as! GRPCMutableCallOptions
 
-        callOptionsWithCreds.initialMetadata = ["desired-kin-version" : "4" ]
-
+        let headersCopy = NSMutableDictionary.init(dictionary: ["desired-kin-version" : "4" ])
+        
+        if (newCallOptions.initialMetadata != nil) {
+            headersCopy.addEntries(from: newCallOptions.initialMetadata!)
+        }
+        
+        newCallOptions.initialMetadata = headersCopy as Dictionary
+        
         manager.startNextInterceptor(withRequest: requestOptions,
-                                     callOptions: callOptionsWithCreds)
+                                     callOptions: newCallOptions)
     }
 }

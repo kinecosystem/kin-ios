@@ -112,16 +112,16 @@ extension KinSampleViewController: KinClientCellDelegate {
 
         getKinCell.getKinButton.isEnabled = false
 
-        print("Creating account.")
+        print("Funding account.")
 
-        self.createAccount()
+        self.fund(amount: Kin(1000))
             .then(on: .main, { _ in
                 getKinCell.getKinButton.isEnabled = true
             })
 
         try! kinAccount.watchCreation()
             .finally({
-                print("I see a new account!")
+                print("Funded Account!")
             })
     }
 
@@ -155,7 +155,7 @@ extension KinSampleViewController: KinClientCellDelegate {
 
     private func fund(amount: Kin) -> Promise<Bool> {
         let p = Promise<Bool>()
-        let url = URL(string: "http://friendbot-testnet.kininfrastructure.com/fund?addr=\(kinAccount.publicAddress)&amount=\(amount)")!
+        let url = URL(string: "https://friendbot-testnet.kininfrastructure.com/fund?addr=\(kinAccount.publicAddress)&amount=\(amount)")!
 
         URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             guard

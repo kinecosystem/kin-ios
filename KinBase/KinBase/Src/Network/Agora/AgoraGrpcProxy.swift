@@ -74,14 +74,12 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
          appInfoProvider: AppInfoProvider,
          storage: KinStorageType,
          logger: KinLoggerFactory,
-         interceptorFactories: [GRPCInterceptorFactory] = [GRPCInterceptorFactory]()) {
+         interceptorFactories: [GRPCInterceptorFactory]) {
         self.network = network
         self.logger = logger
-        let authContext = AppUserAuthContext(appInfoProvider: appInfoProvider)
-        let userAgentContext = UserAgentContext(storage: storage)
     
         let grpcServiceProvider = GrpcServiceProvider(host: network.agoraUrl,
-                                                      interceptorFactories: [GRPCInterceptorFactory](arrayLiteral: authContext, userAgentContext) + interceptorFactories)
+                                                      interceptorFactories: interceptorFactories)
         self.grpcAccountService = grpcServiceProvider.accountService
         self.grpcTransactionService = grpcServiceProvider.transactionService
         

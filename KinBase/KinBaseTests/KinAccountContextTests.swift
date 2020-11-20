@@ -150,6 +150,8 @@ class KinAccountContextTests: XCTestCase {
 
         let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId))
         mockKinService.stubGetAccountResult = expectAccount
+        
+        mockKinStorage.stubUpdateAccountResult = expectAccount
 
         let expect = expectation(description: "callback")
         sut.getAccount().then { account in

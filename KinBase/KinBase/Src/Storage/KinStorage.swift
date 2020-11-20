@@ -10,6 +10,8 @@ import Foundation
 import Promises
 
 public protocol KinStorageType {
+    func hasPrivateKey(_ privateKey: KinAccount.Key) -> Bool
+    
     func addAccount(_ account: KinAccount) throws -> KinAccount
 
     func addAccount(_ account: KinAccount) -> Promise<KinAccount>

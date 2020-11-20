@@ -63,6 +63,11 @@ extension KinFileStorage: KinStorageType {
             return self.writeAccountInfoAsync(account)
         }
     }
+    
+    public func hasPrivateKey(_ privateKey: KinAccount.Key) -> Bool {
+        let key = try? getKeyFromSecureStore(accountId: privateKey.accountId)
+        return key != nil
+    }
 
     public func getAccount(_ accountId: KinAccount.Id) -> Promise<KinAccount?> {
         let key = try? getKeyFromSecureStore(accountId: accountId)

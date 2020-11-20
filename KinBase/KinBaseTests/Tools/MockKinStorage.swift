@@ -117,4 +117,8 @@ class MockKinStorage: KinStorageType {
     func getOrCreateCID() -> String {
         return UUID().uuidString
     }
+    
+    func hasPrivateKey(_ privateKey: KinAccount.Key) -> Bool {
+        false
+    }
 }

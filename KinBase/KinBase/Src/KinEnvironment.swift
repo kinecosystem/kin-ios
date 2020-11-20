@@ -136,7 +136,9 @@ public struct KinEnvironment {
             let storage = KinFileStorage(directory: documentDirectory,
                                          network: network)
         
-            var interceptors = [GRPCInterceptorFactory]()
+            let authContext = AppUserAuthContext(appInfoProvider: appInfoProvider)
+            let userAgentContext = UserAgentContext(storage: storage)
+            var interceptors = [GRPCInterceptorFactory](arrayLiteral: authContext, userAgentContext)
             if (testMigration) {
                 interceptors.append(UpgradeApiV4Context())
             }
@@ -200,12 +202,16 @@ extension KinEnvironment {
         return storage.getAllAccountIds()
     }
 
-    func importPrivateKey(_ key: KinAccount.Key) throws -> KinAccount {
+    func importPrivateKey(_ key: KinAccount.Key) throws {
         guard key.privateKey != nil else {
             throw Errors.missingPrivateKey
         }
 
-        return try storage.addAccount(KinAccount(key: key))
+        if storage.hasPrivateKey(key) {
+            return
+        }
+        
+        let _: KinAccount? = try storage.addAccount(KinAccount(key: key))
     }
     
     mutating func setEnableLogging(enableLogging: Bool) {

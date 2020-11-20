@@ -161,9 +161,8 @@ public class KinAccountContext {
          - Throws: an error if `key` doesn't contain a private key
         */
         public func importExistingPrivateKey(_ key: KinAccount.Key) throws -> ExistingAccountBuilder {
-            let importedAccount = try env.importPrivateKey(key)
-            return ExistingAccountBuilder(env: env,
-                                          accountId: importedAccount.id)
+            try env.importPrivateKey(key)
+            return ExistingAccountBuilder(env: env, accountId: key.accountId)
         }
     }
 
@@ -294,9 +293,8 @@ extension KinAccountContext: KinAccountReadOperations {
                                     tokenAccounts: accounts
                                 )
                             }
-                            .then { it in self.storage.updateAccount(it) }
                         }
-                    }
+                    }.then { it in self.storage.updateAccount(it) }
                 }
                 guard let account = storedAccount else {
                     return getAccountAndRecover()

@@ -37,15 +37,22 @@ public class AppUserAuthInterceptor: GRPCInterceptor {
     }
 
     public override func start(with requestOptions: GRPCRequestOptions, callOptions: GRPCCallOptions) {
-        let callOptionsWithCreds = callOptions.mutableCopy() as! GRPCMutableCallOptions
+        
+        let newCallOptions = callOptions.mutableCopy() as! GRPCMutableCallOptions
 
-        if requestOptions.path == "/kin.agora.transaction.v3.Transaction/SubmitTransaction" {
+        if requestOptions.path == "/kin.agora.transaction.v3.Transaction/SubmitTransaction" || requestOptions.path == "/kin.agora.transaction.v4.Transaction/SubmitTransaction" {
             let creds = appInfoProvider.getPassthroughAppUserCredentials()
-            callOptionsWithCreds.initialMetadata = ["app-user-id": creds.appUserId,
-                                                    "app-user-passkey": creds.appUserPasskey]
+            let headersCopy = NSMutableDictionary.init(dictionary: ["app-user-id": creds.appUserId,
+                                                                    "app-user-passkey": creds.appUserPasskey])
+                       
+            if (newCallOptions.initialMetadata != nil) {
+                headersCopy.addEntries(from: newCallOptions.initialMetadata!)
+            }
+
+            newCallOptions.initialMetadata = headersCopy as Dictionary
         }
 
         manager.startNextInterceptor(withRequest: requestOptions,
-                                     callOptions: callOptionsWithCreds)
+                                     callOptions: newCallOptions)
     }
 }

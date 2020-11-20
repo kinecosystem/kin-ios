@@ -91,9 +91,17 @@ public class UserAgentInterceptor: GRPCInterceptor {
     }
 
     public override func start(with requestOptions: GRPCRequestOptions, callOptions: GRPCCallOptions) {
-        let callOptions = callOptions.mutableCopy() as! GRPCMutableCallOptions
-        callOptions.initialMetadata = ["user-agent": userAgentString]
+        let newCallOptions = callOptions.mutableCopy() as! GRPCMutableCallOptions
+        
+        let headersCopy = NSMutableDictionary.init(dictionary: ["kin-user-agent": userAgentString])
+               
+        if (newCallOptions.initialMetadata != nil) {
+            headersCopy.addEntries(from: newCallOptions.initialMetadata!)
+        }
+       
+        newCallOptions.initialMetadata = headersCopy as Dictionary
+        
         manager.startNextInterceptor(withRequest: requestOptions,
-                                     callOptions: callOptions)
+                                     callOptions: newCallOptions)
     }
 }

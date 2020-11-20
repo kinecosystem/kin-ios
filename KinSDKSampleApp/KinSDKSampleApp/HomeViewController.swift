@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
         }
         
         do {
-            let kinClient = KinClient(provider: provider, appId: try AppId("test"))
+            let kinClient = KinClient(provider: provider, appId: try AppId("test"), testMigration: false)
             
             if let kinAccount = kinClient.accounts.first {
                 //if we already have the account, pass it on to KinSampleViewController

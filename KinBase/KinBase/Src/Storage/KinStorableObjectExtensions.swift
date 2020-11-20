@@ -32,9 +32,9 @@ extension KinAccount.Status {
     var storableObject: KinStorageKinAccount_Status {
         switch self {
         case .registered:
-            return .registered
+            return KinStorageKinAccount_Status.registered
         case .unregistered:
-            return .unregistered
+            return KinStorageKinAccount_Status.unregistered
         }
     }
 }
@@ -123,8 +123,8 @@ extension KinStorageKinBalance {
 
 extension KinStorageKinAccount_Status {
     var kinAccountStatus: KinAccount.Status {
-        switch self {
-        case .registered:
+        switch self.rawValue {
+        case KinStorageKinAccount_Status.registered.rawValue:
             return .registered
         default:
             return .unregistered
