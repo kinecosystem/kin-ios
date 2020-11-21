@@ -799,7 +799,7 @@ extension KinServiceV4 : KinServiceType {
     
     public func createAccount(accountId: KinAccount.Id, signer: KeyPair) -> Promise<KinAccount> {
         return networkOperationHandler.queueWork { [weak self] respond in
-            guard let self = self else {
+            guard let self = self, let signerPrivateKey = signer.privateKey else {
                 respond.onError?(Errors.unknown)
                 return
             }
@@ -813,36 +813,42 @@ extension KinServiceV4 : KinServiceType {
                    return
                 }
                 
+                let tokenAccountSeed = try Seed(bytes: [Byte](sha256(data: Data(signerPrivateKey.bytes))))
+                let tokenAccount = KeyPair(seed: tokenAccountSeed)
+                let tokenAccountPub: SolanaPublicKey = tokenAccount.asPublicKey()
+                
+                
                 let subsidizer: SolanaPublicKey = serviceConfig.subsidizerAccount!
-                let accountPub: SolanaPublicKey = signer.asPublicKey()
                 let owner: SolanaPublicKey = signer.asPublicKey()
                 let programKey = serviceConfig.tokenProgram!
                 let mint = serviceConfig.token!
                 
                 let transaction = try! SolanaTransaction.newTransaction(
-                        subsidizer,
-                        SystemProgram.createAccountInstruction(
-                            subsidizer: subsidizer,
-                            address: accountPub,
-                            owner: programKey,
-                            lamports: minRentExemption.lamports,
-                            size: TokenProgram.accountSize),
-                        TokenProgram.initializeAccountInstruction(
-                            account: accountPub,
-                            mint: mint,
-                            owner: owner,
-                            programKey: programKey
-                        ),
-                        TokenProgram.setAuthority(
-                            account: accountPub,
-                            currentAuthority: accountPub,
-                            newAuthority: subsidizer,
-                            authorityType: TokenProgram.AuthorityType.AuthorityCloseAccount,
-                            programKey: programKey
-                        )
-                    ).copyAndSetRecentBlockhash(recentBlockhash: recentBlockHash.blockHash!)
-                        .copyAndSign(signers: signer)
+                    subsidizer,
+                    SystemProgram.createAccountInstruction(
+                        subsidizer: subsidizer,
+                        address: tokenAccountPub,
+                        owner: programKey,
+                        lamports: minRentExemption.lamports,
+                        size: TokenProgram.accountSize),
+                    TokenProgram.initializeAccountInstruction(
+                        account: tokenAccountPub,
+                        mint: mint,
+                        owner: owner,
+                        programKey: programKey
+                    ),
+                    TokenProgram.setAuthority(
+                        account: tokenAccountPub,
+                        currentAuthority: owner,
+                        newAuthority: subsidizer,
+                        authorityType: TokenProgram.AuthorityType.AuthorityCloseAccount,
+                        programKey: programKey
+                    )
+                ).copyAndSetRecentBlockhash(recentBlockhash: recentBlockHash.blockHash!)
+                    .copyAndSign(signers: tokenAccount, signer)
 
+                print(transaction.encode().hexEncodedString())
+                
                 let request = CreateAccountRequestV4(transaction: transaction)
                 self.requestPrint(request: request)
                 self.accountCreationApi.createAccount(request: request) { [weak self] response in

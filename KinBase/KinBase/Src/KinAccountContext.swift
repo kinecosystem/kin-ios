@@ -495,13 +495,14 @@ extension KinAccountContext: KinPaymentWriteOperations {
                 .then(on: self.dispatchQueue) { _ in
                         self.storage.insertNewTransaction(accountId: self.accountId,
                                                           newTransaction: resultTransaction!)
+                            .then { _ in resultTransaction }
                 }
-                .then(on: self.dispatchQueue) { [weak self] transactions -> [KinPayment] in
-                        guard let self = self, let transaction = transactions.first else {
+                .then(on: self.dispatchQueue) { [weak self] transaction -> [KinPayment] in
+                        guard let self = self else {
                             throw Errors.unknown
                         }
                         
-                        let payments = transaction.kinPayments
+                        let payments = transaction!.kinPayments
                     
                         // If we have an active stream then we rely on that update for balance changes
                         if (self.accountObservable == nil) {

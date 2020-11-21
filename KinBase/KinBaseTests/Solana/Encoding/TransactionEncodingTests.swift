@@ -113,7 +113,7 @@ class SolanaTransactionEncodingTests: XCTestCase {
 
         XCTAssertEqual(tx.signatures.count, 3)
         XCTAssertEqual(tx.message.accounts.count, 6)
-        XCTAssertEqual(2, tx.message.header.numSignatures)
+        XCTAssertEqual(3, tx.message.header.numSignatures)
         XCTAssertEqual(1, tx.message.header.numReadOnlySigned)
         XCTAssertEqual(2, tx.message.header.numReadOnly)
 
@@ -176,7 +176,7 @@ class SolanaTransactionEncodingTests: XCTestCase {
 
         XCTAssertEqual(tx.signatures.count, 4)
         XCTAssertEqual(tx.message.accounts.count, 6)
-        XCTAssertEqual(3, tx.message.header.numSignatures)
+        XCTAssertEqual(4, tx.message.header.numSignatures)
         XCTAssertEqual(1, tx.message.header.numReadOnlySigned)
         XCTAssertEqual(1, tx.message.header.numReadOnly)
 

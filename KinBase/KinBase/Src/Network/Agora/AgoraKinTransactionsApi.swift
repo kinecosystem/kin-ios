@@ -345,6 +345,8 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
             .then { (grpcResponse: APBTransactionV4SubmitTransactionResponse)  in
                 switch grpcResponse.result {
                 case .ok:
+                    fallthrough
+                case .alreadySubmitted:
                     guard let transaction =
                         grpcResponse.toKinTransactionAcknowledged(solanaTransaction: request.transaction,
                                                                   network: network) else {
@@ -355,6 +357,7 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
                                                              error: nil,
                                                              kinTransaction: transaction)
                     completion(response)
+                
                 case .failed:
                     var result: SubmitTransactionResponseV4.Result = .transientFailure
                     if let transactionResult = try? XDRDecoder.decode(TransactionResultXDR.self,

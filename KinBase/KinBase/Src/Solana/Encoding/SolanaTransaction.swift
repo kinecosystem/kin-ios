@@ -284,7 +284,7 @@ public struct SolanaTransaction: SolanaCodable {
         uniqueAccounts.quickSort() //sorted() //quickSort()
 
         let header = MessageHeader(
-            numSignatures: Byte(uniqueAccounts.filter { it in it.isWritable && it.isSigner }.count),
+            numSignatures: Byte(uniqueAccounts.filter { it in it.isSigner }.count),
             numReadOnlySigned: Byte(uniqueAccounts.filter { it in  !it.isWritable && it.isSigner }.count),
             numReadOnly: Byte(uniqueAccounts.filter { it in !it.isWritable && !it.isSigner }.count)
         )
@@ -329,7 +329,7 @@ public struct SolanaTransaction: SolanaCodable {
     }
     
     func copyAndSign(signers: KeyPair...) throws -> SolanaTransaction {
-        let numRequiredSignatures = Int(message.header.numSignatures) + Int(message.header.numReadOnlySigned)
+        let numRequiredSignatures = Int(message.header.numSignatures)
         if (signers.count > numRequiredSignatures) {
             throw SigningError.tooManySigners
         }

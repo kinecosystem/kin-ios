@@ -93,8 +93,7 @@ public struct KinEnvironment {
             let storage = KinFileStorage(directory: documentDirectory,
                                          network: network)
             let testServiceInstance = KinTestService(friendBotApi: FriendBotApi(),
-                                                     networkOperationHandler: networkHandler,
-                                                     dispatchQueue: .promises)
+                                                     networkOperationHandler: networkHandler)
             let testService: KinTestServiceType? = network == KinNetwork.testNet ? testServiceInstance : nil
             return KinEnvironment(network: network,
                                   service: service,
@@ -175,14 +174,13 @@ public struct KinEnvironment {
             let service: KinServiceType =  KinServiceWrapper(kinServiceV3: serviceV3, kinServiceV4: serviceV4, metaServiceApi: metaServiceApi) //minApiVersion == 4 ? serviceV4 : serviceV3
 
             let testServiceV3 = KinTestService(friendBotApi: FriendBotApi(),
-                                               networkOperationHandler: networkHandler,
-                                               dispatchQueue: .promises)
+                                               networkOperationHandler: networkHandler)
             let testServiceV4 = KinTestServiceV4(airdropApi: AgoraKinAirdropApi(agoraGrpc: grpcProxy),
-                                                 networkOperationHandler: networkHandler,
-                                                 dispatchQueue: .promises)
-            let testServiceInstance: KinTestServiceType = minApiVersion == 4 ? testServiceV4 : testServiceV3
+                                                 kinService: serviceV4,
+                                                 networkOperationHandler: networkHandler)
+            let testServiceInstance: KinTestServiceType = ((metaServiceApi.configuredMinApi == 4 || testMigration) ? testServiceV4 : testServiceV3)
             
-            let testService: KinTestServiceType? = network == KinNetwork.testNet ? testServiceInstance : nil
+            let testService: KinTestServiceType? = (network == KinNetwork.testNet ? testServiceInstance : nil)
 
             return KinEnvironment(network: network,
                                   service: service,

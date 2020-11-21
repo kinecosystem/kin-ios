@@ -69,7 +69,7 @@ extension APBTransactionV4HistoryItem {
     func toKinTransactionHistorical(network: KinNetwork) -> KinTransaction? {
         let record = Record.historical(ts: Date().timeIntervalSince1970,
                                                       resultXdrBytes: [Byte](transactionError.resultXdr),
-                                                      pagingToken: String(bytes: cursor.value, encoding: .utf8) ?? "")
+                                                      pagingToken: cursor.value.base64EncodedString())
 
         let invoices: InvoiceList? = hasInvoiceList ? invoiceList.invoiceList : nil
         

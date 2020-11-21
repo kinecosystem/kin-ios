@@ -94,7 +94,7 @@ extension GetTransactionHistoryRequestV4 {
 
         if let cursor = cursor {
             let protoCursor = APBTransactionV4Cursor()
-            protoCursor.value = cursor.data(using: .utf8)
+            protoCursor.value = Data(base64Encoded: cursor)
             request.cursor = protoCursor
         }
 

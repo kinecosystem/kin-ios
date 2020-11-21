@@ -16,8 +16,7 @@ class KinTestServiceTests: XCTestCase {
     override func setUp() {
         mockFriendBotApi = MockFriendBotApi()
         sut = KinTestService(friendBotApi: mockFriendBotApi,
-                             networkOperationHandler: NetworkOperationHandler(),
-                             dispatchQueue: .main)
+                             networkOperationHandler: NetworkOperationHandler())
     }
 
     func testFundAccountOk() {

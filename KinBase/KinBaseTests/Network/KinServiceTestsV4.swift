@@ -115,8 +115,7 @@ class KinServiceTestsV4: XCTestCase {
     }
 
     func testCreateAccountSucceed() {
-        let accountId = StubObjects.accountId1
-        let expectAccount = KinAccount(key: try! KinAccount.Key(accountId: accountId),
+        let expectAccount = KinAccount(key: try! KinAccount.Key(secretSeed: StubObjects.seed1),
                                        balance: KinBalance(Kin(string: "9999.99400")!),
                                        status: .registered,
                                        sequence: 24497836326387718)

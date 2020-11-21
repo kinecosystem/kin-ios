@@ -20,14 +20,11 @@ public class KinTestService: KinTestServiceType {
     }
     private let friendBotApi: FriendBotApi
     private let networkOperationHandler: NetworkOperationHandler
-    private let dispatchQueue: DispatchQueue
 
     init(friendBotApi: FriendBotApi,
-         networkOperationHandler: NetworkOperationHandler,
-         dispatchQueue: DispatchQueue) {
+         networkOperationHandler: NetworkOperationHandler) {
         self.friendBotApi = friendBotApi
         self.networkOperationHandler = networkOperationHandler
-        self.dispatchQueue = dispatchQueue
     }
 
     public func fundAccount(_ accountId: KinAccount.Id) -> Promise<Void> {
@@ -60,14 +57,14 @@ public class KinTestServiceV4: KinTestServiceType {
     }
     private let airdropApi: KinAirdropApi
     private let networkOperationHandler: NetworkOperationHandler
-    private let dispatchQueue: DispatchQueue
+    private let kinService: KinServiceV4
 
     init(airdropApi: KinAirdropApi,
-         networkOperationHandler: NetworkOperationHandler,
-         dispatchQueue: DispatchQueue) {
+         kinService: KinServiceV4,
+         networkOperationHandler: NetworkOperationHandler) {
         self.airdropApi = airdropApi
         self.networkOperationHandler = networkOperationHandler
-        self.dispatchQueue = dispatchQueue
+        self.kinService = kinService
     }
 
     public func fundAccount(_ accountId: KinAccount.Id) -> Promise<Void> {
@@ -77,12 +74,22 @@ public class KinTestServiceV4: KinTestServiceType {
                 return
             }
 
-            self.airdropApi.airdrop(request: AirdropRequest(accountId: accountId, kin: 1)) { (response) in
+            self.airdropApi.airdrop(request: AirdropRequest(accountId: accountId, kin: 10)) { (response) in
                 switch response.result {
                 case .ok:
                     respond.onSuccess(())
-                    fallthrough
                 default:
+                    self.kinService.resolveTokenAccounts(accountId: accountId)
+                        .then { accounts in
+                            self.airdropApi.airdrop(request: AirdropRequest(accountId: accounts.first?.accountId ?? accountId, kin: 10)) { (response) in
+                                switch response.result {
+                                case .ok:
+                                    respond.onSuccess(())
+                                default:
+                                    respond.onError?(Errors.unknown)
+                                }
+                            }
+                    }
                     respond.onError?(Errors.unknown)
                 }
             }

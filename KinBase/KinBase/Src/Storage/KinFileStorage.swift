@@ -238,9 +238,9 @@ extension KinFileStorage: KinStorageType {
                                      newTransaction: KinTransaction) -> Promise<[KinTransaction]> {
         return getStoredTransactions(accountId: accountId)
             .then(on: fileAccessQueue) { transactions -> [KinTransaction] in
-                return transactions?.items ?? [] + [newTransaction]
+                return (transactions?.items ?? []) + [newTransaction]
             }
-            .then(on: fileAccessQueue) { self.storeTransactions(accountId: accountId, transactions: $0) }
+            .then(on: fileAccessQueue) { transactionsToStore in self.storeTransactions(accountId: accountId, transactions: transactionsToStore) }
     }
 
     public func upsertNewTransactions(accountId: KinAccount.Id,
