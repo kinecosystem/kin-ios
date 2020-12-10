@@ -6,7 +6,7 @@ The KinUX module provides an easy to use out of the box spend flow UI that is pr
 Add the following to your project's Podfile.
 This will also transitively pull in KinBase and KinDesign into your project as well.
 ```
-pod 'KinUX', '~> 0.4.1'
+pod 'KinUX', '~> 0.4.2'
 ```
 
 ##  Overview
@@ -35,14 +35,14 @@ override func viewDidLoad() {
             .Builder(env: KinEnvironment.Agora.testNet())
             .importExistingPrivateKey(key)
             .build()
-  invoice = try Invoice(lineItems: [LineItem(title: "Test Title", 
-                                             amount: Kin(100))])   
+  invoice = try Invoice(lineItems: [LineItem(title: "Test Title",
+                                             amount: Kin(100))])
 }
 
 @objc private func kinUXPaymentFlowTapped() {
   paymentFlowController = PaymentFlowController(kinAccountContext: kinAccountContext,
                                                 hostViewController: self)
-                                                      
+
   paymentFlowController?.confirmPaymentOfInvoice(invoice,
                                                 payerAccount: kinAccountContext.accountId,
                                                 processingAppInfo: appInfoProvider.appInfo,

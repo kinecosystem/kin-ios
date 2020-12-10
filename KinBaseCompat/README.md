@@ -14,7 +14,7 @@ pod 'KinSDK', '~> 1.0.2', :subspecs => ['BackupRestore']
 ```
 Now, replace that with the following and do a clean build:
 ```
-pod 'KinBaseCompat', '~> 0.4.1'
+pod 'KinBaseCompat', '~> 0.4.2'
 ```
 
 If you're not using [kin-sdk-ios](https://github.com/kinecosystem/kin-sdk-ios), please checkout [KinBase](../KinBase/README.md).
@@ -42,7 +42,7 @@ With the migration to Solana just around the corner, apps that want to continue 
 *Any application that does not upgrade will start to receive a `KinService.Errors.upgradeRequired` exception on any request made from `KinAccount`.*
 
 #### Testing migration within your app
-To enable migration of Kin3 -> Kin4 accounts on testnet, `KinClient` has a new optional parameter 
+To enable migration of Kin3 -> Kin4 accounts on testnet, `KinClient` has a new optional parameter
 `testMigration` that will force this sdk into a state where migration will occur on demand if true
 
 #### On Migration Day (Dec 8, 2020)

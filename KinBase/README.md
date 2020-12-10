@@ -7,7 +7,7 @@ The KinBase module is the foundation upon which the rest of the sdk stands on, h
 ## Installation
 Add the following to your Podfile.
 ```
-pod 'KinBase', '~> 0.4.1'
+pod 'KinBase', '~> 0.4.2'
 ```
 
 ## Overview
@@ -18,10 +18,10 @@ Below you'll find a general overview on how to make use of KinBase, but also con
 
 
 ## Quick Start
-Everything starts with a `KinEnvironment` instance that describes which blockchain, services, and storage will be used. For a default setup, simply 
+Everything starts with a `KinEnvironment` instance that describes which blockchain, services, and storage will be used. For a default setup, simply
 
 ### Agora Kin Environment
-The Agora Kin Environment is now the preferred method of communicating to the Kin Blockchain. Agora is a both a gateway to submit payments, but also a history collected that can be used to resolve your full payment history.  
+The Agora Kin Environment is now the preferred method of communicating to the Kin Blockchain. Agora is a both a gateway to submit payments, but also a history collected that can be used to resolve your full payment history.
 When submitting payments, a developer should properly configure an [Agora webhook](https://docs.kin.org/how-it-works#webhooks)., which acts as a delegate to approve and optionally co-sign a transaction to mediate transaction fees.
 Agora can also store additional meta-data about your transaction concerning what your payments were for. This bundle of information is called an `Invoice`, and is offchain data which is referenced by the payment's associated Memo, both which you can read more about down below in the [Sending Payments section](#sending-payments)
 
@@ -149,7 +149,7 @@ An invoice for a payment contains a list of line items, which contain the follow
 
 The `Invoice` and `LineItem` class can be used to construct an Invoice for which to operate on. As an app that sells a set of digital goods or services you may wish to transform the information you have in your own models into an Invoice object and reference it later via it's identifier stored in the SKU.
 ```swift
-let lineItem = try LineItem(title: "Start a Chat", 
+let lineItem = try LineItem(title: "Start a Chat",
                             description: "Your description",
                             amount: Kin(25),
                             sku: SKU([Byte](yourSkuData)))
