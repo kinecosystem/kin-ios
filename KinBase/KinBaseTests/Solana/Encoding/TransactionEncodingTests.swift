@@ -300,6 +300,38 @@ class SolanaTransactionEncodingTests: XCTestCase {
                 .elementsEqual(tx.message.instructions[1].accounts.value)
         )
     }
+    
+    func testTransation_UpdateSignature() {
+        let transaction = createTransaction()
+        
+        XCTAssertEqual(transaction.signatures.count, 2)
+        
+        let signature = Signature([Byte](repeating: 0x33, count: 64))!
+        let updatedTransaction = transaction.updatingSignature(signature: signature)
+        
+        XCTAssertEqual(updatedTransaction.signatures.count, 2)
+        XCTAssertEqual(updatedTransaction.signatures[0], signature)
+        XCTAssertEqual(updatedTransaction.signatures[1], transaction.signatures[1])
+    }
+    
+    func createTransaction() -> SolanaTransaction {
+        let keys = generateKeys(2)
+        let tx = SolanaTransaction.newTransaction(keys[0].asPublicKey(), SolanaInstruction.newInstruction(
+            keys[1].asPublicKey(),
+            Data([5,6,7]),
+            AccountMeta.newAccountMeta(keys[0].asPublicKey(), isSigner: true, isProgram: true)
+        ))
+        
+        let signatures = [
+            Signature([Byte](repeating: 0x11, count: 64)),
+            Signature([Byte](repeating: 0x22, count: 64)),
+        ].compactMap { $0 }
+        
+        return SolanaTransaction(
+            message: tx.message,
+            signatures: signatures
+        )
+    }
 
     func generateKeys(_ amount: Int) -> [KeyPair] {
         var keys = [KeyPair]()

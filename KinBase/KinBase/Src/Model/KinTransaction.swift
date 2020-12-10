@@ -157,14 +157,22 @@ public class KinTransaction: Equatable, CustomStringConvertible, KinTransactionT
     
     public var description: String {
         get {
-            return "KinTransaction(record=\(record)), network=\(network), envelopeXdrBytes=(...), invoiceList=\(String(describing: invoiceList)), transactionHash=\(String(describing: transactionHash)), sourceAccount=\(sourceAccount), sequenceNumber=\(sequenceNumber), fee=\(fee), memo=\(memo), paymentOperations=\(paymentOperations), resultCode=\(String(describing: resultCode))"
+            return "KinTransaction(record=\(record)), network=\(network), envelopeXdrBytes=(...), invoiceList=\(describe(invoiceList)), transactionHash=\(describe(transactionHash)), sourceAccount=\(sourceAccount), sequenceNumber=\(sequenceNumber), fee=\(fee), memo=\(memo), paymentOperations=\(paymentOperations), resultCode=\(describe(resultCode))"
+        }
+    }
+    
+    private func describe<T>(_ element: T?) -> String {
+        if let element = element {
+            return String(describing: element)
+        } else {
+            return "<null>"
         }
     }
 }
 
 public extension SolanaTransaction {
     var transactionHash: KinTransactionHash? {
-        return KinTransactionHash((signatures.first?.encode())!)
+        return KinTransactionHash(signatures.first!.encode())
     }
     
     var sourceAccount: KinAccount.Id {

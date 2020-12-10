@@ -347,15 +347,15 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
                 case .ok:
                     fallthrough
                 case .alreadySubmitted:
-                    guard let transaction =
-                        grpcResponse.toKinTransactionAcknowledged(solanaTransaction: request.transaction,
-                                                                  network: network) else {
-                            fallthrough
+                    guard let signature = Signature(data: grpcResponse.signature.value) else {
+                        fallthrough
+                    }
+                    let solanaTransaction = request.transaction.updatingSignature(signature: signature)
+                    guard let transaction = grpcResponse.toKinTransactionAcknowledged(solanaTransaction: solanaTransaction, network: network) else {
+                        fallthrough
                     }
 
-                    let response = SubmitTransactionResponseV4(result: .ok,
-                                                             error: nil,
-                                                             kinTransaction: transaction)
+                    let response = SubmitTransactionResponseV4(result: .ok, error: nil, kinTransaction: transaction)
                     completion(response)
                 
                 case .failed:

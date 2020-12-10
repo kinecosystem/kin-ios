@@ -328,6 +328,18 @@ public struct SolanaTransaction: SolanaCodable {
         case invalidKey
     }
     
+    func updatingSignature(signature: Signature) -> SolanaTransaction {
+        // Copy and replace the first signature in this transaction
+        // and return a new transaction.
+        var signatures = [signature]
+        signatures.append(contentsOf: self.signatures[1...])
+        
+        return SolanaTransaction(
+            message: message,
+            signatures: signatures
+        )
+    }
+    
     func copyAndSign(signers: KeyPair...) throws -> SolanaTransaction {
         let numRequiredSignatures = Int(message.header.numSignatures)
         if (signers.count > numRequiredSignatures) {
