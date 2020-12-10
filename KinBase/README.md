@@ -68,6 +68,14 @@ Apps should expect to see increased transaction times temporarily on the date of
 An on-demand migration will be attempted to trigger a migration, rebuild, and retry transactions that are submitted from an unmigrated account on this day and optimistically will complete successfully but are not guaranteed.
 After all accounts have been migrated to Solana, transaction times should noticeably improve to around ~1s. Additional performance improvements are still possible and will roll out in future sdk releases.
 
+### Kin 2 Support
+*For those apps that are still on Kin 2 and require support for Kin 2 -> Kin 4 migration*
+You should configure your KinEnvironment to use the Kin 2 NetworkEnvironment as follows:
+```kotlin
+KinEnvironment.Agora.defaultEnvironmentSetup(network: .mainNetKin2, ...)
+```
+
+*Failure to do this will default your app to start on Kin 3 which will create a new account for your users on Kin3 with a 0 Kin balance. You probably do not want to do this.*
 
 ### *As you may notice on the `KinAccountContext.Builder`, there are a few options on how to configure a `KinAccountContext`...*
 

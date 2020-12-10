@@ -380,20 +380,47 @@ extension KinService: KinServiceType {
                 return
             }
 
+            let isKin2 = self.network.isKin2
+            let issuer = self.network.issuer
             let paymentOperations = paymentItems.compactMap { item -> PaymentOperation? in
-                guard let dest = try? KeyPair(accountId: item.destAccountId),
-                    let asset = Asset(type: AssetType.ASSET_TYPE_NATIVE) else {
+                guard let dest = try? KeyPair(accountId: item.destAccountId) else {
                     return nil
                 }
-
-                return PaymentOperation(sourceAccount: sourceKey,
-                                        destination: dest,
-                                        asset: asset,
-                                        amount: item.amount)
+                
+                if isKin2 {
+                    let asset = Asset(
+                        type: AssetType.ASSET_TYPE_CREDIT_ALPHANUM4,
+                        code: "KIN",
+                        issuer: issuer
+                    )!
+                    return PaymentOperation(sourceAccount: sourceKey,
+                                            destination: dest,
+                                            asset: asset,
+                                            amount: item.amount * 100)
+                } else {
+                    guard let asset = Asset(type: AssetType.ASSET_TYPE_NATIVE) else {
+                        return nil
+                    }
+                    
+                    return PaymentOperation(sourceAccount: sourceKey,
+                                            destination: dest,
+                                            asset: asset,
+                                            amount: item.amount)
+                }
             }
 
             do {
-                let nonZeroFee = fee > 0 ? UInt32(fee) : Transaction.defaultOperationFee
+                let nonZeroFee: UInt32
+                if isKin2 {
+                    // Kin 2 will always pay fee of 100 quarks,
+                    // inflated by 100 because of decimal scaling,
+                    // times the number of payment operations
+                    // and in the base currency: XLM
+                    nonZeroFee = Transaction.defaultOperationFee * 100
+                } else {
+                    nonZeroFee = fee > 0 ? UInt32(fee) : Transaction.defaultOperationFee
+                }
+                
                 let transaction = try Transaction(sourceAccount: KinAccount(key: ownerKey, status: .registered, sequence: nonce),
                                                   operations: paymentOperations,
                                                   memo: memo.stellarMemo ?? Memo.none,

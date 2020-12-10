@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         // setup test account (GDV4TKOCDBHB3XGCKAXWYETQRIN4RTJKSD6FQV43E2AUHORR56B4YDC4)
         let key = try! KinAccount.Key(secretSeed: "SA7PKYPSJHOU5I6YTU6OJIOLZXREBCX6N5QK7USSXQCKS65SWSQPIMA7")
         kinAccountContext = try! KinAccountContext
-            .Builder(env: KinEnvironment.Agora.testNet(testMigration: AppDelegate.enableTestMigration))
+            .Builder(env: KinEnvironment.Agora.testNet(useKin2: AppDelegate.useKin2, testMigration: AppDelegate.enableTestMigration))
                    .importExistingPrivateKey(key)
                    .build()
 

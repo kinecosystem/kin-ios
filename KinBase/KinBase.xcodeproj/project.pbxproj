@@ -110,6 +110,10 @@
 		93F66F1F253BEC4600E14D59 /* SolanaKeyPairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1B253BEC4600E14D59 /* SolanaKeyPairTests.swift */; };
 		93F66F20253BEC4600E14D59 /* ShortVecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */; };
 		93F66F24253BF35D00E14D59 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F23253BF35D00E14D59 /* Instruction.swift */; };
+		9A629FAE25714A1600D8E29B /* KinVersionInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A629FAD25714A1600D8E29B /* KinVersionInterceptor.swift */; };
+		9A629FB325717D7600D8E29B /* KinVersionInterceptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A629FB225717D7600D8E29B /* KinVersionInterceptorTests.swift */; };
+		9A629FB925717DEA00D8E29B /* MockGRPCInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */; };
+		9AADA39C257EC1580019A419 /* KinNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AADA39B257EC1580019A419 /* KinNetworkTests.swift */; };
 		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -245,6 +249,10 @@
 		93F66F1B253BEC4600E14D59 /* SolanaKeyPairTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaKeyPairTests.swift; sourceTree = "<group>"; };
 		93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVecTests.swift; sourceTree = "<group>"; };
 		93F66F23253BF35D00E14D59 /* Instruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		9A629FAD25714A1600D8E29B /* KinVersionInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinVersionInterceptor.swift; sourceTree = "<group>"; };
+		9A629FB225717D7600D8E29B /* KinVersionInterceptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinVersionInterceptorTests.swift; sourceTree = "<group>"; };
+		9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGRPCInterceptorManager.swift; sourceTree = "<group>"; };
+		9AADA39B257EC1580019A419 /* KinNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinNetworkTests.swift; sourceTree = "<group>"; };
 		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -377,10 +385,12 @@
 		85572F9D24A823AF003734CB /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9A629FB725717DCC00D8E29B /* Mocks */,
 				8518B10D244C9BE300EC329B /* KinServiceTests.swift */,
 				9387E082254B6F5600D44509 /* KinServiceTestsV4.swift */,
 				858A245D248AB32E002EB843 /* NetworkOperationHandlerTests.swift */,
 				8525B83B24DE31F0008277AB /* AppUserAuthInterceptorTests.swift */,
+				9A629FB225717D7600D8E29B /* KinVersionInterceptorTests.swift */,
 				853EC7B424EDCC06004E0BED /* KinTestServiceTests.swift */,
 				85572F9E24A823BA003734CB /* Stellar */,
 				85572FA024A823F1003734CB /* Agora */,
@@ -470,6 +480,7 @@
 				858A245B24897D0D002EB843 /* BackoffStrategy.swift */,
 				8525B7F324DCCF1F008277AB /* AppUserAuthInterceptor.swift */,
 				9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */,
+				9A629FAD25714A1600D8E29B /* KinVersionInterceptor.swift */,
 				930F62B7255F564100E6A8CF /* UpgradeApiV4Interceptor.swift */,
 			);
 			path = Network;
@@ -532,6 +543,7 @@
 				85737EE8243FBCC80012132E /* Tools */,
 				858ECDA9245783FA006AF3D6 /* KinAccountContextTests.swift */,
 				858ECDB5245A0413006AF3D6 /* KinTransactionTests.swift */,
+				9AADA39B257EC1580019A419 /* KinNetworkTests.swift */,
 				851BC5BA248F0E5E00EC6609 /* KinEnvironmentTests.swift */,
 				85B0240D2371CC7700829FD6 /* Info.plist */,
 			);
@@ -604,6 +616,14 @@
 				93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */,
 			);
 			path = Encoding;
+			sourceTree = "<group>";
+		};
+		9A629FB725717DCC00D8E29B /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -844,6 +864,7 @@
 				85F037002469D86E005734A8 /* DefaultHorizonKinTransactionWhitelistingApi.swift in Sources */,
 				85737EDD243E629C0012132E /* KinAccountApi.swift in Sources */,
 				851E7BB624A2A5FD00B800C8 /* AgoraKinAccountsApi.swift in Sources */,
+				9A629FAE25714A1600D8E29B /* KinVersionInterceptor.swift in Sources */,
 				93F66F10253BEC3800E14D59 /* SolanaTransaction.swift in Sources */,
 				85572F9C24A80E8C003734CB /* ProtoToModel.swift in Sources */,
 				855B76E72436775C0037F407 /* KinTransaction.swift in Sources */,
@@ -897,6 +918,7 @@
 				858ECDB8245A04B6006AF3D6 /* StubObjects.swift in Sources */,
 				851BC5BD248F192300EC6609 /* MockTransactionStreamItem.swift in Sources */,
 				85F037042469DA0A005734A8 /* DefaultHorizonKinTransactionWhitelistingApiTests.swift in Sources */,
+				9AADA39C257EC1580019A419 /* KinNetworkTests.swift in Sources */,
 				851BC5BB248F0E5E00EC6609 /* KinEnvironmentTests.swift in Sources */,
 				853EC7AD24EDB900004E0BED /* AppInfoTests.swift in Sources */,
 				853EC7AF24EDBE6D004E0BED /* InvoiceTests.swift in Sources */,
@@ -910,6 +932,7 @@
 				851B278C24328225004EE486 /* KeyChainStorageTests.swift in Sources */,
 				9387E083254B6F5700D44509 /* KinServiceTestsV4.swift in Sources */,
 				93F66F1F253BEC4600E14D59 /* SolanaKeyPairTests.swift in Sources */,
+				9A629FB325717D7600D8E29B /* KinVersionInterceptorTests.swift in Sources */,
 				851BC5B9248ADA2B00EC6609 /* DefaultHorizonKinAccountCreationApiTests.swift in Sources */,
 				85EEEB8224BE237A002AAC29 /* KinBinaryMemoTests.swift in Sources */,
 				8525B83C24DE31F0008277AB /* AppUserAuthInterceptorTests.swift in Sources */,
@@ -923,6 +946,7 @@
 				85572FA224A8241C003734CB /* AgoraKinAccountsApiTests.swift in Sources */,
 				858ECDAC245784A7006AF3D6 /* MockKinService.swift in Sources */,
 				858ECDAA245783FA006AF3D6 /* KinAccountContextTests.swift in Sources */,
+				9A629FB925717DEA00D8E29B /* MockGRPCInterceptorManager.swift in Sources */,
 				858ECDAE245784D3006AF3D6 /* MockKinStorage.swift in Sources */,
 				93F66F1E253BEC4600E14D59 /* TransactionEncodingTests.swift in Sources */,
 				85713C3524520958005F5A48 /* KinFileStorageTests.swift in Sources */,

@@ -211,7 +211,7 @@ public extension SolanaTransaction {
             let amount = Quark(Data(it.data.value[1..<it.data.value.count]).withUnsafeBytes {$0.load(as: UInt64.self)}).kin
             let source = message.accounts[Int(it.accounts.value[0])].accountId
             let destination = message.accounts[Int(it.accounts.value[1])].accountId
-            return KinPaymentOperation(amount: amount, source: source, destination: destination)
+            return KinPaymentOperation(amount: amount, source: source, destination: destination, isNonNativeAsset: false)
         }
     }
 }
@@ -325,7 +325,8 @@ public struct StellarKinTransaction: Equatable, KinTransactionType {
 
             return KinPaymentOperation(amount: Quark(paymentOperation.amount).kin,
                                        source: operation.sourceAccount?.accountId ?? "",
-                                       destination: paymentOperation.destination.accountId)
+                                       destination: paymentOperation.destination.accountId,
+                                       isNonNativeAsset: paymentOperation.asset.assetCode == "KIN")
         }
     }
 
@@ -381,11 +382,12 @@ extension KinTransaction {
                 return invoices[index]
             }()
 
+            let amount = (network.isKin2 && operation.isNonNativeAsset) ? operation.amount / 100 : operation.amount
             let payment = KinPayment(id: id,
                                      status: .success,
                                      sourceAccountId: operation.source,
                                      destAccountId: operation.destination,
-                                     amount: operation.amount,
+                                     amount: amount,
                                      fee: fee,
                                      memo: memo,
                                      timestamp: record.timestamp,

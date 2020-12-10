@@ -10,17 +10,6 @@ import XCTest
 import KinGrpcApi
 @testable import KinBase
 
-class MockGRPCInterceptorManager: GRPCInterceptorManager {
-    var calledRequestOptions: GRPCRequestOptions?
-    var calledCallOptions: GRPCCallOptions?
-
-    override func startNextInterceptor(withRequest requestOptions: GRPCRequestOptions,
-                                       callOptions: GRPCCallOptions) {
-        calledRequestOptions = requestOptions
-        calledCallOptions = callOptions
-    }
-}
-
 class AppUserAuthInterceptorTests: XCTestCase {
 
     var appInfoProvider = DummyAppInfoProvider()

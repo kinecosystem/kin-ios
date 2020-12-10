@@ -76,6 +76,7 @@ public struct KinEnvironment {
                                                     accountCreationApi: KinAccountCreationApi,
                                                     whitelistingApi: KinTransactionWhitelistingApi,
                                                     enableLogging: Bool) -> KinEnvironment {
+            assertNotLegacy(network)
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
             let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let horizonApi = HorizonKinApi(stellarSdkProxy: StellarSdkProxy(network: network))
@@ -103,19 +104,28 @@ public struct KinEnvironment {
                                   testService: testService,
                                   logger: logger)
         }
+        
+        private static func assertNotLegacy(_ network: KinNetwork) {
+            switch network {
+            case .testNetKin2, .mainNetKin2:
+                fatalError("Unsupported: please upgrade to Agora")
+            default:
+                break
+            }
+        }
     }
 
     public class Agora {
-        public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = false, minApiVersion: Int = 3) -> KinEnvironment {
-            return defaultEnvironmentSetup(network: .mainNet,
+        public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = false, minApiVersion: Int = 3, useKin2: Bool = false) -> KinEnvironment {
+            return defaultEnvironmentSetup(network: useKin2 ? .mainNetKin2 : .mainNet,
                                            appInfoProvider: appInfoProvider,
                                            enableLogging: enableLogging,
                                            minApiVersion: minApiVersion,
                                            testMigration: false)
         }
 
-        public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = true, minApiVersion: Int = 3, testMigration: Bool = false) -> KinEnvironment {
-            return defaultEnvironmentSetup(network: .testNet,
+        public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = true, minApiVersion: Int = 3, useKin2: Bool = false, testMigration: Bool = false) -> KinEnvironment {
+            return defaultEnvironmentSetup(network: useKin2 ? .testNetKin2 : .testNet,
                                            appInfoProvider: appInfoProvider,
                                            enableLogging: enableLogging,
                                            minApiVersion: minApiVersion,
@@ -127,6 +137,10 @@ public struct KinEnvironment {
                                                     enableLogging: Bool,
                                                     minApiVersion: Int,
                                                     testMigration: Bool) -> KinEnvironment {
+            if !network.isKin2 {
+                assertApiVersion(minApiVersion)
+            }
+            
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
             let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let networkHandler = NetworkOperationHandler()
@@ -138,7 +152,10 @@ public struct KinEnvironment {
             let authContext = AppUserAuthContext(appInfoProvider: appInfoProvider)
             let userAgentContext = UserAgentContext(storage: storage)
             var interceptors = [GRPCInterceptorFactory](arrayLiteral: authContext, userAgentContext)
-            if (testMigration) {
+            if network.isKin2 {
+                interceptors.append(KinVersionContext(blockchainVersion: 2)) // Kin2 Blockchain
+            }
+            if testMigration {
                 interceptors.append(UpgradeApiV4Context())
             }
             let grpcProxy = AgoraGrpcProxy(network: network,
@@ -189,6 +206,12 @@ public struct KinEnvironment {
                                   dispatchQueue: .promises,
                                   testService: testService,
                                   logger: logger)
+        }
+        
+        private static func assertApiVersion(_ version: Int) {
+            guard version == 3 || version == 4 else {
+                fatalError("Version \(version) is unsupported. Must be 3 or 4.")
+            }
         }
     }
 }

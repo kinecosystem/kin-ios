@@ -39,7 +39,7 @@ class KinWalletAccountViewController: UIViewController {
     }()
 
     init(accountId: KinAccount.Id) {
-        self.env = KinEnvironment.Agora.testNet(testMigration: AppDelegate.enableTestMigration)
+        self.env = KinEnvironment.Agora.testNet(useKin2: AppDelegate.useKin2, testMigration: AppDelegate.enableTestMigration)
         self.accountContext = KinAccountContext
             .Builder(env: self.env)
             .useExistingAccount(accountId)

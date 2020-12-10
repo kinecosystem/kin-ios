@@ -78,6 +78,7 @@ class KinServiceTests: XCTestCase {
     var mockKinWhitelistingApi: MockWhitelistingApi!
     var mockKinStreamingApi: MockKinStreamingApi!
     var sut: KinServiceType!
+    var sut2: KinServiceType!
 
     override func setUp() {
         mockKinAccountApi = MockKinAccountApi()
@@ -87,6 +88,16 @@ class KinServiceTests: XCTestCase {
         mockKinStreamingApi = MockKinStreamingApi()
 
         sut = KinService(network: .testNet,
+                         networkOperationHandler: NetworkOperationHandler(),
+                         dispatchQueue: .main,
+                         accountApi: mockKinAccountApi,
+                         accountCreationApi: mockKinAccountCreationApi,
+                         transactionApi: mockKinTransactionApi,
+                         transactionWhitelistingApi: mockKinWhitelistingApi,
+                         streamingApi: mockKinStreamingApi,
+                         logger: KinLoggerFactoryImpl(isLoggingEnabled: true))
+        
+        sut2 = KinService(network: .testNetKin2,
                          networkOperationHandler: NetworkOperationHandler(),
                          dispatchQueue: .main,
                          accountApi: mockKinAccountApi,
@@ -262,6 +273,44 @@ class KinServiceTests: XCTestCase {
                 XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)
                 XCTAssertEqual(transaction.record.recordType, Record.RecordType.inFlight)
                 expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testBuildAndSignTransactionKin2Succeed() {
+        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AABOIAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAIAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAFLSU4AAAAAAEW5G8005Z05h9lKYP6VjCyF2379OGk5xeTLLLm15qibAAAAAElQT4AAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAFLSU4AAAAAAEW5G8005Z05h9lKYP6VjCyF2379OGk5xeTLLLm15qibAAAAAIt5kQAAAAAAAAAAAcIY7/sAAABAoSWFNRFdkKFrtXQhTSK/4TFibwBs2M/hd6SwVisS32qLqrSjUwOssELC83Hpe6cyU/BYuvmQvlgGZ38zIV5vAg=="
+
+        let sourceAccountSeed = "SDFDPC5VK7FSFDH4Q3CQPQRA4OPFXYM6CFRXVQOA767OGXFYBEDEQGMF"
+        let destAccountId = "GAQQOLVJB35BIUZMARHI75OYLIS7NWFZOBV3C7YQ37CT3RVXRIQC6CXN"
+
+        let account = KinAccount(
+            key: try! KinAccount.Key(secretSeed: sourceAccountSeed),
+            balance: KinBalance(Kin(string: "9999.99400")!),
+            status: .registered,
+            sequence: 16576250185252864
+        )
+        
+        let paymentItems = [
+            KinPaymentItem(amount: Kin(123), destAccountId: destAccountId),
+            KinPaymentItem(amount: Kin(234), destAccountId: destAccountId),
+        ]
+
+        let expect = expectation(description: "callback")
+        sut2.buildAndSignTransaction(
+            ownerKey: account.key,
+            sourceKey: account.key,
+            nonce: account.sequenceNumber,
+            paymentItems: paymentItems,
+            memo: KinMemo(text: "ohi"),
+            fee: Quark(12)
+        ).then { transaction in
+            XCTAssertEqual(transaction.fee, 20000)
+            XCTAssertEqual(transaction.paymentOperations[0].amount, 12300)
+            XCTAssertEqual(transaction.paymentOperations[1].amount, 23400)
+            XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)
+            XCTAssertEqual(transaction.record.recordType, Record.RecordType.inFlight)
+            expect.fulfill()
         }
 
         waitForExpectations(timeout: 1)
