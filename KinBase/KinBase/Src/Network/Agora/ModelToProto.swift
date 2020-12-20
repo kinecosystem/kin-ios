@@ -114,6 +114,7 @@ extension SubmitTransactionRequestV4 {
         let request = APBTransactionV4SubmitTransactionRequest()
         request.transaction = APBCommonV4Transaction()
         request.transaction.value = transaction.encode()
+        request.invoiceList = invoiceList?.proto
         request.commitment = APBCommonV4Commitment.recent
         
         return request
