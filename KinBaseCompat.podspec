@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinBaseCompat'
-  s.version          = '0.4.3'
+  s.version          = '0.4.4'
   s.summary          = 'Kin SDK for iOS'
 
   s.description      = <<-DESC
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.source_files = 'KinBaseCompat/KinBaseCompat/Src/**/*.swift'
   s.resources = 'KinBaseCompat/KinBaseCompat/Src/KinBackupRestoreModule/*.{strings,xcassets}'
 
-  s.dependency 'KinBase', '~> 0.4.3'
+  s.dependency 'KinBase', '~> 0.4.4'
   s.dependency 'Sodium', '0.8.0'
 
   # Dependencies needed for KinGrpcApi
