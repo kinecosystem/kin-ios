@@ -170,7 +170,7 @@ extension APBAccountV3TransactionEvent {
 
 extension APBAccountV4TransactionEvent {
     func toKinTransactionAcknowledged(network: KinNetwork) -> KinTransaction? {
-        guard hasTransaction && hasTransactionError else {
+        guard hasTransaction && !hasTransactionError else {
             return nil
         }
 
