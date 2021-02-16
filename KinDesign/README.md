@@ -10,7 +10,7 @@ All of these components can be tested out and browsed in the [sample app](../Kin
 ## Installation
 Add the following to your project's Podfile.
 ```
-pod 'KinDesign', '~> 0.4.4'
+pod 'KinDesign', '~> 0.4.5'
 ```
 
 ### Primary Button
