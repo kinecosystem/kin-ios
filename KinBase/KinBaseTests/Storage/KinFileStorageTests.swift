@@ -220,18 +220,16 @@ class KinFileStorageTests: XCTestCase {
 
     func testStoreAndGetTransactionsSucceed() {
         let accountId = StubObjects.accountId1
-
-        let expectEnvelope1 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAANhAAAg/dXTMFwEyDLyL0+Yr+f1f4LYZEEubaO47gaTAQAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDQ3WmCKQd8CSd4+uF/Oj3WxgG5o4XirKsO0H37ke9PZ8QG3CYMOgAPrAA0YD3cfx/87x8VIW/NMj69RRLtZL4G"
         let invoice = StubObjects.stubInvoice
         let invoiceList = try! InvoiceList(invoices: [invoice])
-        let transaction1 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope1)!),
+        let transaction1 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
                                               record: .historical(ts: 123456789,
                                                                   resultXdrBytes: [2, 1],
                                                                   pagingToken: "page1"),
                                               network: .testNet,
                                               invoiceList: invoiceList)
-        let expectEnvelope2 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAIQcuqQ76FFMsBE6P9dhaJfbYuXBrsX8Q38U9xreKIC8AAAAAAAAAAAC7ruAAAAAAAAAAAcIY7/sAAABA6Qs1HI1B40fJNBc0RR0R7WfLDqKgniTGcT7yWa5ogAlEHwIuX54fHPv+sqKmCXa9JRadOmnPxi0/24UGFuUrDw=="
-        let transaction2 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope2)!),
+        
+        let transaction2 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope2)!),
                                                record: .historical(ts: 1234567890,
                                                                    resultXdrBytes: [2, 1],
                                                                    pagingToken: "page2"),
@@ -250,9 +248,11 @@ class KinFileStorageTests: XCTestCase {
         let expectGet = expectation(description: "transactions retrieved")
         sut.getStoredTransactions(accountId: accountId)
             .then { transactions in
-                XCTAssertEqual(transactions?.items, expectTransactions)
-                XCTAssertEqual(transactions?.headPagingToken, "page1")
-                XCTAssertEqual(transactions?.tailPagingToken, "page2")
+                let t = try! XCTUnwrap(transactions)
+                XCTAssertEqual(t.items[0], expectTransactions[0])
+                XCTAssertEqual(t.items[1], expectTransactions[1])
+                XCTAssertEqual(t.headPagingToken, "page1")
+                XCTAssertEqual(t.tailPagingToken, "page2")
                 expectGet.fulfill()
         }
 

@@ -56,7 +56,7 @@ class KinWalletDemoViewController: UIViewController {
 
     @objc func addNewAccountButtonTapped() {
         guard let newAccountContext = try? KinAccountContext
-            .Builder(env: KinEnvironment.Agora.testNet(useKin2: AppDelegate.useKin2, testMigration: AppDelegate.enableTestMigration))
+            .Builder(env: KinEnvironment.Agora.testNet())
             .createNewAccount()
             .build() else {
                 return

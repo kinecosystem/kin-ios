@@ -115,7 +115,7 @@ class KinServiceV4IntegrationTests: XCTestCase {
         // KinAccountContext
 
         context.getAccount().test(150, self) // To force creation of the account
-        context.env.testService?.fundAccount(context.accountId).test(150, self) // airdrop in 1 Kin
+        context.env.testService?.fundAccount(context.accountId, amount: 10).test(150, self) // airdrop in 1 Kin
 
 //        let testPayment: () -> Void = { self.context.sendKinPayment(KinPaymentItem(amount: Quark(Int.random(in: 0..<100)).kin, destAccountId: airdropAccount.accountId), memo: KinMemo.none)
 //            .test(150, self) { (value, error) in
@@ -137,65 +137,6 @@ class KinServiceV4IntegrationTests: XCTestCase {
                 }.catch { error in
                     onCompleted(error)
                 }
-        })
-    }
-    
-    func testMigration() {
-        let envV3 = KinEnvironment.Agora.testNet(minApiVersion: 3)
-        let contextV3 = try! KinAccountContext.Builder.init(env: envV3)
-            .createNewAccount()
-            .build()
-        
-        contextV3.getAccount().test(15, self) { (value, error) in
-            if (error == nil) {
-                print("Account Creation Complete")
-            } else {
-                print("Account Creation Failed: $error")
-            }
-        }
-        
-        envV3.testService?.fundAccount(contextV3.accountId).test(15, self) { (value, error) in
-            if (error == nil) {
-                print("Airdrop Complete")
-            } else {
-                print("Airdrop Failed: $error")
-            }
-        }
-        
-        contextV3.getAccount(forceUpdate: true).test(15, self) { (value, error) in
-            if (error == nil) {
-                print("Balance: \(String(describing: value?.balance.amount))")
-            } else {
-                print("Account Creation Failed: $error")
-            }
-        }
-        
-        let contextV4Upgrade = KinAccountContext.Builder.init(env: KinEnvironment.Agora.testNet(minApiVersion: 3, testMigration: true))
-            .useExistingAccount(contextV3.accountId)
-            .build()
-        
-//        contextV4Upgrade.sendKinPayments(
-//            [KinPaymentItem](arrayLiteral: KinPaymentItem(amount: randomQuarkAmount(100).kin, destAccountId: airdropAccount.accountId)),
-//            memo: .none,
-//            destinationAccountSpec: .exact
-//        ).test(120, self) { (value, error) in
-//            if (error == nil) {
-//                print("Send Complete")
-//            } else {
-//                print("Send Failed: \(String(describing: error))")
-//            }
-//        }
-        
-        runTest(times: 10, testCase: self, test: { onCompleted in
-            contextV4Upgrade.sendKinPayments(
-                [KinPaymentItem](arrayLiteral: KinPaymentItem(amount: self.randomQuarkAmount(100).kin, destAccountId: self.airdropAccount.accountId)),
-                memo: KinMemo.none,
-                destinationAccountSpec: .exact
-            ).then { it in
-                onCompleted(it)
-            }.catch { error in
-                onCompleted(error)
-            }
         })
     }
     

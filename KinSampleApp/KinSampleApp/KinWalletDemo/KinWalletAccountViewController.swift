@@ -39,7 +39,7 @@ class KinWalletAccountViewController: UIViewController {
     }()
 
     init(accountId: KinAccount.Id) {
-        self.env = KinEnvironment.Agora.testNet(useKin2: AppDelegate.useKin2, testMigration: AppDelegate.enableTestMigration)
+        self.env = KinEnvironment.Agora.testNet()
         self.accountContext = KinAccountContext
             .Builder(env: self.env)
             .useExistingAccount(accountId)
@@ -116,7 +116,7 @@ class KinWalletAccountViewController: UIViewController {
 
     private func fundWalletTapped() {
         loadingSpinner.startAnimating()
-        env.testService?.fundAccount(accountContext.accountId)
+        env.testService?.fundAccount(accountContext.accountId, amount: 100)
             .then(on: .main) { [weak self] _ in
                 print("funded")
                 self?.loadingSpinner.stopAnimating()

@@ -181,9 +181,9 @@ PODS:
     - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
     - gRPC-ProtoRPC (~> 1.28.0)
     - KinGrpcApi/Messages
-  - PromisesObjC (1.2.11)
-  - PromisesSwift (1.2.11):
-    - PromisesObjC (= 1.2.11)
+  - PromisesObjC (1.2.12)
+  - PromisesSwift (1.2.12):
+    - PromisesObjC (= 1.2.12)
   - Protobuf (3.11.4)
   - Sodium (0.8.0)
 
@@ -236,11 +236,11 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: d3e2f7e4c3c36dc1b45b7c47f6961f894c9d6810
   kin-stellar-ios-mac-sdk: b3069fd5023286c49a4f593d0b094e9ce609ddbe
   KinGrpcApi: e9f44c26aff1948cd86e0e7157711862b950111a
-  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
-  PromisesSwift: fed4eb6f7a29846a22624d1b86b77e1dedb88724
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PromisesSwift: 64085cf6e5fc1b5001f90cf31e87a1f1621fefee
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
 PODFILE CHECKSUM: 7fcc9dc1f914014c9d599d944aa83362706d6fc3
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

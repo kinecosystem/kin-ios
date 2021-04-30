@@ -9,63 +9,81 @@
 import XCTest
 @testable import KinBase
 
-class MockKinAccountApi: KinAccountApi {
-    var stubGetAccountResponse: GetAccountResponse?
-
-    func getAccount(request: GetAccountRequest, completion: @escaping (GetAccountResponse) -> Void) {
+class MockKinAccountApi: KinAccountApiV4 {
+    
+    var stubGetAccountResponse: GetAccountResponseV4?
+    var stubResolveTokenAccounts: ResolveTokenAccountsResponseV4?
+    
+    func getAccount(request: GetAccountRequestV4, completion: @escaping (GetAccountResponseV4) -> Void) {
         completion(stubGetAccountResponse!)
+    }
+    
+    func resolveTokenAccounts(request: ResolveTokenAccountsRequestV4, completion: @escaping (ResolveTokenAccountsResponseV4) -> Void) {
+        completion(stubResolveTokenAccounts!)
     }
 }
 
-class MockKinAccountCreationApi: KinAccountCreationApi {
-    var stubCreateAccountResponse: CreateAccountResponse?
+class MockKinAccountCreationApi: KinAccountCreationApiV4 {
+    var stubCreateAccountResponse: CreateAccountResponseV4?
 
-    func createAccount(request: CreateAccountRequest, completion: @escaping (CreateAccountResponse) -> Void) {
+    func createAccount(request: CreateAccountRequestV4, completion: @escaping (CreateAccountResponseV4) -> Void) {
         completion(stubCreateAccountResponse!)
     }
 }
 
-class MockKinTransactionApi: KinTransactionApi {
-
-    var stubGetTransactionHistoryResponse: GetTransactionHistoryResponse?
-    var stubGetTransactionResponse: GetTransactionResponse?
-    var stubGetMinFeeResponse: GetMinFeeForTransactionResponse?
-    var stubSubmitTransactionResponse: SubmitTransactionResponse?
-
-    func getTransactionHistory(request: GetTransactionHistoryRequest, completion: @escaping (GetTransactionHistoryResponse) -> Void) {
-        completion(stubGetTransactionHistoryResponse!)
+class MockKinTransactionApi: KinTransactionApiV4 {
+    
+    var stubGetMinKinVersion: GetMinimumKinVersionResponseV4?
+    var stubGetServiceConfig: GetServiceConfigResponseV4?
+    var stubGetRecentBlockHash: GetRecentBlockHashResonseV4?
+    var stubGetMinimumBalanceForRentExemption: GetMinimumBalanceForRentExemptionResponseV4?
+    var stubGetTransactionHistory: GetTransactionHistoryResponseV4?
+    var stubGetTransaction: GetTransactionResponseV4?
+    var stubGetTransactionMinFee: GetMinFeeForTransactionResponseV4?
+    var stubSubmitTransaction: SubmitTransactionResponseV4?
+    
+    func getMinKinVersion(request: GetMinimumKinVersionRequestV4, completion: @escaping (GetMinimumKinVersionResponseV4) -> Void) {
+        completion(stubGetMinKinVersion!)
     }
-
-    func getTransaction(request: GetTransactionRequest, completion: @escaping (GetTransactionResponse) -> Void) {
-        completion(stubGetTransactionResponse!)
+    
+    func getServiceConfig(request: GetServiceConfigRequestV4, completion: @escaping (GetServiceConfigResponseV4) -> Void) {
+        completion(stubGetServiceConfig!)
     }
-
-    func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponse) -> Void) {
-        completion(stubGetMinFeeResponse!)
+    
+    func getRecentBlockHash(request: GetRecentBlockHashRequestV4, completion: @escaping (GetRecentBlockHashResonseV4) -> Void) {
+        completion(stubGetRecentBlockHash!)
     }
-
-    func submitTransaction(request: SubmitTransactionRequest, completion: @escaping (SubmitTransactionResponse) -> Void) {
-        completion(stubSubmitTransactionResponse!)
+    
+    func getMinimumBalanceForRentExemption(request: GetMinimumBalanceForRentExemptionRequestV4, completion: @escaping (GetMinimumBalanceForRentExemptionResponseV4) -> Void) {
+        completion(stubGetMinimumBalanceForRentExemption!)
+    }
+    
+    func getTransactionHistory(request: GetTransactionHistoryRequestV4, completion: @escaping (GetTransactionHistoryResponseV4) -> Void) {
+        completion(stubGetTransactionHistory!)
+    }
+    
+    func getTransaction(request: GetTransactionRequestV4, completion: @escaping (GetTransactionResponseV4) -> Void) {
+        completion(stubGetTransaction!)
+    }
+    
+    func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponseV4) -> Void) {
+        completion(stubGetTransactionMinFee!)
+    }
+    
+    func submitTransaction(request: SubmitTransactionRequestV4, completion: @escaping (SubmitTransactionResponseV4) -> Void) {
+        completion(stubSubmitTransaction!)
     }
 }
 
-class MockWhitelistingApi: KinTransactionWhitelistingApi {
-    var isWhitelistingAvailable: Bool = false
-
-    func whitelistTransaction(request: WhitelistTransactionRequest, completion: @escaping (WhitelistTransactionResponse) -> Void) {
-
-    }
-}
-
-class MockKinStreamingApi: KinStreamingApi {
+class MockKinStreamingApi: KinStreamingApiV4 {
     var stubNewTransactionsStream: Observable<KinTransaction>?
     var stubAccountStream: Observable<KinAccount>?
 
-    func streamAccount(_ accountId: KinAccount.Id) -> Observable<KinAccount> {
+    func streamAccountV4(_ accountId: KinAccount.Id) -> Observable<KinAccount> {
         return stubAccountStream!
     }
 
-    func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction> {
+    func streamNewTransactionsV4(accountId: KinAccount.Id) -> Observable<KinTransaction> {
         return stubNewTransactionsStream!
     }
 }
@@ -75,7 +93,6 @@ class KinServiceTests: XCTestCase {
     var mockKinAccountApi: MockKinAccountApi!
     var mockKinAccountCreationApi: MockKinAccountCreationApi!
     var mockKinTransactionApi: MockKinTransactionApi!
-    var mockKinWhitelistingApi: MockWhitelistingApi!
     var mockKinStreamingApi: MockKinStreamingApi!
     var sut: KinServiceType!
     var sut2: KinServiceType!
@@ -84,28 +101,23 @@ class KinServiceTests: XCTestCase {
         mockKinAccountApi = MockKinAccountApi()
         mockKinAccountCreationApi = MockKinAccountCreationApi()
         mockKinTransactionApi = MockKinTransactionApi()
-        mockKinWhitelistingApi = MockWhitelistingApi()
         mockKinStreamingApi = MockKinStreamingApi()
 
-        sut = KinService(network: .testNet,
+        sut = KinServiceV4(network: .testNet,
                          networkOperationHandler: NetworkOperationHandler(),
                          dispatchQueue: .main,
                          accountApi: mockKinAccountApi,
                          accountCreationApi: mockKinAccountCreationApi,
                          transactionApi: mockKinTransactionApi,
-                         transactionWhitelistingApi: mockKinWhitelistingApi,
                          streamingApi: mockKinStreamingApi,
                          logger: KinLoggerFactoryImpl(isLoggingEnabled: true))
         
-        sut2 = KinService(network: .testNetKin2,
-                         networkOperationHandler: NetworkOperationHandler(),
-                         dispatchQueue: .main,
-                         accountApi: mockKinAccountApi,
-                         accountCreationApi: mockKinAccountCreationApi,
-                         transactionApi: mockKinTransactionApi,
-                         transactionWhitelistingApi: mockKinWhitelistingApi,
-                         streamingApi: mockKinStreamingApi,
-                         logger: KinLoggerFactoryImpl(isLoggingEnabled: true))
+        mockKinTransactionApi.stubGetServiceConfig = .init(
+            result: .ok,
+            subsidizerAccount: StubObjects.accountId1.asPublicKey(),
+            tokenProgram: StubObjects.accountId2.asPublicKey(),
+            token: StubObjects.accountId2.asPublicKey()
+        )
     }
 
     func testCreateAccountSucceed() {
@@ -114,10 +126,12 @@ class KinServiceTests: XCTestCase {
                                        balance: KinBalance(Kin(string: "9999.99400")!),
                                        status: .registered,
                                        sequence: 24497836326387718)
-        let stubResponse = CreateAccountResponse(result: .ok,
-                                                 error: nil,
-                                                 account: expectAccount)
-        mockKinAccountCreationApi.stubCreateAccountResponse = stubResponse
+        
+        mockKinAccountCreationApi.stubCreateAccountResponse = .init(
+            result: .ok,
+            error: nil,
+            account: expectAccount
+        )
 
         let expect = expectation(description: "callback")
         sut.createAccount(accountId: "", signer: expectAccount.key).then { account in
@@ -129,15 +143,20 @@ class KinServiceTests: XCTestCase {
     }
 
     func testCreateAccountError() {
-        let error = KinService.Errors.unknown
-        let stubResponse = CreateAccountResponse(result: .undefinedError,
-                                                 error: error,
-                                                 account: nil)
-        mockKinAccountCreationApi.stubCreateAccountResponse = stubResponse
+        mockKinAccountCreationApi.stubCreateAccountResponse = .init(
+            result: .undefinedError,
+            error: KinService.Errors.unknown,
+            account: nil
+        )
+        
+        mockKinTransactionApi.stubGetMinimumBalanceForRentExemption = .init(result: .ok, lamports: 32)
+        mockKinTransactionApi.stubGetRecentBlockHash = .init(result: .ok, blockHash: Hash())
 
         let expect = expectation(description: "callback")
         sut.createAccount(accountId: "", signer: try! KinAccount.Key.generateRandomKeyPair()).catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+            if case .transientFailure = error as? KinService.Errors {} else {
+                XCTFail()
+            }
             expect.fulfill()
         }
         waitForExpectations(timeout: 1)
@@ -149,10 +168,12 @@ class KinServiceTests: XCTestCase {
                                        balance: KinBalance(Kin(string: "9999.99400")!),
                                        status: .registered,
                                        sequence: 24497836326387718)
-        let stubResponse = GetAccountResponse(result: .ok,
-                                              error: nil,
-                                              account: expectAccount)
-        mockKinAccountApi.stubGetAccountResponse = stubResponse
+        
+        mockKinAccountApi.stubGetAccountResponse = .init(
+            result: .ok,
+            error: nil,
+            account: expectAccount
+        )
 
         let expect = expectation(description: "callback")
         sut.getAccount(accountId: accountId).then { account in
@@ -164,53 +185,56 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetAccountTransientFailure() {
-        let error = KinService.Errors.unknown
-        let stubResponse = GetAccountResponse(result: .transientFailure,
-                                              error: error,
-                                              account: nil)
-        mockKinAccountApi.stubGetAccountResponse = stubResponse
+        mockKinAccountApi.stubGetAccountResponse = .init(
+            result: .transientFailure,
+            error: KinService.Errors.unknown,
+            account: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getAccount(accountId: "").catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+            XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
             expect.fulfill()
         }
         waitForExpectations(timeout: 1)
     }
 
     func testGetAccountNotFound() {
-        let stubResponse = GetAccountResponse(result: .notFound,
-                                              error: nil,
-                                              account: nil)
-        mockKinAccountApi.stubGetAccountResponse = stubResponse
+        mockKinAccountApi.stubGetAccountResponse = .init(
+            result: .notFound,
+            error: nil,
+            account: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getAccount(accountId: "").catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.itemNotFound)
+            XCTAssertError(error, is: KinService.Errors.itemNotFound)
             expect.fulfill()
         }
         waitForExpectations(timeout: 1)
     }
 
     func testGetAccountUpgradeRequired() {
-        let stubResponse = GetAccountResponse(result: .upgradeRequired,
-                                              error: nil,
-                                              account: nil)
-        mockKinAccountApi.stubGetAccountResponse = stubResponse
+        mockKinAccountApi.stubGetAccountResponse = .init(
+            result: .upgradeRequired,
+            error: nil,
+            account: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getAccount(accountId: "").catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+            XCTAssertError(error, is: KinService.Errors.upgradeRequired)
             expect.fulfill()
         }
         waitForExpectations(timeout: 1)
     }
 
     func testGetMinFeeSucceed() {
-        let stubResponse = GetMinFeeForTransactionResponse(result: .ok,
-                                                           error: nil,
-                                                           fee: Quark(101))
-        mockKinTransactionApi.stubGetMinFeeResponse = stubResponse
+        mockKinTransactionApi.stubGetTransactionMinFee = .init(
+            result: .ok,
+            error: nil,
+            fee: Quark(101)
+        )
 
         let expect = expectation(description: "callback")
         sut.getMinFee().then { fee in
@@ -222,15 +246,15 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetMinFeeError() {
-        let error = KinService.Errors.unknown
-        let stubResponse = GetMinFeeForTransactionResponse(result: .error,
-                                                           error: error,
-                                                           fee: nil)
-        mockKinTransactionApi.stubGetMinFeeResponse = stubResponse
+        mockKinTransactionApi.stubGetTransactionMinFee = .init(
+            result: .error,
+            error: KinService.Errors.unknown,
+            fee: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getMinFee().catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+            XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
             expect.fulfill()
         }
 
@@ -238,14 +262,15 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetMinFeeUpgradeRequired() {
-        let stubResponse = GetMinFeeForTransactionResponse(result: .upgradeRequired,
-                                                           error: nil,
-                                                           fee: nil)
-        mockKinTransactionApi.stubGetMinFeeResponse = stubResponse
+        mockKinTransactionApi.stubGetTransactionMinFee = .init(
+            result: .upgradeRequired,
+            error: nil,
+            fee: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getMinFee().catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+            XCTAssertError(error, is: KinService.Errors.upgradeRequired)
             expect.fulfill()
         }
 
@@ -253,10 +278,12 @@ class KinServiceTests: XCTestCase {
     }
 
     func testBuildAndSignTransactionSucceed() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDpSBbgeceq6/vcEh3/blqn0qNYo4q8DLHes4DADOPzunvSjREWBeKJC9SdaKhtCnrcv3J04V1MVmdN5iDQ5HcP"
+        let expectEnvelope = "AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0TkH5OqiL+e3r9ZxQbUBFqC6PySv5Cc9yOzf2guknCHbIcTc2BDEvi57qB3NLGxfacjIVcBgm6hYeBLAoIrYPAgABAyEHLqkO+hRTLAROj/XYWiX22Llwa7F/EN/FPca3iiAvXcX6W5Rx/UxdWFA1UzmGZgUAY7yHYMvnC/isIcIY7/sFSlNQ+F3IgtYUpVZyeIopbd8eq6vQpgZ4iEky9O72oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIAA29oaQADAQABCQPgrrsAAAAAAA=="
 
         let sourceAccountSeed = "SDFDPC5VK7FSFDH4Q3CQPQRA4OPFXYM6CFRXVQOA767OGXFYBEDEQGMF"
         let destAccountId = "GAQQOLVJB35BIUZMARHI75OYLIS7NWFZOBV3C7YQ37CT3RVXRIQC6CXN"
+        
+        mockKinTransactionApi.stubGetRecentBlockHash = .init(result: .ok, blockHash: Hash())
 
         let account = KinAccount(key: try! KinAccount.Key(secretSeed: sourceAccountSeed),
                                  balance: KinBalance(Kin(string: "9999.99400")!),
@@ -277,50 +304,14 @@ class KinServiceTests: XCTestCase {
 
         waitForExpectations(timeout: 1)
     }
-    
-    func testBuildAndSignTransactionKin2Succeed() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AABOIAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAIAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAFLSU4AAAAAAEW5G8005Z05h9lKYP6VjCyF2379OGk5xeTLLLm15qibAAAAAElQT4AAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAFLSU4AAAAAAEW5G8005Z05h9lKYP6VjCyF2379OGk5xeTLLLm15qibAAAAAIt5kQAAAAAAAAAAAcIY7/sAAABAoSWFNRFdkKFrtXQhTSK/4TFibwBs2M/hd6SwVisS32qLqrSjUwOssELC83Hpe6cyU/BYuvmQvlgGZ38zIV5vAg=="
-
-        let sourceAccountSeed = "SDFDPC5VK7FSFDH4Q3CQPQRA4OPFXYM6CFRXVQOA767OGXFYBEDEQGMF"
-        let destAccountId = "GAQQOLVJB35BIUZMARHI75OYLIS7NWFZOBV3C7YQ37CT3RVXRIQC6CXN"
-
-        let account = KinAccount(
-            key: try! KinAccount.Key(secretSeed: sourceAccountSeed),
-            balance: KinBalance(Kin(string: "9999.99400")!),
-            status: .registered,
-            sequence: 16576250185252864
-        )
-        
-        let paymentItems = [
-            KinPaymentItem(amount: Kin(123), destAccountId: destAccountId),
-            KinPaymentItem(amount: Kin(234), destAccountId: destAccountId),
-        ]
-
-        let expect = expectation(description: "callback")
-        sut2.buildAndSignTransaction(
-            ownerKey: account.key,
-            sourceKey: account.key,
-            nonce: account.sequenceNumber,
-            paymentItems: paymentItems,
-            memo: KinMemo(text: "ohi"),
-            fee: Quark(12)
-        ).then { transaction in
-            XCTAssertEqual(transaction.fee, 20000)
-            XCTAssertEqual(transaction.paymentOperations[0].amount, 12300)
-            XCTAssertEqual(transaction.paymentOperations[1].amount, 23400)
-            XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)
-            XCTAssertEqual(transaction.record.recordType, Record.RecordType.inFlight)
-            expect.fulfill()
-        }
-
-        waitForExpectations(timeout: 1)
-    }
 
     func testBuildAndSignTransactionAgoraMemoSucceed() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAANhAAAg/dXTMFwEyDLyL0+Yr+f1f4LYZEEubaO47gaTAQAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDQ3WmCKQd8CSd4+uF/Oj3WxgG5o4XirKsO0H37ke9PZ8QG3CYMOgAPrAA0YD3cfx/87x8VIW/NMj69RRLtZL4G"
+        let expectEnvelope = "AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABdHoppHI/xXaRLRk1yJyBegxHuKVfCPyVYumj/1JP+lS82RjVIkU47boTtllTFmB50OnMvgJXsP/VCu692MxoJAgACBbtbiTuSmfPON/HqV6oaTugti96HN5aanCPaf56BGgfLXcX6W5Rx/UxdWFA1UzmGZgUAY7yHYMvnC/isIcIY7/shBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogL0elh1WujKW7sQtSpf0P3aTdBVzypYIwYsZlZdQdOL88BUpTUPhdyILWFKVWcniKKW3fHqur0KYGeIhJMvTu9qAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIEACxZUUFBSVAzVjB6QmNCTWd5OGk5UG1LL245WCtDMkdSQkxtMmp1TzRHa3dFPQMDAQIBCQPgrrsAAAAAAA=="
 
         let sourceAccountSeed = "SDFDPC5VK7FSFDH4Q3CQPQRA4OPFXYM6CFRXVQOA767OGXFYBEDEQGMF"
         let destAccountId = "GAQQOLVJB35BIUZMARHI75OYLIS7NWFZOBV3C7YQ37CT3RVXRIQC6CXN"
+        
+        mockKinTransactionApi.stubGetRecentBlockHash = .init(result: .ok, blockHash: Hash())
 
         let account = KinAccount(key: try! KinAccount.Key(secretSeed: sourceAccountSeed),
                                  balance: KinBalance(Kin(string: "9999.99400")!),
@@ -355,7 +346,9 @@ class KinServiceTests: XCTestCase {
     func testBuildAndSignTransactionUnableToSignError() {
         let sourceAccountId = "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM"
         let destAccountId = "GAQQOLVJB35BIUZMARHI75OYLIS7NWFZOBV3C7YQ37CT3RVXRIQC6CXN"
-
+        
+        mockKinTransactionApi.stubGetRecentBlockHash = .init(result: .ok, blockHash: Hash())
+        
         let account = KinAccount(key: try! KinAccount.Key(accountId: sourceAccountId),
                                  balance: KinBalance(Kin(string: "9999.99400")!),
                                  status: .registered,
@@ -375,20 +368,24 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetTransactionSucceed() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDpSBbgeceq6/vcEh3/blqn0qNYo4q8DLHes4DADOPzunvSjREWBeKJC9SdaKhtCnrcv3J04V1MVmdN5iDQ5HcP"
-        let expectResponse = GetTransactionResponse(result: .ok,
-                                                    error: nil,
-                                                    kinTransaction: try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
-                                                                                        record: .historical(ts: 123456789,
-                                                                                                            resultXdrBytes: [2, 1],
-                                                                                                            pagingToken: "pagingtoken"),
-                                                                                        network: .testNet))
-        mockKinTransactionApi.stubGetTransactionResponse = expectResponse
+        mockKinTransactionApi.stubGetTransaction = .init(
+            result: .ok,
+            error: nil,
+            kinTransaction: try! KinTransaction(
+                envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+                record: .historical(
+                    ts: 123456789,
+                    resultXdrBytes: [2, 1],
+                    pagingToken: "pagingtoken"
+                ),
+                network: .testNet
+            )
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransaction(transactionHash: KinTransactionHash(Data([0, 1])))
             .then { transaction in
-                XCTAssertEqual(expectResponse.kinTransaction, transaction)
+                XCTAssertEqual(transaction, self.mockKinTransactionApi.stubGetTransaction?.kinTransaction)
                 expect.fulfill()
         }
 
@@ -397,15 +394,17 @@ class KinServiceTests: XCTestCase {
 
     func testGetTransactionTransientFailure() {
         let error = KinService.Errors.unknown
-        let expectResponse = GetTransactionResponse(result: .transientFailure,
-                                                    error: error,
-                                                    kinTransaction: nil)
-        mockKinTransactionApi.stubGetTransactionResponse = expectResponse
+        
+        mockKinTransactionApi.stubGetTransaction = .init(
+            result: .transientFailure,
+            error: error,
+            kinTransaction: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransaction(transactionHash: KinTransactionHash(Data([0, 1])))
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+                XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
                 expect.fulfill()
         }
 
@@ -413,15 +412,16 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetTransactionNotFound() {
-        let expectResponse = GetTransactionResponse(result: .notFound,
-                                                    error: nil,
-                                                    kinTransaction: nil)
-        mockKinTransactionApi.stubGetTransactionResponse = expectResponse
+        mockKinTransactionApi.stubGetTransaction = .init(
+            result: .notFound,
+            error: nil,
+            kinTransaction: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransaction(transactionHash: KinTransactionHash(Data([0, 1])))
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.itemNotFound)
+                XCTAssertError(error, is: KinService.Errors.itemNotFound)
                 expect.fulfill()
         }
 
@@ -429,15 +429,16 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetTransactionUpgradeRequired() {
-        let expectResponse = GetTransactionResponse(result: .upgradeRequired,
-                                                    error: nil,
-                                                    kinTransaction: nil)
-        mockKinTransactionApi.stubGetTransactionResponse = expectResponse
+        mockKinTransactionApi.stubGetTransaction = .init(
+            result: .upgradeRequired,
+            error: nil,
+            kinTransaction: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransaction(transactionHash: KinTransactionHash(Data([0, 1])))
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+                XCTAssertError(error, is: KinService.Errors.upgradeRequired)
                 expect.fulfill()
         }
 
@@ -445,23 +446,31 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetLatestTransactionsSucceed() {
-        let expectEnvelope1 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDpSBbgeceq6/vcEh3/blqn0qNYo4q8DLHes4DADOPzunvSjREWBeKJC9SdaKhtCnrcv3J04V1MVmdN5iDQ5HcP"
-        let transaction1 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope1)!),
-                                              record: .historical(ts: 123456789,
-                                                                  resultXdrBytes: [2, 1],
-                                                                  pagingToken: "pagingtoken"),
-                                              network: .testNet)
-        let expectEnvelope2 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAIQcuqQ76FFMsBE6P9dhaJfbYuXBrsX8Q38U9xreKIC8AAAAAAAAAAAC7ruAAAAAAAAAAAcIY7/sAAABA6Qs1HI1B40fJNBc0RR0R7WfLDqKgniTGcT7yWa5ogAlEHwIuX54fHPv+sqKmCXa9JRadOmnPxi0/24UGFuUrDw=="
-        let transaction2 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope2)!),
-                                               record: .historical(ts: 1234567890,
-                                                                   resultXdrBytes: [2, 1],
-                                                                   pagingToken: "pagingtoken"),
-                                               network: .testNet)
+        let transaction1 = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .historical(
+                ts: 123456789,
+                resultXdrBytes: [2, 1],
+                pagingToken: "pagingtoken"
+            ),
+            network: .testNet
+        )
+        
+        let transaction2 = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope2)!),
+            record: .historical(
+                ts: 1234567890,
+                resultXdrBytes: [2, 1],
+                pagingToken: "pagingtoken"
+            ),
+            network: .testNet
+        )
 
-        let expectResponse = GetTransactionHistoryResponse(result: .ok,
-                                                           error: nil,
-                                                           kinTransactions: [transaction1, transaction2])
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .ok,
+            error: nil,
+            kinTransactions: [transaction1, transaction2]
+        )
 
         let expect = expectation(description: "callback")
         sut.getLatestTransactions(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM")
@@ -474,16 +483,16 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetLatestTransactionsTransientFailure() {
-        let error = KinService.Errors.unknown
-        let expectResponse = GetTransactionHistoryResponse(result: .transientFailure,
-                                                           error: error,
-                                                           kinTransactions: nil)
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .transientFailure,
+            error: KinService.Errors.unknown,
+            kinTransactions: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getLatestTransactions(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM")
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+                XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
                 expect.fulfill()
         }
 
@@ -491,15 +500,16 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetLatestTransactionsNotFound() {
-        let expectResponse = GetTransactionHistoryResponse(result: .notFound,
-                                                           error: nil,
-                                                           kinTransactions: nil)
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .notFound,
+            error: nil,
+            kinTransactions: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getLatestTransactions(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM")
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.itemNotFound)
+                XCTAssertError(error, is: KinService.Errors.itemNotFound)
                 expect.fulfill()
         }
 
@@ -507,39 +517,48 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetLatestTransactionsUpgradeRequired() {
-        let expectResponse = GetTransactionHistoryResponse(result: .upgradeRequired,
-                                                           error: nil,
-                                                           kinTransactions: nil)
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .upgradeRequired,
+            error: nil,
+            kinTransactions: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getLatestTransactions(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM")
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+                XCTAssertError(error, is: KinService.Errors.upgradeRequired)
                 expect.fulfill()
         }
 
         waitForExpectations(timeout: 1)
     }
-
+    
     func testGetTransactionPageSucceed() {
-        let expectEnvelope1 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAEAAAADb2hpAAAAAAEAAAABAAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAAQAAAAAhBy6pDvoUUywETo/12Fol9ti5cGuxfxDfxT3Gt4ogLwAAAAAAAAAAALuu4AAAAAAAAAABwhjv+wAAAEDpSBbgeceq6/vcEh3/blqn0qNYo4q8DLHes4DADOPzunvSjREWBeKJC9SdaKhtCnrcv3J04V1MVmdN5iDQ5HcP"
-        let transaction1 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope1)!),
-                                              record: .historical(ts: 123456789,
-                                                                  resultXdrBytes: [2, 1],
-                                                                  pagingToken: "pagingtoken"),
-                                              network: .testNet)
-        let expectEnvelope2 = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAIQcuqQ76FFMsBE6P9dhaJfbYuXBrsX8Q38U9xreKIC8AAAAAAAAAAAC7ruAAAAAAAAAAAcIY7/sAAABA6Qs1HI1B40fJNBc0RR0R7WfLDqKgniTGcT7yWa5ogAlEHwIuX54fHPv+sqKmCXa9JRadOmnPxi0/24UGFuUrDw=="
-        let transaction2 = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope2)!),
-                                               record: .historical(ts: 1234567890,
-                                                                   resultXdrBytes: [2, 1],
-                                                                   pagingToken: "pagingtoken"),
-                                               network: .testNet)
-
-        let expectResponse = GetTransactionHistoryResponse(result: .ok,
-                                                           error: nil,
-                                                           kinTransactions: [transaction1, transaction2])
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        let transaction1 = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .historical(
+                ts: 123456789,
+                resultXdrBytes: [2, 1],
+                pagingToken: "pagingtoken"
+            ),
+            network: .testNet
+        )
+        
+        let transaction2 = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope2)!),
+            record: .historical(
+                ts: 1234567890,
+                resultXdrBytes: [2, 1],
+                pagingToken: "pagingtoken"
+            ),
+            network: .testNet
+        )
+        
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .ok,
+            error: nil,
+            kinTransactions: [transaction1, transaction2]
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransactionPage(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM",
@@ -554,18 +573,18 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetTransactionPageTransientFailure() {
-        let error = KinService.Errors.unknown
-        let expectResponse = GetTransactionHistoryResponse(result: .transientFailure,
-                                                           error: error,
-                                                           kinTransactions: nil)
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .transientFailure,
+            error: KinService.Errors.unknown,
+            kinTransactions: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransactionPage(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM",
                                pagingToken: "pagingtoken",
                                order: .descending)
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+                XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
                 expect.fulfill()
             }
 
@@ -573,17 +592,18 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetTransactionPageNotFound() {
-        let expectResponse = GetTransactionHistoryResponse(result: .notFound,
-                                                           error: nil,
-                                                           kinTransactions: nil)
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .notFound,
+            error: nil,
+            kinTransactions: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransactionPage(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM",
                                pagingToken: "pagingtoken",
                                order: .descending)
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.itemNotFound)
+                XCTAssertError(error, is: KinService.Errors.itemNotFound)
                 expect.fulfill()
             }
 
@@ -591,17 +611,18 @@ class KinServiceTests: XCTestCase {
     }
 
     func testGetTransactionPageUpgradeRequired() {
-        let expectResponse = GetTransactionHistoryResponse(result: .upgradeRequired,
-                                                           error: nil,
-                                                           kinTransactions: nil)
-        mockKinTransactionApi.stubGetTransactionHistoryResponse = expectResponse
+        mockKinTransactionApi.stubGetTransactionHistory = .init(
+            result: .upgradeRequired,
+            error: nil,
+            kinTransactions: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.getTransactionPage(accountId: "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM",
                                pagingToken: "pagingtoken",
                                order: .descending)
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+                XCTAssertError(error, is: KinService.Errors.upgradeRequired)
                 expect.fulfill()
             }
 
@@ -609,20 +630,27 @@ class KinServiceTests: XCTestCase {
     }
 
     func testSubmitTransactionSucceed() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAIQcuqQ76FFMsBE6P9dhaJfbYuXBrsX8Q38U9xreKIC8AAAAAAAAAAAC7ruAAAAAAAAAAAcIY7/sAAABA6Qs1HI1B40fJNBc0RR0R7WfLDqKgniTGcT7yWa5ogAlEHwIuX54fHPv+sqKmCXa9JRadOmnPxi0/24UGFuUrDw=="
-        let inFlightTransaction = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
-                                                      record: .inFlight(ts: 123456789),
-                                                      network: .testNet,
-                                                      invoiceList: StubObjects.stubInvoiceList1)
-        let ackedTransaction = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
-                                                   record: .acknowledged(ts: 123456799,
-                                                                         resultXdrBytes: [0, 1]),
-                                                   network: .testNet)
-        let expectResponse = SubmitTransactionResponse(result: .ok,
-                                                       error: nil,
-                                                       kinTransaction: ackedTransaction)
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet,
+            invoiceList: StubObjects.stubInvoiceList1
+        )
+        
+        let ackedTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .acknowledged(
+                ts: 123456799,
+                resultXdrBytes: [0, 1]
+            ),
+            network: .testNet
+        )
 
-        mockKinTransactionApi.stubSubmitTransactionResponse = expectResponse
+        mockKinTransactionApi.stubSubmitTransaction = .init(
+            result: .ok,
+            error: nil,
+            kinTransaction: ackedTransaction
+        )
 
         let expect = expectation(description: "callback")
         sut.submitTransaction(transaction: inFlightTransaction)
@@ -635,21 +663,22 @@ class KinServiceTests: XCTestCase {
     }
 
     func testSubmitTransactionError() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAIQcuqQ76FFMsBE6P9dhaJfbYuXBrsX8Q38U9xreKIC8AAAAAAAAAAAC7ruAAAAAAAAAAAcIY7/sAAABA6Qs1HI1B40fJNBc0RR0R7WfLDqKgniTGcT7yWa5ogAlEHwIuX54fHPv+sqKmCXa9JRadOmnPxi0/24UGFuUrDw=="
-        let inFlightTransaction = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
-                                                      record: .inFlight(ts: 123456789),
-                                                      network: .testNet)
-        let error = KinService.Errors.unknown
-        let expectResponse = SubmitTransactionResponse(result: .transientFailure,
-                                                       error: error,
-                                                       kinTransaction: nil)
-
-        mockKinTransactionApi.stubSubmitTransactionResponse = expectResponse
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet
+        )
+        
+        mockKinTransactionApi.stubSubmitTransaction = .init(
+            result: .transientFailure,
+            error: KinService.Errors.unknown,
+            kinTransaction: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.submitTransaction(transaction: inFlightTransaction)
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.transientFailure(error: error))
+                XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
                 expect.fulfill()
         }
 
@@ -657,33 +686,26 @@ class KinServiceTests: XCTestCase {
     }
 
     func testSubmitTransactionUpgradeRequired() {
-        let expectEnvelope = "AAAAAF3F+luUcf1MXVhQNVM5hmYFAGO8h2DL5wv4rCHCGO/7AAAAZAA65AMAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAIQcuqQ76FFMsBE6P9dhaJfbYuXBrsX8Q38U9xreKIC8AAAAAAAAAAAC7ruAAAAAAAAAAAcIY7/sAAABA6Qs1HI1B40fJNBc0RR0R7WfLDqKgniTGcT7yWa5ogAlEHwIuX54fHPv+sqKmCXa9JRadOmnPxi0/24UGFuUrDw=="
-        let inFlightTransaction = try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
-                                                      record: .inFlight(ts: 123456789),
-                                                      network: .testNet)
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet
+        )
 
-        let expectResponse = SubmitTransactionResponse(result: .upgradeRequired,
-                                                       error: nil,
-                                                       kinTransaction: nil)
-
-        mockKinTransactionApi.stubSubmitTransactionResponse = expectResponse
+        mockKinTransactionApi.stubSubmitTransaction = .init(
+            result: .upgradeRequired,
+            error: nil,
+            kinTransaction: nil
+        )
 
         let expect = expectation(description: "callback")
         sut.submitTransaction(transaction: inFlightTransaction)
             .catch { error in
-                XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+                XCTAssertError(error, is: KinService.Errors.upgradeRequired)
                 expect.fulfill()
         }
 
         waitForExpectations(timeout: 1)
-    }
-
-    func testCanWhitelistTransaction() {
-        mockKinWhitelistingApi.isWhitelistingAvailable = true
-        sut.canWhitelistTransactions().then { XCTAssertTrue($0) }
-
-        mockKinWhitelistingApi.isWhitelistingAvailable = false
-        sut.canWhitelistTransactions().then { XCTAssertFalse($0) }
     }
 
     func testStreamNewTransactions() {

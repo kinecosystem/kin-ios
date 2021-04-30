@@ -23,7 +23,7 @@ class KinTransactionTests: XCTestCase {
         XCTAssertEqual(payments.count, 1)
         XCTAssertEqual(payments.first!.id.offset, 0)
         XCTAssertEqual(payments.first!.id.transactionHash, transaction.transactionHash)
-        XCTAssertEqual(payments.first!.id.value, transaction.transactionHash!.rawValue + [0])
+        XCTAssertEqual(payments.first!.id.value, transaction.transactionHash.rawValue + [0])
         XCTAssertEqual(payments.first!.amount, transaction.paymentOperations.first!.amount)
         XCTAssertEqual(payments.first!.fee, transaction.fee)
         XCTAssertEqual(payments.first!.sourceAccountId, transaction.sourceAccount)

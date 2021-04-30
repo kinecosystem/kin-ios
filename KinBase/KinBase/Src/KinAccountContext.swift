@@ -451,28 +451,16 @@ extension KinAccountContext: KinPaymentWriteOperations {
                     return sourceAccountPromise.then { accountData in
                         paymentItemsPromise.then { it in
                             attemptNumber = attemptNumber + 1
-                            return self.getFee()
-                                .then { fee in
-                                    self.service.buildAndSignTransaction(
-                                        ownerKey: accountData.ownerKey,
-                                        sourceKey: accountData.sourceKey,
-                                        nonce: accountData.nonce,
-                                        paymentItems: it,
-                                        memo: memo,
-                                        fee: fee // feeOverride ?: fee
-                                    )
+                            return self.getFee().then { fee in
+                                self.service.buildAndSignTransaction(
+                                    ownerKey: accountData.ownerKey,
+                                    sourceKey: accountData.sourceKey,
+                                    nonce: accountData.nonce,
+                                    paymentItems: it,
+                                    memo: memo,
+                                    fee: fee // feeOverride ?: fee
+                                )
                             }
-//                            .then { it in
-//                                    if (it is StellarKinTransaction) {
-//                                        let tx = org.kin.stellarfork.Transaction.fromEnvelopeXdr(Base64.encodeBase64String(it.bytesValue), it.networkEnvironment.getNetwork())
-//                                        if (signaturesOverride.isNotEmpty()) {
-//                                            tx.signatures = signaturesOverride
-//                                        }
-//
-//                                        it.copy(bytesValue = Base64.decodeBase64(tx.toEnvelopeXdrBase64())!!)
-//                                    } else it
-//                                }
-//                            }
                         }
                     }
                 }
@@ -489,58 +477,56 @@ extension KinAccountContext: KinPaymentWriteOperations {
             }
             return self.service.buildSignAndSubmitTransaction(buildAndSignTransaction:buildSignSubmit)
                 .then(on: self.dispatchQueue) { transaction -> Promise<KinAccount> in
-                        resultTransaction = transaction
-                        return self.storage.advanceSequence(accountId: self.accountId)
+                    resultTransaction = transaction
+                    return self.storage.advanceSequence(accountId: self.accountId)
                 }
                 .then(on: self.dispatchQueue) { _ in
-                        self.storage.insertNewTransaction(accountId: self.accountId,
-                                                          newTransaction: resultTransaction!)
-                            .then { _ in resultTransaction }
+                    self.storage.insertNewTransaction(accountId: self.accountId,
+                                                      newTransaction: resultTransaction!)
+                        .then { _ in resultTransaction }
                 }
                 .then(on: self.dispatchQueue) { [weak self] transaction -> [KinPayment] in
-                        guard let self = self else {
-                            throw Errors.unknown
-                        }
-                        
-                        let payments = transaction!.kinPayments
+                    guard let self = self else {
+                        throw Errors.unknown
+                    }
                     
-                        // If we have an active stream then we rely on that update for balance changes
-                        if (self.accountObservable == nil) {
-                            let amountToDeduct = payments.reduce(Kin.zero) { $0 + $1.amount }
-
-                            let account = try await(self.storage.deductFromAccountBalance(accountId: self.accountId,
-                                                                                          amount: amountToDeduct))
-                            self.balanceSubject.onNext(account.balance)
-                        }
-                       
-                        return payments
+                    let payments = transaction!.kinPayments
+                    
+                    // If we have an active stream then we rely on that update for balance changes
+                    if (self.accountObservable == nil) {
+                        let amountToDeduct = payments.reduce(Kin.zero) { $0 + $1.amount }
+                        
+                        let account = try `await`(self.storage.deductFromAccountBalance(accountId: self.accountId,
+                                                                                        amount: amountToDeduct))
+                        self.balanceSubject.onNext(account.balance)
+                    }
+                    
+                    return payments
                 }.recover { [weak self] (error: Error) -> Promise<[KinPayment]> in
-                        guard let self = self else {
-                            return Promise.init(Errors.unknown)
+                    guard let self = self else {
+                        return Promise.init(Errors.unknown)
+                    }
+                    
+                    guard attemptNumber < MAX_ATTEMPTS else {
+                        return Promise.init(error)
+                    }
+                    
+                    if (error as? KinServiceV4.Errors) == KinServiceV4.Errors.badSequenceNumber {
+                        self.service.invalidateRecentBlockHashCache()
+                        return attempt()
+                        
+                    } else if (error as? KinService.Errors) == KinService.Errors.badSequenceNumber {
+                        return self.getAccount(forceUpdate: true).then { _ in
+                            return attempt()
                         }
                         
-                        guard attemptNumber < MAX_ATTEMPTS else {
-                            return Promise.init(error)
-                        }
+                    } else if (error as? KinServiceV4.Errors == KinServiceV4.Errors.invalidAccount) {
+                        Thread.sleep(until: Date().addingTimeInterval((try? invalidAccountErrorRetryStrategy.nextDelay()) ?? 0))
+                        return attempt()
                         
-                        if (error as? KinServiceV4.Errors == KinServiceV4.Errors.badSequenceNumber) {
-                            self.service.invalidateRecentBlockHashCache()
-                            return attempt()
-                        } else if (error as? KinService.Errors == KinService.Errors.badSequenceNumber) {
-                            if ((self.service as? KinServiceWrapper)?.metaServiceApi.configuredMinApi == 4) {
-                                self.service.invalidateRecentBlockHashCache()
-                                return attempt()
-                            } else {
-                                return self.getAccount(forceUpdate: true).then { _ in
-                                    return attempt()
-                                }
-                            }
-                        } else if (error as? KinServiceV4.Errors == KinServiceV4.Errors.invalidAccount) {
-                            Thread.sleep(until: Date().addingTimeInterval((try? invalidAccountErrorRetryStrategy.nextDelay()) ?? 0))
-                            return attempt()
-                        } else {
-                            return Promise.init(error)
-                        }
+                    } else {
+                        return Promise.init(error)
+                    }
                 }
         }
         

@@ -216,15 +216,13 @@ class KinAccountContextTests: XCTestCase {
         let payments = [KinPaymentItem(amount: Kin(1000), destAccountId: StubObjects.accountId1),
                         KinPaymentItem(amount: Kin(990), destAccountId: StubObjects.accountId2)]
         let memo = KinMemo.none
-
-        let signedEnvelope = "AAAAAOg2QBm0NeppntiRBPTrzbkKvo3F8SZyGqHco/tuLdJtAAAAyABeTpgAAAABAAAAAAAAAAEAAAAAAAAAAgAAAAEAAAAA6DZAGbQ16mme2JEE9OvNuQq+jcXxJnIaodyj+24t0m0AAAABAAAAALtbiTuSmfPON/HqV6oaTugti96HN5aanCPaf56BGgfLAAAAAAAAAAAF9eEAAAAAAQAAAADoNkAZtDXqaZ7YkQT06825Cr6NxfEmchqh3KP7bi3SbQAAAAEAAAAAR6WHVa6MpbuxC1Kl/Q/dpN0FXPKlgjBixmVl1B04vzwAAAAAAAAAAAXmnsAAAAAAAAAAAW4t0m0AAABAejXsRsLudrJhseIcXJ7hwxpTAmg15XKST1/PipJBF3ZAMHVQj2gKOHEaBouMDGeQ7/4Pi30X38nJHBmY4Hn5DA=="
-        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: signedEnvelope)
+        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
         mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
-        let stubAckedTransaction = StubObjects.ackedTransaction(from: signedEnvelope)
+        let stubAckedTransaction = StubObjects.ackedTransaction(from: StubObjects.transactionEnvelopeSigned)
         mockKinService.stubSubmitTransactionResult = .init(stubAckedTransaction)
         mockKinService.stubCanWhitelistTransactionResult = false
         mockKinService.stubMinFee = Quark(100)
@@ -239,7 +237,7 @@ class KinAccountContextTests: XCTestCase {
         let expect = expectation(description: "callback")
         sut.sendKinPayments(payments, memo: memo).then { payments in
             XCTAssertTrue(self.mockKinStorage.sequenceAdvanced)
-            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 1000 - 990)))
+            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 25)))
             XCTAssertEqual(self.mockKinStorage.transactionInserted, stubAckedTransaction)
             XCTAssertEqual(payments, stubAckedTransaction.kinPayments)
             expect.fulfill()
@@ -264,15 +262,13 @@ class KinAccountContextTests: XCTestCase {
         // Set up signed transaction returned by service
         let payment = KinPaymentItem(amount: Kin(1000), destAccountId: StubObjects.accountId2)
         let memo = KinMemo.none
-
-        let signedEnvelope = "AAAAAOg2QBm0NeppntiRBPTrzbkKvo3F8SZyGqHco/tuLdJtAAAAZAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAA6DZAGbQ16mme2JEE9OvNuQq+jcXxJnIaodyj+24t0m0AAAABAAAAAEelh1WujKW7sQtSpf0P3aTdBVzypYIwYsZlZdQdOL88AAAAAAAAAAAF9eEAAAAAAAAAAAFuLdJtAAAAQGUUccKOuGODuCBE/qJ6bczgvkIuBSHrUHICVwYdjNb0BdvcpQd/tznSmqtl0zfrVIVvSEAnlOmeIDw8WyzWEwQ="
-        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: signedEnvelope)
+        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
         mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
-        let stubAckedTransaction = StubObjects.ackedTransaction(from: signedEnvelope)
+        let stubAckedTransaction = StubObjects.ackedTransaction(from: StubObjects.transactionEnvelopeSigned)
         mockKinService.stubSubmitTransactionResult = .init(stubAckedTransaction)
         mockKinService.stubCanWhitelistTransactionResult = false
 
@@ -287,7 +283,7 @@ class KinAccountContextTests: XCTestCase {
         let expect = expectation(description: "callback")
         sut.sendKinPayment(payment, memo: memo).then { resultPayment in
             XCTAssertTrue(self.mockKinStorage.sequenceAdvanced)
-            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 1000)))
+            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 25)))
             XCTAssertEqual(self.mockKinStorage.transactionInserted, stubAckedTransaction)
             XCTAssertEqual(resultPayment, stubAckedTransaction.kinPayments.first)
             expect.fulfill()
@@ -312,15 +308,13 @@ class KinAccountContextTests: XCTestCase {
         // Set up signed transaction returned by service
         let payment = KinPaymentItem(amount: Kin(1000), destAccountId: StubObjects.accountId2)
         let memo = KinMemo.none
-
-        let signedEnvelope = "AAAAAOg2QBm0NeppntiRBPTrzbkKvo3F8SZyGqHco/tuLdJtAAAAZAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAA6DZAGbQ16mme2JEE9OvNuQq+jcXxJnIaodyj+24t0m0AAAABAAAAAEelh1WujKW7sQtSpf0P3aTdBVzypYIwYsZlZdQdOL88AAAAAAAAAAAF9eEAAAAAAAAAAAFuLdJtAAAAQGUUccKOuGODuCBE/qJ6bczgvkIuBSHrUHICVwYdjNb0BdvcpQd/tznSmqtl0zfrVIVvSEAnlOmeIDw8WyzWEwQ="
-        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: signedEnvelope)
+        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
         mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
-        let stubAckedTransaction = StubObjects.ackedTransaction(from: signedEnvelope)
+        let stubAckedTransaction = StubObjects.ackedTransaction(from: StubObjects.transactionEnvelopeSigned)
         mockKinService.stubSubmitTransactionResult = .init(KinService.Errors.upgradeRequired)
         mockKinService.stubCanWhitelistTransactionResult = false
 
@@ -353,16 +347,14 @@ class KinAccountContextTests: XCTestCase {
 
         sut = KinAccountContext(environment: mockEnv,
                                 accountId: key.accountId)
-
-        // Set up signed transaction returned by service
-        let signedEnvelope = "AAAAAOg2QBm0NeppntiRBPTrzbkKvo3F8SZyGqHco/tuLdJtAAAAZAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAA6DZAGbQ16mme2JEE9OvNuQq+jcXxJnIaodyj+24t0m0AAAABAAAAAEelh1WujKW7sQtSpf0P3aTdBVzypYIwYsZlZdQdOL88AAAAAAAAAAAF9eEAAAAAAAAAAAFuLdJtAAAAQGUUccKOuGODuCBE/qJ6bczgvkIuBSHrUHICVwYdjNb0BdvcpQd/tznSmqtl0zfrVIVvSEAnlOmeIDw8WyzWEwQ="
-        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: signedEnvelope)
+        
+        let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
         mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
-        let stubAckedTransaction = StubObjects.ackedTransaction(from: signedEnvelope, withInvoice: true)
+        let stubAckedTransaction = StubObjects.ackedTransaction(from: StubObjects.transactionEnvelopeSigned, withInvoice: true)
         mockKinService.stubSubmitTransactionResult = .init(stubAckedTransaction)
         mockKinService.stubCanWhitelistTransactionResult = false
 
@@ -380,7 +372,7 @@ class KinAccountContextTests: XCTestCase {
                        invoice: StubObjects.stubInvoice,
                        type: .p2p).then { resultPayment in
             XCTAssertTrue(self.mockKinStorage.sequenceAdvanced)
-            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 1000)))
+            XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 25)))
             XCTAssertEqual(self.mockKinStorage.transactionInserted, stubAckedTransaction)
             XCTAssertEqual(resultPayment, stubAckedTransaction.kinPayments.first)
             XCTAssertNotNil(resultPayment.invoice)
