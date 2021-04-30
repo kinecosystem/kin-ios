@@ -10,19 +10,17 @@ import Foundation
 import Promises
 
 public protocol KinAirdropApi {
-    func airdrop(request: AirdropRequest,
-                 completion: @escaping (AirdropResponse) -> Void)
-    
-    func airdrop(accountId: KinAccount.Id, kin: Kin) -> Promise<AirdropResponse>
+    func airdrop(request: AirdropRequest, completion: @escaping (AirdropResponse) -> Void)
+    func airdrop(account: PublicKey, kin: Kin) -> Promise<AirdropResponse>
 }
 
 // MARK: - Request & Response
 public struct AirdropRequest {
-    public let accountId: KinAccount.Id
+    public let account: PublicKey
     public let kin: Kin
 
-    public init(accountId: KinAccount.Id, kin: Kin) {
-        self.accountId = accountId
+    public init(account: PublicKey, kin: Kin) {
+        self.account = account
         self.kin = kin
     }
 }

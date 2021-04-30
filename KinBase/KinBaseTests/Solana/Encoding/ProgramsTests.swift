@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import stellarsdk
 @testable import KinBase
 
 class ProgramsTests: XCTestCase {
@@ -23,19 +22,19 @@ class ProgramsTests: XCTestCase {
         )
         
         let command = [Byte](repeating: 0, count: 4)
-        let lamports = UInt64(12345).toByteArray()
+        let lamports = UInt64(12345).bytes
             
-        let size = UInt64(67890).toByteArray()
+        let size = UInt64(67890).bytes
         
         NSLog("\(instruction.data)")
         
         XCTAssertEqual(command, [Byte](instruction.data[0..<4]))
         XCTAssertEqual(lamports, [Byte](instruction.data[4..<12]))
         XCTAssertEqual(size, [Byte](instruction.data[12..<20]))
-        XCTAssertEqual(keys[2].asPublicKey().value, [Byte](instruction.data[20..<52]))
+        XCTAssertEqual(keys[2].publicKey.bytes, [Byte](instruction.data[20..<52]))
         
-        let tx = SolanaTransaction(
-            data: SolanaTransaction.newTransaction(keys[0].asPublicKey(), instruction).encode()
+        let tx = Transaction(
+            data: Transaction(payer: keys[0].publicKey, instructions: instruction).encode()
         )
         
         XCTAssertNotNil(tx)
@@ -56,7 +55,7 @@ class ProgramsTests: XCTestCase {
             account: keys[0].asPublicKey(),
             mint: keys[1].asPublicKey(),
             owner: keys[2].asPublicKey(),
-            programKey: TokenProgram.PROGRAM_KEY
+            programKey: TokenProgram.publicKey
         )
 
         XCTAssertEqual(Byte(1), instruction.data[0])
@@ -76,10 +75,10 @@ class ProgramsTests: XCTestCase {
             destination: keys[1].asPublicKey(),
             owner: keys[2].asPublicKey(),
             amount: Quark(UInt64(123456789)).kin,
-            programKey: TokenProgram.PROGRAM_KEY
+            programKey: TokenProgram.publicKey
         )
 
-        let expectedAmount = UInt64(123456789).toByteArray()
+        let expectedAmount = UInt64(123456789).bytes
 
         XCTAssertEqual(Byte(3), instruction.data[0])
         XCTAssertEqual(expectedAmount, [Byte](instruction.data[1..<instruction.data.count]))
@@ -104,19 +103,19 @@ class ProgramsTests: XCTestCase {
                                        appIdx: 10,
                                        foreignKeyBytes: [Byte](UUID().uuidString.data(using: .utf8)!))
 
-        let instructionWithTextMemo = MemoProgram.memoInsutructionFromBytes(bytes: textMemo.rawValue)
-        let instructionWithBinaryMemo = MemoProgram.memoInsutructionFromBytes(bytes: binaryMemo.encode().base64EncodedString().bytes)
+        let instructionWithTextMemo = MemoProgram.memoInsutruction(with: textMemo.data)
+        let instructionWithBinaryMemo = MemoProgram.memoInsutruction(with: binaryMemo.encode().base64EncodedData())
 
-        let txTextMemo = SolanaTransaction.newTransaction(
-           keys[0].asPublicKey(),
-           instructionWithTextMemo
+        let txTextMemo = Transaction(
+            payer: keys[0].publicKey,
+            instructions: instructionWithTextMemo
         )
 
-        XCTAssertEqual("1-kek-suffix", String(bytes: txTextMemo.memo.rawValue, encoding: .utf8))
+        XCTAssertEqual("1-kek-suffix", String(bytes: txTextMemo.memo.data, encoding: .utf8))
 
-        let txBinaryMemo = SolanaTransaction.newTransaction(
-           keys[0].asPublicKey(),
-           instructionWithBinaryMemo
+        let txBinaryMemo = Transaction(
+            payer: keys[0].publicKey,
+            instructions: instructionWithBinaryMemo
         )
 
         XCTAssertEqual(binaryMemo.encode(), txBinaryMemo.memo.agoraMemo?.encode())
@@ -124,10 +123,8 @@ class ProgramsTests: XCTestCase {
 
     
     func generateKeys(_ amount: Int) -> [KeyPair] {
-        var keys = [KeyPair]()
-        for _ in 0..<amount {
-           keys.append(try! KeyPair.generateRandomKeyPair())
+        (0..<amount).map { _ in
+           KeyPair.generate()!
         }
-        return keys
     }
 }

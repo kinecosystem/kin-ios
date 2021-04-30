@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import stellarsdk
 @testable import KinBase
 
 class KeyChainStorageTests: XCTestCase {
@@ -22,7 +21,7 @@ class KeyChainStorageTests: XCTestCase {
     }
 
     func testAddAndRetrieve() {
-        let keyPair = try! KeyPair.generateRandomKeyPair()
+        let keyPair = KeyPair.generate()!
         let expectKey = keyPair.seed!.data
 
         try! sut.add(account: keyPair.accountId, key: expectKey)
@@ -33,7 +32,7 @@ class KeyChainStorageTests: XCTestCase {
     }
 
     func testAddAndDelete() {
-        let keyPair = try! KeyPair.generateRandomKeyPair()
+        let keyPair = KeyPair.generate()!
         let key = keyPair.seed!.data
 
         try! sut.add(account: keyPair.accountId, key: key)
@@ -43,7 +42,7 @@ class KeyChainStorageTests: XCTestCase {
     }
 
     func testAddAndReplaceExisting() {
-        let keyPair = try! KeyPair.generateRandomKeyPair()
+        let keyPair = KeyPair.generate()!
         let oldKey = "oldkey".data(using: .utf8)!
         let newKey = keyPair.seed!.data
 
@@ -60,12 +59,12 @@ class KeyChainStorageTests: XCTestCase {
         XCTAssertEqual(try! sut.allAccounts().count, 0)
 
         // One account
-        let keyPair1 = try! KeyPair.generateRandomKeyPair()
+        let keyPair1 = KeyPair.generate()!
         try! sut.add(account: keyPair1.accountId, key: keyPair1.seed!.data)
         XCTAssertEqual(try! sut.allAccounts(), [keyPair1.accountId])
 
         // More than one account
-        let keyPair2 = try! KeyPair.generateRandomKeyPair()
+        let keyPair2 = KeyPair.generate()!
         try! sut.add(account: keyPair2.accountId, key: keyPair2.seed!.data)
         let allAccounts = try! sut.allAccounts()
         XCTAssertEqual(allAccounts.count, 2)
@@ -77,3 +76,9 @@ class KeyChainStorageTests: XCTestCase {
         XCTAssertEqual(try! sut.allAccounts().count, 0)
     }
 }
+
+//extension stellarsdk.Seed {
+//    public var data: Data {
+//        return Data(bytes: self.bytes, count: self.bytes.count)
+//    }
+//}

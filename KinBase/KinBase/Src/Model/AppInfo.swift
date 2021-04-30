@@ -19,32 +19,30 @@ public struct AppIndex {
 
 public struct AppInfo {
     public let appIdx: AppIndex
-    public let kinAccountId: KinAccount.Id
+    public let kinAccount: PublicKey
     public let name: String
     public let appIconData: Data
 
-    public init(appIdx: AppIndex,
-                kinAccountId: KinAccount.Id,
-                name: String,
-                appIconData: Data) {
+    public init(appIdx: AppIndex, kinAccount: PublicKey, name: String, appIconData: Data) {
         self.appIdx = appIdx
-        self.kinAccountId = kinAccountId
+        self.kinAccount = kinAccount
         self.name = name
         self.appIconData = appIconData
     }
 
-    public static let testApp: AppInfo = AppInfo(appIdx: .testApp,
-                                                 kinAccountId: "",
-                                                 name: "Test App",
-                                                 appIconData: Data())
+    public static let testApp: AppInfo = AppInfo(
+        appIdx: .testApp,
+        kinAccount: .zero,
+        name: "Test App",
+        appIconData: Data()
+    )
 }
 
 public struct AppUserCredentials {
     public let appUserId: String
     public let appUserPasskey: String
 
-    public init(appUserId: String,
-                appUserPasskey: String) {
+    public init(appUserId: String, appUserPasskey: String) {
         self.appUserId = appUserId
         self.appUserPasskey = appUserPasskey
     }

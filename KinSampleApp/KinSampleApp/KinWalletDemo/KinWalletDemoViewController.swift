@@ -23,7 +23,7 @@ class KinWalletDemoViewController: UIViewController {
         return tableView
     }()
 
-    private var accounts = [KinAccount.Id]()
+    private var accounts: [PublicKey] = []
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -45,7 +45,7 @@ class KinWalletDemoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        accounts = (UserDefaults.standard.array(forKey: accountsStorageKey) as? [String]) ?? []
+        accounts = (UserDefaults.standard.stringArray(forKey: accountsStorageKey) ?? []).compactMap { PublicKey(base58: $0) }
         tableView.reloadData()
     }
 
@@ -62,8 +62,8 @@ class KinWalletDemoViewController: UIViewController {
                 return
         }
 
-        accounts.append(newAccountContext.accountId)
-        UserDefaults.standard.set(accounts, forKey: accountsStorageKey)
+        accounts.append(newAccountContext.accountPublicKey)
+        UserDefaults.standard.set(accounts.map { $0.base58 }, forKey: accountsStorageKey)
 
         tableView.reloadData()
     }
@@ -83,7 +83,7 @@ extension KinWalletDemoViewController: UITableViewDataSource {
             return .init()
         }
 
-        cell.textLabel?.text = accounts[indexPath.row]
+        cell.textLabel?.text = accounts[indexPath.row].base58
         cell.textLabel?.textColor = .kinBlack
 
         return cell
@@ -137,7 +137,7 @@ extension KinWalletDemoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let accountViewController = KinWalletAccountViewController(accountId: accounts[indexPath.row])
+        let accountViewController = KinWalletAccountViewController(account: accounts[indexPath.row])
         navigationController?.pushViewController(accountViewController, animated: true)
     }
 }

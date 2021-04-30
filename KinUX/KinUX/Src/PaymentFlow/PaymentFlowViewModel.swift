@@ -20,10 +20,7 @@ public class PaymentFlowViewModel: BaseViewModel<PaymentFlowViewModelArgs, Payme
         logger.getLogger(name: String(describing: self))
     }()
 
-    public init(navigator: Navigator,
-                args: PaymentFlowViewModelArgs,
-                kinAccountContext: KinAccountContext,
-                logger: KinLoggerFactory) {
+    public init(navigator: Navigator, args: PaymentFlowViewModelArgs, kinAccountContext: KinAccountContext, logger: KinLoggerFactory) {
         self.navigator = navigator
         self.args = args
         self.kinAccountContext = kinAccountContext
@@ -83,7 +80,7 @@ public class PaymentFlowViewModel: BaseViewModel<PaymentFlowViewModelArgs, Payme
         updateState { _ in
             weak var weakSelf = self
             kinAccountContext.payInvoice(processingAppIdx: args.appInfo.appIdx,
-                                         destinationAccount: args.appInfo.kinAccountId,
+                                         destinationAccount: args.appInfo.kinAccount,
                                          invoice: args.invoice)
                 .then { (kinPayment) in
                     DispatchQueue.main.sync {

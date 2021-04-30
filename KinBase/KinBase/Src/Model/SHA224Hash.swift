@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 
 /// The SHA-224 hash of an `Invoice` or `InvoiceList`.
 public struct SHA224Hash: Equatable, Hashable {

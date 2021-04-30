@@ -8,7 +8,6 @@
 
 import Foundation
 import KinGrpcApi
-import stellarsdk
 
 extension CreateAccountRequestV4 {
     var protoRequest: APBAccountV4CreateAccountRequest {
@@ -23,34 +22,10 @@ extension CreateAccountRequestV4 {
     }
 }
 
-extension CreateAccountRequest {
-    var protoRequest: APBAccountV3CreateAccountRequest {
-        let protoAccountId = APBCommonV3StellarAccountId()
-        protoAccountId.value = accountId
-
-        let request = APBAccountV3CreateAccountRequest()
-        request.accountId = protoAccountId
-
-        return request
-    }
-}
-
-extension GetAccountRequest {
-    var protoRequest: APBAccountV3GetAccountInfoRequest {
-        let protoAccountId = APBCommonV3StellarAccountId()
-        protoAccountId.value = accountId
-
-        let request = APBAccountV3GetAccountInfoRequest()
-        request.accountId = protoAccountId
-
-        return request
-    }
-}
-
 extension GetAccountRequestV4 {
     var protoRequest: APBAccountV4GetAccountInfoRequest {
         let request = APBAccountV4GetAccountInfoRequest()
-        request.accountId = accountId.solanaAccountId
+        request.accountId = account.solanaAccountId
 
         return request
     }
@@ -59,7 +34,7 @@ extension GetAccountRequestV4 {
 extension ResolveTokenAccountsRequestV4 {
     var protoRequest: APBAccountV4ResolveTokenAccountsRequest {
         let request = APBAccountV4ResolveTokenAccountsRequest()
-        request.accountId = accountId.solanaAccountId
+        request.accountId = account.solanaAccountId
         
         return request
     }
@@ -90,7 +65,7 @@ extension GetMinimumBalanceForRentExemptionRequestV4 {
 extension GetTransactionHistoryRequestV4 {
     var protoRequest: APBTransactionV4GetHistoryRequest {
         let request = APBTransactionV4GetHistoryRequest()
-        request.accountId = accountId.solanaAccountId
+        request.accountId = account.solanaAccountId
 
         if let cursor = cursor {
             let protoCursor = APBTransactionV4Cursor()
@@ -127,31 +102,6 @@ extension GetRecentBlockHashRequestV4 {
     }
 }
 
-extension GetTransactionHistoryRequest {
-    var protoRequest: APBTransactionV3GetHistoryRequest {
-        let protoAccountId = APBCommonV3StellarAccountId()
-        protoAccountId.value = accountId
-
-        let request = APBTransactionV3GetHistoryRequest()
-        request.accountId = protoAccountId
-
-        if let cursor = cursor {
-            let protoCursor = APBTransactionV3Cursor()
-            protoCursor.value = cursor.data(using: .utf8)
-            request.cursor = protoCursor
-        }
-
-        switch order {
-        case .ascending:
-            request.direction = .asc
-        case .descending:
-            request.direction = .desc
-        }
-
-        return request
-    }
-}
-
 extension KinTransactionHash {
     var proto: APBCommonV3TransactionHash {
         let hash = APBCommonV3TransactionHash()
@@ -169,18 +119,9 @@ extension KinTransactionHash {
 extension AirdropRequest {
     var protoRequest: APBAirdropV4RequestAirdropRequest {
         let request = APBAirdropV4RequestAirdropRequest()
-        request.accountId = accountId.solanaAccountId
+        request.accountId = account.solanaAccountId
         request.quarks = UInt64(kin.quark)
         request.commitment = APBCommonV4Commitment.single
-        
-        return request
-    }
-}
-
-extension GetTransactionRequest {
-    var protoRequest: APBTransactionV3GetTransactionRequest {
-        let request = APBTransactionV3GetTransactionRequest()
-        request.transactionHash = transactionHash.proto
         
         return request
     }
@@ -196,28 +137,18 @@ extension GetTransactionRequestV4 {
     }
 }
 
-extension SubmitTransactionRequest {
-    var protoRequest: APBTransactionV3SubmitTransactionRequest {
-        let request = APBTransactionV3SubmitTransactionRequest()
-        request.envelopeXdr = Data(base64Encoded: transactionEnvelopeXdr)
-        request.invoiceList = invoiceList?.proto
-        
-        return request
-    }
-}
-
-extension KinAccount.Id {
+extension PublicKey {
     var proto: APBCommonV3StellarAccountId {
         let accountId = APBCommonV3StellarAccountId()
-        accountId.value = self
+        accountId.value = base58
         return accountId
     }
 }
 
-extension KinAccount.Id {
+extension PublicKey {
     var solanaAccountId: APBCommonV4SolanaAccountId{
         let accountId = APBCommonV4SolanaAccountId()
-        accountId.value = Data(try! KeyPair.init(accountId: self).asPublicKey().value)
+        accountId.value = data
         return accountId
     }
 }

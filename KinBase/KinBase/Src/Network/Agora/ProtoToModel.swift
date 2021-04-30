@@ -8,7 +8,6 @@
 
 import Foundation
 import KinGrpcApi
-import stellarsdk
 
 extension Int64 {
     var kinBalance: KinBalance {
@@ -18,33 +17,37 @@ extension Int64 {
 
 extension APBAccountV4AccountInfo {
     var kinAccount: KinAccount? {
-        guard let key = try? KinAccount.Key(publicKey: PublicKey([UInt8](accountId.value))) else {
+        guard let publicKey = PublicKey(accountId.value) else {
             return nil
         }
 
-        return KinAccount(key: key,
-                          balance: balance.kinBalance,
-                          status: .registered,
-                          sequence: 0)
+        return KinAccount(
+            publicKey: publicKey,
+            balance: balance.kinBalance,
+            status: .registered,
+            sequence: 0
+        )
     }
 }
 
 extension APBCommonV4SolanaAccountId {
-    var solanaPublicKey: SolanaPublicKey {
-        return SolanaPublicKey([Byte](self.value))!
+    var publicKey: PublicKey {
+        return PublicKey(value)!
     }
 }
 
 extension APBAccountV3AccountInfo {
     var kinAccount: KinAccount? {
-        guard let key = try? KinAccount.Key(accountId: accountId.value) else {
+        guard let publicKey = PublicKey(base58: accountId.value) else {
             return nil
         }
 
-        return KinAccount(key: key,
-                          balance: balance.kinBalance,
-                          status: .registered,
-                          sequence: sequenceNumber)
+        return KinAccount(
+            publicKey: publicKey,
+            balance: balance.kinBalance,
+            status: .registered,
+            sequence: sequenceNumber
+        )
     }
 }
 
@@ -67,24 +70,25 @@ extension APBTransactionV3HistoryItem {
 
 extension APBTransactionV4HistoryItem {
     func toKinTransactionHistorical(network: KinNetwork) -> KinTransaction? {
-        let record = Record.historical(ts: Date().timeIntervalSince1970,
-                                                      resultXdrBytes: [Byte](transactionError.resultXdr),
-                                                      pagingToken: cursor.value.base64EncodedString())
-
-        let invoices: InvoiceList? = hasInvoiceList ? invoiceList.invoiceList : nil
-        
-       
-        var bytes: [Byte]
-        
-        if ([Byte](solanaTransaction.value).count != 0 ) {
-            bytes =  [Byte](solanaTransaction.value)
-        } else {
-            bytes = [Byte](stellarTransaction.envelopeXdr)
-        }
-        return try? KinTransaction(envelopeXdrBytes: bytes,
-                                   record: record,
-                                   network: network,
-                                   invoiceList: invoices)
+        return nil
+//        let record = Record.historical(ts: Date().timeIntervalSince1970,
+//                                                      resultXdrBytes: [Byte](transactionError.resultXdr),
+//                                                      pagingToken: cursor.value.base64EncodedString())
+//
+//        let invoices: InvoiceList? = hasInvoiceList ? invoiceList.invoiceList : nil
+//
+//
+//        var bytes: [Byte]
+//
+//        if ([Byte](solanaTransaction.value).count != 0 ) {
+//            bytes =  [Byte](solanaTransaction.value)
+//        } else {
+//            bytes = [Byte](stellarTransaction.envelopeXdr)
+//        }
+//        return try? KinTransaction(envelopeXdrBytes: bytes,
+//                                   record: record,
+//                                   network: network,
+//                                   invoiceList: invoices)
     }
 }
 
@@ -108,44 +112,44 @@ extension APBTransactionV3SubmitTransactionResponse {
     }
 }
 
-extension APBCommonV4TransactionError {
-    var resultXdrCode: TransactionResultCode {
-        switch reason {
-        case .none:
-            return TransactionResultCode.success
-        case .unauthorized:
-            return TransactionResultCode.badAuth
-        case .badNonce:
-            return TransactionResultCode.badSeq
-        case .insufficientFunds:
-            return TransactionResultCode.insufficientBalance
-        case .invalidAccount:
-            return TransactionResultCode.noAccount
-        case .unknown:
-            return TransactionResultCode.failed
-        default:
-            return TransactionResultCode.internalError
-        }
-    }
-    
-    var resultXdr: [Byte] {
-        var body: TransactionResultBodyXDR
-        if (resultXdrCode == TransactionResultCode.success) {
-            body = TransactionResultBodyXDR.success([OperationResultXDR]())
-        } else {
-            body = TransactionResultBodyXDR.failed
-        }
-        let result = TransactionResultXDR(feeCharged: 0, resultBody: body, code: resultXdrCode)
-        return try! XDREncoder.encode(result)
-    }
-}
+//extension APBCommonV4TransactionError {
+//    var resultXdrCode: TransactionResultCode {
+//        switch reason {
+//        case .none:
+//            return TransactionResultCode.success
+//        case .unauthorized:
+//            return TransactionResultCode.badAuth
+//        case .badNonce:
+//            return TransactionResultCode.badSeq
+//        case .insufficientFunds:
+//            return TransactionResultCode.insufficientBalance
+//        case .invalidAccount:
+//            return TransactionResultCode.noAccount
+//        case .unknown:
+//            return TransactionResultCode.failed
+//        default:
+//            return TransactionResultCode.internalError
+//        }
+//    }
+//    
+//    var resultXdr: [Byte] {
+//        var body: TransactionResultBodyXDR
+//        if (resultXdrCode == TransactionResultCode.success) {
+//            body = TransactionResultBodyXDR.success([OperationResultXDR]())
+//        } else {
+//            body = TransactionResultBodyXDR.failed
+//        }
+//        let result = TransactionResultXDR(feeCharged: 0, resultBody: body, code: resultXdrCode)
+//        return try! XDREncoder.encode(result)
+//    }
+//}
 
 extension APBTransactionV4SubmitTransactionResponse {
-    func toKinTransactionAcknowledged(solanaTransaction: SolanaTransaction,
+    func toKinTransactionAcknowledged(solanaTransaction: Transaction,
                                       network: KinNetwork) -> KinTransaction? {
 
         let record = Record.acknowledged(ts: Date().timeIntervalSince1970,
-                                         resultXdrBytes: transactionError.resultXdr)
+                                         resultXdrBytes: [])//transactionError.resultXdr)
 
         return try? KinTransaction(envelopeXdrBytes: [Byte](solanaTransaction.encode()),
                                    record: record,
@@ -175,7 +179,7 @@ extension APBAccountV4TransactionEvent {
         }
 
         let record = Record.acknowledged(ts: Date().timeIntervalSince1970,
-                                         resultXdrBytes: transactionError.resultXdr)
+                                         resultXdrBytes: [])//transactionError.resultXdr)
 
         return try? KinTransaction(envelopeXdrBytes: [Byte](transaction.value),
                                    record: record,

@@ -119,20 +119,16 @@ public struct KinEnvironment {
 extension KinEnvironment {
     /// A convinence function to get all account ids stored in the current environment.
     /// - Returns: a `Promise` of `KinAccount.Id`s
-    public func allAccountIds() -> Promise<[KinAccount.Id]> {
+    public func allAccountIds() -> Promise<[PublicKey]> {
         return storage.getAllAccountIds()
     }
 
-    func importPrivateKey(_ key: KinAccount.Key) throws {
-        guard key.privateKey != nil else {
-            throw Errors.missingPrivateKey
-        }
-
-        if storage.hasPrivateKey(key) {
+    func importPrivateKey(_ key: KeyPair) throws {
+        if storage.hasPrivateKey(key.publicKey) {
             return
         }
         
-        let _: KinAccount? = try storage.addAccount(KinAccount(key: key))
+        let _: KinAccount? = try storage.addAccount(KinAccount(publicKey: key.publicKey, privateKey: key.privateKey))
     }
     
     mutating func setEnableLogging(enableLogging: Bool) {

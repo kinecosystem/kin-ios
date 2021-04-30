@@ -61,14 +61,15 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
         
-        // setup test account (GDV4TKOCDBHB3XGCKAXWYETQRIN4RTJKSD6FQV43E2AUHORR56B4YDC4)
-        let key = try! KinAccount.Key(secretSeed: "SA7PKYPSJHOU5I6YTU6OJIOLZXREBCX6N5QK7USSXQCKS65SWSQPIMA7")
+        // Public key: GsRAL8GEGbYxfDT53gSEXTxpThzuyrqmkg6iv4o2kC35
+        let seed = Seed(base58: "5EmJ6yXQVz1gNeHBdMjkqaioLf6Sk1TqUMBGZDwcLg3V")!
+        let key = KeyPair(seed: seed)
         kinAccountContext = try! KinAccountContext
             .Builder(env: KinEnvironment.Agora.testNet())
-                   .importExistingPrivateKey(key)
-                   .build()
-
-               print(kinAccountContext!.accountId)
+            .importExistingPrivateKey(key)
+            .build()
+        
+        print(kinAccountContext!.accountPublicKey)
     }
 
     override func viewWillLayoutSubviews() {
@@ -111,16 +112,21 @@ class HomeViewController: UIViewController {
         let invoice = try! Invoice(lineItems: [LineItem(title: "Test Title", amount: Kin(100))])
         let data = UIImage(named: "ic_launcher")!.pngData()!
 
-        let appInfo = AppInfo(appIdx: .testApp,
-                              kinAccountId: "GDV4TKOCDBHB3XGCKAXWYETQRIN4RTJKSD6FQV43E2AUHORR56B4YDC4",
-                              name: "Test App",
-                              appIconData: data)
-
-        paymentFlowController?.confirmPaymentOfInvoice(invoice,
-                                                       payerAccount: kinAccountContext!.accountId,
-                                                       processingAppInfo: appInfo,
-                                                       onResult: { result in
-                                                        print(result)
-        })
+        let account = PublicKey(base58: "GsRAL8GEGbYxfDT53gSEXTxpThzuyrqmkg6iv4o2kC35")!
+        let appInfo = AppInfo(
+            appIdx: .testApp,
+            kinAccount: account,
+            name: "Test App",
+            appIconData: data
+        )
+        
+        paymentFlowController?.confirmPaymentOfInvoice(
+            invoice,
+            payerAccount: kinAccountContext!.accountPublicKey,
+            processingAppInfo: appInfo,
+            onResult: { result in
+                print(result)
+            }
+        )
     }
 }

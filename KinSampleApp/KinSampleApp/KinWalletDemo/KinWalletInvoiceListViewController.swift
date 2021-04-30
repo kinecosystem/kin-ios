@@ -10,8 +10,8 @@ import UIKit
 import KinBase
 import KinDesign
 
-func invoiceListStorageKey(for account: KinAccount.Id) -> String {
-    return  "kin_wallet_demo_invoice_list_\(account)"
+func invoiceListStorageKey(for account: PublicKey) -> String {
+    return  "kin_wallet_demo_invoice_list_\(account.base58)"
 }
 
 class KinWalletInvoiceListViewController: UIViewController {
@@ -49,7 +49,7 @@ class KinWalletInvoiceListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let key = invoiceListStorageKey(for: accountContext.accountId)
+        let key = invoiceListStorageKey(for: accountContext.accountPublicKey)
         if let storedData = UserDefaults.standard.data(forKey: key),
             let invoiceListBlob = try? KinStorageInvoiceListBlob(data: storedData),
             let invoiceList = invoiceListBlob.invoiceList {
@@ -76,19 +76,19 @@ class KinWalletInvoiceListViewController: UIViewController {
         let invoice = try! Invoice(lineItems: [lineItem])
         let invoiceList = try! InvoiceList(invoices: [invoice])
         let data = invoiceList.storableObject.data()!
-        let key = invoiceListStorageKey(for: accountContext.accountId)
+        let key = invoiceListStorageKey(for: accountContext.accountPublicKey)
         UserDefaults.standard.set(data, forKey: key)
 
         invoices = invoiceList.invoices
     }
 
     func clearInvoices() {
-        let key = invoiceListStorageKey(for: accountContext.accountId)
+        let key = invoiceListStorageKey(for: accountContext.accountPublicKey)
         UserDefaults.standard.set(nil, forKey: key)
     }
 
     @objc func createInvoiceButtonTapped() {
-        let vc = KinWalletCreateInvoiceViewController(accountId: accountContext.accountId)
+        let vc = KinWalletCreateInvoiceViewController(account: accountContext.accountPublicKey)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -28,8 +28,8 @@ public struct KinPayment: Equatable {
 
     public let id: Id
     public let status: Status
-    public let sourceAccountId: KinAccount.Id
-    public let destAccountId: KinAccount.Id
+    public let sourceAccount: PublicKey
+    public let destAccount: PublicKey
     public let amount: Kin
     public let fee: Quark
     public let memo: KinMemo
@@ -41,8 +41,8 @@ public struct KinPayment: Equatable {
     public static func == (lhs: KinPayment, rhs: KinPayment) -> Bool {
         return lhs.id == rhs.id &&
             lhs.status == rhs.status &&
-            lhs.sourceAccountId == rhs.sourceAccountId &&
-            lhs.destAccountId == rhs.destAccountId &&
+            lhs.sourceAccount == rhs.sourceAccount &&
+            lhs.destAccount == rhs.destAccount &&
             lhs.amount == rhs.amount &&
             lhs.fee == rhs.fee &&
             lhs.timestamp == rhs.timestamp &&
@@ -53,18 +53,20 @@ public struct KinPayment: Equatable {
 
 public struct KinPaymentItem {
     public let amount: Kin
-    public let destAccountId: KinAccount.Id
+    public let destAccount: PublicKey
     public let invoice: Invoice?
 
-    public init(amount: Kin,
-                destAccountId: KinAccount.Id,
-                invoice: Invoice? = nil) {
+    public init(amount: Kin, destAccount: PublicKey, invoice: Invoice? = nil) {
         self.amount = amount
-        self.destAccountId = destAccountId
+        self.destAccount = destAccount
         self.invoice = invoice
     }
     
-    public func copy(amount: Kin? = nil, destAccountId: KinAccount.Id? = nil, invoice: Invoice? = nil) -> KinPaymentItem {
-        return KinPaymentItem(amount: amount ?? self.amount, destAccountId: destAccountId ?? self.destAccountId, invoice: invoice ?? self.invoice)
+    public func copy(amount: Kin? = nil, destAccount: PublicKey? = nil, invoice: Invoice? = nil) -> KinPaymentItem {
+        KinPaymentItem(
+            amount: amount ?? self.amount,
+            destAccount: destAccount ?? self.destAccount,
+            invoice: invoice ?? self.invoice
+        )
     }
 }

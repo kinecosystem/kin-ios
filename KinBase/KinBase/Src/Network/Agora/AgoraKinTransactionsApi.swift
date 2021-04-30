@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 import KinGrpcApi
 
 public class AgoraKinTransactionsApi {
@@ -35,170 +34,6 @@ public class AgoraKinTransactionsApi {
     }
 }
 
-extension AgoraKinTransactionsApi: KinTransactionApi {
-    public func getTransactionHistory(request: GetTransactionHistoryRequest,
-                                      completion: @escaping (GetTransactionHistoryResponse) -> Void) {
-        let network = agoraGrpc.network
-        agoraGrpc.getHistory(request.protoRequest)
-            .then { (grpcResponse: APBTransactionV3GetHistoryResponse)  in
-                switch grpcResponse.result {
-                case .ok:
-                    let transactions = grpcResponse.itemsArray
-                        .compactMap { item -> KinTransaction? in
-                            guard let item = item as? APBTransactionV3HistoryItem else {
-                                return nil
-                            }
-
-                            return item.toKinTransactionHistorical(network: network)
-                    }
-                    let response = GetTransactionHistoryResponse(result: .ok,
-                                                                 error: nil,
-                                                                 kinTransactions: transactions)
-                    completion(response)
-                default:
-                    let response = GetTransactionHistoryResponse(result: .notFound,
-                                                                 error: nil,
-                                                                 kinTransactions: nil)
-                    completion(response)
-                }
-            }
-            .catch { error in
-                var result = GetTransactionHistoryResponse.Result.undefinedError
-                if error.canRetry() {
-                    result = .transientFailure
-                } else if error.isForcedUpgrade() {
-                    result = .upgradeRequired
-                }
-                let response = GetTransactionHistoryResponse(result: result,
-                                                             error: error,
-                                                             kinTransactions: nil)
-                completion(response)
-            }
-    }
-
-    public func getTransaction(request: GetTransactionRequest,
-                               completion: @escaping (GetTransactionResponse) -> Void) {
-        let network = agoraGrpc.network
-        agoraGrpc.getTransaction(request.protoRequest)
-            .then { (grpcResponse: APBTransactionV3GetTransactionResponse)  in
-                switch grpcResponse.state {
-                case .success:
-                    let transaction = grpcResponse.hasItem ? grpcResponse.item.toKinTransactionHistorical(network: network) : nil
-                    let response = GetTransactionResponse(result: .ok,
-                                                          error: nil,
-                                                          kinTransaction: transaction)
-                    completion(response)
-                default:
-                    let response = GetTransactionResponse(result: .notFound,
-                                                          error: nil,
-                                                          kinTransaction: nil)
-                    completion(response)
-                }
-            }
-            .catch { error in
-                var result = GetTransactionResponse.Result.undefinedError
-                if error.canRetry() {
-                    result = .transientFailure
-                } else if error.isForcedUpgrade() {
-                    result = .upgradeRequired
-                }
-                
-                let response = GetTransactionResponse(result: result,
-                                                      error: error,
-                                                      kinTransaction: nil)
-                completion(response)
-            }
-    }
-
-    public func submitTransaction(request: SubmitTransactionRequest,
-                                  completion: @escaping (SubmitTransactionResponse) -> Void) {
-        let network = agoraGrpc.network
-        agoraGrpc.submitTransaction(request.protoRequest)
-            .then { (grpcResponse: APBTransactionV3SubmitTransactionResponse) in
-                switch grpcResponse.result {
-                case .ok:
-                    guard let transaction =
-                        grpcResponse.toKinTransactionAcknowledged(envelopeXdrFromRequest: request.transactionEnvelopeXdr,
-                                                                  network: network) else {
-                            fallthrough
-                    }
-
-                    let response = SubmitTransactionResponse(result: .ok,
-                                                             error: nil,
-                                                             kinTransaction: transaction)
-                    completion(response)
-                case .failed:
-                    var result: SubmitTransactionResponse.Result = .transientFailure
-                    if let transactionResult = try? XDRDecoder.decode(TransactionResultXDR.self,
-                                                                      data: grpcResponse.resultXdr) {
-                        switch transactionResult.code {
-                        case .insufficientBalance:
-                            result = .insufficientBalance
-                        case .insufficientFee:
-                            result = .insufficientFee
-                        case .noAccount:
-                            result = .noAccount
-                        case .badSeq:
-                            result = .badSequenceNumber
-                        default:
-                            break
-                        }
-                    }
-
-                    let response = SubmitTransactionResponse(result: result,
-                                                             error: nil,
-                                                             kinTransaction: nil)
-
-                    completion(response)
-                case .invoiceError:
-                    let invoiceErrors = grpcResponse.invoiceErrorsArray.compactMap { item -> InvoiceError? in
-                        guard let error = item as? APBCommonV3InvoiceError else {
-                            return nil
-                        }
-
-                        return error.invoiceError
-                    }
-
-                    let response = SubmitTransactionResponse(result: .invoiceError,
-                                                             error: Errors.invoiceErrors(errors: invoiceErrors),
-                                                             kinTransaction: nil)
-                    completion(response)
-                case .rejected:
-                    let response = SubmitTransactionResponse(result: .webhookRejected,
-                                                             error: nil,
-                                                             kinTransaction: nil)
-                    completion(response)
-                default:
-                    let response = SubmitTransactionResponse(result: .undefinedError,
-                                                             error: nil,
-                                                             kinTransaction: nil)
-                    completion(response)
-                }
-            }
-            .catch { error in
-                var result = SubmitTransactionResponse.Result.undefinedError
-                if error.canRetry() {
-                    result = .transientFailure
-                } else if error.isForcedUpgrade() {
-                    result = .upgradeRequired
-                }
-                
-                let response = SubmitTransactionResponse(result: result,
-                                                         error: error,
-                                                         kinTransaction: nil)
-                completion(response)
-            }
-    }
-
-    public func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponse) -> Void) {
-        // TODO: we need an rpc to fetch this from Agora
-        let response = GetMinFeeForTransactionResponse(result: .ok,
-                                                       error: nil,
-                                                       fee: Quark(100))
-        completion(response)
-    }
-}
-
 extension AgoraKinTransactionsApi: KinTransactionApiV4 {
     public func getMinKinVersion(request: GetMinimumKinVersionRequestV4, completion: @escaping (GetMinimumKinVersionResponseV4) -> Void) {
         agoraGrpc.getMinimumVersion(request.protoRequest)
@@ -210,9 +45,9 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
     public func getServiceConfig(request: GetServiceConfigRequestV4, completion: @escaping (GetServiceConfigResponseV4) -> Void) {
         agoraGrpc.getServiceConfig(request.protoRequest)
             .then { (grpcResponse: APBTransactionV4GetServiceConfigResponse)  in
-                  let subsidizer = grpcResponse.subsidizerAccount.solanaPublicKey
-                  let tokenProgram = grpcResponse.tokenProgram.solanaPublicKey
-                  let token = grpcResponse.token.solanaPublicKey
+                  let subsidizer = grpcResponse.subsidizerAccount.publicKey
+                  let tokenProgram = grpcResponse.tokenProgram.publicKey
+                  let token = grpcResponse.token.publicKey
                 
                 completion(GetServiceConfigResponseV4(result: GetServiceConfigResponseV4.Result.ok, subsidizerAccount: subsidizer, tokenProgram: tokenProgram, token: token))
             }
@@ -347,7 +182,7 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
                 case .ok:
                     fallthrough
                 case .alreadySubmitted:
-                    guard let signature = Signature(data: grpcResponse.signature.value) else {
+                    guard let signature = Signature(grpcResponse.signature.value) else {
                         fallthrough
                     }
                     let solanaTransaction = request.transaction.updatingSignature(signature: signature)
@@ -359,28 +194,25 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
                     completion(response)
                 
                 case .failed:
-                    var result: SubmitTransactionResponseV4.Result = .transientFailure
-                    if let transactionResult = try? XDRDecoder.decode(TransactionResultXDR.self,
-                                                                      data: grpcResponse.transactionError.resultXdr) {
-                        switch transactionResult.code {
-                        case .insufficientBalance:
-                            result = .insufficientBalance
-                        case .insufficientFee:
-                            result = .insufficientFee
-                        case .noAccount:
-                            result = .noAccount
-                        case .badSeq:
-                            result = .badSequenceNumber
-                        default:
-                            break
-                        }
+                    let result: SubmitTransactionResponseV4.Result
+                    switch grpcResponse.transactionError.reason {
+                    case .insufficientFunds:
+                        result = .insufficientBalance
+                    case .invalidAccount:
+                        result = .noAccount
+                    case .badNonce:
+                        result = .badSequenceNumber
+                    default:
+                        result = .transientFailure
                     }
-
-                    let response = SubmitTransactionResponseV4(result: result,
-                                                             error: nil,
-                                                             kinTransaction: nil)
+                    let response = SubmitTransactionResponseV4(
+                        result: result,
+                        error: nil,
+                        kinTransaction: nil
+                    )
 
                     completion(response)
+                    
                 case .invoiceError:
                     let invoiceErrors = grpcResponse.invoiceErrorsArray.compactMap { item -> InvoiceError? in
                         guard let error = item as? APBCommonV3InvoiceError else {

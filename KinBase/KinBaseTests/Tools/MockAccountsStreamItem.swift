@@ -7,13 +7,12 @@
 //
 
 import Foundation
-import stellarsdk
 
-class MockAccountsStreamItem: AccountsStreamItem {
-
-    var stubResponse: StreamResponseEnum<AccountResponse>?
-
-    override func onReceive(response:@escaping StreamResponseEnum<AccountResponse>.ResponseClosure) {
-        response(stubResponse!)
-    }
-}
+//class MockAccountsStreamItem: AccountsStreamItem {
+//
+//    var stubResponse: StreamResponseEnum<AccountResponse>?
+//
+//    override func onReceive(response:@escaping StreamResponseEnum<AccountResponse>.ResponseClosure) {
+//        response(stubResponse!)
+//    }
+//}

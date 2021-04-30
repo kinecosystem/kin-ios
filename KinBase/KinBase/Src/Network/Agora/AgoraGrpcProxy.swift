@@ -15,12 +15,6 @@ protocol AgoraGrpcProxyType {
 }
 
 protocol AgoraAccountServiceGrpcProxy: AgoraGrpcProxyType {
-    // V3 Apis
-    func createAccount(_ request: APBAccountV3CreateAccountRequest) -> Promise<APBAccountV3CreateAccountResponse>
-    func getAccountInfo(_ request: APBAccountV3GetAccountInfoRequest) -> Promise<APBAccountV3GetAccountInfoResponse>
-    func getEvents(_ request: APBAccountV3GetEventsRequest) -> Observable<APBAccountV3Events>
-    
-    //  V4 Apis
     func createAccount(_ request: APBAccountV4CreateAccountRequest) -> Promise<APBAccountV4CreateAccountResponse>
     func getAccountInfo(_ request: APBAccountV4GetAccountInfoRequest) -> Promise<APBAccountV4GetAccountInfoResponse>
     func getEvents(_ request: APBAccountV4GetEventsRequest) -> Observable<APBAccountV4Events>
@@ -28,12 +22,6 @@ protocol AgoraAccountServiceGrpcProxy: AgoraGrpcProxyType {
 }
 
 protocol AgoraTransactionServiceGrpcProxy: AgoraGrpcProxyType {
-    // V3 Apis
-    func getHistory(_ request: APBTransactionV3GetHistoryRequest) -> Promise<APBTransactionV3GetHistoryResponse>
-    func submitTransaction(_ request: APBTransactionV3SubmitTransactionRequest) -> Promise<APBTransactionV3SubmitTransactionResponse>
-    func getTransaction(_ request: APBTransactionV3GetTransactionRequest) -> Promise<APBTransactionV3GetTransactionResponse>
-    
-    // V4 Apis
     func getHistory(_ request: APBTransactionV4GetHistoryRequest) -> Promise<APBTransactionV4GetHistoryResponse>
     func submitTransaction(_ request: APBTransactionV4SubmitTransactionRequest) -> Promise<APBTransactionV4SubmitTransactionResponse>
     func getTransaction(_ request: APBTransactionV4GetTransactionRequest) -> Promise<APBTransactionV4GetTransactionResponse>
@@ -43,7 +31,7 @@ protocol AgoraTransactionServiceGrpcProxy: AgoraGrpcProxyType {
     func getMinimumVersion(_ request: APBTransactionV4GetMinimumKinVersionRequest) -> Promise<APBTransactionV4GetMinimumKinVersionResponse>
 }
 
-protocol AgoraAirdropServiceGrpcProxy : AgoraGrpcProxyType {
+protocol AgoraAirdropServiceGrpcProxy: AgoraGrpcProxyType {
     // V4 Apis
     func airdrop(_ request: APBAirdropV4RequestAirdropRequest) -> Promise<APBAirdropV4RequestAirdropResponse>
 }
@@ -150,23 +138,6 @@ class AgoraGrpcProxy: AgoraGrpcProxyType {
 
 // MARK: - AccountService
 extension AgoraGrpcProxy: AgoraAccountServiceGrpcProxy {
-    // V3 Apis
-    func createAccount(_ request: APBAccountV3CreateAccountRequest) -> Promise<APBAccountV3CreateAccountResponse> {
-        return callUnaryRPC(request: request,
-                            protoMethod: grpcAccountService.createAccount(withMessage:responseHandler:callOptions:))
-    }
-
-    func getAccountInfo(_ request: APBAccountV3GetAccountInfoRequest) -> Promise<APBAccountV3GetAccountInfoResponse> {
-        return callUnaryRPC(request: request,
-                            protoMethod: grpcAccountService.getInfoWithMessage(_:responseHandler:callOptions:))
-    }
-
-    func getEvents(_ request: APBAccountV3GetEventsRequest) -> Observable<APBAccountV3Events> {
-        return callStreamingRPC(request: request,
-                                protoMethod: grpcAccountService.getEventsWithMessage(_:responseHandler:callOptions:))
-    }
-    
-    // V4 Apis
     func createAccount(_ request: APBAccountV4CreateAccountRequest) -> Promise<APBAccountV4CreateAccountResponse> {
         return callUnaryRPC(request: request,
         protoMethod: grpcAccountServiceV4.createAccount(withMessage:responseHandler:callOptions:))
@@ -190,25 +161,6 @@ extension AgoraGrpcProxy: AgoraAccountServiceGrpcProxy {
 
 // MARK: - TransactionService
 extension AgoraGrpcProxy: AgoraTransactionServiceGrpcProxy {
-
-    
-    // V3 Apis
-    func getHistory(_ request: APBTransactionV3GetHistoryRequest) -> Promise<APBTransactionV3GetHistoryResponse> {
-        return callUnaryRPC(request: request,
-                            protoMethod: grpcTransactionService.getHistoryWithMessage(_:responseHandler:callOptions:))
-    }
-
-    func submitTransaction(_ request: APBTransactionV3SubmitTransactionRequest) -> Promise<APBTransactionV3SubmitTransactionResponse> {
-        return callUnaryRPC(request: request,
-                            protoMethod: grpcTransactionService.submitTransaction(withMessage:responseHandler:callOptions:))
-    }
-
-    func getTransaction(_ request: APBTransactionV3GetTransactionRequest) -> Promise<APBTransactionV3GetTransactionResponse> {
-        return callUnaryRPC(request: request,
-                            protoMethod: grpcTransactionService.getWithMessage(_:responseHandler:callOptions:))
-    }
-    
-    //  V4 Apis
     func getHistory(_ request: APBTransactionV4GetHistoryRequest) -> Promise<APBTransactionV4GetHistoryResponse> {
         return callUnaryRPC(request: request,
                             protoMethod: grpcTransactionServiceV4.getHistoryWithMessage(_:responseHandler:callOptions:))

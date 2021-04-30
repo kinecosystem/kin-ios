@@ -15,25 +15,25 @@ public class PaymentFlowController {
 
     private var transition: SheetTransition?
 
-    public init(kinAccountContext: KinAccountContext,
-                hostViewController: UIViewController) {
+    public init(kinAccountContext: KinAccountContext, hostViewController: UIViewController) {
         self.kinAccountContext = kinAccountContext
         self.hostViewController = hostViewController
     }
 
-    public func confirmPaymentOfInvoice(_ invoice: Invoice,
-                                        payerAccount: KinAccount.Id,
-                                        processingAppInfo: AppInfo,
-                                        onResult: @escaping (PaymentFlowViewModelResult) -> Void) {
+    public func confirmPaymentOfInvoice(_ invoice: Invoice, payerAccount: PublicKey, processingAppInfo: AppInfo, onResult: @escaping (PaymentFlowViewModelResult) -> Void) {
         let vc = PaymentFlowViewController()
         vc.resultCallback = onResult
 
-        let viewModel = PaymentFlowViewModel(navigator: vc,
-                                             args: .init(invoice: invoice,
-                                                         payerAccountId: payerAccount,
-                                                         appInfo: processingAppInfo),
-                                             kinAccountContext: kinAccountContext,
-                                             logger: kinAccountContext.env.logger)
+        let viewModel = PaymentFlowViewModel(
+            navigator: vc,
+            args: .init(
+                invoice: invoice,
+                payerAccount: payerAccount,
+                appInfo: processingAppInfo
+            ),
+            kinAccountContext: kinAccountContext,
+            logger: kinAccountContext.env.logger
+        )
 
         vc.attachViewModel(viewModel)
 

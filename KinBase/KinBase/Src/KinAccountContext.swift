@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 import Promises
 
 /// Describes the mode by which updates are presented to an `Observer`
@@ -91,9 +90,7 @@ public protocol KinPaymentWriteOperations {
      - Parameter memo: a memo can be provided to reference what the payment was for., if no memo is desired, then set it to `KinMemo.none`
      - Returns: a `Promise` with the blockchain confirmed `KinPayment`
     */
-    func sendKinPayment(_ paymentItem: KinPaymentItem,
-                        memo: KinMemo)
-        -> Promise<KinPayment>
+    func sendKinPayment(_ paymentItem: KinPaymentItem, memo: KinMemo) -> Promise<KinPayment>
 
     /**
      Sends a batch of payments, each corresponding to `KinPaymentItem` in a single `KinTransaction` to be processed together.
@@ -102,17 +99,9 @@ public protocol KinPaymentWriteOperations {
      - Parameter memo: a memo can be provided to reference what thes batch of payments were for. If no memo is desired, then set it to `KinMemo.none`
      - Returns: a `Promise` with the blockchain confirmed `KinPayment`s or an error
      */
-    func sendKinPayments(_ payments: [KinPaymentItem],
-                         memo: KinMemo,
-                         sourceAccountSpec: AccountSpec,
-                         destinationAccountSpec: AccountSpec)
-        -> Promise<[KinPayment]>
+    func sendKinPayments(_ payments: [KinPaymentItem], memo: KinMemo, sourceAccountSpec: AccountSpec, destinationAccountSpec: AccountSpec) -> Promise<[KinPayment]>
 
-    func payInvoice(processingAppIdx: AppIndex,
-                    destinationAccount: KinAccount.Id,
-                    invoice: Invoice,
-                    type: KinBinaryMemo.TransferType)
-        -> Promise<KinPayment>
+    func payInvoice(processingAppIdx: AppIndex, destinationAccount: PublicKey, invoice: Invoice, type: KinBinaryMemo.TransferType) -> Promise<KinPayment>
 }
 
 /**
@@ -149,9 +138,8 @@ public class KinAccountContext {
          - Parameter accountId: denoting the `KinAccount` to get information from
          - Returns: an `ExistingAccountBuilder`, call `.build()` on it to get an instance of KinAccountContext with the specified account.
         */
-        public func useExistingAccount(_ accountId: KinAccount.Id) -> ExistingAccountBuilder {
-            return ExistingAccountBuilder(env: env,
-                                          accountId: accountId)
+        public func useExistingAccount(_ account: PublicKey) -> ExistingAccountBuilder {
+            return ExistingAccountBuilder(env: env, account: account)
         }
 
         /**
@@ -160,9 +148,9 @@ public class KinAccountContext {
          - Returns: an `ExistingAccountBuilder`, call `.build()` on it to get an instance of KinAccountContext with the specified account.
          - Throws: an error if `key` doesn't contain a private key
         */
-        public func importExistingPrivateKey(_ key: KinAccount.Key) throws -> ExistingAccountBuilder {
+        public func importExistingPrivateKey(_ key: KeyPair) throws -> ExistingAccountBuilder {
             try env.importPrivateKey(key)
-            return ExistingAccountBuilder(env: env, accountId: key.accountId)
+            return ExistingAccountBuilder(env: env, account: key.publicKey)
         }
     }
 
@@ -175,22 +163,25 @@ public class KinAccountContext {
 
         public func build() throws -> KinAccountContext {
             let newAccount = try createNewAccount()
-            return KinAccountContext(environment: env, accountId: newAccount.id)
+            return KinAccountContext(environment: env, account: newAccount.publicKey)
         }
 
         private func createNewAccount() throws -> KinAccount {
-            let key = try KeyPair.generateRandomKeyPair()
-            let newAccount = KinAccount(key: key)
+            guard let key = KeyPair.generate() else {
+                throw Errors.unknown
+            }
+            
+            let newAccount = KinAccount(publicKey: key.publicKey, privateKey: key.privateKey)
             return try env.storage.addAccount(newAccount)
         }
     }
 
     public struct ExistingAccountBuilder {
         let env: KinEnvironment
-        let accountId: KinAccount.Id
+        let account: PublicKey
 
         public func build() -> KinAccountContext {
-            return KinAccountContext(environment: env, accountId: accountId)
+            return KinAccountContext(environment: env, account: account)
         }
     }
     
@@ -210,7 +201,7 @@ public class KinAccountContext {
     public let dispatchQueue: DispatchQueue
 
     /// Denotes the `KinAccount` to get information from
-    public let accountId: KinAccount.Id
+    public let accountPublicKey: PublicKey
 
     private lazy var balanceSubject: ValueSubject<KinBalance> = {
         let subject = ValueSubject<KinBalance>()
@@ -243,7 +234,7 @@ public class KinAccountContext {
             guard let self = self else {
                 return
             }
-            self.storage.getStoredTransactions(accountId: self.accountId)
+            self.storage.getStoredTransactions(account: self.accountPublicKey)
                 .then { $0?.items ?? [] }
                 .then { $0.kinPayments.reversed() }
                 .then { subject.onNext($0) }
@@ -258,13 +249,12 @@ public class KinAccountContext {
 
     private let disposeBag = DisposeBag()
 
-    init(environment: KinEnvironment,
-         accountId: KinAccount.Id) {
+    init(environment: KinEnvironment, account: PublicKey) {
         self.env = environment
         self.service = environment.service
         self.storage = environment.storage
         self.dispatchQueue = environment.dispatchQueue
-        self.accountId = accountId
+        self.accountPublicKey = account
     }
 
     deinit {
@@ -276,46 +266,50 @@ public class KinAccountContext {
 extension KinAccountContext: KinAccountReadOperations {
     public func getAccount(forceUpdate: Bool = false) -> Promise<KinAccount> {
         log.info(msg: #function)
-        return storage.getAccount(accountId)
+        return storage.getAccount(accountPublicKey)
             .then(on: dispatchQueue) { storedAccount -> Promise<KinAccount> in
-                func getAccountAndRecover() -> Promise<KinAccount> {
-                    return self.service.getAccount(accountId: self.accountId)
-                    .recover { error -> Promise<KinAccount> in
-                        guard let serviceError = error as? KinServiceV4.Errors, serviceError == KinServiceV4.Errors.itemNotFound else {
-                            return Promise(error)
-                        }
-                        return self.service.resolveTokenAccounts(accountId: self.accountId).then { accounts in
-                            let maybeResolvedAccountId = accounts.first?.accountId ?? self.accountId
-                            return self.service.getAccount(accountId: maybeResolvedAccountId).then { it -> KinAccount in
-                                // b/c we want to update our on hand account with the resolved accountInfo details on solana
-                                return it.copy(
-                                    key: try! KinAccount.Key(accountId: self.accountId),
-                                    tokenAccounts: accounts
-                                )
-                            }
-                        }
-                    }.then { it in self.storage.updateAccount(it) }
-                }
                 guard let account = storedAccount else {
-                    return getAccountAndRecover()
+                    return self.getAccountAndRecover()
                 }
-
+                
                 switch account.status {
                 case .unregistered:
                     return self.registerAccount(account: account)
-                        .then(on: self.dispatchQueue) { _ in getAccountAndRecover() }
-//                    return getAccountAndRecover()
-//                        .then(on: self.dispatchQueue) { self.storage.updateAccount($0) }
-//                        .recover(on: self.dispatchQueue) { _ in self.registerAccount(account: account) }
-//                        .recover(on: self.dispatchQueue) { _ in return account }
+                        .then(on: self.dispatchQueue) { _ in
+                            self.getAccountAndRecover()
+                        }
+                    
                 case .registered:
                     if forceUpdate {
-                        return getAccountAndRecover()
+                        return self.getAccountAndRecover()
                     } else {
                         return .init(account)
                     }
                 }
             }
+    }
+    
+    private func getAccountAndRecover() -> Promise<KinAccount> {
+        return self.service.getAccount(account: self.accountPublicKey)
+        .recover { error -> Promise<KinAccount> in
+            guard let serviceError = error as? KinServiceV4.Errors, serviceError == KinServiceV4.Errors.itemNotFound else {
+                return Promise(error)
+            }
+            
+            return self.service.resolveTokenAccounts(account: self.accountPublicKey).then { accounts in
+                let maybeResolvedAccount = accounts.first ?? self.accountPublicKey
+                return self.service.getAccount(account: maybeResolvedAccount).then { account -> KinAccount in
+                    // b/c we want to update our on hand account with the resolved accountInfo details on solana
+                    
+                    return account.copy(
+                        publicKey: self.accountPublicKey,
+                        tokenAccounts: accounts
+                    )
+                }
+            }
+        }.then {
+            self.storage.updateAccount($0)
+        }
     }
 
     public func observeBalance(mode: ObservationMode = .passive) -> Observable<KinBalance> {
@@ -332,7 +326,7 @@ extension KinAccountContext: KinAccountReadOperations {
 
     public func clearStorage() -> Promise<Void> {
         log.info(msg: #function)
-        return storage.removeAccount(accountId: accountId)
+        return storage.removeAccount(account: accountPublicKey)
     }
 }
 
@@ -349,7 +343,7 @@ extension KinAccountContext: KinPaymentReadOperations {
         case .activeNewOnly:
             let subject = ListSubject<KinPayment>()
             let lifecycle = DisposeBag()
-            service.streamNewTransactions(accountId: accountId)
+            service.streamNewTransactions(account: accountPublicKey)
                 .subscribe { transaction in
                     subject.onNext(transaction.kinPayments)
                 }
@@ -388,10 +382,10 @@ extension KinAccountContext: KinPaymentWriteOperations {
     
     private struct SourceAccountSigningData {
         let nonce: Int64
-        let ownerKey: KinAccount.Key // Private Key
-        let sourceKey: KinAccount.Key // Public Key
+        let ownerKey: KeyPair
+        let sourceKey: PublicKey
     
-        init(_ nonce: Int64, _ ownerKey: KinAccount.Key, _ sourceKey: KinAccount.Key) {
+        init(_ nonce: Int64, _ ownerKey: KeyPair, _ sourceKey: PublicKey) {
             self.nonce = nonce
             self.ownerKey = ownerKey
             self.sourceKey = sourceKey
@@ -408,40 +402,42 @@ extension KinAccountContext: KinPaymentWriteOperations {
         let invalidAccountErrorRetryStrategy = BackoffStrategy.fixed(after: 3, maxAttempts: MAX_ATTEMPTS)
         
         func buildAttempt() -> Promise<KinTransaction> {
-            return all(self.getAccount(), self.getFee())
+            all(self.getAccount(), self.getFee())
                 .then(on: self.dispatchQueue) { account, fee -> Promise<KinTransaction> in
                     var sourceAccountPromise: Promise<SourceAccountSigningData>
                     
-                    if ((attemptNumber == 0 && account.tokenAccounts.isEmpty) || sourceAccountSpec == .exact) {
+                    if (attemptNumber == 0 && account.tokenAccounts.isEmpty) || sourceAccountSpec == .exact {
                         sourceAccountPromise = Promise {
                             SourceAccountSigningData(
                                 account.sequence ?? 0,
-                                account.key,
-                                account.key
+                                KeyPair(publicKey: account.publicKey, privateKey: account.privateKey!), //FIXME:
+                                account.publicKey
                             )
                         }
                     } else {
-                        sourceAccountPromise = self.service.resolveTokenAccounts(accountId: self.accountId)
-                            .then { it in self.storage.updateAccount(account.copy(tokenAccounts: it)) }
+                        sourceAccountPromise = self.service.resolveTokenAccounts(account: self.accountPublicKey)
+                            .then { tokenAccounts in
+                                self.storage.updateAccount(account.copy(tokenAccounts: tokenAccounts))
+                            }
                             .then { resolvedAccount in
                                 SourceAccountSigningData(
                                     resolvedAccount.sequence ?? 0,
-                                    resolvedAccount.key,
-                                    resolvedAccount.tokenAccounts.first ?? resolvedAccount.key
+                                    KeyPair(publicKey: resolvedAccount.publicKey, privateKey: resolvedAccount.privateKey!), //FIXME:
+                                    resolvedAccount.tokenAccounts.first ?? resolvedAccount.publicKey
                                 )
                             }
                     }
                     
                     var paymentItemsPromise: Promise<[KinPaymentItem]>
                     
-                    if (attemptNumber == 0 || destinationAccountSpec == .exact) {
+                    if attemptNumber == 0 || destinationAccountSpec == .exact {
                         paymentItemsPromise = Promise { payments }
                     } else {
                         paymentItemsPromise = all(
                             payments.map { paymentItem in
-                                self.service.resolveTokenAccounts(accountId: paymentItem.destAccountId)
-                                    .then { (it:[KinAccount.Key]) -> KinPaymentItem in
-                                        paymentItem.copy(destAccountId: it.first?.accountId)
+                                self.service.resolveTokenAccounts(account: paymentItem.destAccount)
+                                    .then {
+                                        paymentItem.copy(destAccount: $0.first)
                                     }
                                     .recover { _ in Promise { paymentItem } }
                             }
@@ -478,11 +474,10 @@ extension KinAccountContext: KinPaymentWriteOperations {
             return self.service.buildSignAndSubmitTransaction(buildAndSignTransaction:buildSignSubmit)
                 .then(on: self.dispatchQueue) { transaction -> Promise<KinAccount> in
                     resultTransaction = transaction
-                    return self.storage.advanceSequence(accountId: self.accountId)
+                    return self.storage.advanceSequence(account: self.accountPublicKey)
                 }
                 .then(on: self.dispatchQueue) { _ in
-                    self.storage.insertNewTransaction(accountId: self.accountId,
-                                                      newTransaction: resultTransaction!)
+                    self.storage.insertNewTransaction(account: self.accountPublicKey, newTransaction: resultTransaction!)
                         .then { _ in resultTransaction }
                 }
                 .then(on: self.dispatchQueue) { [weak self] transaction -> [KinPayment] in
@@ -496,8 +491,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
                     if (self.accountObservable == nil) {
                         let amountToDeduct = payments.reduce(Kin.zero) { $0 + $1.amount }
                         
-                        let account = try `await`(self.storage.deductFromAccountBalance(accountId: self.accountId,
-                                                                                        amount: amountToDeduct))
+                        let account = try `await`(self.storage.deductFromAccountBalance(account: self.accountPublicKey, amount: amountToDeduct))
                         self.balanceSubject.onNext(account.balance)
                     }
                     
@@ -515,7 +509,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
                         self.service.invalidateRecentBlockHashCache()
                         return attempt()
                         
-                    } else if (error as? KinService.Errors) == KinService.Errors.badSequenceNumber {
+                    } else if (error as? KinServiceV4.Errors) == KinServiceV4.Errors.badSequenceNumber {
                         return self.getAccount(forceUpdate: true).then { _ in
                             return attempt()
                         }
@@ -533,21 +527,21 @@ extension KinAccountContext: KinPaymentWriteOperations {
         return attempt()
     }
 
-    public func payInvoice(processingAppIdx: AppIndex,
-                           destinationAccount: KinAccount.Id,
-                           invoice: Invoice,
-                           type: KinBinaryMemo.TransferType = .spend) -> Promise<KinPayment> {
+    public func payInvoice(processingAppIdx: AppIndex, destinationAccount: PublicKey, invoice: Invoice, type: KinBinaryMemo.TransferType = .spend) -> Promise<KinPayment> {
         log.info(msg: #function)
         do {
             let invoiceList = try InvoiceList(invoices: [invoice])
-            let agoraMemo = try KinBinaryMemo(typeId: type.rawValue,
-                                          appIdx: processingAppIdx.value,
-                                          foreignKeyBytes: invoiceList.id.decode())
-            let paymentItem = KinPaymentItem(amount: invoice.total,
-                                             destAccountId: destinationAccount,
-                                             invoice: invoice)
-            return sendKinPayment(paymentItem,
-                                  memo: agoraMemo.kinMemo)
+            let agoraMemo = try KinBinaryMemo(
+                typeId: type.rawValue,
+                appIdx: processingAppIdx.value,
+                foreignKeyBytes: invoiceList.id.decode()
+            )
+            let paymentItem = KinPaymentItem(
+                amount: invoice.total,
+                destAccount: destinationAccount,
+                invoice: invoice
+            )
+            return sendKinPayment(paymentItem, memo: agoraMemo.kinMemo)
         } catch let error {
             return .init(error)
         }
@@ -557,18 +551,15 @@ extension KinAccountContext: KinPaymentWriteOperations {
 // MARK: Private
 extension KinAccountContext {
     private func unregisteredAccount() -> Promise<KinAccount> {
-        return .init(on: dispatchQueue) { fulfill, reject in
-            do {
-                let account = try KinAccount(key: KinAccount.Key(accountId: self.accountId))
-                fulfill(account)
-            } catch let error {
-                reject(error)
-            }
+        Promise(on: dispatchQueue) { fulfill, reject in
+            let account = KinAccount(publicKey: self.accountPublicKey)
+            fulfill(account)
         }
     }
 
     private func registerAccount(account: KinAccount) -> Promise<KinAccount> {
-        return service.createAccount(accountId: account.id, signer: account.key)
+        let keyPair = KeyPair(publicKey: account.publicKey, privateKey: account.privateKey!) // FIXME:
+        return service.createAccount(account: account.publicKey, signer: keyPair)
             .then(on: dispatchQueue) { registeredAccount -> KinAccount in
                 return account.merge(registeredAccount)
             }
@@ -611,7 +602,7 @@ extension KinAccountContext {
             return
         }
 
-        accountObservable = service.streamAccount(accountId: self.accountId)
+        accountObservable = service.streamAccount(account: self.accountPublicKey)
             .subscribe { [weak self] account in
                 self?.storage.updateAccount(account)
                     // Yea...this 5s delay is gross but reads aren't
@@ -627,18 +618,16 @@ extension KinAccountContext {
     }
 
     private func requestNextPage() -> Promise<[KinTransaction]> {
-        return storage.getStoredTransactions(accountId: accountId)
+        return storage.getStoredTransactions(account: accountPublicKey)
             .then { [weak self] transactions -> Promise<[KinTransaction]> in
                 guard let self = self else {
                     return .init(Errors.unknown)
                 }
 
                 if let headPagingToken = transactions?.headPagingToken, !headPagingToken.isEmpty {
-                    return self.service.getTransactionPage(accountId: self.accountId,
-                                                           pagingToken: headPagingToken,
-                                                           order: .descending)
+                    return self.service.getTransactionPage(account: self.accountPublicKey, pagingToken: headPagingToken, order: .descending)
                 } else {
-                    return self.service.getLatestTransactions(accountId: self.accountId)
+                    return self.service.getLatestTransactions(account: self.accountPublicKey)
                 }
             }
             .then { [weak self] transactions -> Promise<[KinTransaction]> in
@@ -646,24 +635,21 @@ extension KinAccountContext {
                     return .init(Errors.unknown)
                 }
 
-                return self.storage.upsertNewTransactions(accountId: self.accountId,
-                                                          newTransactions: transactions)
+                return self.storage.upsertNewTransactions(account: self.accountPublicKey, newTransactions: transactions)
             }
     }
 
     private func requestPreviousPage() -> Promise<[KinTransaction]> {
-        return storage.getStoredTransactions(accountId: accountId)
+        return storage.getStoredTransactions(account: accountPublicKey)
             .then { [weak self] transactions -> Promise<[KinTransaction]> in
                 guard let self = self else {
                     return .init(Errors.unknown)
                 }
 
                 if let tailPagingToken = transactions?.tailPagingToken {
-                    return self.service.getTransactionPage(accountId: self.accountId,
-                                                           pagingToken: tailPagingToken,
-                                                           order: .descending)
+                    return self.service.getTransactionPage(account: self.accountPublicKey, pagingToken: tailPagingToken, order: .descending)
                 } else {
-                    return self.service.getLatestTransactions(accountId: self.accountId)
+                    return self.service.getLatestTransactions(account: self.accountPublicKey)
                 }
             }
             .then { [weak self] transactions -> Promise<[KinTransaction]> in
@@ -671,8 +657,7 @@ extension KinAccountContext {
                     return .init(Errors.unknown)
                 }
 
-                return self.storage.upsertOldTransactions(accountId: self.accountId,
-                                                          oldTransactions: transactions)
+                return self.storage.upsertOldTransactions(account: self.accountPublicKey, oldTransactions: transactions)
             }
     }
 

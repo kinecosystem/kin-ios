@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 import KinGrpcApi
 
 // MARK: Models to KinStorage Objects
@@ -42,11 +41,11 @@ extension KinAccount.Status {
 extension KinAccount {
     var storableObject: KinStorageKinAccount {
         let storable = KinStorageKinAccount()
-        storable.publicKey = key.publicKey.storableObject
+        storable.publicKey = publicKey.storableObject
         storable.balance = balance.storableObject
         storable.status = status.storableObject
         storable.sequenceNumber = sequence ?? 0
-        storable.accountsArray = NSMutableArray(array: tokenAccounts.map { it in it.publicKey.storableObject })
+        storable.accountsArray = NSMutableArray(array: tokenAccounts.map { $0.storableObject })
         return storable
     }
 }
@@ -110,8 +109,8 @@ extension InvoiceList {
 
 // MARK: KinStorage Objects to Models
 extension KinStoragePublicKey {
-    var publicKey: PublicKey? {
-        return try? PublicKey([Byte](value))
+    var publicKey: PublicKey {
+        PublicKey(value)!
     }
 }
 
@@ -134,23 +133,24 @@ extension KinStorageKinAccount_Status {
 
 extension KinStorageKinAccount {
     var kinAccount: KinAccount? {
-        guard hasPublicKey, let pk = publicKey.publicKey else {
+        guard hasPublicKey else {
             return nil
         }
-
-        let key = KinAccount.Key(publicKey: pk)
+        
         let kinBalance = hasBalance ? balance.kinBalance : KinBalance.zero
-        var tokenAccounts = [KinAccount.Key]()
-        accountsArray.forEach { it in
-            if let element = it as? KinStoragePublicKey {
-                tokenAccounts.append(KinAccount.Key(publicKey:element.publicKey!))
+        var tokenAccounts: [PublicKey] = []
+        accountsArray.forEach { account in
+            if let key = account as? KinStoragePublicKey {
+                tokenAccounts.append(key.publicKey)
             }
         }
-        let account = KinAccount(key: key,
-                                 balance: kinBalance,
-                                 status: status.kinAccountStatus,
-                                 sequence: sequenceNumber,
-                                 tokenAccounts: tokenAccounts)
+        let account = KinAccount(
+            publicKey: publicKey.publicKey,
+            balance: kinBalance,
+            status: status.kinAccountStatus,
+            sequence: sequenceNumber,
+            tokenAccounts: tokenAccounts
+        )
         return account
     }
 }

@@ -13,23 +13,7 @@ import KinGrpcApi
 
 class MockAgoraTransactionServiceGrpcProxy: AgoraTransactionServiceGrpcProxy {
     var network: KinNetwork = .testNet
-    var stubGetHistoryResponsePromise: Promise<APBTransactionV3GetHistoryResponse>?
-    var stubSubmitTransactionResponsePromise: Promise<APBTransactionV3SubmitTransactionResponse>?
-    var stubGetTransactionResponsePromise: Promise<APBTransactionV3GetTransactionResponse>?
-
-    func getHistory(_ request: APBTransactionV3GetHistoryRequest) -> Promise<APBTransactionV3GetHistoryResponse> {
-        return stubGetHistoryResponsePromise!
-    }
-
-    func submitTransaction(_ request: APBTransactionV3SubmitTransactionRequest) -> Promise<APBTransactionV3SubmitTransactionResponse> {
-        return stubSubmitTransactionResponsePromise!
-    }
-
-    func getTransaction(_ request: APBTransactionV3GetTransactionRequest) -> Promise<APBTransactionV3GetTransactionResponse> {
-        return stubGetTransactionResponsePromise!
-    }
     
-    // V4 Apis
     var stubGetHistoryResponsePromiseV4: Promise<APBTransactionV4GetHistoryResponse>?
     var stubSubmitTransactionResponsePromiseV4: Promise<APBTransactionV4SubmitTransactionResponse>?
     var stubGetTransactionResponsePromiseV4: Promise<APBTransactionV4GetTransactionResponse>?

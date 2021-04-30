@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 
 public enum KinNetwork: Int {
     case mainNet

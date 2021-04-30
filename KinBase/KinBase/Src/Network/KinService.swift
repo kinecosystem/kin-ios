@@ -8,7 +8,6 @@
 
 import Foundation
 import Promises
-import stellarsdk
 
 public enum TransactionOrder {
     case ascending
@@ -16,19 +15,17 @@ public enum TransactionOrder {
 }
 
 public protocol KinServiceType {
-    func createAccount(accountId: KinAccount.Id, signer: KeyPair) -> Promise<KinAccount>
+    func createAccount(account: PublicKey, signer: KeyPair) -> Promise<KinAccount>
 
-    func getAccount(accountId: KinAccount.Id) -> Promise<KinAccount>
+    func getAccount(account: PublicKey) -> Promise<KinAccount>
     
-    func resolveTokenAccounts(accountId: KinAccount.Id) -> Promise<[KinAccount.Key]>
+    func resolveTokenAccounts(account: PublicKey) -> Promise<[PublicKey]>
 
-    func streamAccount(accountId: KinAccount.Id) -> Observable<KinAccount>
+    func streamAccount(account: PublicKey) -> Observable<KinAccount>
 
-    func getLatestTransactions(accountId: KinAccount.Id) -> Promise<[KinTransaction]>
+    func getLatestTransactions(account: PublicKey) -> Promise<[KinTransaction]>
 
-    func getTransactionPage(accountId: KinAccount.Id,
-                            pagingToken: String,
-                            order: TransactionOrder) -> Promise<[KinTransaction]>
+    func getTransactionPage(account: PublicKey, pagingToken: String, order: TransactionOrder) -> Promise<[KinTransaction]>
 
     func getTransaction(transactionHash: KinTransactionHash) -> Promise<KinTransaction>
 
@@ -36,113 +33,106 @@ public protocol KinServiceType {
 
     func canWhitelistTransactions() -> Promise<Bool>
 
-    func buildAndSignTransaction(ownerKey: KinAccount.Key,
-                                 sourceKey: KinAccount.Key,
-                                 nonce: Int64,
-                                 paymentItems: [KinPaymentItem],
-                                 memo: KinMemo,
-                                 fee: Quark) -> Promise<KinTransaction>
+    func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction>
 
     func submitTransaction(transaction: KinTransaction) -> Promise<KinTransaction>
     
-    func buildSignAndSubmitTransaction(
-        buildAndSignTransaction: @escaping () -> Promise<KinTransaction>
-    ) -> Promise<KinTransaction>
+    func buildSignAndSubmitTransaction(buildAndSignTransaction: @escaping () -> Promise<KinTransaction>) -> Promise<KinTransaction>
 
-    func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction>
+    func streamNewTransactions(account: PublicKey) -> Observable<KinTransaction>
     
     func invalidateRecentBlockHashCache()
 }
 
-public class KinService {
-    public enum Errors: Error, Equatable {
-        case unknown
-        case transientFailure(error: Error)
-        case invalidAccount
-        case missingApi
-        case insufficientBalance
-        /// It is expected that this error is handled gracefully by notifying users
-        /// to upgrade to a newer version of the software that should contain a more
-        /// recent version of this SDK.
-        case upgradeRequired
-        case itemNotFound
-        case insufficientFee
-        case badSequenceNumber
-        case webhookRejectedTransaction
-        case invoiceErrorsInRequest(errors: [InvoiceError])
-
-        public static func == (lhs: KinService.Errors, rhs: KinService.Errors) -> Bool {
-            switch (lhs, rhs) {
-            case (.unknown, .unknown):
-                return true
-            case (.transientFailure(_), .transientFailure(_)):
-                return true
-            case (.invalidAccount, .invalidAccount):
-                return true
-            case (.missingApi, .missingApi):
-                return true
-            case (.insufficientBalance, .insufficientBalance):
-                return true
-            case (.upgradeRequired, .upgradeRequired):
-                return true
-            case (.itemNotFound, .itemNotFound):
-                return true
-            case (.insufficientFee, .insufficientFee):
-                return true
-            case (.badSequenceNumber, .badSequenceNumber):
-                return true
-            case (.webhookRejectedTransaction, .webhookRejectedTransaction):
-                return true
-            case (.invoiceErrorsInRequest(_), .invoiceErrorsInRequest(_)):
-                return true
-            default:
-                return false
-            }
-        }
-    }
-
-    private let network: KinNetwork
-    private let networkOperationHandler: NetworkOperationHandler
-    private let dispatchQueue: DispatchQueue
-
-    private let accountApi: KinAccountApi
-    private let accountCreationApi: KinAccountCreationApi
-    private let transactionApi: KinTransactionApi
-    private let transactionWhitelistingApi: KinTransactionWhitelistingApi
-    private let streamingApi: KinStreamingApi
-    private let logger: KinLoggerFactory
-    private lazy var log: KinLogger = {
-        logger.getLogger(name: String(describing: self))
-    }()
-    
-    public init(network: KinNetwork,
-                networkOperationHandler: NetworkOperationHandler,
-                dispatchQueue: DispatchQueue,
-                accountApi: KinAccountApi,
-                accountCreationApi: KinAccountCreationApi,
-                transactionApi: KinTransactionApi,
-                transactionWhitelistingApi: KinTransactionWhitelistingApi,
-                streamingApi: KinStreamingApi,
-                logger: KinLoggerFactory) {
-        self.network = network
-        self.networkOperationHandler = networkOperationHandler
-        self.dispatchQueue = dispatchQueue
-        self.accountApi = accountApi
-        self.accountCreationApi = accountCreationApi
-        self.transactionApi = transactionApi
-        self.transactionWhitelistingApi = transactionWhitelistingApi
-        self.streamingApi = streamingApi
-        self.logger = logger
-    }
-    
-    private func requestPrint<RequestType : Any>(request: RequestType) {
-        log.debug(msg:"[Request][V3]====\n\(request)\n=====[Request][V3]")
-    }
-    
-    private func responsePrint<ResponseType : Any>(response: ResponseType) {
-        log.debug(msg:"[Response][V3]====\n\(response)\n=====[Response][V3]")
-    }
-}
+//public class KinService {
+//    public enum Errors: Error, Equatable {
+//        case unknown
+//        case transientFailure(error: Error)
+//        case invalidAccount
+//        case missingApi
+//        case insufficientBalance
+//        /// It is expected that this error is handled gracefully by notifying users
+//        /// to upgrade to a newer version of the software that should contain a more
+//        /// recent version of this SDK.
+//        case upgradeRequired
+//        case itemNotFound
+//        case insufficientFee
+//        case badSequenceNumber
+//        case webhookRejectedTransaction
+//        case invoiceErrorsInRequest(errors: [InvoiceError])
+//
+//        public static func == (lhs: KinService.Errors, rhs: KinService.Errors) -> Bool {
+//            switch (lhs, rhs) {
+//            case (.unknown, .unknown):
+//                return true
+//            case (.transientFailure(_), .transientFailure(_)):
+//                return true
+//            case (.invalidAccount, .invalidAccount):
+//                return true
+//            case (.missingApi, .missingApi):
+//                return true
+//            case (.insufficientBalance, .insufficientBalance):
+//                return true
+//            case (.upgradeRequired, .upgradeRequired):
+//                return true
+//            case (.itemNotFound, .itemNotFound):
+//                return true
+//            case (.insufficientFee, .insufficientFee):
+//                return true
+//            case (.badSequenceNumber, .badSequenceNumber):
+//                return true
+//            case (.webhookRejectedTransaction, .webhookRejectedTransaction):
+//                return true
+//            case (.invoiceErrorsInRequest(_), .invoiceErrorsInRequest(_)):
+//                return true
+//            default:
+//                return false
+//            }
+//        }
+//    }
+//
+//    private let network: KinNetwork
+//    private let networkOperationHandler: NetworkOperationHandler
+//    private let dispatchQueue: DispatchQueue
+//
+//    private let accountApi: KinAccountApi
+//    private let accountCreationApi: KinAccountCreationApi
+//    private let transactionApi: KinTransactionApi
+//    private let transactionWhitelistingApi: KinTransactionWhitelistingApi
+//    private let streamingApi: KinStreamingApi
+//    private let logger: KinLoggerFactory
+//    private lazy var log: KinLogger = {
+//        logger.getLogger(name: String(describing: self))
+//    }()
+//    
+//    public init(network: KinNetwork,
+//                networkOperationHandler: NetworkOperationHandler,
+//                dispatchQueue: DispatchQueue,
+//                accountApi: KinAccountApi,
+//                accountCreationApi: KinAccountCreationApi,
+//                transactionApi: KinTransactionApi,
+//                transactionWhitelistingApi: KinTransactionWhitelistingApi,
+//                streamingApi: KinStreamingApi,
+//                logger: KinLoggerFactory) {
+//        self.network = network
+//        self.networkOperationHandler = networkOperationHandler
+//        self.dispatchQueue = dispatchQueue
+//        self.accountApi = accountApi
+//        self.accountCreationApi = accountCreationApi
+//        self.transactionApi = transactionApi
+//        self.transactionWhitelistingApi = transactionWhitelistingApi
+//        self.streamingApi = streamingApi
+//        self.logger = logger
+//    }
+//    
+//    private func requestPrint<RequestType : Any>(request: RequestType) {
+//        log.debug(msg:"[Request][V3]====\n\(request)\n=====[Request][V3]")
+//    }
+//    
+//    private func responsePrint<ResponseType : Any>(response: ResponseType) {
+//        log.debug(msg:"[Response][V3]====\n\(response)\n=====[Response][V3]")
+//    }
+//}
 
 public class KinServiceV4 {
     public enum Errors: Error, Equatable {
@@ -289,9 +279,9 @@ public class MetaServiceApi : MetaServiceType {
                         respond.onSuccess(response.version)
                         break
                     default:
-                        var error = KinService.Errors.unknown
+                        var error = KinServiceV4.Errors.unknown
                         if let transientError = response.error {
-                            error = KinService.Errors.transientFailure(error: transientError)
+                            error = KinServiceV4.Errors.transientFailure(error: transientError)
                         }
                         respond.onError?(error)
                     }
@@ -337,55 +327,61 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
-    public func createAccount(accountId: KinAccount.Id, signer: KeyPair) -> Promise<KinAccount> {
+    public func createAccount(account: PublicKey, signer: KeyPair) -> Promise<KinAccount> {
         return networkOperationHandler.queueWork { [weak self] respond in
-            guard let self = self, let signerPrivateKey = signer.privateKey else {
+            guard let self = self else {
                 respond.onError?(Errors.unknown)
                 return
             }
             
+            let signerPrivateKey = signer.privateKey
+            
             all(self.cachedServiceConfig(), self.cachedRecentBlockHash(), self.cachedMinRentExemption()).then { (serviceConfig, recentBlockHash, minRentExemption) in
-                guard (serviceConfig.result == GetServiceConfigResponseV4.Result.ok
-                        || recentBlockHash.result == GetRecentBlockHashResonseV4.Result.ok
-                        || minRentExemption.result == GetMinimumBalanceForRentExemptionResponseV4.Result.ok
-                ) else {
+                guard
+                    serviceConfig.result == GetServiceConfigResponseV4.Result.ok ||
+                    recentBlockHash.result == GetRecentBlockHashResonseV4.Result.ok ||
+                    minRentExemption.result == GetMinimumBalanceForRentExemptionResponseV4.Result.ok
+                else {
                     respond.onError?(Errors.unknown)
-                   return
+                    return
                 }
                 
-                let tokenAccountSeed = try Seed(bytes: [Byte](sha256(data: Data(signerPrivateKey.bytes))))
+                let tokenAccountSeed = Seed(sha256(data: signerPrivateKey.data))!
                 let tokenAccount = KeyPair(seed: tokenAccountSeed)
-                let tokenAccountPub: SolanaPublicKey = tokenAccount.asPublicKey()
+                let tokenAccountPub: PublicKey = tokenAccount.asPublicKey()
                 
-                
-                let subsidizer: SolanaPublicKey = serviceConfig.subsidizerAccount!
-                let owner: SolanaPublicKey = signer.asPublicKey()
+                let subsidizer: PublicKey = serviceConfig.subsidizerAccount!
+                let owner: PublicKey = signer.asPublicKey()
                 let programKey = serviceConfig.tokenProgram!
                 let mint = serviceConfig.token!
                 
-                let transaction = try! SolanaTransaction.newTransaction(
-                    subsidizer,
-                    SystemProgram.createAccountInstruction(
-                        subsidizer: subsidizer,
-                        address: tokenAccountPub,
-                        owner: programKey,
-                        lamports: minRentExemption.lamports,
-                        size: TokenProgram.accountSize),
-                    TokenProgram.initializeAccountInstruction(
-                        account: tokenAccountPub,
-                        mint: mint,
-                        owner: owner,
-                        programKey: programKey
-                    ),
-                    TokenProgram.setAuthority(
-                        account: tokenAccountPub,
-                        currentAuthority: owner,
-                        newAuthority: subsidizer,
-                        authorityType: TokenProgram.AuthorityType.AuthorityCloseAccount,
-                        programKey: programKey
-                    )
-                ).copyAndSetRecentBlockhash(recentBlockhash: recentBlockHash.blockHash!)
-                    .copyAndSign(signers: tokenAccount, signer)
+                let transaction = try! Transaction(
+                    payer: subsidizer,
+                    instructions: [
+                        SystemProgram.createAccountInstruction(
+                            subsidizer: subsidizer,
+                            address: tokenAccountPub,
+                            owner: programKey,
+                            lamports: minRentExemption.lamports,
+                            size: TokenProgram.accountSize
+                        ),
+                        TokenProgram.initializeAccountInstruction(
+                            account: tokenAccountPub,
+                            mint: mint,
+                            owner: owner,
+                            programKey: programKey
+                        ),
+                        TokenProgram.setAuthority(
+                            account: tokenAccountPub,
+                            currentAuthority: owner,
+                            newAuthority: subsidizer,
+                            authorityType: .authorityCloseAccount,
+                            programKey: programKey
+                        )
+                    ]
+                )
+                .updatingBlockhash(recentBlockHash.blockHash!)
+                .signing(using: tokenAccount, signer)
 
                 print(transaction.encode().hexEncodedString())
                 
@@ -412,14 +408,14 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
-    public func getAccount(accountId: KinAccount.Id) -> Promise<KinAccount> {
+    public func getAccount(account: PublicKey) -> Promise<KinAccount> {
         return networkOperationHandler.queueWork { [weak self] respond in
             guard let self = self else {
                 respond.onError?(Errors.unknown)
                 return
             }
 
-            let request = GetAccountRequestV4(accountId: accountId)
+            let request = GetAccountRequestV4(account: account)
             self.requestPrint(request: request)
             self.accountApi.getAccount(request: request) { [weak self] response in
                 self?.responsePrint(response:response)
@@ -447,26 +443,23 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
-    public func resolveTokenAccounts(accountId: KinAccount.Id) -> Promise<[KinAccount.Key]> {
-        let cacheKey = "resolvedAccounts:\(accountId)"
-        let resolve: Promise<[KinAccount.Key]> = cache.resolve(key: cacheKey) { _ in
+    public func resolveTokenAccounts(account: PublicKey) -> Promise<[PublicKey]> {
+        let cacheKey = "resolvedAccounts:\(account.base58)"
+        let resolve: Promise<[PublicKey]> = cache.resolve(key: cacheKey) { _ in
             self.networkOperationHandler.queueWork { [weak self] respond in
                 guard let self = self else {
                     respond.onError?(Errors.unknown)
                     return
                 }
                 
-                let request = ResolveTokenAccountsRequestV4(accountId: accountId)
+                let request = ResolveTokenAccountsRequestV4(account: account)
                 self.requestPrint(request: request)
                 self.accountApi.resolveTokenAccounts(request: request) { [weak self] response in
                     self?.responsePrint(response:response)
                     switch response.result {
                     case .ok:
-                        if let accounts = response.accounts?.map({ (it) -> KeyPair in it.keypair }) {
-                            respond.onSuccess(accounts)
-                            break
-                        }
-                        fallthrough
+                        let accounts = response.accounts?.compactMap { $0 } ?? []
+                        respond.onSuccess(accounts)
                     case .notFound:
                         respond.onError?(Errors.itemNotFound)
                     case .transientFailure:
@@ -484,32 +477,30 @@ extension KinServiceV4 : KinServiceType {
             }
         }
         
-        return resolve.then { it -> Promise<[KinAccount.Key]> in
-            if (it.isEmpty) {
+        return resolve.then { accounts -> Promise<[PublicKey]> in
+            if accounts.isEmpty {
                 self.cache.invalidate(key: cacheKey)
                 return resolve
             } else {
-                return Promise { it }
+                return Promise { accounts }
             }
         }
     }
     
-    public func streamAccount(accountId: KinAccount.Id) -> Observable<KinAccount> {
-        return streamingApi.streamAccountV4(accountId).subscribe { [weak self] (account) in
-            self?.log.debug(msg:"streamAccount::Update \(account)")
+    public func streamAccount(account: PublicKey) -> Observable<KinAccount> {
+        return streamingApi.streamAccountV4(account).subscribe { [weak self] kinAccount in
+            self?.log.debug(msg:"streamAccount::Update \(kinAccount)")
         }
     }
     
-    public func getLatestTransactions(accountId: KinAccount.Id) -> Promise<[KinTransaction]> {
+    public func getLatestTransactions(account: PublicKey) -> Promise<[KinTransaction]> {
         return networkOperationHandler.queueWork { [weak self] respond in
             guard let self = self else {
                 respond.onError?(Errors.unknown)
                 return
             }
 
-            let request = GetTransactionHistoryRequestV4(accountId: accountId,
-                                                        cursor: nil,
-                                                        order: .descending)
+            let request = GetTransactionHistoryRequestV4(account: account, cursor: nil, order: .descending)
             self.requestPrint(request: request)
             self.transactionApi.getTransactionHistory(request: request) { [weak self] response in
                 self?.responsePrint(response:response)
@@ -537,16 +528,14 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
-    public func getTransactionPage(accountId: KinAccount.Id, pagingToken: String, order: TransactionOrder) -> Promise<[KinTransaction]> {
+    public func getTransactionPage(account: PublicKey, pagingToken: String, order: TransactionOrder) -> Promise<[KinTransaction]> {
          return networkOperationHandler.queueWork { [weak self] respond in
                    guard let self = self else {
                        respond.onError?(Errors.unknown)
                        return
                    }
 
-                   let request = GetTransactionHistoryRequestV4(accountId: accountId,
-                                                               cursor: pagingToken,
-                                                               order: order)
+                   let request = GetTransactionHistoryRequestV4(account: account, cursor: pagingToken, order: order)
                    self.requestPrint(request: request)
                    self.transactionApi.getTransactionHistory(request: request) { [weak self] response in
                        self?.responsePrint(response:response)
@@ -617,7 +606,7 @@ extension KinServiceV4 : KinServiceType {
         return Promise.init(true)
     }
     
-    public func buildAndSignTransaction(ownerKey: KinAccount.Key, sourceKey: KinAccount.Key, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
+    public func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
         return networkOperationHandler.queueWork { [weak self] respond in
             guard let self = self else {
                 respond.onError?(Errors.unknown)
@@ -633,45 +622,48 @@ extension KinServiceV4 : KinServiceType {
                 }
                 
                 let signer = ownerKey
-                let subsidizer: SolanaPublicKey = serviceConfig.subsidizerAccount!
-                let owner: SolanaPublicKey = signer.asPublicKey()
+                let subsidizer: PublicKey = serviceConfig.subsidizerAccount!
                 let programKey = serviceConfig.tokenProgram!
                 self.log.debug(msg: "ownerKey: \(ownerKey)")
                 self.log.debug(msg: "sourceKey: \(sourceKey)")
                 self.log.debug(msg: "paymentItems: \(paymentItems)")
                 
-                if (signer.seed == nil) {
-                    respond.onError?(KinServiceV4.Errors.invalidAccount)
-                }
+                var instructions: [Instruction] = []
                 
-                var instructions = paymentItems.map { it in
-                    TokenProgram.transferInstruction(source: sourceKey.asPublicKey(),
-                                                     destination: it.destAccountId.asPublicKey(),
-                                                     owner: owner,
-                                                     amount: it.amount,
-                                                     programKey: programKey)
-                }
-                
-                if (memo != .none) {
-                        switch memo.type {
-                        case .bytes:
-                            if (memo.agoraMemo != nil) {
-                                instructions.insert(MemoProgram.memoInsutructionFromBytes(bytes: memo.agoraMemo!.encode().base64EncodedString().bytes), at: 0)
-                                break
-                            }
-                        case .text:
-                            instructions.insert(MemoProgram.memoInsutructionFromBytes(bytes: memo.rawValue), at: 0)
-                            break
+                if memo != .none {
+                    switch memo.type {
+                    case .bytes:
+                        if memo.agoraMemo != nil {
+                            instructions.append(
+                                MemoProgram.memoInsutruction(with: memo.agoraMemo!.encode().base64EncodedData())
+                            )
                         }
+                        
+                    case .text:
+                        instructions.append(
+                            MemoProgram.memoInsutruction(with: memo.bytes.data)
+                        )
+                    }
                 }
                 
-                let transaction = try! SolanaTransaction.newTransaction(
-                        subsidizer,
-                        instructions
-                    ).copyAndSetRecentBlockhash(recentBlockhash: recentBlockHash.blockHash!)
-                        .copyAndSign(signers: signer)
+                instructions.append(contentsOf: paymentItems.map { paymentItem in
+                    TokenProgram.transferInstruction(
+                        source: sourceKey,
+                        destination: paymentItem.destAccount,
+                        owner: ownerKey.publicKey,
+                        amount: paymentItem.amount,
+                        programKey: programKey
+                    )
+                })
                 
-                print(transaction.encode().hexEncodedString())
+                let transaction = try! Transaction(
+                    payer: subsidizer,
+                    instructions: instructions
+                )
+                .updatingBlockhash(recentBlockHash.blockHash!)
+                .signing(using: signer)
+                
+                print(transaction)
                 
                 let kinTransaction = try! KinTransaction(
                         envelopeXdrBytes: [Byte](transaction.encode()),
@@ -691,8 +683,10 @@ extension KinServiceV4 : KinServiceType {
                 return
             }
 
-            let request = SubmitTransactionRequestV4(transaction: SolanaTransaction(data: Data(transaction.envelopeXdrBytes))!,
-                                                     invoiceList: transaction.invoiceList)
+            let request = SubmitTransactionRequestV4(
+                transaction: Transaction(data: Data(transaction.envelopeXdrBytes))!,
+                invoiceList: transaction.invoiceList
+            )
             self.requestPrint(request: request)
             self.transactionApi.submitTransaction(request: request) { [weak self] response in
                 self?.responsePrint(response:response)
@@ -737,8 +731,8 @@ extension KinServiceV4 : KinServiceType {
         buildAndSignTransaction().then { it in self.submitTransaction(transaction: it) }
     }
     
-    public func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction> {
-        return streamingApi.streamNewTransactionsV4(accountId: accountId).subscribe { [weak self] (transaction) in
+    public func streamNewTransactions(account: PublicKey) -> Observable<KinTransaction> {
+        return streamingApi.streamNewTransactionsV4(account: account).subscribe { [weak self] (transaction) in
             self?.log.debug(msg:"streamNewTransactions::Update \(transaction)")
         }
     }

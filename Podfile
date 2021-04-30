@@ -5,7 +5,6 @@ install! 'cocoapods', :deterministic_uuids => false
 use_frameworks!
 
 def kin_base_dependencies
-    pod 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
     pod 'PromisesSwift', '~> 1.2.8'
     pod 'Sodium', '~> 0.8.0'
     pod 'Base58Swift', '~> 2.1.10'

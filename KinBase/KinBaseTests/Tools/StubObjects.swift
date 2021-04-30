@@ -7,19 +7,22 @@
 //
 
 import Foundation
-import stellarsdk
 import KinGrpcApi
 @testable import KinBase
 
 class StubObjects {
-    static let accountId1 = "GC5VXCJ3SKM7HTRX6HVFPKQ2J3UC3C66Q43ZNGU4EPNH7HUBDID4XHKM"
-    static let accountId2 = "GBD2LB2VV2GKLO5RBNJKL7IP3WSN2BK46KSYEMDCYZSWLVA5HC7TYR72"
-    static let agoraTestAppAccountId = "GDHCB4VCNNFIMZI3BVHLA2FVASECBR2ZXHOAXEBBFVUH5G2YAD7V3JVH"
-    static let badAccountId = "GAXOKOHOUOED5V6PDQP3XNXTJ25Y5DH4MEMY2RRYHYO5F5BVYZ6F7L3D"
-    static let androidTestAccountId = "GDOC25WFE2XQBNXCQ6TTI7H4CBS2CRAQ6BBV5VYFG4GUGBZY7QERNIW4"
+    
+    static let account1             = PublicKey(base58: "DcNCH6sRsbmLBLeHNa8bYJAULGaqt1cKcQVdRwZA1WH8")!
+    static let account2             = PublicKey(base58: "5pgLmrSNqeNmTHJFrM85AwKdgALykG87AzJdEf7ZduCF")!
+    static let agoraTestAppAccount  = PublicKey(base58: "Ese8FGjxT7Q9pztonpKw6haeqBGdU18VRX2AA17AYYwW")!
+    static let badAccountId         = PublicKey(base58: "4A4UpBPNKCnDyr7ApjzHSteappUP8C4pKa7QFGnMyJmc")!
+    static let androidTestAccountId = PublicKey(base58: "FpUuKW6Mac65CuBWwLmBPw6grWTwg1JYgt6yUtt9cup9")!
+    
+    static let keyPair1 = KeyPair(seed: seed1)
+    static let keyPair2 = KeyPair(seed: seed2)
 
-    static let seed1 = "SA5XMJ7XKHFWO6JYE6IWN7OZIV75QBAXIIO2WBKPEG4Q2VEQ2MEOB6XN"
-    static let seed2 = "SDXHKOQBDGQ4GPZN44OQCM242ZEAAWZG5HS6NSSP6NS767RIVJ6VXRAA"
+    static let seed1 = Seed(base58: "517Z246L5gCce1YZEBxjHLECsXwuNZZGDPcpAXVqK1CK")!
+    static let seed2 = Seed(base58: "H3qi4CfvH7Cj8PrkwCPcyDWXi2LYPp3ukb7Hu1KLVQZG")!
 
     static var transaction: KinTransaction {
         return historicalTransaction(from: StubObjects.transactionEnvelope)
@@ -118,27 +121,37 @@ class StubObjects {
         item.description_p = "description"
         return item
     }()
-
+    
     static func inFlightTransaction(from envelope: String) -> KinTransaction {
-        return try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
-                                   record: .inFlight(ts: Date().timeIntervalSince1970),
-                                   network: .testNet)
+        return try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
+            record: .inFlight(ts: Date().timeIntervalSince1970),
+            network: .testNet
+        )
     }
-
+    
     static func ackedTransaction(from envelope: String, withInvoice: Bool = false) -> KinTransaction {
-        return try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
-                                   record: .acknowledged(ts: Date().timeIntervalSince1970,
-                                                         resultXdrBytes: [0, 1, 2]),
-                                   network: .testNet,
-                                   invoiceList: withInvoice ? stubInvoiceList1 : nil)
+        return try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
+            record: .acknowledged(
+                ts: Date().timeIntervalSince1970,
+                resultXdrBytes: [0, 1, 2]
+            ),
+            network: .testNet,
+            invoiceList: withInvoice ? stubInvoiceList1 : nil
+        )
     }
-
+    
     static func historicalTransaction(from envelope: String) -> KinTransaction {
-        return try! KinTransaction(envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
-                                   record: .historical(ts: 123456789,
-                                                       resultXdrBytes: [2, 1],
-                                                       pagingToken: "pagingtoken"),
-                                   network: .testNet)
+        return try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
+            record: .historical(
+                ts: 123456789,
+                resultXdrBytes: [2, 1],
+                pagingToken: "pagingtoken"
+            ),
+            network: .testNet
+        )
     }
 }
 

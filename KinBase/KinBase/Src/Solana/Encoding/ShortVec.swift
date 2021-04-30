@@ -8,70 +8,66 @@
 
 import Foundation
 
-enum ShortVecError: Error {
-    case invalidLength
-}
-
-struct ShortVec {
-    static func encodeLength(_ length: Int) throws -> Data {
-        guard length <= UInt16.max else {
-            throw ShortVecError.invalidLength
-        }
-
-        var rem_len = length
-        var encoded = [UInt8]()
-
+enum ShortVec {
+    static func encodeLength(_ length: UInt16) -> Data {
+        var data = Data()
+        
+        var remaining = Int(length)
         while true {
-            var elem = rem_len & Int(0x7f)
-            rem_len >>= 7
-
-            if rem_len == 0 {
-                encoded.append(UInt8(elem))
-                return Data(bytes: encoded, count: encoded.count)
+            var byte = UInt8(remaining & 0x7f)
+            remaining >>= 7
+            
+            if remaining == 0 {
+                data.append(byte)
+                return Data(data)
             }
-
-            elem |= 0x80
-            encoded.append(UInt8(elem))
+            
+            byte |= 0x80
+            data.append(byte)
         }
+        
+        return data
     }
-
-    static func decodeLength(_ data: Data) throws -> (length: Int, remainingData: Data) {
-        var encoded = [UInt8](data)
-
-        guard encoded.count > 0 else {
-            throw ShortVecError.invalidLength
+    
+    static func encode(_ components: [Data]) -> Data {
+        var container = encodeLength(UInt16(components.count))
+        components.forEach {
+            container.append($0)
         }
-
-        var length: Int = 0
-        var size: Int = 0
-
-        while true {
-            guard let elem = encoded.shift() else {
+        return container
+    }
+    
+    static func encode(_ data: Data) -> Data {
+        var container = encodeLength(UInt16(data.count))
+        container.append(data)
+        return container
+    }
+    
+    static func decodeLength(_ data: Data) -> (length: Int, remaining: Data) {
+        var length = 0
+        var size = 0
+        
+        guard data.count > 0 else {
+            return (length, Data())
+        }
+        
+        let bytes = data.bytes
+        while size < data.count {
+            let byte = Int(bytes[size])
+            length |= (byte & 0x7f) << (size * 7)
+            size += 1
+            if (byte & 0x80) == 0 {
                 break
             }
-
-            length |= (Int(elem) & 0x7f) << (size * 7)
-            size += 1
-
-            if ((elem & 0x80) == 0) {
-              break;
-            }
         }
-
-        return (length, Data(encoded))
-    }
-}
-
-extension Array {
-    mutating func shift() -> Element? {
-        guard let offsetIndex = index(startIndex, offsetBy: 1, limitedBy: endIndex) else {
-            return nil
+        
+        guard data.count > size else {
+            return (length, Data())
         }
-
-        let firstElement = self[startIndex]
-
-        self = Array(self[offsetIndex ..< endIndex] + self[startIndex ..< offsetIndex])
-
-        return firstElement
+        
+        return (
+            length: length,
+            remaining: data.tail(from: size)
+        )
     }
 }

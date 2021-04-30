@@ -8,7 +8,6 @@
 
 import XCTest
 import Promises
-import stellarsdk
 @testable import KinBase
 
 class KinAccountContextTests: XCTestCase {
@@ -37,7 +36,7 @@ class KinAccountContextTests: XCTestCase {
 
     // TODO: remove
 //    func testSubmitTransactionLive() {
-//        let key = try! KeyPair.generateRandomKeyPair()
+//        let key = KeyPair.generate()!
 //        var account = KinAccount(key: key)
 //        print(account.id)
 //
@@ -53,7 +52,7 @@ class KinAccountContextTests: XCTestCase {
 //
 //        wait(for: [expectCreateAccount], timeout: 20)
 //
-//        let context = try! KinAccountContext.Builder(env: agoraEnv)
+//        let context = KinAccountContext.Builder(env: agoraEnv)
 //            .importExistingPrivateKey(key)
 //            .build()
 //
@@ -75,7 +74,7 @@ class KinAccountContextTests: XCTestCase {
 //
     // TODO: remove
 //    func testPayInvoiceLive() {
-//        let key = try! KeyPair.generateRandomKeyPair()
+//        let key = KeyPair.generate()!
 //        var account = KinAccount(key: key)
 //        print(account.id)
 //
@@ -95,7 +94,7 @@ class KinAccountContextTests: XCTestCase {
 //        horizonEnv = nil
 //
 //        let agoraEnv = KinEnvironment.Agora.testNet()
-//        let context = try! KinAccountContext.Builder(env: agoraEnv)
+//        let context = KinAccountContext.Builder(env: agoraEnv)
 //            .importExistingPrivateKey(key)
 //            .build()
 //
@@ -144,11 +143,11 @@ class KinAccountContextTests: XCTestCase {
 //    }
 
     func testGetAccountNotInStorage() {
-        let key = try! KeyPair.generateRandomKeyPair()
+        let key = KeyPair.generate()!
         sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
+                                account: key.publicKey)
 
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId))
+        let expectAccount = KinAccount(publicKey: key.publicKey)
         mockKinService.stubGetAccountResult = expectAccount
         
         mockKinStorage.stubUpdateAccountResult = expectAccount
@@ -163,11 +162,11 @@ class KinAccountContextTests: XCTestCase {
     }
 
     func testGetAccountInStorageRegistered() {
-        let key = try! KeyPair.generateRandomKeyPair()
+        let key = KeyPair.generate()!
         sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
+                                account: key.publicKey)
 
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
+        let expectAccount = KinAccount(publicKey: key.publicKey, privateKey: key.privateKey,
                                             balance: .zero,
                                             status: .registered,
                                             sequence: 1)
@@ -184,14 +183,14 @@ class KinAccountContextTests: XCTestCase {
     }
 
     func testGetPaymentsForTransactionHashSucceed() {
-        sut = KinAccountContext(environment: mockEnv,
-                                accountId: StubObjects.accountId1)
+        sut = KinAccountContext(environment: mockEnv, account: StubObjects.account1)
 
         let expectTransaction = StubObjects.transaction
         mockKinService.stubGetTransactionResult = expectTransaction
 
         let expect = expectation(description: "callback")
-        sut.getPaymentsForTransactionHash(KinTransactionHash(Data([0, 1]))).then { payments in
+        let hash = KinTransactionHash(Data(repeating: 7, count: 64))
+        sut.getPaymentsForTransactionHash(hash).then { payments in
             XCTAssertEqual(payments, expectTransaction.kinPayments)
             expect.fulfill()
         }
@@ -201,20 +200,24 @@ class KinAccountContextTests: XCTestCase {
 
     func testSendKinPaymentsSucceed() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
 
         mockKinStorage.stubGetAccountResult = expectAccount
 
         sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
+                                account: key.publicKey)
 
         // Set up signed transaction returned by service
-        let payments = [KinPaymentItem(amount: Kin(1000), destAccountId: StubObjects.accountId1),
-                        KinPaymentItem(amount: Kin(990), destAccountId: StubObjects.accountId2)]
+        let payments = [
+            KinPaymentItem(amount: Kin(1000), destAccount: StubObjects.account1),
+            KinPaymentItem(amount: Kin(990), destAccount: StubObjects.account2),
+        ]
         let memo = KinMemo.none
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
@@ -248,19 +251,21 @@ class KinAccountContextTests: XCTestCase {
 
     func testSendKinPaymentSucceed() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
 
         mockKinStorage.stubGetAccountResult = expectAccount
 
         sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
+                                account: key.publicKey)
 
         // Set up signed transaction returned by service
-        let payment = KinPaymentItem(amount: Kin(1000), destAccountId: StubObjects.accountId2)
+        let payment = KinPaymentItem(amount: Kin(1000), destAccount: StubObjects.account2)
         let memo = KinMemo.none
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
@@ -294,8 +299,8 @@ class KinAccountContextTests: XCTestCase {
 
     func testSendKinPaymentUpgradeRequired() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(publicKey: key.publicKey, privateKey: key.privateKey,
                                             balance: KinBalance(Kin(10000)),
                                             status: .registered,
                                             sequence: 1)
@@ -303,10 +308,10 @@ class KinAccountContextTests: XCTestCase {
         mockKinStorage.stubGetAccountResult = expectAccount
 
         sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
+                                account: key.publicKey)
 
         // Set up signed transaction returned by service
-        let payment = KinPaymentItem(amount: Kin(1000), destAccountId: StubObjects.accountId2)
+        let payment = KinPaymentItem(amount: Kin(1000), destAccount: StubObjects.account2)
         let memo = KinMemo.none
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
@@ -315,7 +320,7 @@ class KinAccountContextTests: XCTestCase {
 
         // Set up submited transaction on serivce
         let stubAckedTransaction = StubObjects.ackedTransaction(from: StubObjects.transactionEnvelopeSigned)
-        mockKinService.stubSubmitTransactionResult = .init(KinService.Errors.upgradeRequired)
+        mockKinService.stubSubmitTransactionResult = .init(KinServiceV4.Errors.upgradeRequired)
         mockKinService.stubCanWhitelistTransactionResult = false
 
         // Set up account updates in storage
@@ -328,7 +333,7 @@ class KinAccountContextTests: XCTestCase {
         // Test
         let expect = expectation(description: "callback")
         sut.sendKinPayment(payment, memo: memo).catch { error in
-            XCTAssertEqual(error as! KinService.Errors, KinService.Errors.upgradeRequired)
+            XCTAssertEqual(error as! KinServiceV4.Errors, KinServiceV4.Errors.upgradeRequired)
             expect.fulfill()
         }
 
@@ -337,8 +342,8 @@ class KinAccountContextTests: XCTestCase {
 
     func testPayInvoiceSucceed() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(publicKey: key.publicKey, privateKey: key.privateKey,
                                             balance: KinBalance(Kin(10000)),
                                             status: .registered,
                                             sequence: 1)
@@ -346,7 +351,7 @@ class KinAccountContextTests: XCTestCase {
         mockKinStorage.stubGetAccountResult = expectAccount
 
         sut = KinAccountContext(environment: mockEnv,
-                                accountId: key.accountId)
+                                account: key.publicKey)
         
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
@@ -367,10 +372,7 @@ class KinAccountContextTests: XCTestCase {
 
         // Test
         let expect = expectation(description: "callback")
-        sut.payInvoice(processingAppIdx: .testApp,
-                       destinationAccount: StubObjects.accountId2,
-                       invoice: StubObjects.stubInvoice,
-                       type: .p2p).then { resultPayment in
+        sut.payInvoice(processingAppIdx: .testApp, destinationAccount: StubObjects.account2, invoice: StubObjects.stubInvoice, type: .p2p).then { resultPayment in
             XCTAssertTrue(self.mockKinStorage.sequenceAdvanced)
             XCTAssertEqual(self.mockKinStorage.remainingBalance, KinBalance(Kin(10000 - 25)))
             XCTAssertEqual(self.mockKinStorage.transactionInserted, stubAckedTransaction)
@@ -384,18 +386,20 @@ class KinAccountContextTests: XCTestCase {
 
     func testObserveBalancePassive() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
 
         mockKinStorage.stubGetAccountResult = expectAccount
         mockKinStorage.stubUpdateAccountResult = expectAccount
         mockKinService.stubGetAccountResult = expectAccount
 
 
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
 
         let expectBalance = expectation(description: "balance")
         sut.observeBalance(mode: .passive)
@@ -410,17 +414,21 @@ class KinAccountContextTests: XCTestCase {
 
     func testObserveBalanceActive() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
-
-        let updatedAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                             balance: KinBalance(Kin(999)),
-                                             status: .registered,
-                                             sequence: 2)
-
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
+        
+        let updatedAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(999)),
+            status: .registered,
+            sequence: 2
+        )
+        
         mockKinStorage.stubGetAccountResult = expectAccount
         mockKinStorage.stubUpdateAccountResult = expectAccount
         mockKinService.stubGetAccountResult = expectAccount
@@ -429,7 +437,7 @@ class KinAccountContextTests: XCTestCase {
         let stubAccountSubject = ValueSubject<KinAccount>()
         mockKinService.stubStreamAccountObservable = stubAccountSubject
 
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
 
         let expectBalance = expectation(description: "balance")
         expectBalance.expectedFulfillmentCount = 3
@@ -453,12 +461,14 @@ class KinAccountContextTests: XCTestCase {
 
     func testObservePaymentsPassiveEmpty() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
-
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
+        
         mockKinStorage.stubGetAccountResult = expectAccount
         mockKinStorage.stubGetStoredTransactionsResult = nil
         mockKinService.stubGetAccountResult = expectAccount
@@ -467,7 +477,7 @@ class KinAccountContextTests: XCTestCase {
         let stubAccountSubject = ValueSubject<KinAccount>()
         mockKinService.stubStreamAccountObservable = stubAccountSubject
 
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
 
         let expectPayments = expectation(description: "expect payments")
         _ = sut.observePayments(mode: .passive)
@@ -482,24 +492,28 @@ class KinAccountContextTests: XCTestCase {
 
     func testObservePaymentsPassiveTransactions() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
-
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
+        
         mockKinStorage.stubGetAccountResult = expectAccount
-        mockKinStorage.stubGetStoredTransactionsResult = KinTransactions(items: [StubObjects.transaction],
-                                                                         headPagingToken: nil,
-                                                                         tailPagingToken: nil)
+        mockKinStorage.stubGetStoredTransactionsResult = KinTransactions(
+            items: [StubObjects.transaction],
+            headPagingToken: nil,
+            tailPagingToken: nil
+        )
         mockKinService.stubGetAccountResult = expectAccount
         mockKinService.stubGetLatestTransactions = []
-
+        
         let stubAccountSubject = ValueSubject<KinAccount>()
         mockKinService.stubStreamAccountObservable = stubAccountSubject
-
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
-
+        
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
+        
         let expectPayments = expectation(description: "expect payments")
         let paymentObservable = sut.observePayments(mode: .passive)
             .subscribe { resultPayments in
@@ -510,28 +524,32 @@ class KinAccountContextTests: XCTestCase {
         waitForExpectations(timeout: 1)
         paymentObservable.dispose()
     }
-
+    
     func testObservePaymentsNextPage() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
-
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
+        
         mockKinStorage.stubGetAccountResult = expectAccount
-        mockKinStorage.stubGetStoredTransactionsResult = KinTransactions(items: [StubObjects.transaction],
-                                                                         headPagingToken: "head",
-                                                                         tailPagingToken: "tail")
+        mockKinStorage.stubGetStoredTransactionsResult = KinTransactions(
+            items: [StubObjects.transaction],
+            headPagingToken: "head",
+            tailPagingToken: "tail"
+        )
         mockKinService.stubGetAccountResult = expectAccount
         mockKinService.stubGetLatestTransactions = []
         let stubNextTransaction = StubObjects.historicalTransaction(from: StubObjects.transactionEvelope2)
         mockKinService.stubGetTransactionPageResult = [stubNextTransaction]
-
+        
         let stubAccountSubject = ValueSubject<KinAccount>()
         mockKinService.stubStreamAccountObservable = stubAccountSubject
-
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
+        
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
 
         let expectNextPage = expectation(description: "Next page")
         expectNextPage.expectedFulfillmentCount = 2
@@ -554,8 +572,8 @@ class KinAccountContextTests: XCTestCase {
 
     func testObservePaymentsPreviousPage() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(publicKey: key.publicKey, privateKey: key.privateKey,
                                             balance: KinBalance(Kin(10000)),
                                             status: .registered,
                                             sequence: 1)
@@ -572,7 +590,7 @@ class KinAccountContextTests: XCTestCase {
         let stubAccountSubject = ValueSubject<KinAccount>()
         mockKinService.stubStreamAccountObservable = stubAccountSubject
 
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
 
         let expectPrevPage = expectation(description: "prev page")
         expectPrevPage.expectedFulfillmentCount = 2
@@ -595,42 +613,44 @@ class KinAccountContextTests: XCTestCase {
 
     func testObservePaymentsActiveNewOnlyTransactions() {
         // Set up account in storage
-        let key = try! KeyPair(secretSeed: StubObjects.seed1)
-        let expectAccount = try! KinAccount(key: KinAccount.Key(accountId: key.accountId),
-                                            balance: KinBalance(Kin(10000)),
-                                            status: .registered,
-                                            sequence: 1)
-
+        let key = KeyPair(seed: StubObjects.seed1)
+        let expectAccount = KinAccount(
+            publicKey: key.publicKey, privateKey: key.privateKey,
+            balance: KinBalance(Kin(10000)),
+            status: .registered,
+            sequence: 1
+        )
+        
         mockKinStorage.stubGetAccountResult = expectAccount
         mockKinStorage.stubGetStoredTransactionsResult = nil
         mockKinService.stubGetAccountResult = expectAccount
         mockKinService.stubGetLatestTransactions = [StubObjects.transaction]
-
+        
         let stubAccountSubject = ValueSubject<KinAccount>()
         let stubPaymentSubject = ValueSubject<KinTransaction>()
         mockKinService.stubStreamAccountObservable = stubAccountSubject
         mockKinService.stubStreamTransactionObservable = stubPaymentSubject
-
-        sut = KinAccountContext(environment: mockEnv, accountId: expectAccount.id)
-
+        
+        sut = KinAccountContext(environment: mockEnv, account: expectAccount.publicKey)
+        
         let expectPayments = expectation(description: "expect payments")
         let paymentObservable = sut.observePayments(mode: .activeNewOnly)
             .subscribe { resultPayments in
                 XCTAssertEqual(resultPayments.first!.id.transactionHash, StubObjects.transaction.transactionHash)
                 expectPayments.fulfill()
-        }
-
+            }
+        
         stubPaymentSubject.onNext(StubObjects.transaction)
-
+        
         waitForExpectations(timeout: 1)
-
+        
         paymentObservable.dispose()
     }
 
     func testClearStorage() {
-        sut = KinAccountContext(environment: mockEnv, accountId: StubObjects.accountId1)
+        sut = KinAccountContext(environment: mockEnv, account: StubObjects.account1)
         _ = sut.clearStorage().then {
-            XCTAssertEqual(self.mockKinStorage.accountRemoved, StubObjects.accountId1)
+            XCTAssertEqual(self.mockKinStorage.accountRemoved, StubObjects.account1)
         }
     }
 
@@ -640,14 +660,14 @@ class KinAccountContextTests: XCTestCase {
 
     func testExistingAccountBuilder() {
         sut = KinAccountContext.Builder(env: mockEnv)
-            .useExistingAccount(StubObjects.accountId1)
+            .useExistingAccount(StubObjects.account1)
             .build()
 
-        XCTAssertEqual(sut.accountId, StubObjects.accountId1)
+        XCTAssertEqual(sut.accountPublicKey, StubObjects.account1)
     }
 
     func testImportKeyBuilder() {
-        let key = try! KinAccount.Key(secretSeed: StubObjects.seed1)
+        let key = StubObjects.keyPair1
         XCTAssertNoThrow(try KinAccountContext.Builder(env: mockEnv).importExistingPrivateKey(key).build())
     }
 }

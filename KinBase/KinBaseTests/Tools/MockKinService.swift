@@ -11,8 +11,7 @@ import Promises
 @testable import KinBase
 
 class MockKinService: KinServiceType {
-
-
+    
     var stubGetAccountResult: KinAccount?
     var stubGetAccountResultPromise: Promise<KinAccount>?
     var stubCreateAccountResult: KinAccount?
@@ -26,11 +25,11 @@ class MockKinService: KinServiceType {
     var stubGetTransactionPageResult: [KinTransaction]?
     var stubCanWhitelistTransactionResult: Bool?
     var stubMinFee: Quark?
-    var stubResolveTokenAccounts: Promise<[KinAccount.Key]>?
+    var stubResolveTokenAccounts: Promise<[PublicKey]>?
 
     init() { }
 
-    func getAccount(accountId: KinAccount.Id) -> Promise<KinAccount> {
+    func getAccount(account: PublicKey) -> Promise<KinAccount> {
         if stubGetAccountResult != nil {
             return .init(stubGetAccountResult!)
         }
@@ -38,19 +37,19 @@ class MockKinService: KinServiceType {
         return stubGetAccountResultPromise!
     }
 
-    func createAccount(accountId: KinAccount.Id, signer: KinAccount.Key) -> Promise<KinAccount> {
+    func createAccount(account: PublicKey, signer: KeyPair) -> Promise<KinAccount> {
         return .init(stubCreateAccountResult!)
     }
 
-    func streamAccount(accountId: KinAccount.Id) -> Observable<KinAccount> {
+    func streamAccount(account: PublicKey) -> Observable<KinAccount> {
         return stubStreamAccountObservable!
     }
 
-    func getLatestTransactions(accountId: KinAccount.Id) -> Promise<[KinTransaction]> {
+    func getLatestTransactions(account: PublicKey) -> Promise<[KinTransaction]> {
         return .init(stubGetLatestTransactions!)
     }
 
-    func getTransactionPage(accountId: KinAccount.Id, pagingToken: String, order: TransactionOrder) -> Promise<[KinTransaction]> {
+    func getTransactionPage(account: PublicKey, pagingToken: String, order: TransactionOrder) -> Promise<[KinTransaction]> {
         return .init(stubGetTransactionPageResult!)
     }
 
@@ -66,7 +65,7 @@ class MockKinService: KinServiceType {
         return .init(stubCanWhitelistTransactionResult!)
     }
     
-    func buildAndSignTransaction(ownerKey: KinAccount.Key, sourceKey: KinAccount.Key, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
+    func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
         return .init(stubBuildAndSignTransactionResult!)
     }
     
@@ -79,12 +78,12 @@ class MockKinService: KinServiceType {
             .then { it in self.submitTransaction(transaction: it)}
     }
 
-    func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction> {
+    func streamNewTransactions(account: PublicKey) -> Observable<KinTransaction> {
         return stubStreamTransactionObservable!
     }
     
-    func resolveTokenAccounts(accountId: KinAccount.Id) -> Promise<[KinAccount.Key]> {
-        return stubResolveTokenAccounts ?? Promise { [KinAccount.Key](arrayLiteral: accountId.asPublicKey().keypair) }
+    func resolveTokenAccounts(account: PublicKey) -> Promise<[PublicKey]> {
+        return stubResolveTokenAccounts ?? Promise { [account] }
     }
     
     func invalidateRecentBlockHashCache() {

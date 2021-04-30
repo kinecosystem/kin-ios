@@ -69,7 +69,7 @@ class NetworkOperationHandlerTests: XCTestCase {
                                   work: { callback in
                                     i += 1
                                     if i % 3 != 0 {
-                                        callback.onError?(KinService.Errors.unknown)
+                                        callback.onError?(KinServiceV4.Errors.unknown)
                                     } else {
                                         callback.onSuccess(1)
                                     }
@@ -108,7 +108,7 @@ class NetworkOperationHandlerTests: XCTestCase {
         _ = sut.queueOperation(op:
             NetworkOperation<Int>(backoffStrategy: .never(),
                                   work: { callback in
-                                    callback.onError?(KinService.Errors.unknown)
+                                    callback.onError?(KinServiceV4.Errors.unknown)
                                     expect.fulfill()
                                   },
                                   completion: PromisedCallback<Int>(onSuccess: onSuccess,
@@ -148,7 +148,7 @@ class NetworkOperationHandlerTests: XCTestCase {
                                   work: { callback in
                                     i += 1
                                     if i % 3 != 0 {
-                                        callback.onError?(KinService.Errors.unknown)
+                                        callback.onError?(KinServiceV4.Errors.unknown)
                                     } else {
                                         callback.onSuccess(1)
                                     }
@@ -190,7 +190,7 @@ class NetworkOperationHandlerTests: XCTestCase {
                                   work: { callback in
                                     i += 1
                                     if i % 3 != 0 {
-                                        callback.onError?(KinService.Errors.unknown)
+                                        callback.onError?(KinServiceV4.Errors.unknown)
                                     } else {
                                         callback.onSuccess(1)
                                     }

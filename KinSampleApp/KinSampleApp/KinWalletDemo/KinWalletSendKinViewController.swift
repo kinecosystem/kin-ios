@@ -153,6 +153,7 @@ class KinWalletSendKinViewController: UIViewController {
     @objc func sendButtonTapped() {
         guard let amount = Kin(string: amountTextField.text ?? ""),
             let dest = destTextField.text,
+            let destAccount = PublicKey(base58: dest),
             let memo = memoTextField.text else {
                 presentSimpleAlert(message: "Invalid Input")
             return
@@ -160,7 +161,7 @@ class KinWalletSendKinViewController: UIViewController {
 
         loadingSpinner.startAnimating()
 
-        let item = KinPaymentItem(amount: amount, destAccountId: dest)
+        let item = KinPaymentItem(amount: amount, destAccount: destAccount)
         accountContext.sendKinPayment(item, memo: KinMemo(text: memo))
             .then(on: .main) { [weak self] payment in
                 self?.loadingSpinner.stopAnimating()

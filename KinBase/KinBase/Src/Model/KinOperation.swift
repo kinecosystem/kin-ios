@@ -14,7 +14,7 @@ public protocol KinOperation {
 
 public struct KinPaymentOperation: KinOperation {
     public let amount: Kin
-    public let source: KinAccount.Id
-    public let destination: KinAccount.Id
+    public let source: PublicKey
+    public let destination: PublicKey
     public let isNonNativeAsset: Bool
 }

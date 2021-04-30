@@ -55,10 +55,13 @@ extension KinWalletInvoiceViewController: InvoiceTableViewControllerDelegate {
 
         let data = UIImage(named: "ic_launcher")!.pngData()!
 
-        let appInfo = AppInfo(appIdx: .testApp,
-                              kinAccountId: "GDV4TKOCDBHB3XGCKAXWYETQRIN4RTJKSD6FQV43E2AUHORR56B4YDC4",
-                              name: "Test App",
-                              appIconData: data)
+        let account = PublicKey(base58: "GsRAL8GEGbYxfDT53gSEXTxpThzuyrqmkg6iv4o2kC35")!
+        let appInfo = AppInfo(
+            appIdx: .testApp,
+            kinAccount: account,
+            name: "Test App",
+            appIconData: data
+        )
 
         let resultHandler = { [weak self] (result: PaymentFlowViewModelResult) in
             if case .success(_) = result {
@@ -73,9 +76,11 @@ extension KinWalletInvoiceViewController: InvoiceTableViewControllerDelegate {
             }
         }
 
-        paymentFlowController?.confirmPaymentOfInvoice(invoice,
-                                                       payerAccount: accountContext.accountId,
-                                                       processingAppInfo: appInfo,
-                                                       onResult: resultHandler)
+        paymentFlowController?.confirmPaymentOfInvoice(
+            invoice,
+            payerAccount: accountContext.accountPublicKey,
+            processingAppInfo: appInfo,
+            onResult: resultHandler
+        )
     }
 }

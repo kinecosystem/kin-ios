@@ -13,8 +13,6 @@ fileprivate struct Constants {
     static let quarkToKinConversion: Int = 100000
 }
 
-public typealias Byte = UInt8
-
 public typealias Kin = Decimal
 
 public typealias Quark = Int64

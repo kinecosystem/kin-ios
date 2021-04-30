@@ -23,7 +23,7 @@ class MockKinStorage: KinStorageType {
     var remainingBalance: KinBalance!
     var transactionInserted: KinTransaction!
     var storageCleared = false
-    var accountRemoved: KinAccount.Id?
+    var accountRemoved: PublicKey?
     var stubSetMinApiVersionResult: Promise<Int>!
     var stubGetMinApiVersionResult: Promise<Int?>!
 
@@ -37,7 +37,7 @@ class MockKinStorage: KinStorageType {
         TODO()
     }
 
-    func getAccount(_ accountId: KinAccount.Id) -> Promise<KinAccount?> {
+    func getAccount(_ account: PublicKey) -> Promise<KinAccount?> {
         return .init(stubGetAccountResult)
     }
 
@@ -45,20 +45,20 @@ class MockKinStorage: KinStorageType {
         return .init(stubUpdateAccountResult)
     }
 
-    func removeAccount(accountId: KinAccount.Id) -> Promise<Void> {
-        accountRemoved = accountId
+    func removeAccount(account: PublicKey) -> Promise<Void> {
+        accountRemoved = account
         return .init(())
     }
 
-    func getAllAccountIds() -> Promise<[KinAccount.Id]> {
+    func getAllAccountIds() -> Promise<[PublicKey]> {
         TODO()
     }
 
-    func storeTransactions(accountId: KinAccount.Id, transactions: [KinTransaction]) -> Promise<[KinTransaction]> {
+    func storeTransactions(account: PublicKey, transactions: [KinTransaction]) -> Promise<[KinTransaction]> {
         TODO()
     }
 
-    func getStoredTransactions(accountId: KinAccount.Id) -> Promise<KinTransactions?> {
+    func getStoredTransactions(account: PublicKey) -> Promise<KinTransactions?> {
         return .init(stubGetStoredTransactionsResult)
     }
 
@@ -67,34 +67,34 @@ class MockKinStorage: KinStorageType {
         return .init(())
     }
 
-    func advanceSequence(accountId: KinAccount.Id) -> Promise<KinAccount> {
+    func advanceSequence(account: PublicKey) -> Promise<KinAccount> {
         sequenceAdvanced = true
         return .init(stubAdvanceSequenceResult)
     }
 
-    func deductFromAccountBalance(accountId: KinAccount.Id, amount: Kin) -> Promise<KinAccount> {
+    func deductFromAccountBalance(account: PublicKey, amount: Kin) -> Promise<KinAccount> {
         remainingBalance = KinBalance(stubGetAccountResult.balance.amount - amount)
         return .init(stubDeductFromBalanceResult)
     }
 
-    func insertNewTransaction(accountId: KinAccount.Id, newTransaction: KinTransaction) -> Promise<[KinTransaction]> {
+    func insertNewTransaction(account: PublicKey, newTransaction: KinTransaction) -> Promise<[KinTransaction]> {
         transactionInserted = newTransaction
         return .init(stubInsertNewTransactionResult)
     }
 
-    func upsertNewTransactions(accountId: KinAccount.Id, newTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
+    func upsertNewTransactions(account: PublicKey, newTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
         return .init(newTransactions)
     }
 
-    func upsertOldTransactions(accountId: KinAccount.Id, oldTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
+    func upsertOldTransactions(account: PublicKey, oldTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
         return .init(oldTransactions)
     }
 
-    func addInvoiceLists(accountId: KinAccount.Id, invoiceLists: [InvoiceList]) -> Promise<[InvoiceList]> {
+    func addInvoiceLists(account: PublicKey, invoiceLists: [InvoiceList]) -> Promise<[InvoiceList]> {
         return .init([])
     }
 
-    func getInvoiceListsMapForAccountId(account: KinAccount.Id) -> Promise<[InvoiceList.Id : InvoiceList]> {
+    func getInvoiceListsMapForAccountId(account: PublicKey) -> Promise<[InvoiceList.Id : InvoiceList]> {
         return .init([:])
     }
 
@@ -118,7 +118,7 @@ class MockKinStorage: KinStorageType {
         return UUID().uuidString
     }
     
-    func hasPrivateKey(_ privateKey: KinAccount.Key) -> Bool {
+    func hasPrivateKey(_ account: PublicKey) -> Bool {
         false
     }
 }

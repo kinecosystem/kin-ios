@@ -8,164 +8,105 @@
 
 import Foundation
 
-/**
-* AccountMeta represents the account information required
-* for building transactions.
-*/
-public struct AccountMeta {
-    var publicKey: SolanaPublicKey
-    var isSigner: Bool
-    var isWritable: Bool
-    var isPayer: Bool
-    var isProgram: Bool
+public struct Instruction: Equatable {
     
-    init(publicKey: SolanaPublicKey, isSigner: Bool = false, isWritable: Bool = false, isPayer: Bool = false, isProgram: Bool = false) {
-        self.publicKey = publicKey
-        self.isSigner = isSigner
-        self.isWritable = isWritable
-        self.isPayer = isPayer
-        self.isProgram = isProgram
-    }
+    public var program: Key32
+    public var accounts: [AccountMeta]
+    public var data: Data
     
-    static func newAccountMeta(
-        _ publicKey: SolanaPublicKey,
-        isSigner: Bool,
-        isPayer: Bool = false,
-        isProgram: Bool = false
-    ) -> AccountMeta {
-        return AccountMeta(
-            publicKey: publicKey,
-            isSigner: isSigner,
-            isWritable: true,
-            isPayer: isPayer,
-            isProgram: isProgram
-        )
-    }
-    
-    static func newReadonlyAccountMeta(
-        _ publicKey: SolanaPublicKey,
-        isSigner: Bool,
-        isPayer: Bool = false,
-        isProgram: Bool = false
-    ) -> AccountMeta {
-        return AccountMeta(
-            publicKey: publicKey,
-            isSigner: isSigner,
-            isWritable: false,
-            isPayer: isPayer,
-            isProgram: isProgram
-        )
-    }
-}
-
-extension AccountMeta: Comparable {
-    public static func == (lhs: AccountMeta, rhs: AccountMeta) -> Bool {
-        return lhs.publicKey == rhs.publicKey &&
-            lhs.isSigner == rhs.isSigner &&
-            lhs.isWritable == rhs.isWritable &&
-            lhs.isPayer == rhs.isPayer &&
-            lhs.isProgram == rhs.isProgram
-    }
-    
-    public static func < (lhs: AccountMeta, rhs: AccountMeta) -> Bool {
-        if (lhs.isPayer != rhs.isPayer) {
-            return lhs.isPayer
-        }
-        if (lhs.isProgram != rhs.isProgram) {
-            return !lhs.isProgram
-        }
-        if (lhs.isSigner != rhs.isSigner) {
-            return lhs.isSigner
-        }
-        if (lhs.isWritable != rhs.isWritable) {
-            return lhs.isWritable
-        }
-
-        return false
-    }
-}
-
-extension AccountMeta {
-    func copy(publicKey: SolanaPublicKey? = nil, isSigner: Bool? = nil, isWritable: Bool? = nil, isPayer: Bool? = nil, isProgram: Bool? = nil) -> AccountMeta {
-        return AccountMeta(publicKey: publicKey ?? self.publicKey, isSigner: isSigner ?? self.isSigner, isWritable: isWritable ?? self.isWritable, isPayer: isPayer ?? self.isPayer, isProgram: isProgram ?? self.isProgram)
-    }
-}
-
-/**
-* SolanaInstruction represents a transaction instruction.
-*/
-public struct SolanaInstruction {
-    var program: SolanaPublicKey
-    var accounts: [AccountMeta]
-    var data: Data
-    
-    private init(_ program: SolanaPublicKey, _ accounts: [AccountMeta], _ data: Data) {
+    public init(program: Key32, accounts: [AccountMeta], data: Data) {
         self.program = program
         self.accounts = accounts
         self.data = data
     }
     
-    // newInstruction creates a new instruction.
-    static func newInstruction(
-        _ program: SolanaPublicKey,
-        _ data: Data,
-        _ accounts: AccountMeta...
-    ) -> SolanaInstruction {
-        return SolanaInstruction(
-            program,
-            accounts,
-            data
+    public func compile(using messageAccounts: [Key32]) -> CompiledInstruction {
+        let programIndex = messageAccounts.firstIndex { $0 == program }!
+        let accountIndexes = accounts.map { account in
+            messageAccounts.firstIndex { $0 == account.publicKey }!
+        }
+        
+        return CompiledInstruction(
+            programIndex: programIndex,
+            accountIndexes: accountIndexes,
+            data: data
         )
     }
 }
 
-public struct CompiledInstruction: SolanaCodable {
-    var programIndex: Byte
-    var accounts: ByteArray
-    var data: ByteArray
+// MARK: - CompiledInstruction -
 
-    init(programIndex: Byte,
-         accounts: ByteArray,
-         data: ByteArray) {
-        self.programIndex = programIndex
-        self.accounts = accounts
+public struct CompiledInstruction: Equatable {
+    
+    public var programIndex: Byte
+    public var accountIndexes: [Byte]
+    public var data: Data
+    
+    public var byteLength: Int {
+        return
+            1 +
+            ShortVec.encodeLength(UInt16(accountIndexes.count)).count +
+            accountIndexes.count +
+            ShortVec.encodeLength(UInt16(data.count)).count +
+            data.count
+    }
+    
+    public init(programIndex: Int, accountIndexes: [Int], data: Data) {
+        self.init(
+            programIndex: Byte(programIndex),
+            accountIndexes: accountIndexes.map { Byte($0) },
+            data: data
+        )
+    }
+    
+    public init(programIndex: Byte, accountIndexes: [Byte], data: Data) {
+        self.programIndex = Byte(programIndex)
+        self.accountIndexes = accountIndexes.map { Byte($0) }
         self.data = data
     }
+}
 
-    init?(data: Data) {
-        var array = [Byte](data)
+// MARK: - SolanaCodable -
 
-        // Decoding `programIdIndex`
-        self.programIndex = array.shift()!
-
-        // Decoding `accounts`
-        let shortVecTuple = try! ShortVec.decodeLength(Data(array))
-        self.accounts = ByteArray(data: Data(array))!
-
-        let shortVecEncodedLength = try! ShortVec.encodeLength(shortVecTuple.length).count
-        array.removeSubrange(0..<(shortVecEncodedLength + shortVecTuple.length))
-        
-        // Decoding `data`
-        self.data = ByteArray(data: Data(array))!
-    }
-
-    func encode() -> Data {
-        var encoded = Data([programIndex])
+extension CompiledInstruction: SolanaCodable {
     
-        encoded.append(accounts.encode())
+    public init?(data: Data) {
+        guard data.count > 1 else {
+            return nil
+        }
         
-        encoded.append(data.encode())
-
-        return encoded
-    }
-
-    public static func == (lhs: CompiledInstruction, rhs: CompiledInstruction) -> Bool {
-        return lhs.programIndex == rhs.programIndex &&
-            lhs.accounts == rhs.accounts &&
-            lhs.data == rhs.data
+        var payload = data
+        
+        let index = payload.consume(1)[0]
+        
+        var (accountCount, accountData) = ShortVec.decodeLength(payload)
+        guard accountData.count >= accountCount else {
+            return nil
+        }
+        
+        let accountIndexes = accountData.consume(accountCount).map { $0 }
+        
+        let (opaqueCount, opaqueData) = ShortVec.decodeLength(accountData)
+        guard opaqueData.count >= opaqueCount else {
+            return nil
+        }
+        
+        self.programIndex = index
+        self.accountIndexes = accountIndexes
+        self.data = opaqueData.prefix(opaqueCount)
     }
     
-    public var description: String {
-        "CompiledInstruction(programIndex: \(Int(programIndex)), accounts: \(accounts.value), data: \(data.value)"
+    public func encode() -> Data {
+        var container = Data()
+        
+        container.append(programIndex)
+        container.append(
+            ShortVec.encode(Data(accountIndexes))
+        )
+        container.append(
+            ShortVec.encode(data)
+        )
+        
+        return container
     }
 }

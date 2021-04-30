@@ -8,7 +8,6 @@
 
 import Foundation
 import KinBase
-import stellarsdk
 
 /**
  `KinAccounts` wraps the `KinAccount` list.

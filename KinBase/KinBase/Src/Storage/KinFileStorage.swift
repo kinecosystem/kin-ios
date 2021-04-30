@@ -48,13 +48,13 @@ extension KinFileStorage: KinStorageType {
 
     // MARK: Account Operations
     public func addAccount(_ account: KinAccount) throws -> KinAccount {
-        try addKeyToSecureStore(accountId: account.id, key: account.key)
+        try addKeyToSecureStore(publicKey: account.publicKey, privateKey: account.privateKey)
         try writeAccountInfo(account)
         return account
     }
 
     public func addAccount(_ account: KinAccount) -> Promise<KinAccount> {
-        let promise = addKeyToSecureStoreAsync(accountId: account.id, key: account.key)
+        let promise = addKeyToSecureStoreAsync(publicKey: account.publicKey, privateKey: account.privateKey)
         return promise.then(on: fileAccessQueue) { [weak self] _ -> Promise<KinAccount> in
             guard let self = self else {
                 return .init(Errors.unknown)
@@ -64,19 +64,21 @@ extension KinFileStorage: KinStorageType {
         }
     }
     
-    public func hasPrivateKey(_ privateKey: KinAccount.Key) -> Bool {
-        let key = try? getKeyFromSecureStore(accountId: privateKey.accountId)
-        return key != nil
+    public func hasPrivateKey(_ account: PublicKey) -> Bool {
+        getKeyFromSecureStore(account: account) != nil
     }
 
-    public func getAccount(_ accountId: KinAccount.Id) -> Promise<KinAccount?> {
-        let key = try? getKeyFromSecureStore(accountId: accountId)
-        let account = readAccountInfoSync(accountId)
-        return self.merge(key: key, with: account)
+    public func getAccount(_ account: PublicKey) -> Promise<KinAccount?> {
+        guard let privateKey = getKeyFromSecureStore(account: account) else {
+            return Promise { false }
+        }
+        
+        let localAccount = readAccountInfoSync(account)
+        return self.merge(privateKey: privateKey, publicKey: account, with: localAccount)
     }
 
     public func updateAccount(_ account: KinAccount) -> Promise<KinAccount> {
-        return getAccount(account.id)
+        return getAccount(account.publicKey)
             .then(on: fileAccessQueue) { [weak self] storedAccount -> Promise<KinAccount> in
                 guard let self = self else {
                     return .init(Errors.unknown)
@@ -89,26 +91,26 @@ extension KinFileStorage: KinStorageType {
 //                let key = storedAccount.key.privateKey != nil ? storedAccount.key : account.key
                 let updatedAccount = storedAccount.copy(balance: account.balance,
                                                         status: account.status,
-                                                        sequence: account.sequenceNumber,
+                                                        sequence: account.sequence,
                                                         tokenAccounts: account.tokenAccounts)
                 return self.addAccount(updatedAccount)
             }
     }
 
-    public func removeAccount(accountId: KinAccount.Id) -> Promise<Void> {
-        let promise = removeKeyFromSecureStore(accountId: accountId)
+    public func removeAccount(account: PublicKey) -> Promise<Void> {
+        let promise = removeKeyFromSecureStore(account: account)
         return promise.then { [weak self] _ -> Promise<Void> in
             guard let self = self else {
                 return .init(Errors.unknown)
             }
 
-            let accountDirectory = self.directoryForAccount(accountId)
+            let accountDirectory = self.directoryForAccount(account)
             return self.removeFileOrDirectory(accountDirectory)
         }
     }
 
-    public func advanceSequence(accountId: KinAccount.Id) -> Promise<KinAccount> {
-        return getAccount(accountId)
+    public func advanceSequence(account: PublicKey) -> Promise<KinAccount> {
+        return getAccount(account)
             .then(on: fileAccessQueue) { account -> Promise<KinAccount> in
                 guard let account = account else {
                     return .init(Errors.missingAccount)
@@ -126,17 +128,15 @@ extension KinFileStorage: KinStorageType {
             }
     }
 
-    public func deductFromAccountBalance(accountId: KinAccount.Id,
-                                         amount: Kin) -> Promise<KinAccount> {
-        return getAccount(accountId)
+    public func deductFromAccountBalance(account: PublicKey, amount: Kin) -> Promise<KinAccount> {
+        return getAccount(account)
             .then(on: fileAccessQueue) { account -> Promise<KinAccount> in
                 guard let account = account else {
                     return .init(Errors.missingAccount)
                 }
 
-                guard account.status == .registered
-                    else {
-                        return .init(Errors.unregisteredAccount)
+                guard account.status == .registered else {
+                    return .init(Errors.unregisteredAccount)
                 }
 
                 let deductedBalance = KinBalance(max(0, account.balance.amount - amount))
@@ -146,26 +146,23 @@ extension KinFileStorage: KinStorageType {
         }
     }
 
-    public func getAllAccountIds() -> Promise<[KinAccount.Id]> {
-        guard let contents = try? fileManager.contentsOfDirectory(at: directoryForAllAccounts,
-                                                                  includingPropertiesForKeys: nil)
-            else {
-                return Promise([])
+    public func getAllAccountIds() -> Promise<[PublicKey]> {
+        guard let contents = try? fileManager.contentsOfDirectory(at: directoryForAllAccounts, includingPropertiesForKeys: nil) else {
+            return Promise([])
         }
 
         let promises = contents
-            .map { $0.appendingPathComponent(Constants.accountInfoFileName)}
+            .map { $0.appendingPathComponent(Constants.accountInfoFileName) }
             .map { readAccountInfo($0) }
 
         return any(promises).then { accountsOrError in
-            let accountIds = accountsOrError.compactMap { $0.value??.id }
+            let accountIds = accountsOrError.compactMap { $0.value??.publicKey }
             return Promise(accountIds)
         }
     }
 
     // MARK: Transaction Operations
-    public func storeTransactions(accountId: KinAccount.Id,
-                                  transactions: [KinTransaction]) -> Promise<[KinTransaction]> {
+    public func storeTransactions(account: PublicKey, transactions: [KinTransaction]) -> Promise<[KinTransaction]> {
         var headPagingToken: PagingToken?
         for item in transactions {
             if item.record.recordType == .historical {
@@ -184,24 +181,24 @@ extension KinFileStorage: KinStorageType {
 
         let invoiceLists = transactions.compactMap { $0.invoiceList }
 
-        let kinTransactions = KinTransactions(items: transactions,
-                                              headPagingToken: headPagingToken,
-                                              tailPagingToken: tailPagingToken)
+        let kinTransactions = KinTransactions(
+            items: transactions,
+            headPagingToken: headPagingToken,
+            tailPagingToken: tailPagingToken
+        )
 
-        return addInvoiceLists(accountId: accountId,
-                               invoiceLists: invoiceLists)
+        return addInvoiceLists(account: account, invoiceLists: invoiceLists)
             .then { _ in
-                self.writeTransactions(accountId: accountId,
-                                       transactions: kinTransactions)
+                self.writeTransactions(account: account, transactions: kinTransactions)
             }
     }
 
-    public func getStoredTransactions(accountId: KinAccount.Id) -> Promise<KinTransactions?> {
-        var invoiceListsMap = [InvoiceList.Id : InvoiceList]()
-        return getInvoiceListsMapForAccountId(account: accountId)
+    public func getStoredTransactions(account: PublicKey) -> Promise<KinTransactions?> {
+        var invoiceListsMap = [InvoiceList.Id: InvoiceList]()
+        return getInvoiceListsMapForAccountId(account: account)
             .then { storedMap -> Promise<KinTransactions?> in
                 invoiceListsMap = storedMap
-                return self.readTransactions(accountId: accountId)
+                return self.readTransactions(account: account)
             }
             .then { kinTransactions -> KinTransactions? in
                 guard let kinTransactions = kinTransactions else {
@@ -216,36 +213,40 @@ extension KinFileStorage: KinStorageType {
 
                     let invoiceListId = agoraMemo.foreignKeySHA224
 
-                    guard let transaction = try? KinTransaction(envelopeXdrBytes: item.envelopeXdrBytes,
-                                                                record: item.record,
-                                                                network: item.network,
-                                                                invoiceList: invoiceListsMap[invoiceListId]) else {
+                    guard let transaction = try? KinTransaction(
+                        envelopeXdrBytes: item.envelopeXdrBytes,
+                        record: item.record,
+                        network: item.network,
+                        invoiceList: invoiceListsMap[invoiceListId]
+                    ) else {
                         return item
                     }
 
                     return transaction
                 }
 
-                let transactionsWithInvoice = KinTransactions(items: itemsWithInvoice,
-                                                              headPagingToken: kinTransactions.headPagingToken,
-                                                              tailPagingToken: kinTransactions.tailPagingToken)
+                let transactionsWithInvoice = KinTransactions(
+                    items: itemsWithInvoice,
+                    headPagingToken: kinTransactions.headPagingToken,
+                    tailPagingToken: kinTransactions.tailPagingToken
+                )
 
                 return transactionsWithInvoice
             }
     }
 
-    public func insertNewTransaction(accountId: KinAccount.Id,
-                                     newTransaction: KinTransaction) -> Promise<[KinTransaction]> {
-        return getStoredTransactions(accountId: accountId)
+    public func insertNewTransaction(account: PublicKey, newTransaction: KinTransaction) -> Promise<[KinTransaction]> {
+        return getStoredTransactions(account: account)
             .then(on: fileAccessQueue) { transactions -> [KinTransaction] in
                 return (transactions?.items ?? []) + [newTransaction]
             }
-            .then(on: fileAccessQueue) { transactionsToStore in self.storeTransactions(accountId: accountId, transactions: transactionsToStore) }
+            .then(on: fileAccessQueue) { transactionsToStore in
+                self.storeTransactions(account: account, transactions: transactionsToStore)
+            }
     }
 
-    public func upsertNewTransactions(accountId: KinAccount.Id,
-                                      newTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
-        return getStoredTransactions(accountId: accountId)
+    public func upsertNewTransactions(account: PublicKey, newTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
+        return getStoredTransactions(account: account)
             .then { transactions -> [KinTransaction] in
                 var storedTransactions = transactions?.items ?? []
                 storedTransactions = storedTransactions.filter { stored -> Bool in
@@ -256,12 +257,13 @@ extension KinFileStorage: KinStorageType {
 
                 return newTransactions + storedTransactions
             }
-            .then { self.storeTransactions(accountId: accountId, transactions: $0) }
+            .then {
+                self.storeTransactions(account: account, transactions: $0)
+            }
     }
 
-    public func upsertOldTransactions(accountId: KinAccount.Id,
-                                      oldTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
-        return getStoredTransactions(accountId: accountId)
+    public func upsertOldTransactions(account: PublicKey, oldTransactions: [KinTransaction]) -> Promise<[KinTransaction]> {
+        return getStoredTransactions(account: account)
         .then { transactions -> [KinTransaction] in
             var storedTransactions = transactions?.items ?? []
             storedTransactions = storedTransactions.filter { stored -> Bool in
@@ -272,16 +274,17 @@ extension KinFileStorage: KinStorageType {
 
             return storedTransactions + oldTransactions
         }
-        .then { self.storeTransactions(accountId: accountId, transactions: $0) }
+        .then {
+            self.storeTransactions(account: account, transactions: $0)
+        }
     }
 
-    public func addInvoiceLists(accountId: KinAccount.Id,
-                                invoiceLists: [InvoiceList]) -> Promise<[InvoiceList]> {
+    public func addInvoiceLists(account: PublicKey, invoiceLists: [InvoiceList]) -> Promise<[InvoiceList]> {
         guard !invoiceLists.isEmpty else {
             return .init([])
         }
 
-        return getInvoiceListsMapForAccountId(account: accountId)
+        return getInvoiceListsMapForAccountId(account: account)
             .then { (invoicesMap: [InvoiceList.Id : InvoiceList]) -> [InvoiceList.Id : InvoiceList] in
                 var updatedMap = invoicesMap
 
@@ -291,12 +294,12 @@ extension KinFileStorage: KinStorageType {
 
                 return updatedMap
             }
-            .then { _ = self.writeInvoices(accountId: accountId, invoices: $0) }
+            .then { _ = self.writeInvoices(account: account, invoices: $0) }
             .then { invoiceLists }
     }
 
-    public func getInvoiceListsMapForAccountId(account: KinAccount.Id) -> Promise<[InvoiceList.Id : InvoiceList]> {
-        return readInvoices(accountId: account).then { $0 ?? [:] }
+    public func getInvoiceListsMapForAccountId(account: PublicKey) -> Promise<[InvoiceList.Id : InvoiceList]> {
+        return readInvoices(account: account).then { $0 ?? [:] }
     }
 
     public func setMinFee(_ fee: Quark) {
@@ -349,27 +352,28 @@ private extension KinFileStorage {
     var environmentDirectory: URL {
         return kinStorageDirectory
             .appendingPathComponent("env", isDirectory: true)
-            .appendingPathComponent(network.id.base32HexEncodedString, isDirectory: true)
+            .appendingPathComponent(Digest.md5(network.id.bytes).toHexString(), isDirectory: true)
+        // TODO: Verify that MD5 is sufficient for this purpose
     }
 
     var directoryForAllAccounts: URL {
         return environmentDirectory.appendingPathComponent("kin_accounts", isDirectory: true)
     }
 
-    func directoryForAccount(_ accountId: KinAccount.Id) -> URL {
-        return directoryForAllAccounts.appendingPathComponent(accountId, isDirectory: true)
+    func directoryForAccount(_ account: PublicKey) -> URL {
+        return directoryForAllAccounts.appendingPathComponent(account.base58, isDirectory: true)
     }
 
-    func pathForAccountInfoFile(_ accountId: KinAccount.Id) -> URL {
-        return directoryForAccount(accountId).appendingPathComponent(Constants.accountInfoFileName)
+    func pathForAccountInfoFile(_ account: PublicKey) -> URL {
+        return directoryForAccount(account).appendingPathComponent(Constants.accountInfoFileName)
     }
 
-    func pathForTransactionsFile(for accountId: KinAccount.Id) -> URL {
-        return directoryForAccount(accountId).appendingPathComponent(Constants.transactionsFileName)
+    func pathForTransactionsFile(for account: PublicKey) -> URL {
+        return directoryForAccount(account).appendingPathComponent(Constants.transactionsFileName)
     }
 
-    func pathForInvoicesFile(for accountId: KinAccount.Id) -> URL {
-        return directoryForAccount(accountId).appendingPathComponent(Constants.invoicesFileName)
+    func pathForInvoicesFile(for account: PublicKey) -> URL {
+        return directoryForAccount(account).appendingPathComponent(Constants.invoicesFileName)
     }
 }
 
@@ -381,11 +385,11 @@ private extension KinFileStorage {
         }
 
         // Make sure directory exists
-        let accountDirectory = directoryForAccount(account.id)
+        let accountDirectory = directoryForAccount(account.publicKey)
         try fileManager.createDirectory(at: accountDirectory,
                                         withIntermediateDirectories: true)
 
-        let accountInfoFile = pathForAccountInfoFile(account.id)
+        let accountInfoFile = pathForAccountInfoFile(account.publicKey)
 
         try data.write(to: accountInfoFile,
                        options: .atomic)
@@ -407,21 +411,24 @@ private extension KinFileStorage {
         }
     }
 
-    func merge(key: KinAccount.Key?, with account: KinAccount?) -> Promise<KinAccount?> {
+    func merge(privateKey: PrivateKey?, publicKey: PublicKey, with account: KinAccount?) -> Promise<KinAccount?> {
         return Promise<KinAccount?>.init(on: fileAccessQueue) { fulfill, reject in
             // If private key is stored, merge with account info, otherwise return an account without private key
             guard let account = account else {
-                let unregistedAccount = key != nil ? KinAccount(key: key!) : nil
+                let unregistedAccount = KinAccount(publicKey: publicKey, privateKey: privateKey)
                 fulfill(unregistedAccount)
                 return
             }
 
-            if let key = key {
-                let mergedAccount = KinAccount(key: key,
-                                               balance: account.balance,
-                                               status: account.status,
-                                               sequence: account.sequence,
-                                               tokenAccounts: account.tokenAccounts)
+            if let privateKey = privateKey {
+                let mergedAccount = KinAccount(
+                    publicKey: account.publicKey,
+                    privateKey: privateKey,
+                    balance: account.balance,
+                    status: account.status,
+                    sequence: account.sequence,
+                    tokenAccounts: account.tokenAccounts
+                )
                 fulfill(mergedAccount)
                 return
             }
@@ -430,8 +437,8 @@ private extension KinFileStorage {
         }
     }
 
-    func readAccountInfo(_ accountId: KinAccount.Id) -> Promise<KinAccount?> {
-        let accountInfoFile = self.pathForAccountInfoFile(accountId)
+    func readAccountInfo(_ account: PublicKey) -> Promise<KinAccount?> {
+        let accountInfoFile = self.pathForAccountInfoFile(account)
         return readAccountInfo(accountInfoFile)
     }
 
@@ -453,8 +460,8 @@ private extension KinFileStorage {
         }
     }
 
-    func readAccountInfoSync(_ accountId: KinAccount.Id) -> KinAccount? {
-        let accountInfoFile = pathForAccountInfoFile(accountId)
+    func readAccountInfoSync(_ account: PublicKey) -> KinAccount? {
+        let accountInfoFile = pathForAccountInfoFile(account)
         return readAccountInfoSync(accountInfoFile)
     }
 
@@ -467,8 +474,7 @@ private extension KinFileStorage {
         return storageObject?.kinAccount
     }
 
-    func writeTransactions(accountId: KinAccount.Id,
-                           transactions: KinTransactions) -> Promise<[KinTransaction]> {
+    func writeTransactions(account: PublicKey, transactions: KinTransactions) -> Promise<[KinTransaction]> {
         return Promise<[KinTransaction]>.init(on: fileAccessQueue) { [weak self] fulfill, reject in
             guard let self = self else {
                 reject(Errors.unknown)
@@ -482,14 +488,12 @@ private extension KinFileStorage {
 
             do {
                 // Make sure directory exists
-                let accountDirectory = self.directoryForAccount(accountId)
-                try self.fileManager.createDirectory(at: accountDirectory,
-                                                     withIntermediateDirectories: true)
+                let accountDirectory = self.directoryForAccount(account)
+                try self.fileManager.createDirectory(at: accountDirectory, withIntermediateDirectories: true)
 
-                let transactionsFile = self.pathForTransactionsFile(for: accountId)
+                let transactionsFile = self.pathForTransactionsFile(for: account)
 
-                try data.write(to: transactionsFile,
-                               options: .atomic)
+                try data.write(to: transactionsFile, options: .atomic)
                 fulfill(transactions.items)
             } catch let error {
                 reject(error)
@@ -497,14 +501,14 @@ private extension KinFileStorage {
         }
     }
 
-    func readTransactions(accountId: KinAccount.Id) -> Promise<KinTransactions?> {
+    func readTransactions(account: PublicKey) -> Promise<KinTransactions?> {
         return Promise<KinTransactions?>.init(on: fileAccessQueue) { [weak self] fulfill, reject in
             guard let self = self else {
                 reject(Errors.unknown)
                 return
             }
 
-            let transactionsFile = self.pathForTransactionsFile(for: accountId)
+            let transactionsFile = self.pathForTransactionsFile(for: account)
 
             guard let data = try? Data(contentsOf: transactionsFile) else {
                 fulfill(nil)
@@ -517,14 +521,14 @@ private extension KinFileStorage {
         }
     }
 
-    func readInvoices(accountId: KinAccount.Id) -> Promise<[InvoiceList.Id : InvoiceList]?> {
+    func readInvoices(account: PublicKey) -> Promise<[InvoiceList.Id : InvoiceList]?> {
         return Promise<[InvoiceList.Id : InvoiceList]?>.init(on: fileAccessQueue) { [weak self] fulfill, reject in
             guard let self = self else {
                 reject(Errors.unknown)
                 return
             }
 
-            let invoicesFile = self.pathForInvoicesFile(for: accountId)
+            let invoicesFile = self.pathForInvoicesFile(for: account)
 
             guard let data = try? Data(contentsOf: invoicesFile) else {
                 fulfill(nil)
@@ -536,8 +540,7 @@ private extension KinFileStorage {
         }
     }
 
-    func writeInvoices(accountId: KinAccount.Id,
-                       invoices: [InvoiceList.Id : InvoiceList]) -> Promise<[InvoiceList.Id : InvoiceList]> {
+    func writeInvoices(account: PublicKey, invoices: [InvoiceList.Id : InvoiceList]) -> Promise<[InvoiceList.Id : InvoiceList]> {
         return Promise<[InvoiceList.Id : InvoiceList]>.init(on: fileAccessQueue) { [weak self] fulfill, reject in
             guard let self = self else {
                 reject(Errors.unknown)
@@ -550,14 +553,12 @@ private extension KinFileStorage {
             }
 
             // Make sure directory exists
-            let accountDirectory = self.directoryForAccount(accountId)
-            try self.fileManager.createDirectory(at: accountDirectory,
-                                                 withIntermediateDirectories: true)
+            let accountDirectory = self.directoryForAccount(account)
+            try self.fileManager.createDirectory(at: accountDirectory, withIntermediateDirectories: true)
 
-            let invoicesFile = self.pathForInvoicesFile(for: accountId)
+            let invoicesFile = self.pathForInvoicesFile(for: account)
 
-            try data.write(to: invoicesFile,
-                           options: .atomic)
+            try data.write(to: invoicesFile, options: .atomic)
 
             fulfill(invoices)
         }
@@ -585,18 +586,14 @@ private extension KinFileStorage {
 
 // MARK: Private - Key Store Access
 private extension KinFileStorage {
-    func addKeyToSecureStore(accountId: KinAccount.Id, key: KinAccount.Key) throws {
-        guard let secret = key.seed?.secret,
-            let keyData = secret.data(using: .utf8) else {
-            // No private key needs to be added
-            return
+    func addKeyToSecureStore(publicKey: PublicKey, privateKey: PrivateKey?) throws {
+        guard let privateKey = privateKey else {
+            throw Errors.unknown
         }
-
-        try keyStore.add(account: accountId, key: keyData)
+        try keyStore.add(account: publicKey.base58, key: privateKey.data)
     }
 
-    func addKeyToSecureStoreAsync(accountId: KinAccount.Id,
-                             key: KinAccount.Key) -> Promise<Void> {
+    func addKeyToSecureStoreAsync(publicKey: PublicKey, privateKey: PrivateKey?) -> Promise<Void> {
         return Promise<Void>.init(on: fileAccessQueue) { [weak self] fulfill, reject in
             guard let self = self else {
                 reject(Errors.unknown)
@@ -604,7 +601,7 @@ private extension KinFileStorage {
             }
 
             do {
-                try self.addKeyToSecureStore(accountId: accountId, key: key)
+                try self.addKeyToSecureStore(publicKey: publicKey, privateKey: privateKey)
                 fulfill(())
             } catch let error {
                 reject(error)
@@ -612,21 +609,15 @@ private extension KinFileStorage {
         }
     }
 
-    func getKeyFromSecureStore(accountId: KinAccount.Id) throws -> KinAccount.Key? {
-        do {
-            guard let secretData = keyStore.retrieve(account: accountId),
-                let secret = String(bytes: secretData, encoding: .utf8) else {
-                return nil
-            }
-
-            return try KinAccount.Key(secretSeed: secret)
-
-        } catch let error {
-            throw error
+    func getKeyFromSecureStore(account: PublicKey) -> PrivateKey? {
+        guard let secretData = keyStore.retrieve(account: account.base58) else {
+            return nil
         }
+
+        return PrivateKey(secretData)
     }
 
-    func removeKeyFromSecureStore(accountId: KinAccount.Id) -> Promise<Void> {
+    func removeKeyFromSecureStore(account: PublicKey) -> Promise<Void> {
         return Promise<Void>.init(on: fileAccessQueue) { [weak self] fulfill, reject in
             guard let self = self else {
                 reject(Errors.unknown)
@@ -634,7 +625,7 @@ private extension KinFileStorage {
             }
 
             do {
-                try self.keyStore.delete(account: accountId)
+                try self.keyStore.delete(account: account.base58)
                 fulfill(())
             } catch let error {
                 reject(error)

@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import stellarsdk
 import Promises
 import Base58Swift
 import KinGrpcApi
@@ -16,8 +15,8 @@ import KinGrpcApi
 
 class KinServiceV4IntegrationTests: XCTestCase {
     
-//    let airdropAccount = SolanaPublicKey(Base58.base58Decode("DemXVWQ9DXYsGFpmjFXxki3PE1i3VoHQtqxXQFx38pmU")!)! // testnet
-    let airdropAccount = SolanaPublicKey(Base58.base58Decode("Gd1wVb3ioFZgWGadq5sEoLPQnRNFcpcprNeazY3QsTRf")!)! // localnet
+//    let airdropAccount = PublicKey(Base58.base58Decode("DemXVWQ9DXYsGFpmjFXxki3PE1i3VoHQtqxXQFx38pmU")!)! // testnet
+    let airdropAccount = PublicKey(Base58.base58Decode("Gd1wVb3ioFZgWGadq5sEoLPQnRNFcpcprNeazY3QsTRf")!)! // localnet
 
     var mockKinAccountApi: KinAccountApiV4!
     var mockKinAccountCreationApi: KinAccountCreationApiV4!
@@ -115,7 +114,7 @@ class KinServiceV4IntegrationTests: XCTestCase {
         // KinAccountContext
 
         context.getAccount().test(150, self) // To force creation of the account
-        context.env.testService?.fundAccount(context.accountId, amount: 10).test(150, self) // airdrop in 1 Kin
+        context.env.testService?.fundAccount(context.accountPublicKey, amount: 10).test(150, self) // airdrop in 1 Kin
 
 //        let testPayment: () -> Void = { self.context.sendKinPayment(KinPaymentItem(amount: Quark(Int.random(in: 0..<100)).kin, destAccountId: airdropAccount.accountId), memo: KinMemo.none)
 //            .test(150, self) { (value, error) in
@@ -127,16 +126,13 @@ class KinServiceV4IntegrationTests: XCTestCase {
 //            testPayment()
 //        }
 
-        runTest(times: 10, testCase: self, test: { onCompleted in
-            self.context.sendKinPayments(
-                   [KinPaymentItem](arrayLiteral: KinPaymentItem(amount: self.randomQuarkAmount(100).kin, destAccountId: self.airdropAccount.accountId)),
-                    memo: KinMemo.none,
-                    destinationAccountSpec: .exact
-                ).then { it in
-                    onCompleted(it)
-                }.catch { error in
-                    onCompleted(error)
-                }
+        let payments = [
+            KinPaymentItem(amount: self.randomQuarkAmount(100).kin, destAccount: self.airdropAccount)
+        ]
+        runTest(times: 1, testCase: self, test: { onCompleted in
+            self.context.sendKinPayments(payments, memo: KinMemo.none, destinationAccountSpec: .exact)
+                .then { onCompleted($0) }
+                .catch { onCompleted($0) }
         })
     }
     

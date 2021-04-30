@@ -90,10 +90,10 @@ class KinWalletCreateInvoiceViewController: UIViewController {
 
     var lineItems = [LineItem]()
 
-    let accountId: KinAccount.Id
+    let account: PublicKey
 
-    init(accountId: KinAccount.Id) {
-        self.accountId = accountId
+    init(account: PublicKey) {
+        self.account = account
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -180,7 +180,7 @@ class KinWalletCreateInvoiceViewController: UIViewController {
             return
         }
 
-        let key = invoiceListStorageKey(for: accountId)
+        let key = invoiceListStorageKey(for: account)
 
         var invoices = [Invoice]()
         if let storedData = UserDefaults.standard.data(forKey: key),

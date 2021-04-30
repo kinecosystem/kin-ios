@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import stellarsdk
 
-class MockTransactionStreamItem: TransactionsStreamItem {
-    var stubResponse: StreamResponseEnum<TransactionResponse>?
-
-    override func onReceive(response: @escaping StreamResponseEnum<TransactionResponse>.ResponseClosure) {
-        response(stubResponse!)
-    }
-}
+//class MockTransactionStreamItem: TransactionsStreamItem {
+//    var stubResponse: StreamResponseEnum<TransactionResponse>?
+//
+//    override func onReceive(response: @escaping StreamResponseEnum<TransactionResponse>.ResponseClosure) {
+//        response(stubResponse!)
+//    }
+//}

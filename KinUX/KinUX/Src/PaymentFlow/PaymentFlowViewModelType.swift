@@ -11,7 +11,7 @@ import KinBase
 
 public struct PaymentFlowViewModelArgs {
     public let invoice: Invoice
-    public let payerAccountId: KinAccount.Id
+    public let payerAccount: PublicKey
     public let appInfo: AppInfo
 }
 

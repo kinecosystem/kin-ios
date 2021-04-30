@@ -38,11 +38,11 @@ class KinWalletAccountViewController: UIViewController {
         return spinner
     }()
 
-    init(accountId: KinAccount.Id) {
+    init(account: PublicKey) {
         self.env = KinEnvironment.Agora.testNet()
         self.accountContext = KinAccountContext
             .Builder(env: self.env)
-            .useExistingAccount(accountId)
+            .useExistingAccount(account)
             .build()
 
         super.init(nibName: nil, bundle: nil)
@@ -56,7 +56,7 @@ class KinWalletAccountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        headerView.addressLabel.text = accountContext.accountId
+        headerView.addressLabel.text = accountContext.accountPublicKey.base58
 
         loadingSpinner.startAnimating()
         accountContext.getAccount(forceUpdate: true)
@@ -101,7 +101,7 @@ class KinWalletAccountViewController: UIViewController {
 
     private func copyWalletAddressTapped() {
         let pasteboard = UIPasteboard.general
-        pasteboard.string = accountContext.accountId
+        pasteboard.string = accountContext.accountPublicKey.base58
     }
 
     private func sendKinTapped() {
@@ -116,7 +116,7 @@ class KinWalletAccountViewController: UIViewController {
 
     private func fundWalletTapped() {
         loadingSpinner.startAnimating()
-        env.testService?.fundAccount(accountContext.accountId, amount: 100)
+        env.testService?.fundAccount(accountContext.accountPublicKey, amount: 100)
             .then(on: .main) { [weak self] _ in
                 print("funded")
                 self?.loadingSpinner.stopAnimating()
@@ -131,7 +131,7 @@ class KinWalletAccountViewController: UIViewController {
         accountContext.clearStorage()
             .then(on: .main) {  _ in
                 var accounts = UserDefaults.standard.array(forKey: accountsStorageKey) as? [String] ?? []
-                accounts.removeAll { $0 == self.accountContext.accountId }
+                accounts.removeAll { $0 == self.accountContext.accountPublicKey.base58 }
                 UserDefaults.standard.set(accounts, forKey: accountsStorageKey)
 
                 self.navigationController?.popViewController(animated: true)
@@ -204,7 +204,7 @@ extension KinWalletAccountViewController: UITableViewDataSource {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Subtitle")
             let payment = paymentHistory[indexPath.row]
 
-            cell.textLabel?.text = payment.destAccountId
+            cell.textLabel?.text = payment.destAccount.base58
             cell.textLabel?.textColor = .kinBlack
 
             cell.detailTextLabel?.text = payment.memo.text
@@ -214,7 +214,7 @@ extension KinWalletAccountViewController: UITableViewDataSource {
             amountView.amount = payment.amount
             amountView.size = .small
             amountView.color = .kinBlack
-            amountView.sign = payment.destAccountId == accountContext.accountId ? .positive : .negative
+            amountView.sign = payment.destAccount == accountContext.accountPublicKey ? .positive : .negative
             amountView.sizeToFit()
 
             cell.accessoryView = amountView

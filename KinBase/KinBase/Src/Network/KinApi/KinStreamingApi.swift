@@ -9,11 +9,11 @@
 import Foundation
 
 public protocol KinStreamingApi {
-    func streamAccount(_ accountId: KinAccount.Id) -> Observable<KinAccount>
-    func streamNewTransactions(accountId: KinAccount.Id) -> Observable<KinTransaction>
+    func streamAccount(_ account: PublicKey) -> Observable<KinAccount>
+    func streamNewTransactions(account: PublicKey) -> Observable<KinTransaction>
 }
 
 public protocol KinStreamingApiV4 {
-    func streamAccountV4(_ accountId: KinAccount.Id) -> Observable<KinAccount>
-    func streamNewTransactionsV4(accountId: KinAccount.Id) -> Observable<KinTransaction>
+    func streamAccountV4(_ account: PublicKey) -> Observable<KinAccount>
+    func streamNewTransactionsV4(account: PublicKey) -> Observable<KinTransaction>
 }

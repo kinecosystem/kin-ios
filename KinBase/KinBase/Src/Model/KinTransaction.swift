@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import stellarsdk
 
 public typealias PagingToken = String
-public typealias ResultCode = TransactionResultCode
+//public typealias ResultCode = TransactionResultCode
 
 public struct Record: Equatable {
     enum RecordType: Int {
@@ -65,12 +64,12 @@ public protocol KinTransactionType {
     var envelopeXdrBytes: [Byte] { get }
     var invoiceList: InvoiceList? { get }
     var transactionHash: KinTransactionHash { get }
-    var sourceAccount: KinAccount.Id { get }
+    var sourceAccount: PublicKey { get }
     var sequenceNumber: Int64 { get }
     var fee: Quark { get }
     var memo: KinMemo { get }
     var paymentOperations: [KinPaymentOperation] { get }
-    var resultCode: ResultCode? { get }
+//    var resultCode: ResultCode? { get }
 }
 
 extension KinTransactionType {
@@ -81,7 +80,7 @@ extension KinTransactionType {
 
 public class KinTransaction: Equatable, KinTransactionType {
     
-    public let solanaTransaction: SolanaTransaction
+    public let solanaTransaction: Transaction
     
     public var record: Record
     public var network: KinNetwork
@@ -92,7 +91,7 @@ public class KinTransaction: Equatable, KinTransactionType {
         solanaTransaction.transactionHash
     }
     
-    public var sourceAccount: KinAccount.Id {
+    public var sourceAccount: PublicKey {
         solanaTransaction.sourceAccount
     }
     
@@ -108,20 +107,20 @@ public class KinTransaction: Equatable, KinTransactionType {
        solanaTransaction.paymentOperations
     }
     
-    public var resultCode: ResultCode? {
-        guard record.recordType == .historical || record.recordType == .acknowledged,
-              let resultData = record.resultXdrBytes,
-              let result = try? XDRDecoder.decode(TransactionResultXDR.self, data: resultData)
-        else {
-            return nil
-        }
-
-        return result.code
-    }
+//    public var resultCode: ResultCode? {
+//        guard record.recordType == .historical || record.recordType == .acknowledged,
+//              let resultData = record.resultXdrBytes,
+//              let result = try? XDRDecoder.decode(TransactionResultXDR.self, data: resultData)
+//        else {
+//            return nil
+//        }
+//
+//        return result.code
+//    }
     
     init(envelopeXdrBytes: [Byte], record: Record, network: KinNetwork, invoiceList: InvoiceList? = nil) throws {
         self.envelopeXdrBytes = envelopeXdrBytes
-        self.solanaTransaction = SolanaTransaction(data: Data(envelopeXdrBytes))!
+        self.solanaTransaction = Transaction(data: Data(envelopeXdrBytes))!
         self.record = record
         self.network = network
         self.invoiceList = invoiceList
@@ -148,7 +147,6 @@ extension KinTransaction: CustomStringConvertible {
          - fee: \(fee)
          - memo: \(memo)
          - paymentOperations: \(paymentOperations)
-         - resultCode: \(describe(resultCode))
         """
     }
     
@@ -161,48 +159,48 @@ extension KinTransaction: CustomStringConvertible {
     }
 }
 
-public extension SolanaTransaction {
+public extension Transaction {
     var transactionHash: KinTransactionHash {
-        KinTransactionHash(signatures.first!.encode())
+        KinTransactionHash(signatures.first!.data)
     }
     
-    var sourceAccount: KinAccount.Id {
-        message.accounts[1].accountId
+    var sourceAccount: PublicKey {
+        message.accounts[1]
     }
     
     var memo: KinMemo {
         guard
-            let memoInstruction = message.instructions.filter({ instruction in
-                message.accounts[Int(instruction.programIndex)] == MemoProgram.PROGRAM_KEY
+            let memoInstruction = message.instructions.filter({
+                message.accounts[Int($0.programIndex)] == MemoProgram.PROGRAM_KEY
             }).first
         else {
             return KinMemo.none
         }
         
-        let base64Decoded = Data(base64Encoded: Data(memoInstruction.data.value))
-        if (base64Decoded != nil) {
-            let memo = KinMemo(bytes: [Byte](base64Decoded!))
+        
+        if let base64Decoded = Data(base64Encoded: memoInstruction.data) {
+            let memo = KinMemo(bytes: [Byte](base64Decoded))
             if memo.agoraMemo != nil {
                 return memo
             } else {
-                return KinMemo(text: String(bytes: memoInstruction.data.value, encoding: .utf8) ?? "memo_parsing_failed")
+                return KinMemo(text: String(data: memoInstruction.data, encoding: .utf8) ?? "memo_parsing_failed")
             }
         } else {
-            return KinMemo(text: String(bytes: memoInstruction.data.value, encoding: .utf8) ?? "memo_parsing_failed")
+            return KinMemo(text: String(data: memoInstruction.data, encoding: .utf8) ?? "memo_parsing_failed")
         }
     }
     
     var paymentOperations: [KinPaymentOperation] {
         let instructions: [CompiledInstruction] = message.instructions.filter { instruction in
             return message.accounts[Int(instruction.programIndex)] != MemoProgram.PROGRAM_KEY
-                && message.accounts[Int(instruction.programIndex)] != SystemProgram.PROGRAM_KEY
-                && instruction.data.value.first == UInt8(TokenProgram.Command.Transfer.rawValue)
+                && message.accounts[Int(instruction.programIndex)] != SystemProgram.systemPublicKey
+                && instruction.data.first == UInt8(TokenProgram.Command.transfer.rawValue)
         }
     
         return instructions.map { instruction in
-            let amount = Quark(Data(instruction.data.value[1..<instruction.data.value.count]).withUnsafeBytes { $0.load(as: UInt64.self) }).kin
-            let source = message.accounts[Int(instruction.accounts.value[0])].accountId
-            let destination = message.accounts[Int(instruction.accounts.value[1])].accountId
+            let amount = Quark(Data(instruction.data[1..<instruction.data.count]).withUnsafeBytes { $0.load(as: UInt64.self) }).kin
+            let source = message.accounts[Int(instruction.accountIndexes[0])]
+            let destination = message.accounts[Int(instruction.accountIndexes[1])]
             return KinPaymentOperation(amount: amount, source: source, destination: destination, isNonNativeAsset: false)
         }
     }
@@ -225,8 +223,8 @@ extension KinTransactionType {
             let payment = KinPayment(
                 id: id,
                 status: .success,
-                sourceAccountId: operation.source,
-                destAccountId: operation.destination,
+                sourceAccount: operation.source,
+                destAccount: operation.destination,
                 amount: operation.amount,
                 fee: fee,
                 memo: memo,

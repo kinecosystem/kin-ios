@@ -9,16 +9,15 @@
 import Foundation
 
 public protocol KinAccountApi {
-    func getAccount(request: GetAccountRequest,
-                    completion: @escaping (GetAccountResponse) -> Void)
+    func getAccount(request: GetAccountRequest, completion: @escaping (GetAccountResponse) -> Void)
 }
 
 // MARK: - Request & Response
 public struct GetAccountRequest {
-    public let accountId: KinAccount.Id
+    public let account: PublicKey
 
-    public init(accountId: KinAccount.Id) {
-        self.accountId = accountId
+    public init(account: PublicKey) {
+        self.account = account
     }
 }
 
@@ -43,18 +42,16 @@ public struct GetAccountResponse {
 }
 
 public protocol KinAccountApiV4 {
-    func getAccount(request: GetAccountRequestV4,
-                    completion: @escaping (GetAccountResponseV4) -> Void)
-    func resolveTokenAccounts(request: ResolveTokenAccountsRequestV4,
-                              completion: @escaping (ResolveTokenAccountsResponseV4) -> Void)
+    func getAccount(request: GetAccountRequestV4, completion: @escaping (GetAccountResponseV4) -> Void)
+    func resolveTokenAccounts(request: ResolveTokenAccountsRequestV4, completion: @escaping (ResolveTokenAccountsResponseV4) -> Void)
 }
 
 // MARK: - Request & Response V4
 public struct GetAccountRequestV4 {
-    public let accountId: KinAccount.Id
+    public let account: PublicKey
 
-    public init(accountId: KinAccount.Id) {
-        self.accountId = accountId
+    public init(account: PublicKey) {
+        self.account = account
     }
 }
 
@@ -79,7 +76,7 @@ public struct GetAccountResponseV4 {
 }
 
 public struct ResolveTokenAccountsRequestV4 {
-    public let accountId: KinAccount.Id
+    public let account: PublicKey
 }
 
 public struct ResolveTokenAccountsResponseV4 {
@@ -93,9 +90,9 @@ public struct ResolveTokenAccountsResponseV4 {
 
     public let result: Result
     public let error: Error?
-    public let accounts: [SolanaPublicKey]?
+    public let accounts: [PublicKey]?
 
-    public init(result: ResolveTokenAccountsResponseV4.Result, error: Error?, accounts: [SolanaPublicKey]?) {
+    public init(result: ResolveTokenAccountsResponseV4.Result, error: Error?, accounts: [PublicKey]?) {
         self.result = result
         self.error = error
         self.accounts = accounts

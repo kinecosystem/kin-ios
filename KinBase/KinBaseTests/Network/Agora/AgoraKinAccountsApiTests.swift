@@ -13,25 +13,7 @@ import KinGrpcApi
 
 class MockAgoraAccountServiceGrpcProxy: AgoraAccountServiceGrpcProxy {
     var network: KinNetwork = .testNet
-
-    // V3 Apis
-    var stubGetAccountInfoResponsePromise: Promise<APBAccountV3GetAccountInfoResponse>?
-    var stubCreateAccountResponsePromise: Promise<APBAccountV3CreateAccountResponse>?
-    var stubEventsObservable: Observable<APBAccountV3Events>?
-
-    func createAccount(_ request: APBAccountV3CreateAccountRequest) -> Promise<APBAccountV3CreateAccountResponse> {
-        return stubCreateAccountResponsePromise!
-    }
-
-    func getAccountInfo(_ request: APBAccountV3GetAccountInfoRequest) -> Promise<APBAccountV3GetAccountInfoResponse> {
-        return stubGetAccountInfoResponsePromise!
-    }
-
-    func getEvents(_ request: APBAccountV3GetEventsRequest) -> Observable<APBAccountV3Events> {
-        return stubEventsObservable!
-    }
     
-    // V4 Apis
     var stubGetAccountInfoResponsePromiseV4: Promise<APBAccountV4GetAccountInfoResponse>?
     var stubCreateAccountResponsePromiseV4: Promise<APBAccountV4CreateAccountResponse>?
     var stubEventsObservableV4: Observable<APBAccountV4Events>?

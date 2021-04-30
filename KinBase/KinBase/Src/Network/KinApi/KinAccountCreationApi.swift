@@ -16,10 +16,10 @@ public protocol KinAccountCreationApi {
 
 // MARK: - Request & Response
 public struct CreateAccountRequest {
-    public let accountId: KinAccount.Id
+    public let account: PublicKey
 
-    public init(accountId: KinAccount.Id) {
-        self.accountId = accountId
+    public init(account: PublicKey) {
+        self.account = account
     }
 }
 
@@ -55,9 +55,9 @@ public protocol KinAccountCreationApiV4 {
 
 // MARK: - Request & Response
 public struct CreateAccountRequestV4 {
-    public let transaction: SolanaTransaction
+    public let transaction: Transaction
 
-    public init(transaction: SolanaTransaction) {
+    public init(transaction: Transaction) {
         self.transaction = transaction
     }
 }

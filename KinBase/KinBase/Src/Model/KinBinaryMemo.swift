@@ -10,7 +10,7 @@ import Foundation
 
 /**
  * A memo format understood by the Agora services.
- * @param magicByteIndicator                            2 bits   | < 4
+ * @param magicByteIndicator    2 bits   | < 4
  * @param version               3 bits   | < 8
  * @param typeId                5 bits   | < 32
  * @param appIdx                16 bits  | < 65,536
@@ -168,11 +168,11 @@ public struct KinBinaryMemo {
 
     /**
      * Fields below are packed from LSB to MSB order:
-     * magicByteIndicator             2 bits  |   less than 4
-     * version                                 3 bits  |  less than 8
-     * typeId                                  5 bits   |  less than 32
-     * appIdx                                16 bits  |  less than 65,536
-     * foreignKey                         230 bits | Often a SHA-224 of an [InvoiceList] but could be anything
+     * magicByteIndicator             2 bits | less than 4
+     * version                        3 bits | less than 8
+     * typeId                         5 bits | less than 32
+     * appIdx                        16 bits | less than 65,536
+     * foreignKey                   230 bits | Often a SHA-224 of an [InvoiceList] but could be anything
      */
     public func encode() -> Data {
 

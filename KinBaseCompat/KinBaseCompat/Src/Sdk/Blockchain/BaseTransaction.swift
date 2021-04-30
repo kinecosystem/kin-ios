@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 import KinBase
 
 public class Transaction {

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import stellarsdk
 @testable import KinBase
 
 class KinTransactionTests: XCTestCase {
@@ -26,8 +25,8 @@ class KinTransactionTests: XCTestCase {
         XCTAssertEqual(payments.first!.id.value, transaction.transactionHash.rawValue + [0])
         XCTAssertEqual(payments.first!.amount, transaction.paymentOperations.first!.amount)
         XCTAssertEqual(payments.first!.fee, transaction.fee)
-        XCTAssertEqual(payments.first!.sourceAccountId, transaction.sourceAccount)
-        XCTAssertEqual(payments.first!.destAccountId, transaction.paymentOperations.first?.destination)
+        XCTAssertEqual(payments.first!.sourceAccount, transaction.sourceAccount)
+        XCTAssertEqual(payments.first!.destAccount, transaction.paymentOperations.first?.destination)
         XCTAssertEqual(payments.first!.memo, transaction.memo)
         XCTAssertEqual(payments.first!.timestamp, transaction.record.timestamp)
     }

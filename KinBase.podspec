@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   non_arc_files = 'KinBase/KinBase/Src/Storage/Gen/*.{h,m}'
-  s.source_files = 'KinBase/KinBase/**/*.{h,swift}'
+  s.source_files = 'KinBase/KinBase/**/*.{h,c,swift}'
 
   s.dependency 'kin-stellar-ios-mac-sdk', '~> 1.7.5'
   s.dependency 'PromisesSwift', '~> 1.2.8'
