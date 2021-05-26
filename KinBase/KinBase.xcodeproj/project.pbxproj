@@ -199,6 +199,7 @@
 		9AC60B5626497F35002C740A /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B4F26497F34002C740A /* Transaction.swift */; };
 		9AC60B582649AED0002C740A /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B572649AED0002C740A /* Base58.swift */; };
 		9AC60B5A264EAC9E002C740A /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B59264EAC9E002C740A /* MessageTests.swift */; };
+		9AC60B5D265D8632002C740A /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B5C265D8631002C740A /* KeyTests.swift */; };
 		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -425,6 +426,7 @@
 		9AC60B4F26497F34002C740A /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		9AC60B572649AED0002C740A /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		9AC60B59264EAC9E002C740A /* MessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
+		9AC60B5C265D8631002C740A /* KeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyTests.swift; sourceTree = "<group>"; };
 		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -744,6 +746,7 @@
 		93F66F17253BEC4600E14D59 /* Solana */ = {
 			isa = PBXGroup;
 			children = (
+				9AC60B5B265D8624002C740A /* Keys */,
 				93F66F18253BEC4600E14D59 /* Encoding */,
 			);
 			path = Solana;
@@ -955,6 +958,14 @@
 				9AC60AFA2645D32B002C740A /* OFB.swift */,
 			);
 			path = BlockMode;
+			sourceTree = "<group>";
+		};
+		9AC60B5B265D8624002C740A /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				9AC60B5C265D8631002C740A /* KeyTests.swift */,
+			);
+			path = Keys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1361,6 +1372,7 @@
 				93E9B1A3253FE42300DFD776 /* ProgramsTests.swift in Sources */,
 				85572FA224A8241C003734CB /* AgoraKinAccountsApiTests.swift in Sources */,
 				858ECDAC245784A7006AF3D6 /* MockKinService.swift in Sources */,
+				9AC60B5D265D8632002C740A /* KeyTests.swift in Sources */,
 				858ECDAA245783FA006AF3D6 /* KinAccountContextTests.swift in Sources */,
 				9A629FB925717DEA00D8E29B /* MockGRPCInterceptorManager.swift in Sources */,
 				858ECDAE245784D3006AF3D6 /* MockKinStorage.swift in Sources */,

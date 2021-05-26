@@ -9,52 +9,49 @@
 import Foundation
 
 public typealias PagingToken = String
-//public typealias ResultCode = TransactionResultCode
 
 public struct Record: Equatable {
+
+    let recordType: RecordType
+    let timestamp: TimeInterval
+    let pagingToken: PagingToken?
+    
+    private init(recordType: RecordType, timestamp: TimeInterval, pagingToken: PagingToken?) {
+        self.recordType = recordType
+        self.timestamp = timestamp
+        self.pagingToken = pagingToken
+    }
+    
+    public static func inFlight(ts: TimeInterval) -> Record {
+        Record(
+            recordType: .inFlight,
+            timestamp: ts,
+            pagingToken: nil
+        )
+    }
+    
+    public static func acknowledged(ts: TimeInterval) -> Record {
+        Record(
+            recordType: .acknowledged,
+            timestamp: ts,
+            pagingToken: nil
+        )
+    }
+    
+    public static func historical(ts: TimeInterval, pagingToken: PagingToken) -> Record {
+        Record(
+            recordType: .historical,
+            timestamp: ts,
+            pagingToken: pagingToken
+        )
+    }
+}
+
+extension Record {
     enum RecordType: Int {
         case inFlight
         case acknowledged
         case historical
-    }
-
-    let recordType: RecordType
-    let timestamp: TimeInterval
-    let resultXdrBytes: [Byte]?
-    let pagingToken: PagingToken?
-
-    private init(recordType: RecordType,
-                 timestamp: TimeInterval,
-                 resultXdrBytes: [Byte]?,
-                 pagingToken: PagingToken?) {
-        self.recordType = recordType
-        self.timestamp = timestamp
-        self.resultXdrBytes = resultXdrBytes
-        self.pagingToken = pagingToken
-    }
-
-    public static func inFlight(ts: TimeInterval) -> Record {
-        return Record(recordType: .inFlight,
-                      timestamp: ts,
-                      resultXdrBytes: nil,
-                      pagingToken: nil)
-    }
-
-    public static func acknowledged(ts: TimeInterval,
-                             resultXdrBytes: [Byte]) -> Record {
-        return Record(recordType: .acknowledged,
-                      timestamp: ts,
-                      resultXdrBytes: resultXdrBytes,
-                      pagingToken: nil)
-    }
-
-    public static func historical(ts: TimeInterval,
-                           resultXdrBytes: [Byte],
-                           pagingToken: PagingToken) -> Record {
-        return Record(recordType: .historical,
-                      timestamp: ts,
-                      resultXdrBytes: resultXdrBytes,
-                      pagingToken: pagingToken)
     }
 }
 
@@ -69,7 +66,6 @@ public protocol KinTransactionType {
     var fee: Quark { get }
     var memo: KinMemo { get }
     var paymentOperations: [KinPaymentOperation] { get }
-//    var resultCode: ResultCode? { get }
 }
 
 extension KinTransactionType {
@@ -106,17 +102,6 @@ public class KinTransaction: Equatable, KinTransactionType {
     public var paymentOperations: [KinPaymentOperation] {
        solanaTransaction.paymentOperations
     }
-    
-//    public var resultCode: ResultCode? {
-//        guard record.recordType == .historical || record.recordType == .acknowledged,
-//              let resultData = record.resultXdrBytes,
-//              let result = try? XDRDecoder.decode(TransactionResultXDR.self, data: resultData)
-//        else {
-//            return nil
-//        }
-//
-//        return result.code
-//    }
     
     init(envelopeXdrBytes: [Byte], record: Record, network: KinNetwork, invoiceList: InvoiceList? = nil) throws {
         self.envelopeXdrBytes = envelopeXdrBytes

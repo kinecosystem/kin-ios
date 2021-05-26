@@ -364,7 +364,6 @@ class KinServiceTestsV4: XCTestCase {
                 envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
                 record: .historical(
                     ts: 123456789,
-                    resultXdrBytes: [2, 1],
                     pagingToken: "pagingtoken"
                 ),
                 network: .testNet)
@@ -435,7 +434,6 @@ class KinServiceTestsV4: XCTestCase {
             envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
             record: .historical(
                 ts: 123456789,
-                resultXdrBytes: [2, 1],
                 pagingToken: "pagingtoken"
             ),
             network: .testNet
@@ -445,7 +443,6 @@ class KinServiceTestsV4: XCTestCase {
             envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope2)!),
             record: .historical(
                 ts: 1234567890,
-                resultXdrBytes: [2, 1],
                 pagingToken: "pagingtoken"
             ),
             network: .testNet
@@ -518,7 +515,6 @@ class KinServiceTestsV4: XCTestCase {
             envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
             record: .historical(
                 ts: 123456789,
-                resultXdrBytes: [2, 1],
                 pagingToken: "pagingtoken"
             ),
             network: .testNet
@@ -528,7 +524,6 @@ class KinServiceTestsV4: XCTestCase {
             envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope2)!),
             record: .historical(
                 ts: 1234567890,
-                resultXdrBytes: [2, 1],
                 pagingToken: "pagingtoken"
             ),
             network: .testNet
@@ -630,10 +625,7 @@ class KinServiceTestsV4: XCTestCase {
         )
         let ackedTransaction = try! KinTransaction(
             envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
-            record: .acknowledged(
-                ts: 123456799,
-                resultXdrBytes: [0, 1]
-            ),
+            record: .acknowledged(ts: 123456799),
             network: .testNet
         )
         let expectResponse = SubmitTransactionResponseV4(

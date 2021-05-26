@@ -14,21 +14,10 @@ extension KeyPair: CustomStringConvertible {
     }
 }
 
-public class KinAccount : CustomStringConvertible {
-
-    public enum Status {
-        case unregistered
-        case registered
-    }
+public struct KinAccount: CustomStringConvertible {
 
     public var publicKey: PublicKey
     public var privateKey: PrivateKey?
-
-//    public var id: String {
-//        get {
-//            return publicKey.base58
-//        }
-//    }
     
     public var tokenAccounts: [PublicKey]
 
@@ -60,7 +49,21 @@ public class KinAccount : CustomStringConvertible {
     }
     
     public var description: String {
-        "KinAccount(key=\(publicKey), balance=\(balance), status=\(status), sequence=\(String(describing: sequence)), accounts=\(tokenAccounts)))"
+        """
+        KinAccount
+          key: \(publicKey.base58)
+          balance: \(balance)
+          status: \(status)
+          sequence: \(String(describing: sequence))
+          accounts: \(tokenAccounts.map { $0.base58 })))
+        """
+    }
+}
+
+extension KinAccount {
+    public enum Status {
+        case unregistered
+        case registered
     }
 }
 
@@ -74,24 +77,6 @@ extension KinAccount: Equatable {
             lhs.tokenAccounts == rhs.tokenAccounts
     }
 }
-
-//extension KinAccount: TransactionAccount {
-//    public var keyPair: KeyPair {
-//        return key
-//    }
-//
-//    public var sequenceNumber: Int64 {
-//        return sequence ?? 0
-//    }
-//
-//    public func incrementedSequenceNumber() -> Int64 {
-//        return sequenceNumber + 1
-//    }
-//
-//    public func incrementSequenceNumber() {
-//        sequence = sequence != nil ? sequence! + 1 : nil
-//    }
-//}
 
 extension KinAccount {
     /// Merges self.key with other info on the given account

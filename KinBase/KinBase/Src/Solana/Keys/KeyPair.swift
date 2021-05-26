@@ -91,6 +91,12 @@ public struct KeyPair: Equatable {
 
 extension PublicKey {
     
+    public func isOnCurve() -> Bool {
+        bytes.withUnsafeBufferPointer {
+            ed25519_on_curve($0.baseAddress) == 1
+        }
+    }
+    
     public func verify(signature: Signature, data: Data) -> Bool {
         verify(signature: signature, bytes: data.bytes)
     }

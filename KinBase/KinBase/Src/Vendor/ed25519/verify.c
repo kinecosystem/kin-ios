@@ -75,3 +75,11 @@ int ed25519_verify(const unsigned char *signature, const unsigned char *message,
 
     return 1;
 }
+
+int ed25519_on_curve(const unsigned char *public_key) {
+    ge_p3 A;
+    if (ge_frombytes_negate_vartime(&A, public_key) == 0) {
+        return 1;
+    }
+    return 0;
+}

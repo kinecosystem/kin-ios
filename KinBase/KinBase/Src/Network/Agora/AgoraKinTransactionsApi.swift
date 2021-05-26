@@ -99,25 +99,28 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
     public func getTransactionHistory(request: GetTransactionHistoryRequestV4, completion: @escaping (GetTransactionHistoryResponseV4) -> Void) {
         let network = agoraGrpc.network
         agoraGrpc.getHistory(request.protoRequest)
-            .then { (grpcResponse: APBTransactionV4GetHistoryResponse)  in
+            .then { grpcResponse in
                 switch grpcResponse.result {
                 case .ok:
-                    let transactions = grpcResponse.itemsArray
-                        .compactMap { item -> KinTransaction? in
-                            guard let item = item as? APBTransactionV4HistoryItem else {
-                                return nil
-                            }
-
-                            return item.toKinTransactionHistorical(network: network)
+                    let transactions = grpcResponse.itemsArray.compactMap {
+                        ($0 as? APBTransactionV4HistoryItem)?.toKinTransactionHistorical(network: network)
                     }
-                    let response = GetTransactionHistoryResponseV4(result: .ok,
-                                                                 error: nil,
-                                                                 kinTransactions: transactions)
+                    
+                    let response = GetTransactionHistoryResponseV4(
+                        result: .ok,
+                        error: nil,
+                        kinTransactions: transactions
+                    )
+                    
                     completion(response)
+                    
                 default:
-                    let response = GetTransactionHistoryResponseV4(result: .notFound,
-                                                                 error: nil,
-                                                                 kinTransactions: nil)
+                    let response = GetTransactionHistoryResponseV4(
+                        result: .notFound,
+                        error: nil,
+                        kinTransactions: nil
+                    )
+                    
                     completion(response)
                 }
             }
@@ -128,9 +131,13 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
                 } else if error.isForcedUpgrade() {
                     result = .upgradeRequired
                 }
-                let response = GetTransactionHistoryResponseV4(result: result,
-                                                             error: error,
-                                                             kinTransactions: nil)
+                
+                let response = GetTransactionHistoryResponseV4(
+                    result: result,
+                    error: error,
+                    kinTransactions: nil
+                )
+                
                 completion(response)
             }
     }

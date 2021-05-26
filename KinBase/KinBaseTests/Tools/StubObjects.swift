@@ -134,8 +134,7 @@ class StubObjects {
         return try! KinTransaction(
             envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
             record: .acknowledged(
-                ts: Date().timeIntervalSince1970,
-                resultXdrBytes: [0, 1, 2]
+                ts: Date().timeIntervalSince1970
             ),
             network: .testNet,
             invoiceList: withInvoice ? stubInvoiceList1 : nil
@@ -147,7 +146,6 @@ class StubObjects {
             envelopeXdrBytes: [Byte](Data(base64Encoded: envelope)!),
             record: .historical(
                 ts: 123456789,
-                resultXdrBytes: [2, 1],
                 pagingToken: "pagingtoken"
             ),
             network: .testNet

@@ -68,7 +68,7 @@ extension KinTransaction {
         let storable = KinStorageKinTransaction()
         storable.envelopeXdr = Data(envelopeXdrBytes)
         storable.status = record.recordType.storableObject
-        storable.resultXdr = record.resultXdrBytes != nil ? Data(record.resultXdrBytes!) : nil
+        storable.resultXdr = nil
         storable.timestamp = Int64(record.timestamp)
         storable.pagingToken = record.pagingToken
         return storable
@@ -177,17 +177,16 @@ extension KinStorageKinTransaction {
         case .inFlight:
             record = .inFlight(ts: TimeInterval(timestamp))
         case .acknowledged:
-            record = .acknowledged(ts: TimeInterval(timestamp),
-                                   resultXdrBytes: [Byte](resultXdr))
+            record = .acknowledged(ts: TimeInterval(timestamp))
         case .historical:
-            record = .historical(ts: TimeInterval(timestamp),
-                                 resultXdrBytes: [Byte](resultXdr),
-                                 pagingToken: pagingToken)
+            record = .historical(ts: TimeInterval(timestamp), pagingToken: pagingToken)
         }
 
-        return try? KinTransaction(envelopeXdrBytes: [Byte](envelopeXdr),
-                                   record: record,
-                                   network: network)
+        return try? KinTransaction(
+            envelopeXdrBytes: [Byte](envelopeXdr),
+            record: record,
+            network: network
+        )
     }
 }
 
