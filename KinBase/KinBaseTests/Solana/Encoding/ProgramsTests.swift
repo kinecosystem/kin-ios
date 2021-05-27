@@ -10,6 +10,7 @@ import XCTest
 @testable import KinBase
 
 class ProgramsTests: XCTestCase {
+    
     func testCreateAccount() {
         let keys = generateKeys(3)
         
@@ -92,6 +93,24 @@ class ProgramsTests: XCTestCase {
         XCTAssertTrue(instruction.accounts[2].isWritable)
     }
     
+    func testFindAssociateTokenAddress() throws {
+        let wallet  = PublicKey(base58: "4uQeVj5tqViQh7yWWGStvkEG1Zmhx6uasJtWCJziofM")!
+        let mint    = PublicKey(base58: "8opHzTAnfzRpPEx21XtnrVTX28YQuCpAjcn1PczScKh")!
+        let address = PublicKey(base58: "H7MQwEzt97tUJryocn3qaEoy2ymWstwyEk1i9Yv3EmuZ")!
+        
+        let result = try XCTUnwrap(AssociatedTokenProgram.deriveAssociatedAccount(owner: wallet, mint: mint))
+        XCTAssertEqual(result, address)
+    }
+    
+    /// Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L479
+    func testDeriveAddress() throws {
+        let program   = PublicKey(base58: "BPFLoader1111111111111111111111111111111111")!
+        let publicKey = PublicKey(base58: "SeedPubey1111111111111111111111111111111111")!
+
+        let result = try XCTUnwrap(AssociatedTokenProgram.deriveProgramAddress(program: program, seeds: [publicKey.data]))
+
+        XCTAssertEqual(result, PublicKey(base58: "GUs5qLUfsEHkcMB9T38vjr18ypEhRuNWiePW2LoK4E3K")!)
+    }
     
     func testMemos() {
         let keys = generateKeys(3)

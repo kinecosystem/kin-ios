@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CommonCrypto
 
 // MARK: - SystemProgram -
 
@@ -40,8 +41,8 @@ public enum SystemProgram {
         return Instruction(
             program: Self.systemPublicKey,
             accounts: [
-                AccountMeta.writable(publicKey: subsidizer, signer: true, payer: false),
-                AccountMeta.writable(publicKey: address, signer: true, payer: false),
+                .writable(publicKey: subsidizer, signer: true, payer: false),
+                .writable(publicKey: address, signer: true, payer: false),
             ],
             data: data
         )
@@ -66,7 +67,78 @@ extension SystemProgram {
 }
 
 extension PublicKey {
-    static let sysVarRent = PublicKey(Base58.bytesFromBase58("SysvarRent111111111111111111111111111111111"))!
+    static let sysVarRent = PublicKey(base58: "SysvarRent111111111111111111111111111111111")!
+}
+
+// MARK: - AssociatedTokenProgram -
+
+enum AssociatedTokenProgram {
+    
+    static let publicKey = PublicKey(base58: "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")!
+    
+    private static let maxSeeds      = 16
+    private static let maxSeedLength = 32
+    
+    // CreateProgramAddress mirrors the implementation of the Solana SDK's CreateProgramAddress.
+    //
+    // ProgramAddresses are public keys that _do not_ lie on the ed25519 curve to ensure that
+    // there is no associated private key. In the event that the program and seed parameters
+    // result in a valid public key, ErrInvalidPublicKey is returned.
+    //
+    // Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L158
+    static func deriveProgramAddress(program: PublicKey, seeds: [Data]) -> PublicKey? {
+        if seeds.count > maxSeeds {
+            return nil
+        }
+        
+        var digest = SHA256()
+        
+        seeds.forEach { seed in
+            digest.update(seed)
+        }
+        
+        digest.update(program.data)
+        digest.update("ProgramDerivedAddress")
+        
+        let publicKey = PublicKey(digest.digestBytes())!
+        
+        // Following the Solana SDK, we want to _reject_ the generated public key
+        // if it's a valid compressed EdwardsPoint (on the curve).
+        //
+        // Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L182-L187
+        guard !publicKey.isOnCurve() else {
+            return nil
+        }
+        
+        return publicKey
+    }
+    
+    // FindProgramAddress mirrors the implementation of the Solana SDK's FindProgramAddress. Its primary
+    // use case (for Kin and Agora) is for deriving associated accounts.
+    //
+    // Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L234
+    static func findProgramAddress(program: PublicKey, seeds: Data...) -> PublicKey? {
+        findProgramAddress(program: program, seeds: seeds)
+    }
+    
+    static func findProgramAddress(program: PublicKey, seeds: [Data]) -> PublicKey? {
+        for i in 0...Byte.max {
+            let bumpValue = Byte.max - i
+            let bumpSeed = Data([bumpValue])
+            if let publicKey = deriveProgramAddress(program: program, seeds: seeds + [bumpSeed]) {
+                return publicKey
+            }
+        }
+        
+        return nil
+    }
+    
+    public static func deriveAssociatedAccount(owner: PublicKey, mint: PublicKey) -> PublicKey? {
+        findProgramAddress(
+            program: publicKey,
+            seeds: owner.data, TokenProgram.publicKey.data, mint.data
+        )
+    }
 }
 
 // MARK: - TokenProgram -
@@ -81,11 +153,7 @@ enum TokenProgram {
     // Current key: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
     //
     // todo: lock this in, THIS SHOULD BE ONLY USED FOR TESTING IN THE MEANTIME
-    static let publicKey = PublicKey([
-        6, 221, 246, 225, 215, 101, 161, 147, 217, 203, 225,
-        70, 206, 235, 121, 172, 28, 180, 133, 237, 95, 91, 55,
-        145, 58, 140, 245, 133, 126, 255, 0, 169
-    ])!
+    static let publicKey = PublicKey(base58: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")!
     
     // Reference: https://github.com/solana-labs/solana-program-library/blob/b011698251981b5a12088acba18fad1d41c3719a/token/program/src/instruction.rs#L41-L55
     public static func initializeAccountInstruction(account: PublicKey, mint: PublicKey, owner: PublicKey, programKey: PublicKey) -> Instruction {
@@ -104,7 +172,7 @@ enum TokenProgram {
                 .writable(publicKey: account,     signer: true,  payer: false),
                 .readonly(publicKey: mint,        signer: false, payer: false),
                 .readonly(publicKey: owner,       signer: false, payer: false),
-                .readonly(publicKey: .sysVarRent, signer: false, payer: false)
+                .readonly(publicKey: .sysVarRent, signer: false, payer: false),
             ],
             data: data
         )
@@ -215,16 +283,11 @@ enum MemoProgram {
     // Current key: Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo
     //
     // todo: lock this in, or make configurable
-    static let PROGRAM_KEY: PublicKey = PublicKey(
-        [Byte](arrayLiteral:
-                5, 74, 83, 80, 248, 93, 200, 130, 214, 20, 165, 86, 114, 120, 138, 41, 109, 223,
-               30, 171, 171, 208, 166, 6, 120, 136, 73, 50, 244, 238, 246, 160
-        )
-    )!
+    static let publicKey = PublicKey(base58: "Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo")!
     
     public static func memoInsutruction(with data: Data) -> Instruction {
         Instruction(
-            program: PROGRAM_KEY,
+            program: publicKey,
             accounts: [],
             data: data
         )
@@ -263,7 +326,7 @@ extension UInt64 {
             Byte((self & 0x000000FF00000000) >> 32),
             Byte((self & 0x0000FF0000000000) >> 40),
             Byte((self & 0x00FF000000000000) >> 48),
-            Byte((self & 0xFF00000000000000) >> 56)
+            Byte((self & 0xFF00000000000000) >> 56),
         ]
     }
 }

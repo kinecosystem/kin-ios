@@ -156,7 +156,7 @@ public extension Transaction {
     var memo: KinMemo {
         guard
             let memoInstruction = message.instructions.filter({
-                message.accounts[Int($0.programIndex)] == MemoProgram.PROGRAM_KEY
+                message.accounts[Int($0.programIndex)] == MemoProgram.publicKey
             }).first
         else {
             return KinMemo.none
@@ -177,7 +177,7 @@ public extension Transaction {
     
     var paymentOperations: [KinPaymentOperation] {
         let instructions: [CompiledInstruction] = message.instructions.filter { instruction in
-            return message.accounts[Int(instruction.programIndex)] != MemoProgram.PROGRAM_KEY
+            return message.accounts[Int(instruction.programIndex)] != MemoProgram.publicKey
                 && message.accounts[Int(instruction.programIndex)] != SystemProgram.systemPublicKey
                 && instruction.data.first == UInt8(TokenProgram.Command.transfer.rawValue)
         }
