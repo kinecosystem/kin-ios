@@ -22,7 +22,7 @@ public struct SHA224Hash: Equatable, Hashable {
     }
 
     public static func of(bytes: [Byte]) -> SHA224Hash {
-        return SHA224Hash(bytes: Digest.sha224(bytes))
+        return SHA224Hash(bytes: SHA224.digest(bytes.data).bytes)
     }
 
     public static func just(bytes: [Byte]) -> SHA224Hash {

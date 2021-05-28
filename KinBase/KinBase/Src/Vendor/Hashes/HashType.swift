@@ -25,6 +25,10 @@ public extension HashType {
 }
 
 public extension HashType {
+    static func digest(_ string: String) -> Data {
+        digest(Data(string.utf8))
+    }
+    
     static func digest(_ data: Data) -> Data {
         var hash = Self.init()
         hash.update(data)

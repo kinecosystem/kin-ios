@@ -352,7 +352,7 @@ private extension KinFileStorage {
     var environmentDirectory: URL {
         return kinStorageDirectory
             .appendingPathComponent("env", isDirectory: true)
-            .appendingPathComponent(Digest.md5(network.id.bytes).toHexString(), isDirectory: true)
+            .appendingPathComponent(MD5.digest(network.id).hexEncodedString(), isDirectory: true)
         // TODO: Verify that MD5 is sufficient for this purpose
     }
 

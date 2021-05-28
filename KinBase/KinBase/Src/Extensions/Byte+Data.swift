@@ -18,8 +18,8 @@ extension Array where Element == Byte {
     }
 }
 
-//extension Data {
-//    var bytes: [Byte] {
-//        [Byte](self)
-//    }
-//}
+extension Data {
+    var bytes: [Byte] {
+        Array(self)
+    }
+}
