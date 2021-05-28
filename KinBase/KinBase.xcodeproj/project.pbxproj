@@ -200,6 +200,10 @@
 		9AC60B582649AED0002C740A /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B572649AED0002C740A /* Base58.swift */; };
 		9AC60B5A264EAC9E002C740A /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B59264EAC9E002C740A /* MessageTests.swift */; };
 		9AC60B5D265D8632002C740A /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B5C265D8631002C740A /* KeyTests.swift */; };
+		9AC60B632661175E002C740A /* HashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B622661175E002C740A /* HashType.swift */; };
+		9AC60B6526611772002C740A /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B6426611772002C740A /* SHA256.swift */; };
+		9AC60B672661178D002C740A /* SHA512.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B662661178D002C740A /* SHA512.swift */; };
+		9AC60B69266117D0002C740A /* SHA224.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B68266117D0002C740A /* SHA224.swift */; };
 		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -427,6 +431,10 @@
 		9AC60B572649AED0002C740A /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		9AC60B59264EAC9E002C740A /* MessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
 		9AC60B5C265D8631002C740A /* KeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyTests.swift; sourceTree = "<group>"; };
+		9AC60B622661175E002C740A /* HashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashType.swift; sourceTree = "<group>"; };
+		9AC60B6426611772002C740A /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
+		9AC60B662661178D002C740A /* SHA512.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA512.swift; sourceTree = "<group>"; };
+		9AC60B68266117D0002C740A /* SHA224.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA224.swift; sourceTree = "<group>"; };
 		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -838,6 +846,7 @@
 		9AC60AA82645D2A2002C740A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				9AC60B6126611731002C740A /* Hashes */,
 				9AC60AAC2645D32B002C740A /* CryptoSwift */,
 				9AC60A9226459C65002C740A /* Base58 */,
 				9AC60A6C264597B0002C740A /* ed25519 */,
@@ -966,6 +975,17 @@
 				9AC60B5C265D8631002C740A /* KeyTests.swift */,
 			);
 			path = Keys;
+			sourceTree = "<group>";
+		};
+		9AC60B6126611731002C740A /* Hashes */ = {
+			isa = PBXGroup;
+			children = (
+				9AC60B622661175E002C740A /* HashType.swift */,
+				9AC60B6426611772002C740A /* SHA256.swift */,
+				9AC60B662661178D002C740A /* SHA512.swift */,
+				9AC60B68266117D0002C740A /* SHA224.swift */,
+			);
+			path = Hashes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1207,6 +1227,7 @@
 				9AC60B442645D32B002C740A /* CipherModeWorker.swift in Sources */,
 				9AC60B2F2645D32B002C740A /* StreamEncryptor.swift in Sources */,
 				9AC60B412645D32B002C740A /* PCBC.swift in Sources */,
+				9AC60B6526611772002C740A /* SHA256.swift in Sources */,
 				85737EEC24439FD90012132E /* Observable.swift in Sources */,
 				851B278A2432821D004EE486 /* SecureKeyStorage.swift in Sources */,
 				9AC60A86264597B0002C740A /* sc.c in Sources */,
@@ -1238,6 +1259,7 @@
 				85572FA624AA6881003734CB /* AgoraGrpcProxy.swift in Sources */,
 				9AC60B482645D32B002C740A /* Array+Extension.swift in Sources */,
 				9AC60B3D2645D32B002C740A /* CFB.swift in Sources */,
+				9AC60B69266117D0002C740A /* SHA224.swift in Sources */,
 				9AC60A89264597B0002C740A /* key_exchange.c in Sources */,
 				85737EE5243E63E70012132E /* KinNetwork.swift in Sources */,
 				85737EDD243E629C0012132E /* KinAccountApi.swift in Sources */,
@@ -1300,6 +1322,7 @@
 				9AC60A87264597B0002C740A /* sign.c in Sources */,
 				8525B7EF24DB5101008277AB /* AppInfo.swift in Sources */,
 				9AC60A8F264597B0002C740A /* sha512.c in Sources */,
+				9AC60B632661175E002C740A /* HashType.swift in Sources */,
 				9AC60B252645D32B002C740A /* Authenticator.swift in Sources */,
 				9AC60B0E2645D32B002C740A /* UInt32+Extension.swift in Sources */,
 				855B76E524366E710037F407 /* KinAccount.swift in Sources */,
@@ -1324,6 +1347,7 @@
 				9AC60B012645D32B002C740A /* Cryptors.swift in Sources */,
 				9AC60B182645D32B002C740A /* ChaCha20+Foundation.swift in Sources */,
 				9AC60AA52645CF58002C740A /* Data+Hex.swift in Sources */,
+				9AC60B672661178D002C740A /* SHA512.swift in Sources */,
 				85737EC3243D7CF90012132E /* KinFileStorage.swift in Sources */,
 				9AC60A9A2645C8D5002C740A /* KeyPair.swift in Sources */,
 				9AC60B432645D32B002C740A /* GCM.swift in Sources */,
