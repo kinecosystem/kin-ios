@@ -443,6 +443,7 @@ void FieldRules_ClearTypeOneOfCase(FieldRules *message) {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct FloatRules__storage_ {
   uint32_t _has_storage_[1];
@@ -524,6 +525,15 @@ typedef struct FloatRules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFloat,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = FloatRules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[FloatRules class]
@@ -554,6 +564,7 @@ typedef struct FloatRules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct DoubleRules__storage_ {
   uint32_t _has_storage_[1];
@@ -635,6 +646,15 @@ typedef struct DoubleRules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeDouble,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = DoubleRules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[DoubleRules class]
@@ -665,6 +685,7 @@ typedef struct DoubleRules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct Int32Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -746,6 +767,15 @@ typedef struct Int32Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt32,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = Int32Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[Int32Rules class]
@@ -776,6 +806,7 @@ typedef struct Int32Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct Int64Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -857,6 +888,15 @@ typedef struct Int64Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt64,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = Int64Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[Int64Rules class]
@@ -887,6 +927,7 @@ typedef struct Int64Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct UInt32Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -968,6 +1009,15 @@ typedef struct UInt32Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeUInt32,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = UInt32Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[UInt32Rules class]
@@ -998,6 +1048,7 @@ typedef struct UInt32Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct UInt64Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1079,6 +1130,15 @@ typedef struct UInt64Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeUInt64,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = UInt64Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[UInt64Rules class]
@@ -1109,6 +1169,7 @@ typedef struct UInt64Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct SInt32Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1190,6 +1251,15 @@ typedef struct SInt32Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSInt32,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = SInt32Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SInt32Rules class]
@@ -1220,6 +1290,7 @@ typedef struct SInt32Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct SInt64Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1301,6 +1372,15 @@ typedef struct SInt64Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSInt64,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = SInt64Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SInt64Rules class]
@@ -1331,6 +1411,7 @@ typedef struct SInt64Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct Fixed32Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1412,6 +1493,15 @@ typedef struct Fixed32Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFixed32,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = Fixed32Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[Fixed32Rules class]
@@ -1442,6 +1532,7 @@ typedef struct Fixed32Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct Fixed64Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1523,6 +1614,15 @@ typedef struct Fixed64Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFixed64,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = Fixed64Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[Fixed64Rules class]
@@ -1553,6 +1653,7 @@ typedef struct Fixed64Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct SFixed32Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1634,6 +1735,15 @@ typedef struct SFixed32Rules__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSFixed32,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = SFixed32Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SFixed32Rules class]
@@ -1664,6 +1774,7 @@ typedef struct SFixed32Rules__storage_ {
 @dynamic hasGte, gte;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct SFixed64Rules__storage_ {
   uint32_t _has_storage_[1];
@@ -1744,6 +1855,15 @@ typedef struct SFixed64Rules__storage_ {
         .offset = (uint32_t)offsetof(SFixed64Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSFixed64,
+      },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = SFixed64Rules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1838,6 +1958,7 @@ typedef struct BoolRules__storage_ {
 @dynamic uuid;
 @dynamic wellKnownRegex;
 @dynamic hasStrict, strict;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct StringRules__storage_ {
   uint32_t _has_storage_[2];
@@ -2114,6 +2235,16 @@ typedef struct StringRules__storage_ {
         .core.flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasDefaultValue),
         .core.dataType = GPBDataTypeBool,
       },
+      {
+        .defaultValue.valueBool = NO,
+        .core.name = "ignoreEmpty",
+        .core.dataTypeSpecific.className = NULL,
+        .core.number = StringRules_FieldNumber_IgnoreEmpty,
+        .core.hasIndex = 23,
+        .core.offset = 24,  // Stored in _has_storage_ to save space.
+        .core.flags = GPBFieldOptional,
+        .core.dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[StringRules class]
@@ -2162,6 +2293,7 @@ void StringRules_ClearWellKnownOneOfCase(StringRules *message) {
 @dynamic ip;
 @dynamic ipv4;
 @dynamic ipv6;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct BytesRules__storage_ {
   uint32_t _has_storage_[2];
@@ -2299,6 +2431,15 @@ typedef struct BytesRules__storage_ {
         .offset = (uint32_t)offsetof(BytesRules__storage_, len),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = BytesRules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 11,
+        .offset = 12,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -2469,6 +2610,7 @@ typedef struct MessageRules__storage_ {
 @dynamic hasMaxItems, maxItems;
 @dynamic hasUnique, unique;
 @dynamic hasItems, items;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct RepeatedRules__storage_ {
   uint32_t _has_storage_[1];
@@ -2519,6 +2661,15 @@ typedef struct RepeatedRules__storage_ {
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = RepeatedRules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 5,
+        .offset = 6,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[RepeatedRules class]
@@ -2547,6 +2698,7 @@ typedef struct RepeatedRules__storage_ {
 @dynamic hasNoSparse, noSparse;
 @dynamic hasKeys, keys;
 @dynamic hasValues, values;
+@dynamic hasIgnoreEmpty, ignoreEmpty;
 
 typedef struct MapRules__storage_ {
   uint32_t _has_storage_[1];
@@ -2606,6 +2758,15 @@ typedef struct MapRules__storage_ {
         .offset = (uint32_t)offsetof(MapRules__storage_, values),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "ignoreEmpty",
+        .dataTypeSpecific.className = NULL,
+        .number = MapRules_FieldNumber_IgnoreEmpty,
+        .hasIndex = 6,
+        .offset = 7,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =

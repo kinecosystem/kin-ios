@@ -21,10 +21,17 @@
 @class APBTransactionV4GetServiceConfigResponse;
 @class APBTransactionV4GetTransactionRequest;
 @class APBTransactionV4GetTransactionResponse;
+@class APBTransactionV4SignTransactionRequest;
+@class APBTransactionV4SignTransactionResponse;
 @class APBTransactionV4SubmitTransactionRequest;
 @class APBTransactionV4SubmitTransactionResponse;
 
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
+#if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
+  #import <protobuf/Timestamp.pbobjc.h>
+#else
+  #import "google/protobuf/Timestamp.pbobjc.h"
+#endif
   #import "validate/Validate.pbobjc.h"
   #import "common/v3/Model.pbobjc.h"
   #import "common/v4/Model.pbobjc.h"
@@ -45,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GetServiceConfig returns the service and token parameters for the token.
+ * 
+ * The subsidizer key returned may vary based on the 'app-index' header.
  */
 - (GRPCUnaryProtoCall *)getServiceConfigWithMessage:(APBTransactionV4GetServiceConfigRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
@@ -86,20 +95,72 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (GRPCUnaryProtoCall *)getHistoryWithMessage:(APBTransactionV4GetHistoryRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
+#pragma mark SignTransaction(SignTransactionRequest) returns (SignTransactionResponse)
+
+/**
+ * SignTransaction signs the provided transaction, returning the signature to be used.
+ * 
+ * The transaction may include the following types of instructions:
+ * - SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * - SplToken::SetAuthority(CloseAuthority)
+ * - SplToken::Transfer()
+ * - SplToken::CloseAccount()
+ * - Memo::Memo()
+ * 
+ * The transaction can be divided into one or more 'regions', which are delineated by
+ * the memo instruction. Each instruction within a region is considered to be 'related to'
+ * the memo at the beginning of the region. The first (or only) region may not have a memo.
+ * For example, if there are instructions before the first memo instruction, or if there
+ * is no memo at all.
+ * 
+ * If an invoice is applied, there must be a memo whose foreign key contains the SHA-226
+ * of the serialized memo. Additionally, the number of SplToken::Transfer instructions in
+ * the region _must_ match the number of invoices. Furthermore, the invoice cannot be
+ * referenced by more than one region.
+ * 
+ * Examples:
+ * 
+ * Basic Transfer (No Invoice)
+ * 1. SplToken::Transfer()
+ * 
+ * Basic Transfer (Invoice)
+ * 1. Memo::Memo(Spend)
+ * 2. SplToken::Transfer()
+ * 
+ * Transfer with Cleanup (Sender has token accounts A, B, sending to C)
+ * 1. Memo::Memo(GC) [Optional, 'memoless' region is ok]
+ * 2. SplToken::Transfer(B -> A)
+ * 3. SplToken::CloseAccount(B)
+ * 4. Memo::Memo(Spend)
+ * 5. SplToken::Transfer(A -> C)
+ * 
+ * Transfer with Cleanup At End (Sender has token accounts A, B, sending to C)
+ * 1. Memo::Memo(Spend)
+ * 2. SplToken::Transfer(A -> C)
+ * 3. Memo::Memo(GC) [Required, delineate cleanup region from above]
+ * 4. SplToken::Transfer(B -> A)
+ * 5. SplToken::CloseAccount(B)
+ * 
+ * Sender Creates Destination (No Invoice)
+ * 1. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * 2. SplToken::SetAuthority(CloseAuthority)
+ * 2. SplToken::Transfer()
+ * 
+ * Sender Creates Destination (Invoice)
+ * 1. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * 2. SplToken::SetAuthority(CloseAuthority)
+ * 3. Memo::Memo(Earn)
+ * 4. SplToken::Transfer()
+ */
+- (GRPCUnaryProtoCall *)signTransactionWithMessage:(APBTransactionV4SignTransactionRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
+
 #pragma mark SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse)
 
 /**
  * SubmitTransaction submits a transaction.
  * 
- * The transaction may include a single Memo[1] instruction.
- * If a memo instruction is specified, it must be at position 0
- * in the instruction array.
- * 
- * If an invoice is provided, the Memo instruction must contain a
- * Kin Binary memo[2], encoded as base64.
- * 
- * [1]: https://spl.solana.com/memo
- * [2]: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
+ * If the transaction is already signed, the SignTransaction webhook will not
+ * be called.
  */
 - (GRPCUnaryProtoCall *)submitTransactionWithMessage:(APBTransactionV4SubmitTransactionRequest *)message responseHandler:(id<GRPCProtoResponseHandler>)handler callOptions:(GRPCCallOptions *_Nullable)callOptions;
 
@@ -122,6 +183,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GetServiceConfig returns the service and token parameters for the token.
+ * 
+ * The subsidizer key returned may vary based on the 'app-index' header.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -129,6 +192,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GetServiceConfig returns the service and token parameters for the token.
+ * 
+ * The subsidizer key returned may vary based on the 'app-index' header.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -223,20 +288,134 @@ NS_ASSUME_NONNULL_BEGIN
 - (GRPCProtoCall *)RPCToGetHistoryWithRequest:(APBTransactionV4GetHistoryRequest *)request handler:(void(^)(APBTransactionV4GetHistoryResponse *_Nullable response, NSError *_Nullable error))handler;
 
 
+#pragma mark SignTransaction(SignTransactionRequest) returns (SignTransactionResponse)
+
+/**
+ * SignTransaction signs the provided transaction, returning the signature to be used.
+ * 
+ * The transaction may include the following types of instructions:
+ * - SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * - SplToken::SetAuthority(CloseAuthority)
+ * - SplToken::Transfer()
+ * - SplToken::CloseAccount()
+ * - Memo::Memo()
+ * 
+ * The transaction can be divided into one or more 'regions', which are delineated by
+ * the memo instruction. Each instruction within a region is considered to be 'related to'
+ * the memo at the beginning of the region. The first (or only) region may not have a memo.
+ * For example, if there are instructions before the first memo instruction, or if there
+ * is no memo at all.
+ * 
+ * If an invoice is applied, there must be a memo whose foreign key contains the SHA-226
+ * of the serialized memo. Additionally, the number of SplToken::Transfer instructions in
+ * the region _must_ match the number of invoices. Furthermore, the invoice cannot be
+ * referenced by more than one region.
+ * 
+ * Examples:
+ * 
+ * Basic Transfer (No Invoice)
+ * 1. SplToken::Transfer()
+ * 
+ * Basic Transfer (Invoice)
+ * 1. Memo::Memo(Spend)
+ * 2. SplToken::Transfer()
+ * 
+ * Transfer with Cleanup (Sender has token accounts A, B, sending to C)
+ * 1. Memo::Memo(GC) [Optional, 'memoless' region is ok]
+ * 2. SplToken::Transfer(B -> A)
+ * 3. SplToken::CloseAccount(B)
+ * 4. Memo::Memo(Spend)
+ * 5. SplToken::Transfer(A -> C)
+ * 
+ * Transfer with Cleanup At End (Sender has token accounts A, B, sending to C)
+ * 1. Memo::Memo(Spend)
+ * 2. SplToken::Transfer(A -> C)
+ * 3. Memo::Memo(GC) [Required, delineate cleanup region from above]
+ * 4. SplToken::Transfer(B -> A)
+ * 5. SplToken::CloseAccount(B)
+ * 
+ * Sender Creates Destination (No Invoice)
+ * 1. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * 2. SplToken::SetAuthority(CloseAuthority)
+ * 2. SplToken::Transfer()
+ * 
+ * Sender Creates Destination (Invoice)
+ * 1. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * 2. SplToken::SetAuthority(CloseAuthority)
+ * 3. Memo::Memo(Earn)
+ * 4. SplToken::Transfer()
+ *
+ * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
+ */
+- (void)signTransactionWithRequest:(APBTransactionV4SignTransactionRequest *)request handler:(void(^)(APBTransactionV4SignTransactionResponse *_Nullable response, NSError *_Nullable error))handler;
+
+/**
+ * SignTransaction signs the provided transaction, returning the signature to be used.
+ * 
+ * The transaction may include the following types of instructions:
+ * - SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * - SplToken::SetAuthority(CloseAuthority)
+ * - SplToken::Transfer()
+ * - SplToken::CloseAccount()
+ * - Memo::Memo()
+ * 
+ * The transaction can be divided into one or more 'regions', which are delineated by
+ * the memo instruction. Each instruction within a region is considered to be 'related to'
+ * the memo at the beginning of the region. The first (or only) region may not have a memo.
+ * For example, if there are instructions before the first memo instruction, or if there
+ * is no memo at all.
+ * 
+ * If an invoice is applied, there must be a memo whose foreign key contains the SHA-226
+ * of the serialized memo. Additionally, the number of SplToken::Transfer instructions in
+ * the region _must_ match the number of invoices. Furthermore, the invoice cannot be
+ * referenced by more than one region.
+ * 
+ * Examples:
+ * 
+ * Basic Transfer (No Invoice)
+ * 1. SplToken::Transfer()
+ * 
+ * Basic Transfer (Invoice)
+ * 1. Memo::Memo(Spend)
+ * 2. SplToken::Transfer()
+ * 
+ * Transfer with Cleanup (Sender has token accounts A, B, sending to C)
+ * 1. Memo::Memo(GC) [Optional, 'memoless' region is ok]
+ * 2. SplToken::Transfer(B -> A)
+ * 3. SplToken::CloseAccount(B)
+ * 4. Memo::Memo(Spend)
+ * 5. SplToken::Transfer(A -> C)
+ * 
+ * Transfer with Cleanup At End (Sender has token accounts A, B, sending to C)
+ * 1. Memo::Memo(Spend)
+ * 2. SplToken::Transfer(A -> C)
+ * 3. Memo::Memo(GC) [Required, delineate cleanup region from above]
+ * 4. SplToken::Transfer(B -> A)
+ * 5. SplToken::CloseAccount(B)
+ * 
+ * Sender Creates Destination (No Invoice)
+ * 1. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * 2. SplToken::SetAuthority(CloseAuthority)
+ * 2. SplToken::Transfer()
+ * 
+ * Sender Creates Destination (Invoice)
+ * 1. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ * 2. SplToken::SetAuthority(CloseAuthority)
+ * 3. Memo::Memo(Earn)
+ * 4. SplToken::Transfer()
+ *
+ * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
+ */
+- (GRPCProtoCall *)RPCToSignTransactionWithRequest:(APBTransactionV4SignTransactionRequest *)request handler:(void(^)(APBTransactionV4SignTransactionResponse *_Nullable response, NSError *_Nullable error))handler;
+
+
 #pragma mark SubmitTransaction(SubmitTransactionRequest) returns (SubmitTransactionResponse)
 
 /**
  * SubmitTransaction submits a transaction.
  * 
- * The transaction may include a single Memo[1] instruction.
- * If a memo instruction is specified, it must be at position 0
- * in the instruction array.
- * 
- * If an invoice is provided, the Memo instruction must contain a
- * Kin Binary memo[2], encoded as base64.
- * 
- * [1]: https://spl.solana.com/memo
- * [2]: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
+ * If the transaction is already signed, the SignTransaction webhook will not
+ * be called.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */
@@ -245,15 +424,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * SubmitTransaction submits a transaction.
  * 
- * The transaction may include a single Memo[1] instruction.
- * If a memo instruction is specified, it must be at position 0
- * in the instruction array.
- * 
- * If an invoice is provided, the Memo instruction must contain a
- * Kin Binary memo[2], encoded as base64.
- * 
- * [1]: https://spl.solana.com/memo
- * [2]: https://github.com/kinecosystem/agora-api-internal/blob/master/spec/memo.md
+ * If the transaction is already signed, the SignTransaction webhook will not
+ * be called.
  *
  * This method belongs to a set of APIs that have been deprecated. Using the v2 API is recommended.
  */

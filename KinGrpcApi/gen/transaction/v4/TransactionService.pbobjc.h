@@ -39,6 +39,7 @@ CF_EXTERN_C_BEGIN
 @class APBTransactionV4Cursor;
 @class APBTransactionV4HistoryItem;
 @class APBTransactionV4HistoryItem_Payment;
+@class GPBTimestamp;
 GPB_ENUM_FWD_DECLARE(APBCommonV4Commitment);
 
 NS_ASSUME_NONNULL_BEGIN
@@ -93,6 +94,40 @@ GPBEnumDescriptor *APBTransactionV4GetHistoryResponse_Result_EnumDescriptor(void
  * the time this source was generated.
  **/
 BOOL APBTransactionV4GetHistoryResponse_Result_IsValidValue(int32_t value);
+
+#pragma mark - Enum APBTransactionV4SignTransactionResponse_Result
+
+typedef GPB_ENUM(APBTransactionV4SignTransactionResponse_Result) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  APBTransactionV4SignTransactionResponse_Result_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  APBTransactionV4SignTransactionResponse_Result_Ok = 0,
+
+  /**
+   * Indicates that the configured webhook for this transaction
+   * rejected the transaction without a specified reason.
+   **/
+  APBTransactionV4SignTransactionResponse_Result_Rejected = 3,
+
+  /**
+   * Indicates there was an error with one or more of the
+   * supplied invoices.
+   *
+   * See: invoice_errors.
+   **/
+  APBTransactionV4SignTransactionResponse_Result_InvoiceError = 4,
+};
+
+GPBEnumDescriptor *APBTransactionV4SignTransactionResponse_Result_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL APBTransactionV4SignTransactionResponse_Result_IsValidValue(int32_t value);
 
 #pragma mark - Enum APBTransactionV4SubmitTransactionResponse_Result
 
@@ -369,12 +404,81 @@ int32_t APBTransactionV4GetHistoryResponse_Result_RawValue(APBTransactionV4GetHi
  **/
 void SetAPBTransactionV4GetHistoryResponse_Result_RawValue(APBTransactionV4GetHistoryResponse *message, int32_t value);
 
+#pragma mark - APBTransactionV4SignTransactionRequest
+
+typedef GPB_ENUM(APBTransactionV4SignTransactionRequest_FieldNumber) {
+  APBTransactionV4SignTransactionRequest_FieldNumber_Transaction = 1,
+  APBTransactionV4SignTransactionRequest_FieldNumber_InvoiceList = 2,
+};
+
+@interface APBTransactionV4SignTransactionRequest : GPBMessage
+
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4Transaction *transaction;
+/** Test to see if @c transaction has been set. */
+@property(nonatomic, readwrite) BOOL hasTransaction;
+
+/**
+ * An optional invoice list associating each operation with an invoice.
+ *
+ * If an invoice list is included, it is expected that the foreign key in
+ * the transaction memo is the SHA-224 hash of the serialized invoice list.
+ *
+ * The invoice list will be included in webhook calls for the application the
+ * transaction pertains to (as specified by the memo app index).
+ *
+ * The submitted invoice data will only be available for retrieval from the service it
+ * was submitted to and not directly from the blockchain nor any other deployments of
+ * the service.
+ **/
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV3InvoiceList *invoiceList;
+/** Test to see if @c invoiceList has been set. */
+@property(nonatomic, readwrite) BOOL hasInvoiceList;
+
+@end
+
+#pragma mark - APBTransactionV4SignTransactionResponse
+
+typedef GPB_ENUM(APBTransactionV4SignTransactionResponse_FieldNumber) {
+  APBTransactionV4SignTransactionResponse_FieldNumber_Result = 1,
+  APBTransactionV4SignTransactionResponse_FieldNumber_Signature = 2,
+  APBTransactionV4SignTransactionResponse_FieldNumber_InvoiceErrorsArray = 4,
+};
+
+@interface APBTransactionV4SignTransactionResponse : GPBMessage
+
+@property(nonatomic, readwrite) APBTransactionV4SignTransactionResponse_Result result;
+
+/** Present when result = OK */
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4TransactionSignature *signature;
+/** Test to see if @c signature has been set. */
+@property(nonatomic, readwrite) BOOL hasSignature;
+
+/** Present when result = INVOICE_ERROR. */
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBCommonV3InvoiceError*> *invoiceErrorsArray;
+/** The number of items in @c invoiceErrorsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger invoiceErrorsArray_Count;
+
+@end
+
+/**
+ * Fetches the raw value of a @c APBTransactionV4SignTransactionResponse's @c result property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t APBTransactionV4SignTransactionResponse_Result_RawValue(APBTransactionV4SignTransactionResponse *message);
+/**
+ * Sets the raw value of an @c APBTransactionV4SignTransactionResponse's @c result property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetAPBTransactionV4SignTransactionResponse_Result_RawValue(APBTransactionV4SignTransactionResponse *message, int32_t value);
+
 #pragma mark - APBTransactionV4SubmitTransactionRequest
 
 typedef GPB_ENUM(APBTransactionV4SubmitTransactionRequest_FieldNumber) {
   APBTransactionV4SubmitTransactionRequest_FieldNumber_Transaction = 1,
   APBTransactionV4SubmitTransactionRequest_FieldNumber_InvoiceList = 2,
   APBTransactionV4SubmitTransactionRequest_FieldNumber_Commitment = 3,
+  APBTransactionV4SubmitTransactionRequest_FieldNumber_DedupeId = 4,
 };
 
 @interface APBTransactionV4SubmitTransactionRequest : GPBMessage
@@ -401,6 +505,20 @@ typedef GPB_ENUM(APBTransactionV4SubmitTransactionRequest_FieldNumber) {
 @property(nonatomic, readwrite) BOOL hasInvoiceList;
 
 @property(nonatomic, readwrite) enum APBCommonV4Commitment commitment;
+
+/**
+ * dedupe_id specifies an identifier that this transaction is associated with.
+ *
+ * If the service has already seen this ID, it will return the previous transaction
+ * status.
+ *
+ * The motivator for this identifier is that SDKs that retry at a higher level do
+ * not have access to the Blockhash information that the underlying SDK used in
+ * certain circumstances. Notably, in time out related cases, it is possible that
+ * the transaction was submitted, but the (SDK) caller will not be able to infer
+ * the signature.
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSData *dedupeId;
 
 @end
 
@@ -552,6 +670,7 @@ typedef GPB_ENUM(APBTransactionV4HistoryItem_FieldNumber) {
   APBTransactionV4HistoryItem_FieldNumber_TransactionError = 5,
   APBTransactionV4HistoryItem_FieldNumber_PaymentsArray = 6,
   APBTransactionV4HistoryItem_FieldNumber_InvoiceList = 7,
+  APBTransactionV4HistoryItem_FieldNumber_TransactionTime = 8,
 };
 
 typedef GPB_ENUM(APBTransactionV4HistoryItem_RawTransaction_OneOfCase) {
@@ -604,6 +723,11 @@ typedef GPB_ENUM(APBTransactionV4HistoryItem_RawTransaction_OneOfCase) {
 @property(nonatomic, readwrite, strong, null_resettable) APBCommonV3InvoiceList *invoiceList;
 /** Test to see if @c invoiceList has been set. */
 @property(nonatomic, readwrite) BOOL hasInvoiceList;
+
+/** Note: this may not always be available. */
+@property(nonatomic, readwrite, strong, null_resettable) GPBTimestamp *transactionTime;
+/** Test to see if @c transactionTime has been set. */
+@property(nonatomic, readwrite) BOOL hasTransactionTime;
 
 @end
 

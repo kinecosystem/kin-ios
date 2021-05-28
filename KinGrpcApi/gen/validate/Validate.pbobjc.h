@@ -237,6 +237,7 @@ typedef GPB_ENUM(FloatRules_FieldNumber) {
   FloatRules_FieldNumber_Gte = 5,
   FloatRules_FieldNumber_InArray = 6,
   FloatRules_FieldNumber_NotInArray = 7,
+  FloatRules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -294,6 +295,13 @@ typedef GPB_ENUM(FloatRules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - DoubleRules
@@ -306,6 +314,7 @@ typedef GPB_ENUM(DoubleRules_FieldNumber) {
   DoubleRules_FieldNumber_Gte = 5,
   DoubleRules_FieldNumber_InArray = 6,
   DoubleRules_FieldNumber_NotInArray = 7,
+  DoubleRules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -363,6 +372,13 @@ typedef GPB_ENUM(DoubleRules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - Int32Rules
@@ -375,6 +391,7 @@ typedef GPB_ENUM(Int32Rules_FieldNumber) {
   Int32Rules_FieldNumber_Gte = 5,
   Int32Rules_FieldNumber_InArray = 6,
   Int32Rules_FieldNumber_NotInArray = 7,
+  Int32Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -432,6 +449,13 @@ typedef GPB_ENUM(Int32Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - Int64Rules
@@ -444,6 +468,7 @@ typedef GPB_ENUM(Int64Rules_FieldNumber) {
   Int64Rules_FieldNumber_Gte = 5,
   Int64Rules_FieldNumber_InArray = 6,
   Int64Rules_FieldNumber_NotInArray = 7,
+  Int64Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -501,6 +526,13 @@ typedef GPB_ENUM(Int64Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - UInt32Rules
@@ -513,6 +545,7 @@ typedef GPB_ENUM(UInt32Rules_FieldNumber) {
   UInt32Rules_FieldNumber_Gte = 5,
   UInt32Rules_FieldNumber_InArray = 6,
   UInt32Rules_FieldNumber_NotInArray = 7,
+  UInt32Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -570,6 +603,13 @@ typedef GPB_ENUM(UInt32Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - UInt64Rules
@@ -582,6 +622,7 @@ typedef GPB_ENUM(UInt64Rules_FieldNumber) {
   UInt64Rules_FieldNumber_Gte = 5,
   UInt64Rules_FieldNumber_InArray = 6,
   UInt64Rules_FieldNumber_NotInArray = 7,
+  UInt64Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -639,6 +680,13 @@ typedef GPB_ENUM(UInt64Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - SInt32Rules
@@ -651,6 +699,7 @@ typedef GPB_ENUM(SInt32Rules_FieldNumber) {
   SInt32Rules_FieldNumber_Gte = 5,
   SInt32Rules_FieldNumber_InArray = 6,
   SInt32Rules_FieldNumber_NotInArray = 7,
+  SInt32Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -708,6 +757,13 @@ typedef GPB_ENUM(SInt32Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - SInt64Rules
@@ -720,6 +776,7 @@ typedef GPB_ENUM(SInt64Rules_FieldNumber) {
   SInt64Rules_FieldNumber_Gte = 5,
   SInt64Rules_FieldNumber_InArray = 6,
   SInt64Rules_FieldNumber_NotInArray = 7,
+  SInt64Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -777,6 +834,13 @@ typedef GPB_ENUM(SInt64Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - Fixed32Rules
@@ -789,6 +853,7 @@ typedef GPB_ENUM(Fixed32Rules_FieldNumber) {
   Fixed32Rules_FieldNumber_Gte = 5,
   Fixed32Rules_FieldNumber_InArray = 6,
   Fixed32Rules_FieldNumber_NotInArray = 7,
+  Fixed32Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -846,6 +911,13 @@ typedef GPB_ENUM(Fixed32Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - Fixed64Rules
@@ -858,6 +930,7 @@ typedef GPB_ENUM(Fixed64Rules_FieldNumber) {
   Fixed64Rules_FieldNumber_Gte = 5,
   Fixed64Rules_FieldNumber_InArray = 6,
   Fixed64Rules_FieldNumber_NotInArray = 7,
+  Fixed64Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -915,6 +988,13 @@ typedef GPB_ENUM(Fixed64Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - SFixed32Rules
@@ -927,6 +1007,7 @@ typedef GPB_ENUM(SFixed32Rules_FieldNumber) {
   SFixed32Rules_FieldNumber_Gte = 5,
   SFixed32Rules_FieldNumber_InArray = 6,
   SFixed32Rules_FieldNumber_NotInArray = 7,
+  SFixed32Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -984,6 +1065,13 @@ typedef GPB_ENUM(SFixed32Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - SFixed64Rules
@@ -996,6 +1084,7 @@ typedef GPB_ENUM(SFixed64Rules_FieldNumber) {
   SFixed64Rules_FieldNumber_Gte = 5,
   SFixed64Rules_FieldNumber_InArray = 6,
   SFixed64Rules_FieldNumber_NotInArray = 7,
+  SFixed64Rules_FieldNumber_IgnoreEmpty = 8,
 };
 
 /**
@@ -1053,6 +1142,13 @@ typedef GPB_ENUM(SFixed64Rules_FieldNumber) {
 /** The number of items in @c notInArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger notInArray_Count;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - BoolRules
@@ -1100,6 +1196,7 @@ typedef GPB_ENUM(StringRules_FieldNumber) {
   StringRules_FieldNumber_NotContains = 23,
   StringRules_FieldNumber_WellKnownRegex = 24,
   StringRules_FieldNumber_Strict = 25,
+  StringRules_FieldNumber_IgnoreEmpty = 26,
 };
 
 typedef GPB_ENUM(StringRules_WellKnown_OneOfCase) {
@@ -1300,6 +1397,13 @@ typedef GPB_ENUM(StringRules_WellKnown_OneOfCase) {
 @property(nonatomic, readwrite) BOOL strict;
 
 @property(nonatomic, readwrite) BOOL hasStrict;
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 /**
@@ -1323,6 +1427,7 @@ typedef GPB_ENUM(BytesRules_FieldNumber) {
   BytesRules_FieldNumber_Ipv4 = 11,
   BytesRules_FieldNumber_Ipv6 = 12,
   BytesRules_FieldNumber_Len = 13,
+  BytesRules_FieldNumber_IgnoreEmpty = 14,
 };
 
 typedef GPB_ENUM(BytesRules_WellKnown_OneOfCase) {
@@ -1433,6 +1538,13 @@ typedef GPB_ENUM(BytesRules_WellKnown_OneOfCase) {
  **/
 @property(nonatomic, readwrite) BOOL ipv6;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 /**
@@ -1516,6 +1628,7 @@ typedef GPB_ENUM(RepeatedRules_FieldNumber) {
   RepeatedRules_FieldNumber_MaxItems = 2,
   RepeatedRules_FieldNumber_Unique = 3,
   RepeatedRules_FieldNumber_Items = 4,
+  RepeatedRules_FieldNumber_IgnoreEmpty = 5,
 };
 
 /**
@@ -1554,6 +1667,13 @@ typedef GPB_ENUM(RepeatedRules_FieldNumber) {
 /** Test to see if @c items has been set. */
 @property(nonatomic, readwrite) BOOL hasItems;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - MapRules
@@ -1564,6 +1684,7 @@ typedef GPB_ENUM(MapRules_FieldNumber) {
   MapRules_FieldNumber_NoSparse = 3,
   MapRules_FieldNumber_Keys = 4,
   MapRules_FieldNumber_Values = 5,
+  MapRules_FieldNumber_IgnoreEmpty = 6,
 };
 
 /**
@@ -1606,6 +1727,13 @@ typedef GPB_ENUM(MapRules_FieldNumber) {
 /** Test to see if @c values has been set. */
 @property(nonatomic, readwrite) BOOL hasValues;
 
+/**
+ * IgnoreEmpty specifies that the validation rules of this field should be
+ * evaluated only if the field is not empty
+ **/
+@property(nonatomic, readwrite) BOOL ignoreEmpty;
+
+@property(nonatomic, readwrite) BOOL hasIgnoreEmpty;
 @end
 
 #pragma mark - AnyRules

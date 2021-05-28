@@ -137,6 +137,8 @@ BOOL APBAccountV4Events_Result_IsValidValue(int32_t value);
 typedef GPB_ENUM(APBAccountV4AccountInfo_FieldNumber) {
   APBAccountV4AccountInfo_FieldNumber_AccountId = 1,
   APBAccountV4AccountInfo_FieldNumber_Balance = 2,
+  APBAccountV4AccountInfo_FieldNumber_Owner = 3,
+  APBAccountV4AccountInfo_FieldNumber_CloseAuthority = 4,
 };
 
 @interface APBAccountV4AccountInfo : GPBMessage
@@ -147,6 +149,14 @@ typedef GPB_ENUM(APBAccountV4AccountInfo_FieldNumber) {
 
 /** The last known balance, in quarks, of the account. */
 @property(nonatomic, readwrite) int64_t balance;
+
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4SolanaAccountId *owner;
+/** Test to see if @c owner has been set. */
+@property(nonatomic, readwrite) BOOL hasOwner;
+
+@property(nonatomic, readwrite, strong, null_resettable) APBCommonV4SolanaAccountId *closeAuthority;
+/** Test to see if @c closeAuthority has been set. */
+@property(nonatomic, readwrite) BOOL hasCloseAuthority;
 
 @end
 
@@ -160,18 +170,27 @@ typedef GPB_ENUM(APBAccountV4CreateAccountRequest_FieldNumber) {
 @interface APBAccountV4CreateAccountRequest : GPBMessage
 
 /**
- * Transaction should contain the following instructions:
+ * CreateAccountRequest should be of one of the following forms:
+ *   Legacy:
+ *     1. [Optional] Memo::Memo()
+ *     2. SystemProgram::CreateAccount()
+ *     3. SplTokenProgram::InitializeAccount()
+ *     4. [Optional] SplTokenProgram::SetAuthority()
+ *   Standard:
+ *     1. [Optional] Memo::Memo()
+ *     2. SplAssociateTokenAccount::CreateAssociatedTokenAccount()
+ *     3. [Optional] SplTokenProgram::SetAuthority()
  *
- *   1. SystemProgram::CreateAccount()
- *   2. SplTokenProgram::InitializeAccount()
- *   3. SplTokenProgram::SetAuthority()
+ * The SetAuthority() instruction only needs to be set if the service is
+ * subsidizing the account creation. In that case, a SetAuthority()
+ * instruction must be included that sets the CloseAuthority of
+ * the account to the subsidizer. This is to prevent the farming of Sol
+ * by creating accounts. It should be noted that an account can only
+ * be closed if there is zero kin in the account.
  *
- * (3) only needs to be set if the service is subsidizing the
- * account creation. In that case, a SetAuthority() instruction
- * should be included that sets the CloseAuthority of the account
- * to the subsidizer. This is to prevent farming of Sol by creating
- * accounts. It should be noted that an account can only be closed
- * if there is zero kin in the account.
+ * An optional memo may be provided to attribute the account
+ * creation with an app index. This may be used for the KRE.
+ * The memo type should be NONE.
  *
  * If the parameters are not for the Kin token, or there are
  * any other instructions, InvalidArgument will be returned.
@@ -289,6 +308,7 @@ void SetAPBAccountV4GetAccountInfoResponse_Result_RawValue(APBAccountV4GetAccoun
 
 typedef GPB_ENUM(APBAccountV4ResolveTokenAccountsRequest_FieldNumber) {
   APBAccountV4ResolveTokenAccountsRequest_FieldNumber_AccountId = 1,
+  APBAccountV4ResolveTokenAccountsRequest_FieldNumber_IncludeAccountInfo = 2,
 };
 
 @interface APBAccountV4ResolveTokenAccountsRequest : GPBMessage
@@ -297,12 +317,20 @@ typedef GPB_ENUM(APBAccountV4ResolveTokenAccountsRequest_FieldNumber) {
 /** Test to see if @c accountId has been set. */
 @property(nonatomic, readwrite) BOOL hasAccountId;
 
+/**
+ * Specifies whether or not detailed account info for each token account should
+ * be returned. This should only be specified if needed, as it requires extra
+ * lookups.
+ **/
+@property(nonatomic, readwrite) BOOL includeAccountInfo;
+
 @end
 
 #pragma mark - APBAccountV4ResolveTokenAccountsResponse
 
 typedef GPB_ENUM(APBAccountV4ResolveTokenAccountsResponse_FieldNumber) {
   APBAccountV4ResolveTokenAccountsResponse_FieldNumber_TokenAccountsArray = 1,
+  APBAccountV4ResolveTokenAccountsResponse_FieldNumber_TokenAccountInfosArray = 2,
 };
 
 @interface APBAccountV4ResolveTokenAccountsResponse : GPBMessage
@@ -313,10 +341,25 @@ typedef GPB_ENUM(APBAccountV4ResolveTokenAccountsResponse_FieldNumber) {
  * If the provided account is also a token account, it will be first in the list.
  * Otherwise, the list order should not be depended on, as there is no reliable way
  * to sort accounts based on creation time.
+ *
+ * Deprecated in favour of token_account_infos.
  **/
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBCommonV4SolanaAccountId*> *tokenAccountsArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBCommonV4SolanaAccountId*> *tokenAccountsArray GPB_DEPRECATED_MSG("kin.agora.account.v4.ResolveTokenAccountsResponse.token_accounts is deprecated (see account/v4/account_service.proto).");
 /** The number of items in @c tokenAccountsArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger tokenAccountsArray_Count;
+@property(nonatomic, readonly) NSUInteger tokenAccountsArray_Count GPB_DEPRECATED_MSG("kin.agora.account.v4.ResolveTokenAccountsResponse.token_accounts is deprecated (see account/v4/account_service.proto).");
+
+/**
+ * Zero or more account infos that are owned by the provided account id.
+ *
+ * In the case where include_account_info is false, token_account_infos will
+ * still be provided. However, they will not include any data requiring account
+ * lookups. That is, only account_id and owner will be set.
+ *
+ * Note: the ordering of token_account_infos is identical to token_accounts.
+ **/
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<APBAccountV4AccountInfo*> *tokenAccountInfosArray;
+/** The number of items in @c tokenAccountInfosArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger tokenAccountInfosArray_Count;
 
 @end
 

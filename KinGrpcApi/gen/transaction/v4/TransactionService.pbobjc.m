@@ -619,6 +619,178 @@ BOOL APBTransactionV4GetHistoryResponse_Result_IsValidValue(int32_t value__) {
   }
 }
 
+#pragma mark - APBTransactionV4SignTransactionRequest
+
+@implementation APBTransactionV4SignTransactionRequest
+
+@dynamic hasTransaction, transaction;
+@dynamic hasInvoiceList, invoiceList;
+
+typedef struct APBTransactionV4SignTransactionRequest__storage_ {
+  uint32_t _has_storage_[1];
+  APBCommonV4Transaction *transaction;
+  APBCommonV3InvoiceList *invoiceList;
+} APBTransactionV4SignTransactionRequest__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "transaction",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4Transaction),
+        .number = APBTransactionV4SignTransactionRequest_FieldNumber_Transaction,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(APBTransactionV4SignTransactionRequest__storage_, transaction),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "invoiceList",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV3InvoiceList),
+        .number = APBTransactionV4SignTransactionRequest_FieldNumber_InvoiceList,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(APBTransactionV4SignTransactionRequest__storage_, invoiceList),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4SignTransactionRequest class]
+                                     rootClass:[APBTransactionV4TransactionServiceRoot class]
+                                          file:APBTransactionV4TransactionServiceRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(APBTransactionV4SignTransactionRequest__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - APBTransactionV4SignTransactionResponse
+
+@implementation APBTransactionV4SignTransactionResponse
+
+@dynamic result;
+@dynamic hasSignature, signature;
+@dynamic invoiceErrorsArray, invoiceErrorsArray_Count;
+
+typedef struct APBTransactionV4SignTransactionResponse__storage_ {
+  uint32_t _has_storage_[1];
+  APBTransactionV4SignTransactionResponse_Result result;
+  APBCommonV4TransactionSignature *signature;
+  NSMutableArray *invoiceErrorsArray;
+} APBTransactionV4SignTransactionResponse__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "result",
+        .dataTypeSpecific.enumDescFunc = APBTransactionV4SignTransactionResponse_Result_EnumDescriptor,
+        .number = APBTransactionV4SignTransactionResponse_FieldNumber_Result,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(APBTransactionV4SignTransactionResponse__storage_, result),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
+      },
+      {
+        .name = "signature",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4TransactionSignature),
+        .number = APBTransactionV4SignTransactionResponse_FieldNumber_Signature,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(APBTransactionV4SignTransactionResponse__storage_, signature),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "invoiceErrorsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV3InvoiceError),
+        .number = APBTransactionV4SignTransactionResponse_FieldNumber_InvoiceErrorsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(APBTransactionV4SignTransactionResponse__storage_, invoiceErrorsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[APBTransactionV4SignTransactionResponse class]
+                                     rootClass:[APBTransactionV4TransactionServiceRoot class]
+                                          file:APBTransactionV4TransactionServiceRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(APBTransactionV4SignTransactionResponse__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+int32_t APBTransactionV4SignTransactionResponse_Result_RawValue(APBTransactionV4SignTransactionResponse *message) {
+  GPBDescriptor *descriptor = [APBTransactionV4SignTransactionResponse descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBTransactionV4SignTransactionResponse_FieldNumber_Result];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetAPBTransactionV4SignTransactionResponse_Result_RawValue(APBTransactionV4SignTransactionResponse *message, int32_t value) {
+  GPBDescriptor *descriptor = [APBTransactionV4SignTransactionResponse descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:APBTransactionV4SignTransactionResponse_FieldNumber_Result];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
+#pragma mark - Enum APBTransactionV4SignTransactionResponse_Result
+
+GPBEnumDescriptor *APBTransactionV4SignTransactionResponse_Result_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "Ok\000Rejected\000InvoiceError\000";
+    static const int32_t values[] = {
+        APBTransactionV4SignTransactionResponse_Result_Ok,
+        APBTransactionV4SignTransactionResponse_Result_Rejected,
+        APBTransactionV4SignTransactionResponse_Result_InvoiceError,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(APBTransactionV4SignTransactionResponse_Result)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:APBTransactionV4SignTransactionResponse_Result_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL APBTransactionV4SignTransactionResponse_Result_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case APBTransactionV4SignTransactionResponse_Result_Ok:
+    case APBTransactionV4SignTransactionResponse_Result_Rejected:
+    case APBTransactionV4SignTransactionResponse_Result_InvoiceError:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
 #pragma mark - APBTransactionV4SubmitTransactionRequest
 
 @implementation APBTransactionV4SubmitTransactionRequest
@@ -626,12 +798,14 @@ BOOL APBTransactionV4GetHistoryResponse_Result_IsValidValue(int32_t value__) {
 @dynamic hasTransaction, transaction;
 @dynamic hasInvoiceList, invoiceList;
 @dynamic commitment;
+@dynamic dedupeId;
 
 typedef struct APBTransactionV4SubmitTransactionRequest__storage_ {
   uint32_t _has_storage_[1];
   APBCommonV4Commitment commitment;
   APBCommonV4Transaction *transaction;
   APBCommonV3InvoiceList *invoiceList;
+  NSData *dedupeId;
 } APBTransactionV4SubmitTransactionRequest__storage_;
 
 // This method is threadsafe because it is initially called
@@ -666,6 +840,15 @@ typedef struct APBTransactionV4SubmitTransactionRequest__storage_ {
         .offset = (uint32_t)offsetof(APBTransactionV4SubmitTransactionRequest__storage_, commitment),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
+      },
+      {
+        .name = "dedupeId",
+        .dataTypeSpecific.className = NULL,
+        .number = APBTransactionV4SubmitTransactionRequest_FieldNumber_DedupeId,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(APBTransactionV4SubmitTransactionRequest__storage_, dedupeId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1041,6 +1224,7 @@ BOOL APBTransactionV4GetTransactionResponse_State_IsValidValue(int32_t value__) 
 @dynamic hasTransactionError, transactionError;
 @dynamic paymentsArray, paymentsArray_Count;
 @dynamic hasInvoiceList, invoiceList;
+@dynamic hasTransactionTime, transactionTime;
 
 typedef struct APBTransactionV4HistoryItem__storage_ {
   uint32_t _has_storage_[2];
@@ -1051,6 +1235,7 @@ typedef struct APBTransactionV4HistoryItem__storage_ {
   APBCommonV4TransactionError *transactionError;
   NSMutableArray *paymentsArray;
   APBCommonV3InvoiceList *invoiceList;
+  GPBTimestamp *transactionTime;
 } APBTransactionV4HistoryItem__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1119,6 +1304,15 @@ typedef struct APBTransactionV4HistoryItem__storage_ {
         .number = APBTransactionV4HistoryItem_FieldNumber_InvoiceList,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(APBTransactionV4HistoryItem__storage_, invoiceList),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "transactionTime",
+        .dataTypeSpecific.className = GPBStringifySymbol(GPBTimestamp),
+        .number = APBTransactionV4HistoryItem_FieldNumber_TransactionTime,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(APBTransactionV4HistoryItem__storage_, transactionTime),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

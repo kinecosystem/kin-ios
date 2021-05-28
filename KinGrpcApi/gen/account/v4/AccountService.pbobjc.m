@@ -64,10 +64,14 @@ static GPBFileDescriptor *APBAccountV4AccountServiceRoot_FileDescriptor(void) {
 
 @dynamic hasAccountId, accountId;
 @dynamic balance;
+@dynamic hasOwner, owner;
+@dynamic hasCloseAuthority, closeAuthority;
 
 typedef struct APBAccountV4AccountInfo__storage_ {
   uint32_t _has_storage_[1];
   APBCommonV4SolanaAccountId *accountId;
+  APBCommonV4SolanaAccountId *owner;
+  APBCommonV4SolanaAccountId *closeAuthority;
   int64_t balance;
 } APBAccountV4AccountInfo__storage_;
 
@@ -94,6 +98,24 @@ typedef struct APBAccountV4AccountInfo__storage_ {
         .offset = (uint32_t)offsetof(APBAccountV4AccountInfo__storage_, balance),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
+      },
+      {
+        .name = "owner",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4SolanaAccountId),
+        .number = APBAccountV4AccountInfo_FieldNumber_Owner,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(APBAccountV4AccountInfo__storage_, owner),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "closeAuthority",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBCommonV4SolanaAccountId),
+        .number = APBAccountV4AccountInfo_FieldNumber_CloseAuthority,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(APBAccountV4AccountInfo__storage_, closeAuthority),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -465,6 +487,7 @@ BOOL APBAccountV4GetAccountInfoResponse_Result_IsValidValue(int32_t value__) {
 @implementation APBAccountV4ResolveTokenAccountsRequest
 
 @dynamic hasAccountId, accountId;
+@dynamic includeAccountInfo;
 
 typedef struct APBAccountV4ResolveTokenAccountsRequest__storage_ {
   uint32_t _has_storage_[1];
@@ -485,6 +508,15 @@ typedef struct APBAccountV4ResolveTokenAccountsRequest__storage_ {
         .offset = (uint32_t)offsetof(APBAccountV4ResolveTokenAccountsRequest__storage_, accountId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "includeAccountInfo",
+        .dataTypeSpecific.className = NULL,
+        .number = APBAccountV4ResolveTokenAccountsRequest_FieldNumber_IncludeAccountInfo,
+        .hasIndex = 1,
+        .offset = 2,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -510,10 +542,12 @@ typedef struct APBAccountV4ResolveTokenAccountsRequest__storage_ {
 @implementation APBAccountV4ResolveTokenAccountsResponse
 
 @dynamic tokenAccountsArray, tokenAccountsArray_Count;
+@dynamic tokenAccountInfosArray, tokenAccountInfosArray_Count;
 
 typedef struct APBAccountV4ResolveTokenAccountsResponse__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *tokenAccountsArray;
+  NSMutableArray *tokenAccountInfosArray;
 } APBAccountV4ResolveTokenAccountsResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -528,6 +562,15 @@ typedef struct APBAccountV4ResolveTokenAccountsResponse__storage_ {
         .number = APBAccountV4ResolveTokenAccountsResponse_FieldNumber_TokenAccountsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(APBAccountV4ResolveTokenAccountsResponse__storage_, tokenAccountsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "tokenAccountInfosArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(APBAccountV4AccountInfo),
+        .number = APBAccountV4ResolveTokenAccountsResponse_FieldNumber_TokenAccountInfosArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(APBAccountV4ResolveTokenAccountsResponse__storage_, tokenAccountInfosArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },

@@ -34,7 +34,7 @@ echo "Cloning kin-api into ${KIN_API_GIT_PATH}"
 git clone -b master --single-branch git@github.com:kinecosystem/agora-api-internal.git ${KIN_API_GIT_PATH}
 
 echo "Cloning protoc-gen-validate into ${VALIDATE_GIT_PATH}"
-git clone -b master --single-branch git@github.com:envoyproxy/protoc-gen-validate.git $VALIDATE_GIT_PATH
+git clone -b main --single-branch git@github.com:envoyproxy/protoc-gen-validate.git $VALIDATE_GIT_PATH
 
 # Find only the protos under /v3/.
 for path in $(find ${KIN_API_GIT_PATH}/proto -name 'v3' -type d -print0 | xargs -0 -n1); do
