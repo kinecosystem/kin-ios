@@ -82,7 +82,6 @@
 		9387E03A254A1D5100D44509 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E039254A1D5100D44509 /* Cache.swift */; };
 		9387E083254B6F5700D44509 /* KinServiceTestsV4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E082254B6F5600D44509 /* KinServiceTestsV4.swift */; };
 		93A591232502CBC200E43C65 /* KinLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A591222502CBC200E43C65 /* KinLogger.swift */; };
-		93DEA72F2568B56A00E44499 /* KinCryptoTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DEA72E2568B56900E44499 /* KinCryptoTools.swift */; };
 		93E9B1A3253FE42300DFD776 /* ProgramsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9B1A2253FE42300DFD776 /* ProgramsTests.swift */; };
 		93F66F1D253BEC4600E14D59 /* SolanaCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */; };
 		93F66F1E253BEC4600E14D59 /* TransactionEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */; };
@@ -237,7 +236,6 @@
 		9387E039254A1D5100D44509 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		9387E082254B6F5600D44509 /* KinServiceTestsV4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceTestsV4.swift; sourceTree = "<group>"; };
 		93A591222502CBC200E43C65 /* KinLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinLogger.swift; sourceTree = "<group>"; };
-		93DEA72E2568B56900E44499 /* KinCryptoTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinCryptoTools.swift; sourceTree = "<group>"; };
 		93E9B1A2253FE42300DFD776 /* ProgramsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsTests.swift; sourceTree = "<group>"; };
 		93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaCodableTests.swift; sourceTree = "<group>"; };
 		93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionEncodingTests.swift; sourceTree = "<group>"; };
@@ -468,7 +466,6 @@
 				85737EF12443AFFB0012132E /* Helper.swift */,
 				93A591222502CBC200E43C65 /* KinLogger.swift */,
 				9387E039254A1D5100D44509 /* Cache.swift */,
-				93DEA72E2568B56900E44499 /* KinCryptoTools.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -995,7 +992,6 @@
 				85737ED8243E59060012132E /* KinEnvironment.swift in Sources */,
 				93A591232502CBC200E43C65 /* KinLogger.swift in Sources */,
 				853EC7A924EC5D38004E0BED /* KinTestService.swift in Sources */,
-				93DEA72F2568B56A00E44499 /* KinCryptoTools.swift in Sources */,
 				85737EE1243E62EE0012132E /* KinTransactionApi.swift in Sources */,
 				859A760B2464AC240028555F /* ListObservable.swift in Sources */,
 				9AC60B5626497F35002C740A /* Transaction.swift in Sources */,

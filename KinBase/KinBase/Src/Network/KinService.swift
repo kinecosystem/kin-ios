@@ -346,7 +346,7 @@ extension KinServiceV4 : KinServiceType {
                     return
                 }
                 
-                let tokenAccountSeed = Seed(sha256(data: signerPrivateKey.data))!
+                let tokenAccountSeed = Seed(SHA256.digest(signerPrivateKey.data))!
                 let tokenAccount = KeyPair(seed: tokenAccountSeed)
                 let tokenAccountPub: PublicKey = tokenAccount.asPublicKey()
                 
