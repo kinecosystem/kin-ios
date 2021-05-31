@@ -5,9 +5,6 @@
       location = "group:KinBase/KinBase.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:KinBaseCompat/KinBaseCompat.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:KinDesign/KinDesign.xcodeproj">
    </FileRef>
    <FileRef
@@ -15,12 +12,6 @@
    </FileRef>
    <FileRef
       location = "group:KinSampleApp/KinSampleApp.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:KinSDKSampleApp/KinSDKSampleApp.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:KinBackupRestoreSampleApp/KinBackupRestoreSampleApp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
