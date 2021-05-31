@@ -14,6 +14,7 @@ class KeyChainStorageTests: XCTestCase {
 
     override func setUp() {
         sut = KeyChainStorage()
+        try! sut.clear()
     }
 
     override func tearDown() {

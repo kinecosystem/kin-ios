@@ -10,6 +10,12 @@
 		167108C93CE609A97325BB6E /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82363D272B8652C191E782CD /* Pods_KinBase.framework */; };
 		851B278A2432821D004EE486 /* SecureKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B27892432821D004EE486 /* SecureKeyStorage.swift */; };
 		851B278C24328225004EE486 /* KeyChainStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B278B24328225004EE486 /* KeyChainStorageTests.swift */; };
+		851B279624354AF9004EE486 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B279524354AF9004EE486 /* AppDelegate.swift */; };
+		851B279824354AF9004EE486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B279724354AF9004EE486 /* SceneDelegate.swift */; };
+		851B279A24354AF9004EE486 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B279924354AF9004EE486 /* ContentView.swift */; };
+		851B279C24354AFB004EE486 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 851B279B24354AFB004EE486 /* Assets.xcassets */; };
+		851B279F24354AFB004EE486 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 851B279E24354AFB004EE486 /* Preview Assets.xcassets */; };
+		851B27A224354AFB004EE486 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 851B27A024354AFB004EE486 /* LaunchScreen.storyboard */; };
 		851BC5BD248F192300EC6609 /* MockTransactionStreamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851BC5BC248F192300EC6609 /* MockTransactionStreamItem.swift */; };
 		851E7BB624A2A5FD00B800C8 /* AgoraKinAccountsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E7BB524A2A5FD00B800C8 /* AgoraKinAccountsApi.swift */; };
 		851E7BB824A2A61A00B800C8 /* AgoraKinTransactionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E7BB724A2A61A00B800C8 /* AgoraKinTransactionsApi.swift */; };
@@ -126,6 +132,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		851B27A824354C08004EE486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85B023F42371CC7700829FD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 851B279224354AF9004EE486;
+			remoteInfo = KinBaseTestsHost;
+		};
 		85B024082371CC7700829FD6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 85B023F42371CC7700829FD6 /* Project object */;
@@ -144,6 +157,15 @@
 		8518B10D244C9BE300EC329B /* KinServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceTests.swift; sourceTree = "<group>"; };
 		851B27892432821D004EE486 /* SecureKeyStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureKeyStorage.swift; sourceTree = "<group>"; };
 		851B278B24328225004EE486 /* KeyChainStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainStorageTests.swift; sourceTree = "<group>"; };
+		851B279324354AF9004EE486 /* KinBaseTestsHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinBaseTestsHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		851B279524354AF9004EE486 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		851B279724354AF9004EE486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		851B279924354AF9004EE486 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		851B279B24354AFB004EE486 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		851B279E24354AFB004EE486 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		851B27A124354AFB004EE486 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		851B27A324354AFB004EE486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		851B27A724354B8B004EE486 /* KinBaseTestsHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KinBaseTestsHost.entitlements; sourceTree = "<group>"; };
 		851BC5BC248F192300EC6609 /* MockTransactionStreamItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTransactionStreamItem.swift; sourceTree = "<group>"; };
 		851E7BB524A2A5FD00B800C8 /* AgoraKinAccountsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinAccountsApi.swift; sourceTree = "<group>"; };
 		851E7BB724A2A61A00B800C8 /* AgoraKinTransactionsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinTransactionsApi.swift; sourceTree = "<group>"; };
@@ -265,6 +287,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		851B279024354AF9004EE486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85B023FA2371CC7700829FD6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -317,6 +346,29 @@
 				85713C322450CE8C005F5A48 /* KinStorableObjectExtensions.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		851B279424354AF9004EE486 /* KinBaseTestsHost */ = {
+			isa = PBXGroup;
+			children = (
+				851B27A724354B8B004EE486 /* KinBaseTestsHost.entitlements */,
+				851B279524354AF9004EE486 /* AppDelegate.swift */,
+				851B279724354AF9004EE486 /* SceneDelegate.swift */,
+				851B279924354AF9004EE486 /* ContentView.swift */,
+				851B279B24354AFB004EE486 /* Assets.xcassets */,
+				851B27A024354AFB004EE486 /* LaunchScreen.storyboard */,
+				851B27A324354AFB004EE486 /* Info.plist */,
+				851B279D24354AFB004EE486 /* Preview Content */,
+			);
+			path = KinBaseTestsHost;
+			sourceTree = "<group>";
+		};
+		851B279D24354AFB004EE486 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				851B279E24354AFB004EE486 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		851E7BB124A1849200B800C8 /* KinApi */ = {
@@ -451,6 +503,7 @@
 			children = (
 				85B023FF2371CC7700829FD6 /* KinBase */,
 				85B0240A2371CC7700829FD6 /* KinBaseTests */,
+				851B279424354AF9004EE486 /* KinBaseTestsHost */,
 				85B023FE2371CC7700829FD6 /* Products */,
 				64DCE9545BED844A80D66CDE /* Frameworks */,
 				4778AA979B6B2663CF8952FE /* Pods */,
@@ -462,6 +515,7 @@
 			children = (
 				85B023FD2371CC7700829FD6 /* KinBase.framework */,
 				85B024062371CC7700829FD6 /* KinBaseTests.xctest */,
+				851B279324354AF9004EE486 /* KinBaseTestsHost.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -689,6 +743,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		851B279224354AF9004EE486 /* KinBaseTestsHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 851B27A424354AFB004EE486 /* Build configuration list for PBXNativeTarget "KinBaseTestsHost" */;
+			buildPhases = (
+				851B278F24354AF9004EE486 /* Sources */,
+				851B279024354AF9004EE486 /* Frameworks */,
+				851B279124354AF9004EE486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinBaseTestsHost;
+			productName = KinBaseTestsHost;
+			productReference = 851B279324354AF9004EE486 /* KinBaseTestsHost.app */;
+			productType = "com.apple.product-type.application";
+		};
 		85B023FC2371CC7700829FD6 /* KinBase */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024112371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBase" */;
@@ -722,6 +793,7 @@
 			);
 			dependencies = (
 				85B024092371CC7700829FD6 /* PBXTargetDependency */,
+				851B27A924354C08004EE486 /* PBXTargetDependency */,
 			);
 			name = KinBaseTests;
 			productName = KinBaseTests;
@@ -734,10 +806,13 @@
 		85B023F42371CC7700829FD6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Kin Foundation";
 				TargetAttributes = {
+					851B279224354AF9004EE486 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					85B023FC2371CC7700829FD6 = {
 						CreatedOnToolsVersion = 11.1;
 						LastSwiftMigration = 1110;
@@ -763,11 +838,22 @@
 			targets = (
 				85B023FC2371CC7700829FD6 /* KinBase */,
 				85B024052371CC7700829FD6 /* KinBaseTests */,
+				851B279224354AF9004EE486 /* KinBaseTestsHost */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		851B279124354AF9004EE486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				851B27A224354AFB004EE486 /* LaunchScreen.storyboard in Resources */,
+				851B279F24354AFB004EE486 /* Preview Assets.xcassets in Resources */,
+				851B279C24354AFB004EE486 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85B023FB2371CC7700829FD6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -849,6 +935,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		851B278F24354AF9004EE486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				851B279624354AF9004EE486 /* AppDelegate.swift in Sources */,
+				851B279824354AF9004EE486 /* SceneDelegate.swift in Sources */,
+				851B279A24354AF9004EE486 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		85B023F92371CC7700829FD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -969,6 +1065,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		851B27A924354C08004EE486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 851B279224354AF9004EE486 /* KinBaseTestsHost */;
+			targetProxy = 851B27A824354C08004EE486 /* PBXContainerItemProxy */;
+		};
 		85B024092371CC7700829FD6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 85B023FC2371CC7700829FD6 /* KinBase */;
@@ -976,7 +1077,62 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		851B27A024354AFB004EE486 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				851B27A124354AFB004EE486 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		851B27A524354AFB004EE486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
+				DEVELOPMENT_TEAM = 64923RW79V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinBaseTestsHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		851B27A624354AFB004EE486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
+				DEVELOPMENT_TEAM = 64923RW79V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.kin..KinBaseTestsHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		85B0240F2371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1177,8 +1333,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 83VHY3GSWL;
+				DEVELOPMENT_TEAM = 64923RW79V;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1197,8 +1354,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 83VHY3GSWL;
+				DEVELOPMENT_TEAM = 64923RW79V;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1216,6 +1374,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		851B27A424354AFB004EE486 /* Build configuration list for PBXNativeTarget "KinBaseTestsHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				851B27A524354AFB004EE486 /* Debug */,
+				851B27A624354AFB004EE486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		85B023F72371CC7700829FD6 /* Build configuration list for PBXProject "KinBase" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
