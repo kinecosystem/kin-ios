@@ -13,25 +13,19 @@ import CommonCrypto
 
 public enum SystemProgram {
     
-    public static let systemPublicKey = PublicKey.zero
-    
-    // Reference: https://github.com/solana-labs/solana/blob/f02a78d8fff2dd7297dc6ce6eb5a68a3002f5359/sdk/src/system_instruction.rs#L58-L72
+    /// Account references
+    ///   0. [WRITE, SIGNER] Funding account
+    ///   1. [WRITE, SIGNER] New account
+    ///
+    ///   CreateAccount {
+    ///     lamports: u64, // Number of lamports to transfer to the new account
+    ///     space: u64,    // Number of bytes of memory to allocate
+    ///     owner: Pubkey, // Address of program that will own the new account
+    ///   }
+    ///
+    ///   Reference: https://github.com/solana-labs/solana/blob/f02a78d8fff2dd7297dc6ce6eb5a68a3002f5359/sdk/src/system_instruction.rs#L58-L72
+    ///
     public static func createAccountInstruction(subsidizer: PublicKey, address: PublicKey, owner: PublicKey, lamports: UInt64, size: UInt64) -> Instruction {
-        // # Account references
-        //   0. [WRITE, SIGNER] Funding account
-        //   1. [WRITE, SIGNER] New account
-        //
-        // CreateAccount {
-        //   // Number of lamports to transfer to the new account
-        //   lamports: u64,
-        //   // Number of bytes of memory to allocate
-        //   space: u64,
-        //
-        //   //Address of program that will own the new account
-        //   owner: Pubkey,
-        // }
-        //
-        
         var data = Data()
         data.append(contentsOf: Command.createAccount.rawValue.bytes)
         data.append(contentsOf: lamports.bytes)
@@ -39,7 +33,7 @@ public enum SystemProgram {
         data.append(contentsOf: owner.bytes)
         
         return Instruction(
-            program: Self.systemPublicKey,
+            program: .systemProgram,
             accounts: [
                 .writable(publicKey: subsidizer, signer: true, payer: false),
                 .writable(publicKey: address, signer: true, payer: false),
@@ -67,25 +61,80 @@ extension SystemProgram {
 }
 
 extension PublicKey {
-    static let sysVarRent = PublicKey(base58: "SysvarRent111111111111111111111111111111111")!
+    
+    public static let systemProgram = PublicKey.zero
+    
+    public static let sysVarRent = PublicKey(base58: "SysvarRent111111111111111111111111111111111")!
+    
+    public static let associatedTokenProgram = PublicKey(base58: "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")!
+    
+    /// ProgramKey is the address of the token program that should be used.
+    ///
+    /// Current key: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+    ///
+    /// todo: lock this in, THIS SHOULD BE ONLY USED FOR TESTING IN THE MEANTIME
+    static let tokenProgram = PublicKey(base58: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")!
+    
+    /// ProgramKey is the address of the memo program that should be used.
+    ///
+    /// Current key: Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo
+    ///
+    /// todo: lock this in, or make configurable
+    static let memoProgram = PublicKey(base58: "Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo")!
 }
 
 // MARK: - AssociatedTokenProgram -
 
 enum AssociatedTokenProgram {
     
-    static let publicKey = PublicKey(base58: "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")!
-    
     private static let maxSeeds      = 16
     private static let maxSeedLength = 32
     
-    // CreateProgramAddress mirrors the implementation of the Solana SDK's CreateProgramAddress.
-    //
-    // ProgramAddresses are public keys that _do not_ lie on the ed25519 curve to ensure that
-    // there is no associated private key. In the event that the program and seed parameters
-    // result in a valid public key, ErrInvalidPublicKey is returned.
-    //
-    // Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L158
+    /// Reference: https://github.com/solana-labs/solana-program-library/blob/0639953c7dd0f5228c3ceda3ba68fece3b46ff1d/associated-token-account/program/src/lib.rs#L54
+    /// Create an associated token account for the given wallet address and token mint
+    ///
+    /// Accounts expected by this instruction:
+    ///
+    ///   0. `[writeable,signer]` Funding account (must be a system account)
+    ///   1. `[writeable]` Associated token account address to be created
+    ///   2. `[]` Wallet address for the new associated token account
+    ///   3. `[]` The token mint for the new associated token account
+    ///   4. `[]` System program
+    ///   5. `[]` SPL Token program
+    ///   6. `[]` Rent sysvar
+    ///
+    public static func createAssociatedAccountInstruction(subsidizer: PublicKey, owner: PublicKey, mint: PublicKey) -> Instruction {
+        let associatedAccount = deriveAssociatedAccount(owner: owner, mint: mint)!
+        return Instruction(
+            program: .associatedTokenProgram,
+            accounts: [
+                .writable(publicKey: subsidizer, signer: true, payer: false),
+                .writable(publicKey: associatedAccount, signer: false, payer: false),
+                .readonly(publicKey: owner, signer: false, payer: false),
+                .readonly(publicKey: mint, signer: false, payer: false),
+                .readonly(publicKey: .systemProgram, signer: false, payer: false),
+                .readonly(publicKey: .tokenProgram, signer: false, payer: false),
+                .readonly(publicKey: .sysVarRent, signer: false, payer: false),
+            ],
+            data: Data()
+        )
+    }
+    
+    public static func deriveAssociatedAccount(owner: PublicKey, mint: PublicKey) -> PublicKey? {
+        findProgramAddress(
+            program: .associatedTokenProgram,
+            seeds: owner.data, PublicKey.tokenProgram.data, mint.data
+        )
+    }
+    
+    /// CreateProgramAddress mirrors the implementation of the Solana SDK's CreateProgramAddress.
+    ///
+    /// ProgramAddresses are public keys that _do not_ lie on the ed25519 curve to ensure that
+    /// there is no associated private key. In the event that the program and seed parameters
+    /// result in a valid public key, ErrInvalidPublicKey is returned.
+    ///
+    /// Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L158
+    ///
     static func deriveProgramAddress(program: PublicKey, seeds: [Data]) -> PublicKey? {
         if seeds.count > maxSeeds {
             return nil
@@ -113,10 +162,11 @@ enum AssociatedTokenProgram {
         return publicKey
     }
     
-    // FindProgramAddress mirrors the implementation of the Solana SDK's FindProgramAddress. Its primary
-    // use case (for Kin and Agora) is for deriving associated accounts.
-    //
-    // Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L234
+    /// FindProgramAddress mirrors the implementation of the Solana SDK's FindProgramAddress. Its primary
+    /// use case (for Kin and Agora) is for deriving associated accounts.
+    ///
+    /// Reference: https://github.com/solana-labs/solana/blob/5548e599fe4920b71766e0ad1d121755ce9c63d5/sdk/program/src/pubkey.rs#L234
+    ///
     static func findProgramAddress(program: PublicKey, seeds: Data...) -> PublicKey? {
         findProgramAddress(program: program, seeds: seeds)
     }
@@ -132,37 +182,26 @@ enum AssociatedTokenProgram {
         
         return nil
     }
-    
-    public static func deriveAssociatedAccount(owner: PublicKey, mint: PublicKey) -> PublicKey? {
-        findProgramAddress(
-            program: publicKey,
-            seeds: owner.data, TokenProgram.publicKey.data, mint.data
-        )
-    }
 }
 
 // MARK: - TokenProgram -
 
 enum TokenProgram {
     
-    // Reference: https://github.com/solana-labs/solana-program-library/blob/11b1e3eefdd4e523768d63f7c70a7aa391ea0d02/token/program/src/state.rs#L125
+    /// Reference: https://github.com/solana-labs/solana-program-library/blob/11b1e3eefdd4e523768d63f7c70a7aa391ea0d02/token/program/src/state.rs#L125
     static let accountSize: UInt64 = 165
     
-    // ProgramKey is the address of the token program that should be used.
-    //
-    // Current key: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
-    //
-    // todo: lock this in, THIS SHOULD BE ONLY USED FOR TESTING IN THE MEANTIME
-    static let publicKey = PublicKey(base58: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")!
     
-    // Reference: https://github.com/solana-labs/solana-program-library/blob/b011698251981b5a12088acba18fad1d41c3719a/token/program/src/instruction.rs#L41-L55
+    /// Reference: https://github.com/solana-labs/solana-program-library/blob/b011698251981b5a12088acba18fad1d41c3719a/token/program/src/instruction.rs#L41-L55
+    /// Accounts expected by this instruction:
+    ///
+    ///   0. `[writable]`  The account to initialize.
+    ///   1. `[]` The mint this account will be associated with.
+    ///   2. `[]` The new account's owner/multisignature.
+    ///   3. `[]` Rent sysvar
+    ///
     public static func initializeAccountInstruction(account: PublicKey, mint: PublicKey, owner: PublicKey, programKey: PublicKey) -> Instruction {
-        // Accounts expected by this instruction:
-        //
-        //   0. `[writable]`  The account to initialize.
-        //   1. `[]` The mint this account will be associated with.
-        //   2. `[]` The new account's owner/multisignature.
-        //   3. `[]` Rent sysvar
+
         var data = Data()
         data.append(Command.initializeAccount.rawValue)
         
@@ -178,22 +217,22 @@ enum TokenProgram {
         )
     }
     
-    // todo(feature): support multi-sig
-    //
-    // Reference: https://github.com/solana-labs/solana-program-library/blob/b011698251981b5a12088acba18fad1d41c3719a/token/program/src/instruction.rs#L76-L91
+    /// Reference: https://github.com/solana-labs/solana-program-library/blob/b011698251981b5a12088acba18fad1d41c3719a/token/program/src/instruction.rs#L76-L91
+    /// Accounts expected by this instruction:
+    ///
+    ///   * Single owner/delegate
+    ///   0. `[writable]` The source account.
+    ///   1. `[writable]` The destination account.
+    ///   2. `[signer]` The source account's owner/delegate.
+    ///
+    ///   * Multisignature owner/delegate
+    ///   0. `[writable]` The source account.
+    ///   1. `[writable]` The destination account.
+    ///   2. `[]` The source account's multisignature owner/delegate.
+    ///   3. ..3+M `[signer]` M signer accounts.
+    ///
     public static func transferInstruction(source: PublicKey, destination: PublicKey, owner: PublicKey, amount: Decimal, programKey: PublicKey) -> Instruction {
-        // Accounts expected by this instruction:
-        //
-        //   * Single owner/delegate
-        //   0. `[writable]` The source account.
-        //   1. `[writable]` The destination account.
-        //   2. `[signer]` The source account's owner/delegate.
-        //
-        //   * Multisignature owner/delegate
-        //   0. `[writable]` The source account.
-        //   1. `[writable]` The destination account.
-        //   2. `[]` The source account's multisignature owner/delegate.
-        //   3. ..3+M `[signer]` M signer accounts.
+
         var data = Data()
         data.append(Command.transfer.rawValue)
         data.append(contentsOf: UInt64(amount.quark).bytes)
@@ -209,20 +248,20 @@ enum TokenProgram {
         )
     }
     
+    /// Sets a new authority of a mint or account.
+    ///
+    /// Accounts expected by this instruction:
+    ///
+    ///   * Single authority
+    ///   0. `[writable]` The mint or account to change the authority of.
+    ///   1. `[signer]` The current authority of the mint or account.
+    ///
+    ///   * Multisignature authority
+    ///   0. `[writable]` The mint or account to change the authority of.
+    ///   1. `[]` The mint's or account's multisignature authority.
+    ///   2. ..2+M `[signer]` M signer accounts
+    ///
     public static func setAuthority(account: PublicKey, currentAuthority: PublicKey, newAuthority: PublicKey?, authorityType: AuthorityType, programKey: PublicKey) -> Instruction {
-        // Sets a new authority of a mint or account.
-        //
-        // Accounts expected by this instruction:
-        //
-        //   * Single authority
-        //   0. `[writable]` The mint or account to change the authority of.
-        //   1. `[signer]` The current authority of the mint or account.
-        //
-        //   * Multisignature authority
-        //   0. `[writable]` The mint or account to change the authority of.
-        //   1. `[]` The mint's or account's multisignature authority.
-        //   2. ..2+M `[signer]` M signer accounts
-        
         var data = Data()
         data.append(Byte(Command.setAuthority.rawValue))
         data.append(authorityType.rawValue)
@@ -278,16 +317,9 @@ extension TokenProgram {
 // MARK: - MemoProgram -
 
 enum MemoProgram {
-    // ProgramKey is the address of the memo program that should be used.
-    //
-    // Current key: Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo
-    //
-    // todo: lock this in, or make configurable
-    static let publicKey = PublicKey(base58: "Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo")!
-    
     public static func memoInsutruction(with data: Data) -> Instruction {
         Instruction(
-            program: publicKey,
+            program: .memoProgram,
             accounts: [],
             data: data
         )

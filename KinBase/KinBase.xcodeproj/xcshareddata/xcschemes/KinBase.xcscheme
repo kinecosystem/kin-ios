@@ -7,7 +7,7 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "NO"
+            buildForTesting = "YES"
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "85B023FC2371CC7700829FD6"
                BuildableName = "KinBase.framework"
                BlueprintName = "KinBase"
+               ReferencedContainer = "container:KinBase.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "85B024052371CC7700829FD6"
+               BuildableName = "KinBaseTests.xctest"
+               BlueprintName = "KinBaseTests"
                ReferencedContainer = "container:KinBase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

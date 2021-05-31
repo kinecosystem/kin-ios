@@ -734,7 +734,7 @@
 		85B023F42371CC7700829FD6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Kin Foundation";
 				TargetAttributes = {
@@ -1178,7 +1178,7 @@
 			baseConfigurationReference = DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = 83VHY3GSWL;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1198,7 +1198,7 @@
 			baseConfigurationReference = 81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = 83VHY3GSWL;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

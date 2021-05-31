@@ -56,7 +56,7 @@ class ProgramsTests: XCTestCase {
             account: keys[0].asPublicKey(),
             mint: keys[1].asPublicKey(),
             owner: keys[2].asPublicKey(),
-            programKey: TokenProgram.publicKey
+            programKey: .tokenProgram
         )
 
         XCTAssertEqual(Byte(1), instruction.data[0])
@@ -76,7 +76,7 @@ class ProgramsTests: XCTestCase {
             destination: keys[1].asPublicKey(),
             owner: keys[2].asPublicKey(),
             amount: Quark(UInt64(123456789)).kin,
-            programKey: TokenProgram.publicKey
+            programKey: .tokenProgram
         )
 
         let expectedAmount = UInt64(123456789).bytes

@@ -100,7 +100,7 @@ class KinServiceTestsV4: XCTestCase {
         mockKinTransactionApi = MockKinTransactionApiV4()
         mockKinStreamingApi = MockKinStreamingApiV4()
         
-        mockKinTransactionApi.subServiceConfigResponse = GetServiceConfigResponseV4(result: .ok, subsidizerAccount: TokenProgram.publicKey, tokenProgram: TokenProgram.publicKey, token: TokenProgram.publicKey)
+        mockKinTransactionApi.subServiceConfigResponse = GetServiceConfigResponseV4(result: .ok, subsidizerAccount: .tokenProgram, tokenProgram: .tokenProgram, token: .tokenProgram)
         mockKinTransactionApi.stubMinBalanceRentExemption = GetMinimumBalanceForRentExemptionResponseV4(result: .ok, lamports: 12345)
         mockKinTransactionApi.stubRecentBlockhashResponse = GetRecentBlockHashResonseV4(result: .ok, blockHash: .zero)
 
