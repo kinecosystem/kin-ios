@@ -290,26 +290,28 @@ extension KinAccountContext: KinAccountReadOperations {
     }
     
     private func getAccountAndRecover() -> Promise<KinAccount> {
-        return self.service.getAccount(account: self.accountPublicKey)
-        .recover { error -> Promise<KinAccount> in
-            guard let serviceError = error as? KinServiceV4.Errors, serviceError == KinServiceV4.Errors.itemNotFound else {
-                return Promise(error)
-            }
-            
-            return self.service.resolveTokenAccounts(account: self.accountPublicKey).then { accounts in
-                let maybeResolvedAccount = accounts.first ?? self.accountPublicKey
-                return self.service.getAccount(account: maybeResolvedAccount).then { account -> KinAccount in
-                    // b/c we want to update our on hand account with the resolved accountInfo details on solana
-                    
-                    return account.copy(
-                        publicKey: self.accountPublicKey,
-                        tokenAccounts: accounts
-                    )
+        service
+            .getAccount(account: self.accountPublicKey)
+            .recover { error -> Promise<KinAccount> in
+                guard let serviceError = error as? KinServiceV4.Errors, serviceError == KinServiceV4.Errors.itemNotFound else {
+                    return Promise(error)
+                }
+                
+                return self.service.resolveTokenAccounts(account: self.accountPublicKey).then { accounts in
+                    let maybeResolvedAccount = accounts.first ?? self.accountPublicKey
+                    return self.service.getAccount(account: maybeResolvedAccount).then { account -> KinAccount in
+                        // b/c we want to update our on hand account with the resolved accountInfo details on solana
+                        
+                        return account.copy(
+                            publicKey: self.accountPublicKey,
+                            tokenAccounts: accounts
+                        )
+                    }
                 }
             }
-        }.then {
-            self.storage.updateAccount($0)
-        }
+            .then {
+                self.storage.updateAccount($0)
+            }
     }
 
     public func observeBalance(mode: ObservationMode = .passive) -> Observable<KinBalance> {
@@ -559,7 +561,7 @@ extension KinAccountContext {
 
     private func registerAccount(account: KinAccount) -> Promise<KinAccount> {
         let keyPair = KeyPair(publicKey: account.publicKey, privateKey: account.privateKey!) // FIXME:
-        return service.createAccount(account: account.publicKey, signer: keyPair)
+        return service.createAccount(account: account.publicKey, signer: keyPair, appIndex: AppIndex(value: 0))
             .then(on: dispatchQueue) { registeredAccount -> KinAccount in
                 return account.merge(registeredAccount)
             }

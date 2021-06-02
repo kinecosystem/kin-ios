@@ -48,6 +48,25 @@ extension KeyType {
     }
 }
 
+// MARK: - Stellar -
+
+extension KeyType {
+    
+    public var stellarID: String {
+        var container = Data([48]) // Stellar accountID version byte
+        container.append(data)
+        return container.crc16Data().base32
+    }
+    
+    public init?(stellarID: String) {
+        if let data = Data(base32: stellarID) {
+            self.init(data[1...data.count - 3])
+        } else {
+            return nil
+        }
+    }
+}
+
 // MARK: - Key32 -
 
 public struct Key32: Equatable, KeyType {

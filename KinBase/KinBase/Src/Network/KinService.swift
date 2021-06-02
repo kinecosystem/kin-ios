@@ -15,7 +15,7 @@ public enum TransactionOrder {
 }
 
 public protocol KinServiceType {
-    func createAccount(account: PublicKey, signer: KeyPair) -> Promise<KinAccount>
+    func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount>
 
     func getAccount(account: PublicKey) -> Promise<KinAccount>
     
@@ -43,96 +43,6 @@ public protocol KinServiceType {
     
     func invalidateRecentBlockHashCache()
 }
-
-//public class KinService {
-//    public enum Errors: Error, Equatable {
-//        case unknown
-//        case transientFailure(error: Error)
-//        case invalidAccount
-//        case missingApi
-//        case insufficientBalance
-//        /// It is expected that this error is handled gracefully by notifying users
-//        /// to upgrade to a newer version of the software that should contain a more
-//        /// recent version of this SDK.
-//        case upgradeRequired
-//        case itemNotFound
-//        case insufficientFee
-//        case badSequenceNumber
-//        case webhookRejectedTransaction
-//        case invoiceErrorsInRequest(errors: [InvoiceError])
-//
-//        public static func == (lhs: KinService.Errors, rhs: KinService.Errors) -> Bool {
-//            switch (lhs, rhs) {
-//            case (.unknown, .unknown):
-//                return true
-//            case (.transientFailure(_), .transientFailure(_)):
-//                return true
-//            case (.invalidAccount, .invalidAccount):
-//                return true
-//            case (.missingApi, .missingApi):
-//                return true
-//            case (.insufficientBalance, .insufficientBalance):
-//                return true
-//            case (.upgradeRequired, .upgradeRequired):
-//                return true
-//            case (.itemNotFound, .itemNotFound):
-//                return true
-//            case (.insufficientFee, .insufficientFee):
-//                return true
-//            case (.badSequenceNumber, .badSequenceNumber):
-//                return true
-//            case (.webhookRejectedTransaction, .webhookRejectedTransaction):
-//                return true
-//            case (.invoiceErrorsInRequest(_), .invoiceErrorsInRequest(_)):
-//                return true
-//            default:
-//                return false
-//            }
-//        }
-//    }
-//
-//    private let network: KinNetwork
-//    private let networkOperationHandler: NetworkOperationHandler
-//    private let dispatchQueue: DispatchQueue
-//
-//    private let accountApi: KinAccountApi
-//    private let accountCreationApi: KinAccountCreationApi
-//    private let transactionApi: KinTransactionApi
-//    private let transactionWhitelistingApi: KinTransactionWhitelistingApi
-//    private let streamingApi: KinStreamingApi
-//    private let logger: KinLoggerFactory
-//    private lazy var log: KinLogger = {
-//        logger.getLogger(name: String(describing: self))
-//    }()
-//    
-//    public init(network: KinNetwork,
-//                networkOperationHandler: NetworkOperationHandler,
-//                dispatchQueue: DispatchQueue,
-//                accountApi: KinAccountApi,
-//                accountCreationApi: KinAccountCreationApi,
-//                transactionApi: KinTransactionApi,
-//                transactionWhitelistingApi: KinTransactionWhitelistingApi,
-//                streamingApi: KinStreamingApi,
-//                logger: KinLoggerFactory) {
-//        self.network = network
-//        self.networkOperationHandler = networkOperationHandler
-//        self.dispatchQueue = dispatchQueue
-//        self.accountApi = accountApi
-//        self.accountCreationApi = accountCreationApi
-//        self.transactionApi = transactionApi
-//        self.transactionWhitelistingApi = transactionWhitelistingApi
-//        self.streamingApi = streamingApi
-//        self.logger = logger
-//    }
-//    
-//    private func requestPrint<RequestType : Any>(request: RequestType) {
-//        log.debug(msg:"[Request][V3]====\n\(request)\n=====[Request][V3]")
-//    }
-//    
-//    private func responsePrint<ResponseType : Any>(response: ResponseType) {
-//        log.debug(msg:"[Response][V3]====\n\(response)\n=====[Response][V3]")
-//    }
-//}
 
 public class KinServiceV4 {
     public enum Errors: Error, Equatable {
@@ -235,7 +145,6 @@ public class KinServiceV4 {
         self.transactionApi = transactionApi
         self.streamingApi = streamingApi
         self.logger = logger
-//        warmCache()
     }
     
      private func requestPrint<RequestType : Any>(request: RequestType) {
@@ -327,14 +236,12 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
-    public func createAccount(account: PublicKey, signer: KeyPair) -> Promise<KinAccount> {
-        return networkOperationHandler.queueWork { [weak self] respond in
+    public func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount> {
+        networkOperationHandler.queueWork { [weak self] respond in
             guard let self = self else {
                 respond.onError?(Errors.unknown)
                 return
             }
-            
-            let signerPrivateKey = signer.privateKey
             
             all(self.cachedServiceConfig(), self.cachedRecentBlockHash(), self.cachedMinRentExemption()).then { (serviceConfig, recentBlockHash, minRentExemption) in
                 guard
@@ -346,44 +253,42 @@ extension KinServiceV4 : KinServiceType {
                     return
                 }
                 
-                let tokenAccountSeed = Seed(SHA256.digest(signerPrivateKey.data))!
-                let tokenAccount = KeyPair(seed: tokenAccountSeed)
-                let tokenAccountPub: PublicKey = tokenAccount.asPublicKey()
-                
-                let subsidizer: PublicKey = serviceConfig.subsidizerAccount!
-                let owner: PublicKey = signer.asPublicKey()
+                let subsidizer = serviceConfig.subsidizerAccount!
+                let owner = signer.publicKey
                 let programKey = serviceConfig.tokenProgram!
                 let mint = serviceConfig.token!
                 
+                let (createInstruction, associatedAccountAddress) = AssociatedTokenProgram.createAssociatedAccountInstruction(
+                    subsidizer: subsidizer,
+                    owner: owner,
+                    mint: mint
+                )
+                
+                var instructions: [Instruction] = [
+                    createInstruction,
+                    TokenProgram.setAuthority(
+                        account: associatedAccountAddress,
+                        currentAuthority: owner,
+                        newAuthority: subsidizer,
+                        authorityType: .authorityCloseAccount,
+                        programKey: programKey
+                    ),
+                ]
+                
+                // Add memo if app index is provided
+                if let appIndex = appIndex {
+                    let memo = try! KinBinaryMemo(typeId: KinBinaryMemo.TransferType.none.rawValue, appIdx: appIndex.value)
+                    instructions.append(
+                        MemoProgram.memoInsutruction(with: memo.encode().base64EncodedData())
+                    )
+                }
+                
                 let transaction = try! Transaction(
                     payer: subsidizer,
-                    instructions: [
-                        SystemProgram.createAccountInstruction(
-                            subsidizer: subsidizer,
-                            address: tokenAccountPub,
-                            owner: programKey,
-                            lamports: minRentExemption.lamports,
-                            size: TokenProgram.accountSize
-                        ),
-                        TokenProgram.initializeAccountInstruction(
-                            account: tokenAccountPub,
-                            mint: mint,
-                            owner: owner,
-                            programKey: programKey
-                        ),
-                        TokenProgram.setAuthority(
-                            account: tokenAccountPub,
-                            currentAuthority: owner,
-                            newAuthority: subsidizer,
-                            authorityType: .authorityCloseAccount,
-                            programKey: programKey
-                        )
-                    ]
+                    instructions: instructions
                 )
                 .updatingBlockhash(recentBlockHash.blockHash!)
-                .signing(using: tokenAccount, signer)
-
-                print(transaction.encode().hexEncodedString())
+                .signing(using: signer)
                 
                 let request = CreateAccountRequestV4(transaction: transaction)
                 self.requestPrint(request: request)
@@ -404,7 +309,10 @@ extension KinServiceV4 : KinServiceType {
                         respond.onError?(error)
                     }
                 }
-            }.catch { error in respond.onError?(error) }
+            }
+            .catch {
+                respond.onError?($0)
+            }
         }
     }
     

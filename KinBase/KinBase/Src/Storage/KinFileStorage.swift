@@ -361,7 +361,7 @@ private extension KinFileStorage {
     }
 
     func directoryForAccount(_ account: PublicKey) -> URL {
-        return directoryForAllAccounts.appendingPathComponent(account.base58, isDirectory: true)
+        return directoryForAllAccounts.appendingPathComponent(account.stellarID, isDirectory: true)
     }
 
     func pathForAccountInfoFile(_ account: PublicKey) -> URL {
@@ -590,7 +590,7 @@ private extension KinFileStorage {
         guard let privateKey = privateKey else {
             throw Errors.unknown
         }
-        try keyStore.add(account: publicKey.base58, key: privateKey.data)
+        try keyStore.add(account: publicKey.stellarID, key: privateKey.data)
     }
 
     func addKeyToSecureStoreAsync(publicKey: PublicKey, privateKey: PrivateKey?) -> Promise<Void> {
@@ -610,7 +610,7 @@ private extension KinFileStorage {
     }
 
     func getKeyFromSecureStore(account: PublicKey) -> PrivateKey? {
-        guard let secretData = keyStore.retrieve(account: account.base58) else {
+        guard let secretData = keyStore.retrieve(account: account.stellarID) else {
             return nil
         }
 
@@ -625,7 +625,7 @@ private extension KinFileStorage {
             }
 
             do {
-                try self.keyStore.delete(account: account.base58)
+                try self.keyStore.delete(account: account.stellarID)
                 fulfill(())
             } catch let error {
                 reject(error)

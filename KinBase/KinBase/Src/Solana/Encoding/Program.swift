@@ -35,8 +35,8 @@ public enum SystemProgram {
         return Instruction(
             program: .systemProgram,
             accounts: [
-                .writable(publicKey: subsidizer, signer: true, payer: false),
-                .writable(publicKey: address, signer: true, payer: false),
+                .writable(publicKey: subsidizer, signer: true),
+                .writable(publicKey: address, signer: true),
             ],
             data: data
         )
@@ -103,20 +103,23 @@ enum AssociatedTokenProgram {
     ///   5. `[]` SPL Token program
     ///   6. `[]` Rent sysvar
     ///
-    public static func createAssociatedAccountInstruction(subsidizer: PublicKey, owner: PublicKey, mint: PublicKey) -> Instruction {
+    public static func createAssociatedAccountInstruction(subsidizer: PublicKey, owner: PublicKey, mint: PublicKey) -> ( instruction: Instruction, associatedAccount: PublicKey) {
         let associatedAccount = deriveAssociatedAccount(owner: owner, mint: mint)!
-        return Instruction(
-            program: .associatedTokenProgram,
-            accounts: [
-                .writable(publicKey: subsidizer, signer: true, payer: false),
-                .writable(publicKey: associatedAccount, signer: false, payer: false),
-                .readonly(publicKey: owner, signer: false, payer: false),
-                .readonly(publicKey: mint, signer: false, payer: false),
-                .readonly(publicKey: .systemProgram, signer: false, payer: false),
-                .readonly(publicKey: .tokenProgram, signer: false, payer: false),
-                .readonly(publicKey: .sysVarRent, signer: false, payer: false),
-            ],
-            data: Data()
+        return (
+            Instruction(
+                program: .associatedTokenProgram,
+                accounts: [
+                    .writable(publicKey: subsidizer, signer: true),
+                    .writable(publicKey: associatedAccount),
+                    .readonly(publicKey: owner),
+                    .readonly(publicKey: mint),
+                    .readonly(publicKey: .systemProgram),
+                    .readonly(publicKey: .tokenProgram),
+                    .readonly(publicKey: .sysVarRent),
+                ],
+                data: Data()
+            ),
+            associatedAccount
         )
     }
     
@@ -208,10 +211,10 @@ enum TokenProgram {
         return Instruction(
             program: programKey,
             accounts: [
-                .writable(publicKey: account,     signer: true,  payer: false),
-                .readonly(publicKey: mint,        signer: false, payer: false),
-                .readonly(publicKey: owner,       signer: false, payer: false),
-                .readonly(publicKey: .sysVarRent, signer: false, payer: false),
+                .writable(publicKey: account, signer: true),
+                .readonly(publicKey: mint),
+                .readonly(publicKey: owner),
+                .readonly(publicKey: .sysVarRent),
             ],
             data: data
         )
@@ -240,9 +243,9 @@ enum TokenProgram {
         return Instruction(
             program: programKey,
             accounts: [
-                .writable(publicKey: source,      signer: false, payer: false),
-                .writable(publicKey: destination, signer: false, payer: false),
-                .writable(publicKey: owner,       signer: true,  payer: false),
+                .writable(publicKey: source),
+                .writable(publicKey: destination),
+                .writable(publicKey: owner, signer: true),
             ],
             data: data
         )
@@ -276,8 +279,8 @@ enum TokenProgram {
         return Instruction(
             program: programKey,
             accounts: [
-                .writable(publicKey: account,          signer: false, payer: false),
-                .readonly(publicKey: currentAuthority, signer: true,  payer: false),
+                .writable(publicKey: account),
+                .readonly(publicKey: currentAuthority, signer: true),
             ],
             data: data
         )

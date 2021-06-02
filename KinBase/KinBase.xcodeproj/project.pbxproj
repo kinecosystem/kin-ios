@@ -88,6 +88,9 @@
 		93F66F20253BEC4600E14D59 /* ShortVecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */; };
 		9A29E2102639ADFF005138F6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A29E20F2639ADFF005138F6 /* Extensions.swift */; };
 		9A629FB925717DEA00D8E29B /* MockGRPCInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */; };
+		9A99A3CB2666BE45003A76D5 /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A99A3CA2666BE45003A76D5 /* Base32.swift */; };
+		9A99A3CC2666BF3E003A76D5 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A9326459C65002C740A /* Base58.swift */; };
+		9A99A3CE2666C035003A76D5 /* Data+CRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A99A3CD2666C035003A76D5 /* Data+CRC.swift */; };
 		9AADA39C257EC1580019A419 /* KinNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AADA39B257EC1580019A419 /* KinNetworkTests.swift */; };
 		9AC60A80264597B0002C740A /* precomp_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A6D264597B0002C740A /* precomp_data.h */; };
 		9AC60A82264597B0002C740A /* seed.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A70264597B0002C740A /* seed.c */; };
@@ -120,7 +123,6 @@
 		9AC60B5426497F35002C740A /* AccountMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B4D26497F34002C740A /* AccountMeta.swift */; };
 		9AC60B5526497F35002C740A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B4E26497F34002C740A /* Message.swift */; };
 		9AC60B5626497F35002C740A /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B4F26497F34002C740A /* Transaction.swift */; };
-		9AC60B582649AED0002C740A /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B572649AED0002C740A /* Base58.swift */; };
 		9AC60B5A264EAC9E002C740A /* MessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B59264EAC9E002C740A /* MessageTests.swift */; };
 		9AC60B5D265D8632002C740A /* KeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B5C265D8631002C740A /* KeyTests.swift */; };
 		9AC60B632661175E002C740A /* HashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B622661175E002C740A /* HashType.swift */; };
@@ -242,6 +244,8 @@
 		93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVecTests.swift; sourceTree = "<group>"; };
 		9A29E20F2639ADFF005138F6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGRPCInterceptorManager.swift; sourceTree = "<group>"; };
+		9A99A3CA2666BE45003A76D5 /* Base32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base32.swift; sourceTree = "<group>"; };
+		9A99A3CD2666C035003A76D5 /* Data+CRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CRC.swift"; sourceTree = "<group>"; };
 		9AADA39B257EC1580019A419 /* KinNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinNetworkTests.swift; sourceTree = "<group>"; };
 		9AC60A6D264597B0002C740A /* precomp_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = precomp_data.h; sourceTree = "<group>"; };
 		9AC60A70264597B0002C740A /* seed.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = seed.c; sourceTree = "<group>"; };
@@ -275,7 +279,6 @@
 		9AC60B4D26497F34002C740A /* AccountMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountMeta.swift; sourceTree = "<group>"; };
 		9AC60B4E26497F34002C740A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9AC60B4F26497F34002C740A /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		9AC60B572649AED0002C740A /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		9AC60B59264EAC9E002C740A /* MessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTests.swift; sourceTree = "<group>"; };
 		9AC60B5C265D8631002C740A /* KeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyTests.swift; sourceTree = "<group>"; };
 		9AC60B622661175E002C740A /* HashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashType.swift; sourceTree = "<group>"; };
@@ -656,6 +659,8 @@
 		9AC60A9226459C65002C740A /* Base58 */ = {
 			isa = PBXGroup;
 			children = (
+				9A99A3CD2666C035003A76D5 /* Data+CRC.swift */,
+				9A99A3CA2666BE45003A76D5 /* Base32.swift */,
 				9AC60A9326459C65002C740A /* Base58.swift */,
 			);
 			path = Base58;
@@ -664,7 +669,6 @@
 		9AC60A942645C8C1002C740A /* Keys */ = {
 			isa = PBXGroup;
 			children = (
-				9AC60B572649AED0002C740A /* Base58.swift */,
 				9AC60A952645C8D4002C740A /* Key.swift */,
 				9AC60A972645C8D5002C740A /* KeyPair.swift */,
 				9AC60A962645C8D4002C740A /* Types.swift */,
@@ -995,6 +999,7 @@
 				85737EE1243E62EE0012132E /* KinTransactionApi.swift in Sources */,
 				859A760B2464AC240028555F /* ListObservable.swift in Sources */,
 				9AC60B5626497F35002C740A /* Transaction.swift in Sources */,
+				9A99A3CC2666BF3E003A76D5 /* Base58.swift in Sources */,
 				9387E0362543EA2600D44509 /* KinAirdropApi.swift in Sources */,
 				9AC60B5226497F35002C740A /* Program.swift in Sources */,
 				9AC60A87264597B0002C740A /* sign.c in Sources */,
@@ -1003,9 +1008,9 @@
 				9AC60B632661175E002C740A /* HashType.swift in Sources */,
 				855B76E524366E710037F407 /* KinAccount.swift in Sources */,
 				85737EEE2443A15A0012132E /* KinBalance.swift in Sources */,
-				9AC60B582649AED0002C740A /* Base58.swift in Sources */,
 				8525B7F624DCD835008277AB /* AppInfoProvider.swift in Sources */,
 				85EEEB7B24BB7554002AAC29 /* SHA224Hash.swift in Sources */,
+				9A99A3CB2666BE45003A76D5 /* Base32.swift in Sources */,
 				930A9F2D254345E900F84156 /* KeyPair+Utilities.swift in Sources */,
 				85713C332450CE8C005F5A48 /* KinStorableObjectExtensions.swift in Sources */,
 				85572FAA24B3CABB003734CB /* KinStreamingApi.swift in Sources */,
@@ -1024,6 +1029,7 @@
 				85737EBF243D7C8A0012132E /* KinAccountContext.swift in Sources */,
 				9387E0382543EAA800D44509 /* AgoraKinAidropApi.swift in Sources */,
 				9AC60A85264597B0002C740A /* ge.c in Sources */,
+				9A99A3CE2666C035003A76D5 /* Data+CRC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

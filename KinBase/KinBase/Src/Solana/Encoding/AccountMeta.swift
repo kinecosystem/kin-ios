@@ -23,7 +23,7 @@ public struct AccountMeta {
         self.isProgram = program
     }
     
-    public static func writable(publicKey: Key32, signer: Bool, payer: Bool) -> AccountMeta {
+    public static func writable(publicKey: Key32, signer: Bool = false, payer: Bool = false) -> AccountMeta {
         AccountMeta(
             publicKey: publicKey,
             signer: signer,
@@ -33,7 +33,7 @@ public struct AccountMeta {
         )
     }
     
-    public static func readonly(publicKey: Key32, signer: Bool, payer: Bool) -> AccountMeta {
+    public static func readonly(publicKey: Key32, signer: Bool = false, payer: Bool = false) -> AccountMeta {
         AccountMeta(
             publicKey: publicKey,
             signer: signer,

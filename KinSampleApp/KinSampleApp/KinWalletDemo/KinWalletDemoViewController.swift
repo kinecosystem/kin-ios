@@ -45,7 +45,17 @@ class KinWalletDemoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        accounts = (UserDefaults.standard.stringArray(forKey: accountsStorageKey) ?? []).compactMap { PublicKey(base58: $0) }
+        accounts = (UserDefaults.standard.stringArray(forKey: accountsStorageKey) ?? []).compactMap {
+            if let key = PublicKey(base58: $0) {
+                return key
+            }
+            
+            if let key = PublicKey(stellarID: $0) {
+                return key
+            }
+            
+            return nil
+        }
         tableView.reloadData()
     }
 
