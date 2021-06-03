@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import KinGrpcApi
 @testable import KinBase
 
 class AppUserAuthInterceptorTests: XCTestCase {

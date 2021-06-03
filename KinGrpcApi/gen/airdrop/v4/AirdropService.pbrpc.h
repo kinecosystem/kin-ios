@@ -1,5 +1,5 @@
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
-#import "airdrop/v4/AirdropService.pbobjc.h"
+#import "AirdropService.pbobjc.h"
 #endif
 
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
@@ -13,8 +13,8 @@
 @class APBAirdropV4RequestAirdropResponse;
 
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
-  #import "validate/Validate.pbobjc.h"
-  #import "common/v4/Model.pbobjc.h"
+  #import "Validate.pbobjc.h"
+  #import "ModelV4.pbobjc.h"
 #endif
 
 @class GRPCUnaryProtoCall;

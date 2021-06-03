@@ -1,11 +1,11 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
-#import "account/v3/AccountService.pbrpc.h"
-#import "account/v3/AccountService.pbobjc.h"
+#import "AccountServiceV3.pbrpc.h"
+#import "AccountServiceV3.pbobjc.h"
 #import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 
-#import "validate/Validate.pbobjc.h"
-#import "common/v3/Model.pbobjc.h"
+#import "Validate.pbobjc.h"
+#import "ModelV3.pbobjc.h"
 
 @implementation APBAccountV3Account
 

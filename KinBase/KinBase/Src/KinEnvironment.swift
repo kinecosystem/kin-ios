@@ -8,7 +8,6 @@
 
 import Foundation
 import Promises
-import KinGrpcApi
 
 public struct KinEnvironment {
     public enum Errors: Error {

@@ -118,9 +118,6 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - Base58Swift (2.1.10):
-    - BigInt (~> 5.0.0)
-  - BigInt (5.0.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -169,37 +166,22 @@ PODS:
     - gRPC/Interface-Legacy (= 1.28.2)
   - gRPC/Interface-Legacy (1.28.2):
     - gRPC-RxLibrary/Interface (= 1.28.2)
-  - KinGrpcApi (0.2.0):
-    - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
-    - KinGrpcApi/Messages (= 0.2.0)
-    - KinGrpcApi/Services (= 0.2.0)
-  - KinGrpcApi/Messages (0.2.0):
-    - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
-    - Protobuf (~> 3.11.4)
-  - KinGrpcApi/Services (0.2.0):
-    - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
-    - gRPC-ProtoRPC (~> 1.28.0)
-    - KinGrpcApi/Messages
   - PromisesObjC (1.2.12)
   - PromisesSwift (1.2.12):
     - PromisesObjC (= 1.2.12)
   - Protobuf (3.11.4)
-  - Sodium (0.8.0)
 
 DEPENDENCIES:
-  - Base58Swift (~> 2.1.10)
-  - "KinGrpcApi (from `git@github.com:kinecosystem/kin-ios.git`, tag `KinGrpcApi_0.4.0`)"
+  - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
+  - gRPC-ProtoRPC (~> 1.28.0)
   - PromisesSwift (~> 1.2.8)
-  - Sodium (= 0.8.0)
-  - Sodium (~> 0.8.0)
+  - Protobuf (~> 3.11.4)
 
 SPEC REPOS:
   trunk:
     - "!ProtoCompiler"
     - "!ProtoCompiler-gRPCPlugin"
     - abseil
-    - Base58Swift
-    - BigInt
     - BoringSSL-GRPC
     - gRPC
     - gRPC-Core
@@ -208,35 +190,20 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - Protobuf
-    - Sodium
-
-EXTERNAL SOURCES:
-  KinGrpcApi:
-    :git: "git@github.com:kinecosystem/kin-ios.git"
-    :tag: KinGrpcApi_0.4.0
-
-CHECKOUT OPTIONS:
-  KinGrpcApi:
-    :git: "git@github.com:kinecosystem/kin-ios.git"
-    :tag: KinGrpcApi_0.4.0
 
 SPEC CHECKSUMS:
   "!ProtoCompiler": da24805d8339f352ec7bb4cb4df2db6a3be45665
   "!ProtoCompiler-gRPCPlugin": 5b943196cbcceb70b0307c7f344d843aa506aea0
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
-  Base58Swift: 53d551f0b33d9478fa63b3445e453a772d6b31a7
-  BigInt: 74b4d88367b0e819d9f77393549226d36faeb0d8
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   gRPC: bc33d0d34a369a3466f6db65119532d110bead9e
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   gRPC-ProtoRPC: cb8a66ef60a177174bae734ae54efa4188846dfc
   gRPC-RxLibrary: d3e2f7e4c3c36dc1b45b7c47f6961f894c9d6810
-  KinGrpcApi: e9f44c26aff1948cd86e0e7157711862b950111a
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   PromisesSwift: 64085cf6e5fc1b5001f90cf31e87a1f1621fefee
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
-  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: 1172e5cb62614ff19bb0e1aca186851bcfdbcd96
+PODFILE CHECKSUM: 3c83cf5ea51045e060fb3bb73338a310c71b0419
 
 COCOAPODS: 1.10.1

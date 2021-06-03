@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 // MARK: Models to KinStorage Objects
 extension PublicKey {

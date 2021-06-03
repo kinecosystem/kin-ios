@@ -9,14 +9,12 @@
 import Foundation
 import XCTest
 import Promises
-import Base58Swift
-import KinGrpcApi
 @testable import KinBase
 
 class KinServiceV4IntegrationTests: XCTestCase {
     
-//    let airdropAccount = PublicKey(Base58.base58Decode("DemXVWQ9DXYsGFpmjFXxki3PE1i3VoHQtqxXQFx38pmU")!)! // testnet
-    let airdropAccount = PublicKey(Base58.base58Decode("Gd1wVb3ioFZgWGadq5sEoLPQnRNFcpcprNeazY3QsTRf")!)! // localnet
+//    let airdropAccount = PublicKey(base58: "DemXVWQ9DXYsGFpmjFXxki3PE1i3VoHQtqxXQFx38pmU")! // testnet
+    let airdropAccount = PublicKey(base58: "Gd1wVb3ioFZgWGadq5sEoLPQnRNFcpcprNeazY3QsTRf")! // localnet
 
     var mockKinAccountApi: KinAccountApiV4!
     var mockKinAccountCreationApi: KinAccountCreationApiV4!

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Kin Foundation. All rights reserved.
 //
 
-import KinGrpcApi
+import KinBase
 
 class MockGRPCInterceptorManager: GRPCInterceptorManager {
     var calledRequestOptions: GRPCRequestOptions?

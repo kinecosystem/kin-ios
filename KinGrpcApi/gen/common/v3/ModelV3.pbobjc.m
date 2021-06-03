@@ -15,8 +15,8 @@
 
 #import <stdatomic.h>
 
-#import "common/v3/Model.pbobjc.h"
-#import "validate/Validate.pbobjc.h"
+#import "ModelV3.pbobjc.h"
+#import "Validate.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push

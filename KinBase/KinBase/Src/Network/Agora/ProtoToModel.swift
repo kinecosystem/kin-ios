@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 extension Int64 {
     var kinBalance: KinBalance {

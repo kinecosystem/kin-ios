@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 @testable import KinBase
 
 class StubObjects {

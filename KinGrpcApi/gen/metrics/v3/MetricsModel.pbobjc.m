@@ -13,7 +13,7 @@
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
-#import "metrics/v3/Model.pbobjc.h"
+#import "MetricsModel.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push

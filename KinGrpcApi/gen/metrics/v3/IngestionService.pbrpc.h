@@ -1,5 +1,5 @@
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
-#import "metrics/v3/IngestionService.pbobjc.h"
+#import "IngestionService.pbobjc.h"
 #endif
 
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY

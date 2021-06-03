@@ -8,7 +8,6 @@
 
 import Foundation
 import Promises
-import KinGrpcApi
 
 protocol AgoraGrpcProxyType {
     var network: KinNetwork { get }

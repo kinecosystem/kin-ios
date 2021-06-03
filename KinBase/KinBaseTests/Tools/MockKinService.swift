@@ -11,7 +11,7 @@ import Promises
 @testable import KinBase
 
 class MockKinService: KinServiceType {
-    
+
     var stubGetAccountResult: KinAccount?
     var stubGetAccountResultPromise: Promise<KinAccount>?
     var stubCreateAccountResult: KinAccount?
@@ -37,7 +37,7 @@ class MockKinService: KinServiceType {
         return stubGetAccountResultPromise!
     }
 
-    func createAccount(account: PublicKey, signer: KeyPair) -> Promise<KinAccount> {
+    func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount> {
         return .init(stubCreateAccountResult!)
     }
 

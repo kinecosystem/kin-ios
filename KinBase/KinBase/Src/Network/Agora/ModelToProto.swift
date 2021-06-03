@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 extension CreateAccountRequestV4 {
     var protoRequest: APBAccountV4CreateAccountRequest {

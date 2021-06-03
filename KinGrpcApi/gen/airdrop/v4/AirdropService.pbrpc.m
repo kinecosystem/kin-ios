@@ -1,11 +1,11 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
-#import "airdrop/v4/AirdropService.pbrpc.h"
-#import "airdrop/v4/AirdropService.pbobjc.h"
+#import "AirdropService.pbrpc.h"
+#import "AirdropService.pbobjc.h"
 #import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 
-#import "validate/Validate.pbobjc.h"
-#import "common/v4/Model.pbobjc.h"
+#import "Validate.pbobjc.h"
+#import "ModelV4.pbobjc.h"
 
 @implementation APBAirdropV4Airdrop
 

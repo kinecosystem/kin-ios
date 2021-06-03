@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 public class GrpcServiceProvider {
     public let accountService: APBAccountV3Account2

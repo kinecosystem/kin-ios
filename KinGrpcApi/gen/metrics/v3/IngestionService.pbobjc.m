@@ -15,7 +15,7 @@
 
 #import <stdatomic.h>
 
-#import "metrics/v3/IngestionService.pbobjc.h"
+#import "IngestionService.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push

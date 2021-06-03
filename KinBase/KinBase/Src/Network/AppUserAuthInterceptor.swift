@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 public class AppUserAuthContext: NSObject, GRPCInterceptorFactory {
     private let appInfoProvider: AppInfoProvider

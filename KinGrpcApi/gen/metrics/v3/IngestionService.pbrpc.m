@@ -1,6 +1,6 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
-#import "metrics/v3/IngestionService.pbrpc.h"
-#import "metrics/v3/IngestionService.pbobjc.h"
+#import "IngestionService.pbrpc.h"
+#import "IngestionService.pbobjc.h"
 #import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 

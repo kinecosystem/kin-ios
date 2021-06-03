@@ -1,17 +1,17 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
-#import "transaction/v4/TransactionService.pbrpc.h"
-#import "transaction/v4/TransactionService.pbobjc.h"
+#import "TransactionService.pbrpc.h"
+#import "TransactionService.pbobjc.h"
 #import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
 #import <protobuf/Timestamp.pbobjc.h>
 #else
-#import "google/protobuf/Timestamp.pbobjc.h"
+#import "Timestamp.pbobjc.h"
 #endif
-#import "validate/Validate.pbobjc.h"
-#import "common/v3/Model.pbobjc.h"
-#import "common/v4/Model.pbobjc.h"
+#import "Validate.pbobjc.h"
+#import "ModelV3.pbobjc.h"
+#import "ModelV4.pbobjc.h"
 
 @implementation APBTransactionV4Transaction
 

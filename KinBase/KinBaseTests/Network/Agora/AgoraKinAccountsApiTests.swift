@@ -8,7 +8,6 @@
 
 import XCTest
 import Promises
-import KinGrpcApi
 @testable import KinBase
 
 class MockAgoraAccountServiceGrpcProxy: AgoraAccountServiceGrpcProxy {

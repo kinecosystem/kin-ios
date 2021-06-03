@@ -1,5 +1,5 @@
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
-#import "account/v4/AccountService.pbobjc.h"
+#import "AccountService.pbobjc.h"
 #endif
 
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
@@ -19,8 +19,8 @@
 @class APBAccountV4ResolveTokenAccountsResponse;
 
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
-  #import "validate/Validate.pbobjc.h"
-  #import "common/v4/Model.pbobjc.h"
+  #import "Validate.pbobjc.h"
+  #import "ModelV4.pbobjc.h"
 #endif
 
 @class GRPCUnaryProtoCall;

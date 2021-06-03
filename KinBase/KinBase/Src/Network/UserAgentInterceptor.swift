@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 struct SDKConfig {
     static let sharedInstance = SDKConfig()

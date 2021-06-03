@@ -6,9 +6,9 @@ use_frameworks!
 
 def kin_base_dependencies
     pod 'PromisesSwift', '~> 1.2.8'
-    pod 'Sodium', '~> 0.8.0'
-    pod 'Base58Swift', '~> 2.1.10'
-    pod 'KinGrpcApi', :git => 'git@github.com:kinecosystem/kin-ios.git', :tag => 'KinGrpcApi_0.4.0'
+    pod '!ProtoCompiler-gRPCPlugin', '~> 1.28.0'
+    pod 'Protobuf', '~> 3.11.4'
+    pod 'gRPC-ProtoRPC', '~> 1.28.0'
 end
 
 def kin_base_compat_dependencies
@@ -28,18 +28,6 @@ target 'KinBase' do
   end
 end
 
-target 'KinSDK' do
-  project 'KinBaseCompat/KinBaseCompat'
-
-  kin_base_compat_dependencies
-
-  target 'KinBaseCompatTests' do
-    inherit! :search_paths
-    # Pods for testing
-    kin_base_compat_dependencies
-  end
-end
-
 target 'KinUX' do
   project 'KinUX/KinUX'
 
@@ -50,16 +38,6 @@ target 'KinUX' do
     # Pods for testing
     kin_base_dependencies
   end
-end
-
-target 'KinSDKSampleApp' do
-  project 'KinSDKSampleApp/KinSDKSampleApp'
-  kin_base_compat_dependencies
-end
-
-target 'KinBackupRestoreSampleApp' do
-  project 'KinBackupRestoreSampleApp/KinBackupRestoreSampleApp'
-  kin_base_compat_dependencies
 end
 
 target 'KinSampleApp' do

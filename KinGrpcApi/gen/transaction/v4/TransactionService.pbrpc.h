@@ -1,5 +1,5 @@
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
-#import "transaction/v4/TransactionService.pbobjc.h"
+#import "TransactionService.pbobjc.h"
 #endif
 
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
@@ -30,11 +30,11 @@
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
   #import <protobuf/Timestamp.pbobjc.h>
 #else
-  #import "google/protobuf/Timestamp.pbobjc.h"
+  #import "Timestamp.pbobjc.h"
 #endif
-  #import "validate/Validate.pbobjc.h"
-  #import "common/v3/Model.pbobjc.h"
-  #import "common/v4/Model.pbobjc.h"
+  #import "Validate.pbobjc.h"
+  #import "ModelV3.pbobjc.h"
+  #import "ModelV4.pbobjc.h"
 #endif
 
 @class GRPCUnaryProtoCall;

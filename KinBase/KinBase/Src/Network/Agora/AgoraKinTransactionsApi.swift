@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import KinGrpcApi
 
 public class AgoraKinTransactionsApi {
     public enum Errors: Equatable, Error {

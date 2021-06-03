@@ -15,8 +15,8 @@
 
 #import <stdatomic.h>
 
-#import "validate/Validate.pbobjc.h"
-#import "google/protobuf/Descriptor.pbobjc.h"
+#import "Validate.pbobjc.h"
+#import "Descriptor.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push

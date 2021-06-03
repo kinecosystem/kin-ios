@@ -1,11 +1,11 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
-#import "transaction/v3/TransactionService.pbrpc.h"
-#import "transaction/v3/TransactionService.pbobjc.h"
+#import "TransactionServiceV3.pbrpc.h"
+#import "TransactionServiceV3.pbobjc.h"
 #import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 
-#import "validate/Validate.pbobjc.h"
-#import "common/v3/Model.pbobjc.h"
+#import "Validate.pbobjc.h"
+#import "ModelV3.pbobjc.h"
 
 @implementation APBTransactionV3Transaction
 

@@ -15,10 +15,10 @@
 
 #import <stdatomic.h>
 
-#import "transaction/v4/TransactionService.pbobjc.h"
-#import "validate/Validate.pbobjc.h"
-#import "common/v3/Model.pbobjc.h"
-#import "common/v4/Model.pbobjc.h"
+#import "TransactionService.pbobjc.h"
+#import "Validate.pbobjc.h"
+#import "ModelV3.pbobjc.h"
+#import "ModelV4.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push

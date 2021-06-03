@@ -131,7 +131,7 @@ class KinServiceTestsV4: XCTestCase {
         mockKinAccountCreationApi.stubCreateAccountResponse = stubResponse
 
         let expect = expectation(description: "callback")
-        sut.createAccount(account: .zero, signer: key).then { account in
+        sut.createAccount(account: .zero, signer: key, appIndex: AppIndex(value: 1)).then { account in
             XCTAssertEqual(account, expectAccount)
             expect.fulfill()
         }
@@ -149,7 +149,7 @@ class KinServiceTestsV4: XCTestCase {
         mockKinAccountCreationApi.stubCreateAccountResponse = stubResponse
 
         let expect = expectation(description: "callback")
-        sut.createAccount(account: .zero, signer: KeyPair.generate()!).catch { error in
+        sut.createAccount(account: .zero, signer: KeyPair.generate()!, appIndex: AppIndex(value: 1)).catch { error in
             XCTAssertEqual(error as! KinServiceV4.Errors, KinServiceV4.Errors.transientFailure(error: error))
             expect.fulfill()
         }

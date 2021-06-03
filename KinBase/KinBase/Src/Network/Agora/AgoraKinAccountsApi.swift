@@ -8,35 +8,6 @@
 
 import Foundation
 import Promises
-import KinGrpcApi
-
-class AgoraEvent {
-    private let event: APBAccountV3Event
-
-    init(event: APBAccountV3Event) {
-        self.event = event
-    }
-
-    class AccountUpdate: AgoraEvent {
-        let kinAccount: KinAccount
-
-        init(event: APBAccountV3Event,
-             kinAccount: KinAccount) {
-            self.kinAccount = kinAccount
-            super.init(event: event)
-        }
-    }
-
-    class TransactionUpdate: AgoraEvent {
-        let kinTransaction: KinTransaction
-
-        init(event: APBAccountV3Event,
-             kinTransaction: KinTransaction) {
-            self.kinTransaction = kinTransaction
-            super.init(event: event)
-        }
-    }
-}
 
 class AgoraEventV4 {
     private let event: APBAccountV4Event

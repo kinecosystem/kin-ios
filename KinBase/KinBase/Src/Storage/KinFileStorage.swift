@@ -588,7 +588,7 @@ private extension KinFileStorage {
 private extension KinFileStorage {
     func addKeyToSecureStore(publicKey: PublicKey, privateKey: PrivateKey?) throws {
         guard let privateKey = privateKey else {
-            throw Errors.unknown
+            return
         }
         try keyStore.add(account: publicKey.stellarID, key: privateKey.data)
     }

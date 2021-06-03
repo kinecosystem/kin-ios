@@ -8,7 +8,6 @@
 
 import Foundation
 import Promises
-import KinGrpcApi
 
 public class AgoraKinAirdropApi {
     public enum Errors: Int, Error {
