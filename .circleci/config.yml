@@ -57,7 +57,7 @@ jobs:
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 11
-            SCAN_SCHEME: KinBaseFramework      
+            SCAN_SCHEME: KinBase
 
       - run:
           name: Code Coverage

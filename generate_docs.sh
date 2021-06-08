@@ -1,3 +1,3 @@
 #!/bin/bash
 
-jazzy --author 'Kin Foundation' --build-tool-arguments -scheme,KinBaseFramework
+jazzy --author 'Kin Foundation' --build-tool-arguments -scheme,KinBase

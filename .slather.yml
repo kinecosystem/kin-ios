@@ -1,7 +1,7 @@
 coverage_service: cobertura_xml
 xcodeproj: KinBase/KinBase.xcodeproj
 workspace: ./kin-ios.xcworkspace
-scheme: "KinBaseFramework"
+scheme: "KinBase"
 source_directory: KinBase/KinBase
 output_directory: coverage/
 ignore:
