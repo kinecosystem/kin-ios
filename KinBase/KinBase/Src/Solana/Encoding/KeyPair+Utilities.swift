@@ -18,18 +18,3 @@ public extension KeyPair {
         publicKey
     }
 }
-
-public extension PublicKey {
-//    var accountId: String {
-//        base58
-//    }
-//    var keypair: KeyPair {
-//        KeyPair.init(accountId: accountId)
-//    }
-}
-
-//public extension KinAccount.Id {
-//    func asPublicKey() -> PublicKey {
-//        return try! KeyPair.init(accountId: self).asPublicKey()
-//    }
-//}
