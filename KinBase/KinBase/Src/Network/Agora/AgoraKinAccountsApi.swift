@@ -84,8 +84,12 @@ extension AgoraKinAccountsApi: KinAccountApiV4 {
     public func resolveTokenAccounts(request: ResolveTokenAccountsRequestV4, completion: @escaping (ResolveTokenAccountsResponseV4) -> Void) {
         agoraGrpc.resolveTokenAccounts(request.protoRequest)
                 .then { (grpcResponse: APBAccountV4ResolveTokenAccountsResponse) in
-                    let accounts = (grpcResponse.tokenAccountsArray as NSArray as! [APBCommonV4SolanaAccountId]).map { (account:APBCommonV4SolanaAccountId) -> PublicKey in
-                        return account.publicKey
+                    let accounts = (grpcResponse.tokenAccountInfosArray as NSArray as! [APBAccountV4AccountInfo]).map {
+                        AccountDescription(
+                            publicKey: $0.accountId.publicKey,
+                            balance: $0.balance.kin,
+                            closeAuthority: $0.closeAuthority.value.isEmpty ? nil : $0.closeAuthority.publicKey
+                        )
                     }
                     
                     let response = ResolveTokenAccountsResponseV4(result: .ok,

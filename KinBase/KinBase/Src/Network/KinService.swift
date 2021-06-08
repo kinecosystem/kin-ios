@@ -15,11 +15,13 @@ public enum TransactionOrder {
 }
 
 public protocol KinServiceType {
+    func mergeTokenAccounts(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<Void>
+    
     func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount>
 
     func getAccount(account: PublicKey) -> Promise<KinAccount>
     
-    func resolveTokenAccounts(account: PublicKey) -> Promise<[PublicKey]>
+    func resolveTokenAccounts(account: PublicKey) -> Promise<[AccountDescription]>
 
     func streamAccount(account: PublicKey) -> Observable<KinAccount>
 
@@ -42,6 +44,8 @@ public protocol KinServiceType {
     func streamNewTransactions(account: PublicKey) -> Observable<KinTransaction>
     
     func invalidateRecentBlockHashCache()
+    
+    func invalidateTokenAccountsCache(account: PublicKey)
 }
 
 public class KinServiceV4 {
@@ -127,6 +131,10 @@ public class KinServiceV4 {
     
     public func invalidateRecentBlockHashCache() {
         cache.invalidate(key: "recentBlockHash")
+    }
+    
+    public func invalidateTokenAccountsCache(account: PublicKey) {
+        cache.invalidate(key: "resolvedAccounts:\(account.base58)")
     }
     
     public init(network: KinNetwork,
@@ -236,6 +244,126 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
+    public func mergeTokenAccounts(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<Void> {
+        networkOperationHandler.queueWork { [weak self] respond in
+            guard let self = self else {
+                respond.onError?(Errors.unknown)
+                return
+            }
+            
+            self.resolveTokenAccounts(account: account).then { tokenAccounts in
+                guard !tokenAccounts.isEmpty else {
+                    respond.onError?(Errors.itemNotFound)
+                    return
+                }
+                
+                all(self.cachedServiceConfig(), self.cachedRecentBlockHash()).then { serviceConfig, recentBlockHash in
+                    
+                    let subsidizer = serviceConfig.subsidizerAccount!
+                    let owner = signer.publicKey
+                    let programKey = serviceConfig.tokenProgram!
+                    let mint = serviceConfig.token!
+                    
+                    var instructions: [Instruction] = []
+                    var rootTokenAccount = tokenAccounts.first?.publicKey
+                    
+                    let (createInstruction, associatedAccountAddress) = AssociatedTokenProgram.createAssociatedAccountInstruction(
+                        subsidizer: subsidizer,
+                        owner: owner,
+                        mint: mint
+                    )
+                    
+                    let shouldCreateAssociatedAccount = tokenAccounts.firstIndex { $0.publicKey == associatedAccountAddress } == nil
+                    if shouldCreateAssociatedAccount {
+                        
+                        // Create associated account instructions
+                        instructions.append(contentsOf: [
+                            createInstruction,
+                            TokenProgram.setAuthority(
+                                account: associatedAccountAddress,
+                                currentAuthority: owner,
+                                newAuthority: subsidizer,
+                                authorityType: .authorityCloseAccount,
+                                programKey: programKey
+                            ),
+                        ])
+                        
+                        // Add memo if app index is provided
+                        if let appIndex = appIndex {
+                            let memo = try! KinBinaryMemo(typeId: KinBinaryMemo.TransferType.none.rawValue, appIdx: appIndex.value)
+                            instructions.append(
+                                MemoProgram.memoInsutruction(with: memo.encode().base64EncodedData())
+                            )
+                        }
+                        
+                        rootTokenAccount = associatedAccountAddress
+                    }
+                    
+                    let accountsToClose = tokenAccounts.filter { $0.publicKey != rootTokenAccount }
+                    
+                    // Add instructions to transfer balances of all token
+                    // accounts to the root account.
+                    
+                    let transferInstructions: [Instruction] = accountsToClose.compactMap { tokenAccount in
+                        guard let balance = tokenAccount.balance, let destination = rootTokenAccount else {
+                            return nil
+                        }
+                        
+                        return TokenProgram.transferInstruction(
+                            source: tokenAccount.publicKey,
+                            destination: destination,
+                            owner: owner,
+                            amount: balance,
+                            programKey: .tokenProgram
+                        )
+                    }
+                    
+                    instructions.append(contentsOf: transferInstructions)
+                    
+                    // For accounts where the `closeAuthority` is either the
+                    // the owner account or the subsidizer, we want to provide
+                    // close instructions.
+                    
+                    let closeInstructions: [Instruction] = accountsToClose.compactMap { tokenAccount in
+                        guard let closeAuthority = tokenAccount.closeAuthority, closeAuthority == account || closeAuthority == subsidizer else {
+                            return nil
+                        }
+                        
+                        return TokenProgram.closeAccount(
+                            account: tokenAccount.publicKey,
+                            destination: closeAuthority,
+                            owner: closeAuthority
+                        )
+                    }
+                    
+                    instructions.append(contentsOf: closeInstructions)
+                    
+                    if instructions.isEmpty {
+                        respond.onSuccess(())
+                    } else {
+                        let transaction = try! Transaction(payer: subsidizer, instructions: instructions)
+                            .updatingBlockhash(recentBlockHash.blockHash!)
+                            .signing(using: signer)
+                        
+                        let kinTransaction = try! KinTransaction(
+                            envelopeXdrBytes: transaction.encode().bytes,
+                            record: .inFlight(ts: Date().timeIntervalSince1970),
+                            network: self.network
+                        )
+                        
+                        self.submitTransaction(transaction: kinTransaction).then { _ in
+                            self.invalidateTokenAccountsCache(account: account)
+                            respond.onSuccess(())
+                        }
+                    }
+                }
+                .catch {
+                    respond.onError?($0)
+                }
+            }
+        }
+    }
+    
     public func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount> {
         networkOperationHandler.queueWork { [weak self] respond in
             guard let self = self else {
@@ -243,11 +371,10 @@ extension KinServiceV4 : KinServiceType {
                 return
             }
             
-            all(self.cachedServiceConfig(), self.cachedRecentBlockHash(), self.cachedMinRentExemption()).then { (serviceConfig, recentBlockHash, minRentExemption) in
+            all(self.cachedServiceConfig(), self.cachedRecentBlockHash()).then { serviceConfig, recentBlockHash in
                 guard
                     serviceConfig.result == GetServiceConfigResponseV4.Result.ok ||
-                    recentBlockHash.result == GetRecentBlockHashResonseV4.Result.ok ||
-                    minRentExemption.result == GetMinimumBalanceForRentExemptionResponseV4.Result.ok
+                    recentBlockHash.result == GetRecentBlockHashResonseV4.Result.ok
                 else {
                     respond.onError?(Errors.unknown)
                     return
@@ -351,9 +478,9 @@ extension KinServiceV4 : KinServiceType {
         }
     }
     
-    public func resolveTokenAccounts(account: PublicKey) -> Promise<[PublicKey]> {
+    public func resolveTokenAccounts(account: PublicKey) -> Promise<[AccountDescription]> {
         let cacheKey = "resolvedAccounts:\(account.base58)"
-        let resolve: Promise<[PublicKey]> = cache.resolve(key: cacheKey) { _ in
+        let resolve: Promise<[AccountDescription]> = cache.resolve(key: cacheKey) { _ in
             self.networkOperationHandler.queueWork { [weak self] respond in
                 guard let self = self else {
                     respond.onError?(Errors.unknown)
@@ -385,7 +512,7 @@ extension KinServiceV4 : KinServiceType {
             }
         }
         
-        return resolve.then { accounts -> Promise<[PublicKey]> in
+        return resolve.then { accounts -> Promise<[AccountDescription]> in
             if accounts.isEmpty {
                 self.cache.invalidate(key: cacheKey)
                 return resolve
@@ -574,10 +701,10 @@ extension KinServiceV4 : KinServiceType {
                 print(transaction)
                 
                 let kinTransaction = try! KinTransaction(
-                        envelopeXdrBytes: [Byte](transaction.encode()),
-                        record: .inFlight(ts: Date().timeIntervalSince1970),
-                        network: self.network
-                    )
+                    envelopeXdrBytes: transaction.encode().bytes,
+                    record: .inFlight(ts: Date().timeIntervalSince1970),
+                    network: self.network
+                )
                 
                 respond.onSuccess(kinTransaction)
             }.catch { it in respond.onError?(it) }

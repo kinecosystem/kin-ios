@@ -34,6 +34,7 @@ extension ResolveTokenAccountsRequestV4 {
     var protoRequest: APBAccountV4ResolveTokenAccountsRequest {
         let request = APBAccountV4ResolveTokenAccountsRequest()
         request.accountId = account.solanaAccountId
+        request.includeAccountInfo = true
         
         return request
     }

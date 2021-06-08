@@ -25,7 +25,7 @@ class MockKinService: KinServiceType {
     var stubGetTransactionPageResult: [KinTransaction]?
     var stubCanWhitelistTransactionResult: Bool?
     var stubMinFee: Quark?
-    var stubResolveTokenAccounts: Promise<[PublicKey]>?
+    var stubResolveTokenAccounts: Promise<[AccountDescription]>?
 
     init() { }
 
@@ -35,6 +35,10 @@ class MockKinService: KinServiceType {
         }
 
         return stubGetAccountResultPromise!
+    }
+    
+    func mergeTokenAccounts(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<Void> {
+        return .init(())
     }
 
     func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount> {
@@ -82,11 +86,15 @@ class MockKinService: KinServiceType {
         return stubStreamTransactionObservable!
     }
     
-    func resolveTokenAccounts(account: PublicKey) -> Promise<[PublicKey]> {
-        return stubResolveTokenAccounts ?? Promise { [account] }
+    func resolveTokenAccounts(account: PublicKey) -> Promise<[AccountDescription]> {
+        return stubResolveTokenAccounts ?? Promise { [AccountDescription(publicKey: account, balance: nil, closeAuthority: nil)] }
     }
     
     func invalidateRecentBlockHashCache() {
+        
+    }
+    
+    func invalidateTokenAccountsCache(account: PublicKey) {
         
     }
 }

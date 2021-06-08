@@ -65,11 +65,16 @@ class KinWalletAccountViewController: UIViewController {
                 self?.headerView.amountView.amount = account.balance.amount
                 self?.headerView.setNeedsLayout()
                 self?.loadingSpinner.stopAnimating()
+                
+                _ = self?.accountContext.mergeTokenAccounts(for: account, appIndex: nil).then {
+                    print("Merge token accounts success")
+                }
             }
             .catch(on: .main) { [weak self] error in
                 self?.loadingSpinner.stopAnimating()
                 self?.presentSimpleAlert(title: nil, message: error.localizedDescription)
             }
+        
 
         accountContext.observeBalance(mode: .active)
             .subscribe { [weak self] balance in

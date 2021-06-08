@@ -14,12 +14,18 @@ extension KeyPair: CustomStringConvertible {
     }
 }
 
+public struct AccountDescription: Equatable {
+    var publicKey: PublicKey
+    var balance: Kin?
+    var closeAuthority: PublicKey?
+}
+
 public struct KinAccount: CustomStringConvertible {
 
     public var publicKey: PublicKey
     public var privateKey: PrivateKey?
     
-    public var tokenAccounts: [PublicKey]
+    public var tokenAccounts: [AccountDescription]
 
     public var balance: KinBalance
 
@@ -28,7 +34,7 @@ public struct KinAccount: CustomStringConvertible {
     /// The sequence number on a registered account
     public var sequence: Int64?
 
-    init(publicKey: PublicKey, privateKey: PrivateKey? = nil, balance: KinBalance = KinBalance.zero, status: Status = .unregistered, sequence: Int64? = nil, tokenAccounts: [PublicKey] = []) {
+    init(publicKey: PublicKey, privateKey: PrivateKey? = nil, balance: KinBalance = KinBalance.zero, status: Status = .unregistered, sequence: Int64? = nil, tokenAccounts: [AccountDescription] = []) {
         self.publicKey = publicKey
         self.privateKey = privateKey
         self.balance = balance
@@ -37,7 +43,7 @@ public struct KinAccount: CustomStringConvertible {
         self.tokenAccounts = tokenAccounts
     }
     
-    public func copy(publicKey: PublicKey? = nil, balance: KinBalance? = nil, status: Status? = nil, sequence: Int64? = nil, tokenAccounts: [PublicKey]? = nil) -> KinAccount {
+    public func copy(publicKey: PublicKey? = nil, balance: KinBalance? = nil, status: Status? = nil, sequence: Int64? = nil, tokenAccounts: [AccountDescription]? = nil) -> KinAccount {
         KinAccount(
             publicKey: publicKey ?? self.publicKey,
             privateKey: self.privateKey,
@@ -55,7 +61,7 @@ public struct KinAccount: CustomStringConvertible {
           balance: \(balance)
           status: \(status)
           sequence: \(String(describing: sequence))
-          accounts: \(tokenAccounts.map { $0.base58 })))
+          accounts: \(tokenAccounts.map { $0.publicKey.base58 })))
         """
     }
 }

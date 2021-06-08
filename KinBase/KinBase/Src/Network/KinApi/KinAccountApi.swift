@@ -90,9 +90,9 @@ public struct ResolveTokenAccountsResponseV4 {
 
     public let result: Result
     public let error: Error?
-    public let accounts: [PublicKey]?
+    public let accounts: [AccountDescription]?
 
-    public init(result: ResolveTokenAccountsResponseV4.Result, error: Error?, accounts: [PublicKey]?) {
+    public init(result: ResolveTokenAccountsResponseV4.Result, error: Error?, accounts: [AccountDescription]?) {
         self.result = result
         self.error = error
         self.accounts = accounts

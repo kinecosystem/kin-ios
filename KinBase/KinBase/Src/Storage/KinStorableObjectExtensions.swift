@@ -17,6 +17,12 @@ extension PublicKey {
     }
 }
 
+extension AccountDescription {
+    var storableObject: KinStoragePublicKey {
+        publicKey.storableObject
+    }
+}
+
 extension KinBalance {
     var storableObject: KinStorageKinBalance {
         let storable = KinStorageKinBalance()
@@ -148,7 +154,7 @@ extension KinStorageKinAccount {
             balance: kinBalance,
             status: status.kinAccountStatus,
             sequence: sequenceNumber,
-            tokenAccounts: tokenAccounts
+            tokenAccounts: tokenAccounts.map { AccountDescription(publicKey: $0, balance: nil, closeAuthority: nil) }
         )
         return account
     }

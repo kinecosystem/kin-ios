@@ -84,6 +84,15 @@ public protocol KinPaymentReadOperations {
 }
 
 public protocol KinPaymentWriteOperations {
+    
+    /**
+     Merge existing Kin token accounts into the associated token account. The associated token is created if it doesn't exist.
+     - Parameter account: The owner account which own the token accounts to merge
+     - Parameter appIndex: App index of your app
+     - Returns: a `Promise` with a `Void` return value
+    */
+    func mergeTokenAccounts(for account: KinAccount, appIndex: AppIndex?) -> Promise<Void>
+    
     /**
      Send a `paymentItem` to the Kin Blockchain for processing.
      - Parameter paymentItem: a `KinPaymentItem` which contains the amount of Kin to be sent and the account the Kin is to be transferred to
@@ -298,7 +307,7 @@ extension KinAccountContext: KinAccountReadOperations {
                 }
                 
                 return self.service.resolveTokenAccounts(account: self.accountPublicKey).then { accounts in
-                    let maybeResolvedAccount = accounts.first ?? self.accountPublicKey
+                    let maybeResolvedAccount = accounts.first?.publicKey ?? self.accountPublicKey
                     return self.service.getAccount(account: maybeResolvedAccount).then { account -> KinAccount in
                         // b/c we want to update our on hand account with the resolved accountInfo details on solana
                         
@@ -367,6 +376,19 @@ extension KinAccountContext: KinPaymentReadOperations {
 
 // MARK: KinPaymentWriteOperations
 extension KinAccountContext: KinPaymentWriteOperations {
+    
+    public func mergeTokenAccounts(for account: KinAccount, appIndex: AppIndex?) -> Promise<Void> {
+        guard let privateKey = account.privateKey else {
+            return Promise(Errors.unknown)
+        }
+        
+        return service.mergeTokenAccounts(
+            account: accountPublicKey,
+            signer: KeyPair(publicKey: account.publicKey, privateKey: privateKey),
+            appIndex: appIndex
+        )
+    }
+    
     public func sendKinPayment(_ paymentItem: KinPaymentItem, memo: KinMemo) -> Promise<KinPayment> {
         log.info(msg: #function)
         return sendKinPayments([paymentItem], memo: memo)
@@ -425,7 +447,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
                                 SourceAccountSigningData(
                                     resolvedAccount.sequence ?? 0,
                                     KeyPair(publicKey: resolvedAccount.publicKey, privateKey: resolvedAccount.privateKey!), //FIXME:
-                                    resolvedAccount.tokenAccounts.first ?? resolvedAccount.publicKey
+                                    resolvedAccount.tokenAccounts.first?.publicKey ?? resolvedAccount.publicKey
                                 )
                             }
                     }
@@ -439,7 +461,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
                             payments.map { paymentItem in
                                 self.service.resolveTokenAccounts(account: paymentItem.destAccount)
                                     .then {
-                                        paymentItem.copy(destAccount: $0.first)
+                                        paymentItem.copy(destAccount: $0.first?.publicKey)
                                     }
                                     .recover { _ in Promise { paymentItem } }
                             }

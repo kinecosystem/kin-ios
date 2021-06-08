@@ -69,7 +69,7 @@ class KinFileStorageTests: XCTestCase {
         
         wait(for: [expectRetrieve], timeout: 1)
         
-        let tokenAcccount = KeyPair.generate()!.publicKey
+        let tokenAcccount = AccountDescription(publicKey: KeyPair.generate()!.publicKey, balance: nil, closeAuthority: nil)
         let expectUpdate = expectation(description: "account updated with token accounts")
         sut.updateAccount(expectAccount.copy(tokenAccounts: [tokenAcccount])).then { account in
             XCTAssertEqual(account, expectAccount.copy(tokenAccounts: [tokenAcccount]))

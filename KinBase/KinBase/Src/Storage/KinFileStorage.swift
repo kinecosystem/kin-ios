@@ -614,7 +614,15 @@ private extension KinFileStorage {
             return nil
         }
 
-        return PrivateKey(secretData)
+        if let privateKey = PrivateKey(secretData) {
+            return privateKey
+        } else {
+            if let secretSeed = String(data: secretData, encoding: .utf8), let seed = Seed(stellarID: secretSeed) {
+                return KeyPair(seed: seed).privateKey
+            }
+        }
+        
+        return nil
     }
 
     func removeKeyFromSecureStore(account: PublicKey) -> Promise<Void> {

@@ -266,7 +266,7 @@ enum TokenProgram {
     ///
     public static func setAuthority(account: PublicKey, currentAuthority: PublicKey, newAuthority: PublicKey?, authorityType: AuthorityType, programKey: PublicKey) -> Instruction {
         var data = Data()
-        data.append(Byte(Command.setAuthority.rawValue))
+        data.append(Command.setAuthority.rawValue)
         data.append(authorityType.rawValue)
         
         if let authority = newAuthority {
@@ -283,6 +283,34 @@ enum TokenProgram {
                 .readonly(publicKey: currentAuthority, signer: true),
             ],
             data: data
+        )
+    }
+    
+    /// Close an account by transferring all its SOL to the destination account.
+    /// Non-native accounts may only be closed if its token amount is zero.
+    ///
+    /// Accounts expected by this instruction:
+    ///
+    ///   * Single owner
+    ///   0. `[writable]` The account to close.
+    ///   1. `[writable]` The destination account.
+    ///   2. `[signer]` The account's owner.
+    ///
+    ///   * Multisignature owner
+    ///   0. `[writable]` The account to close.
+    ///   1. `[writable]` The destination account.
+    ///   2. `[]` The account's multisignature owner.
+    ///   3. ..3+M `[signer]` M signer accounts.
+    ///
+    public static func closeAccount(account: PublicKey, destination: PublicKey, owner: PublicKey) -> Instruction {
+        Instruction(
+            program: .tokenProgram,
+            accounts: [
+                .writable(publicKey: account),
+                .writable(publicKey: destination),
+                .readonly(publicKey: owner),
+            ],
+            data: Data([Command.closeAccount.rawValue])
         )
     }
 }

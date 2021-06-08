@@ -39,7 +39,7 @@ public class KinTestServiceV4: KinTestServiceType {
                 default:
                     self.kinService.resolveTokenAccounts(account: account)
                         .then { accounts in
-                            self.airdropApi.airdrop(request: AirdropRequest(account: accounts.first ?? account, kin: amount)) { response in
+                            self.airdropApi.airdrop(request: AirdropRequest(account: accounts.first?.publicKey ?? account, kin: amount)) { response in
                                 switch response.result {
                                 case .ok:
                                     respond.onSuccess(())
