@@ -7,7 +7,7 @@ The KinBase module is the foundation upon which the rest of the sdk stands on, h
 ## Installation
 Add the following to your Podfile.
 ```
-pod 'KinBase', '~> 0.4.5'
+pod 'KinBase', '~> 0.5.0'
 ```
 
 ## Overview
