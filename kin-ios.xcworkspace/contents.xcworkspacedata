@@ -5,13 +5,10 @@
       location = "group:KinBase/KinBase.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:KinDesign/KinDesign.xcodeproj">
+      location = "group:KinSampleApp/KinSampleApp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:KinUX/KinUX.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:KinSampleApp/KinSampleApp.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

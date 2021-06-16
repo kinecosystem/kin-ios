@@ -136,7 +136,6 @@
 		9AC60A88264597B0002C740A /* sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A76264597B0002C740A /* sha512.h */; };
 		9AC60A89264597B0002C740A /* key_exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A77264597B0002C740A /* key_exchange.c */; };
 		9AC60A8A264597B0002C740A /* add_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A78264597B0002C740A /* add_scalar.c */; };
-		9AC60A8B264597B0002C740A /* ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A79264597B0002C740A /* ed25519.h */; };
 		9AC60A8C264597B0002C740A /* fe.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7A264597B0002C740A /* fe.h */; };
 		9AC60A8D264597B0002C740A /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A7B264597B0002C740A /* keypair.c */; };
 		9AC60A8E264597B0002C740A /* fixedint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7C264597B0002C740A /* fixedint.h */; };
@@ -325,7 +324,6 @@
 		9AC60A76264597B0002C740A /* sha512.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha512.h; sourceTree = "<group>"; };
 		9AC60A77264597B0002C740A /* key_exchange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = key_exchange.c; sourceTree = "<group>"; };
 		9AC60A78264597B0002C740A /* add_scalar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = add_scalar.c; sourceTree = "<group>"; };
-		9AC60A79264597B0002C740A /* ed25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ed25519.h; sourceTree = "<group>"; };
 		9AC60A7A264597B0002C740A /* fe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fe.h; sourceTree = "<group>"; };
 		9AC60A7B264597B0002C740A /* keypair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = keypair.c; sourceTree = "<group>"; };
 		9AC60A7C264597B0002C740A /* fixedint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixedint.h; sourceTree = "<group>"; };
@@ -880,7 +878,6 @@
 			children = (
 				9AC60A9C2645CED1002C740A /* include */,
 				9AC60A6D264597B0002C740A /* precomp_data.h */,
-				9AC60A79264597B0002C740A /* ed25519.h */,
 				9AC60A7C264597B0002C740A /* fixedint.h */,
 				9AC60A7A264597B0002C740A /* fe.h */,
 				9AC60A71264597B0002C740A /* fe.c */,
@@ -989,7 +986,6 @@
 				9A2A6543266953B5006B3910 /* AirdropService.pbrpc.h in Headers */,
 				9AC60A8E264597B0002C740A /* fixedint.h in Headers */,
 				9AC60A9E2645CED1002C740A /* ed25519.h in Headers */,
-				9AC60A8B264597B0002C740A /* ed25519.h in Headers */,
 				9AC60A90264597B0002C740A /* sc.h in Headers */,
 				9A2A653A266953B5006B3910 /* Validate.pbobjc.h in Headers */,
 				9A2A6529266953B5006B3910 /* MetricsModel.pbobjc.h in Headers */,
@@ -1073,7 +1069,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Kin Foundation";
 				TargetAttributes = {
 					851B279224354AF9004EE486 = {
@@ -1381,7 +1377,7 @@
 				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1403,7 +1399,7 @@
 				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1444,6 +1440,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1507,6 +1504,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1547,13 +1545,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 83VHY3GSWL;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = KinBase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1585,13 +1583,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 83VHY3GSWL;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = KinBase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1620,7 +1618,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1641,7 +1639,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
