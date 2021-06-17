@@ -1377,7 +1377,7 @@
 				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Q5A832CU5X;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1399,7 +1399,7 @@
 				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Q5A832CU5X;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1618,7 +1618,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Q5A832CU5X;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1639,7 +1639,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Q5A832CU5X;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
