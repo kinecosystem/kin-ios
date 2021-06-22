@@ -35,10 +35,6 @@ Pod::Spec.new do |s|
       sna.requires_arc = false
       sna.source_files = non_arc_files
       sna.dependency 'Protobuf', '~> 3.11.4'
-      s.pod_target_xcconfig = {
-        # This is needed by all pods that depend on Protobuf:
-        'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1',
-      }
   end
 
   s.pod_target_xcconfig = {
