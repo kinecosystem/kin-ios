@@ -349,15 +349,8 @@ private extension KinFileStorage {
         return rootDirectory.appendingPathComponent("kin_storage", isDirectory: true)
     }
 
-    var environmentDirectory: URL {
-        return kinStorageDirectory
-            .appendingPathComponent("env", isDirectory: true)
-            .appendingPathComponent(MD5.digest(network.id).hexEncodedString(), isDirectory: true)
-        // TODO: Verify that MD5 is sufficient for this purpose
-    }
-
     var directoryForAllAccounts: URL {
-        return environmentDirectory.appendingPathComponent("kin_accounts", isDirectory: true)
+        return kinStorageDirectory.appendingPathComponent("kin_accounts", isDirectory: true)
     }
 
     func directoryForAccount(_ account: PublicKey) -> URL {
