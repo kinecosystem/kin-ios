@@ -24,19 +24,19 @@ In your Podfile
 // *** KinBaseCompat is for LEGACY SUPPORT ONLY ***
 // If you're a longtime Kin developer and want to use the compat
 // interface that looks like the now deprecated SDKs
-pod 'KinBaseCompat', '~> 0.5.0'
+pod 'KinBaseCompat', '~> 0.4.5'
 
 // If you're a new developer or want more functionality you want a
 // mix of the libraries below:
 
 // If you just want to access the blockchain & no UI
-pod 'KinBase', '~> 0.5.0'
+pod 'KinBase', '~> 1.0.0'
 
 // Add spend to use the modal spend flow to allow users to buy things with Kin
-pod 'KinUX', '~> 0.5.0'
+pod 'KinUX', '~> 1.0.0'
 
 // Add design for direct access to UI views you can use in your own app
-pod 'KinDesign', '~> 0.5.0'
+pod 'KinDesign', '~> 1.0.0'
 ```
 
 ## Sample App
