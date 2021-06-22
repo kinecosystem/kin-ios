@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		167108C93CE609A97325BB6E /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82363D272B8652C191E782CD /* Pods_KinBase.framework */; };
+		369FEF8729245BC4FC094575 /* Pods_KinBaseTestsHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1DAE52BBDC192583CD91E /* Pods_KinBaseTestsHost.framework */; };
+		415B3B856414E6D290FBD64B /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6303B71333B77AED92B2F426 /* Pods_KinBaseTests.framework */; };
+		4DB7B29CD163A965D3666C5A /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BC3D463DE980AA721CA58D /* Pods_KinBase.framework */; };
 		851B278A2432821D004EE486 /* SecureKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B27892432821D004EE486 /* SecureKeyStorage.swift */; };
 		851B278C24328225004EE486 /* KeyChainStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B278B24328225004EE486 /* KeyChainStorageTests.swift */; };
 		851B279624354AF9004EE486 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B279524354AF9004EE486 /* AppDelegate.swift */; };
@@ -88,31 +90,28 @@
 		93F66F20253BEC4600E14D59 /* ShortVecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */; };
 		9A29E2102639ADFF005138F6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A29E20F2639ADFF005138F6 /* Extensions.swift */; };
 		9A629FB925717DEA00D8E29B /* MockGRPCInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */; };
-		9A99A3CB2666BE45003A76D5 /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A99A3CA2666BE45003A76D5 /* Base32.swift */; };
 		9A99A3CC2666BF3E003A76D5 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A9326459C65002C740A /* Base58.swift */; };
 		9A99A3CE2666C035003A76D5 /* Data+CRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A99A3CD2666C035003A76D5 /* Data+CRC.swift */; };
 		9AADA39C257EC1580019A419 /* KinNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AADA39B257EC1580019A419 /* KinNetworkTests.swift */; };
-		9AC60A80264597B0002C740A /* precomp_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A6D264597B0002C740A /* precomp_data.h */; };
+		9AC60A80264597B0002C740A /* precomp_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A6D264597B0002C740A /* precomp_data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC60A82264597B0002C740A /* seed.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A70264597B0002C740A /* seed.c */; };
 		9AC60A83264597B0002C740A /* fe.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A71264597B0002C740A /* fe.c */; };
 		9AC60A84264597B0002C740A /* verify.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A72264597B0002C740A /* verify.c */; };
 		9AC60A85264597B0002C740A /* ge.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A73264597B0002C740A /* ge.c */; };
 		9AC60A86264597B0002C740A /* sc.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A74264597B0002C740A /* sc.c */; };
 		9AC60A87264597B0002C740A /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A75264597B0002C740A /* sign.c */; };
-		9AC60A88264597B0002C740A /* sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A76264597B0002C740A /* sha512.h */; };
+		9AC60A88264597B0002C740A /* sha512.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A76264597B0002C740A /* sha512.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC60A89264597B0002C740A /* key_exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A77264597B0002C740A /* key_exchange.c */; };
 		9AC60A8A264597B0002C740A /* add_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A78264597B0002C740A /* add_scalar.c */; };
-		9AC60A8B264597B0002C740A /* ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A79264597B0002C740A /* ed25519.h */; };
-		9AC60A8C264597B0002C740A /* fe.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7A264597B0002C740A /* fe.h */; };
+		9AC60A8C264597B0002C740A /* fe.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7A264597B0002C740A /* fe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC60A8D264597B0002C740A /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A7B264597B0002C740A /* keypair.c */; };
-		9AC60A8E264597B0002C740A /* fixedint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7C264597B0002C740A /* fixedint.h */; };
+		9AC60A8E264597B0002C740A /* fixedint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7C264597B0002C740A /* fixedint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC60A8F264597B0002C740A /* sha512.c in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A7D264597B0002C740A /* sha512.c */; };
-		9AC60A90264597B0002C740A /* sc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7E264597B0002C740A /* sc.h */; };
-		9AC60A91264597B0002C740A /* ge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7F264597B0002C740A /* ge.h */; };
+		9AC60A90264597B0002C740A /* sc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7E264597B0002C740A /* sc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AC60A91264597B0002C740A /* ge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A7F264597B0002C740A /* ge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC60A982645C8D5002C740A /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A952645C8D4002C740A /* Key.swift */; };
 		9AC60A992645C8D5002C740A /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A962645C8D4002C740A /* Types.swift */; };
 		9AC60A9A2645C8D5002C740A /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A972645C8D5002C740A /* KeyPair.swift */; };
-		9AC60A9E2645CED1002C740A /* ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC60A9D2645CED1002C740A /* ed25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9AC60AA42645CF58002C740A /* Data+Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60AA02645CF58002C740A /* Data+Slice.swift */; };
 		9AC60AA52645CF58002C740A /* Data+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60AA12645CF58002C740A /* Data+Hex.swift */; };
 		9AC60AA72645CF58002C740A /* Byte+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60AA32645CF58002C740A /* Byte+Data.swift */; };
@@ -130,41 +129,42 @@
 		9AC60B672661178D002C740A /* SHA512.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B662661178D002C740A /* SHA512.swift */; };
 		9AC60B69266117D0002C740A /* SHA224.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B68266117D0002C740A /* SHA224.swift */; };
 		9AC60B6B26611AA9002C740A /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B6A26611AA9002C740A /* MD5.swift */; };
-		BDD51DEA267FF0750061712E /* IngestionService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DBA267FF0750061712E /* IngestionService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DEB267FF0750061712E /* IngestionService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DBB267FF0750061712E /* IngestionService.pbrpc.m */; };
-		BDD51DEC267FF0750061712E /* MetricsModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DBC267FF0750061712E /* MetricsModel.pbobjc.m */; };
-		BDD51DED267FF0750061712E /* IngestionService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DBD267FF0750061712E /* IngestionService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DEE267FF0750061712E /* IngestionService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DBE267FF0750061712E /* IngestionService.pbobjc.m */; };
-		BDD51DEF267FF0750061712E /* MetricsModel.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DBF267FF0750061712E /* MetricsModel.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DF0267FF0750061712E /* TransactionService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DC2267FF0750061712E /* TransactionService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DF1267FF0750061712E /* TransactionService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DC3267FF0750061712E /* TransactionService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DF2267FF0750061712E /* TransactionService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DC4267FF0750061712E /* TransactionService.pbrpc.m */; };
-		BDD51DF3267FF0750061712E /* TransactionService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DC5267FF0750061712E /* TransactionService.pbobjc.m */; };
-		BDD51DF4267FF0750061712E /* TransactionServiceV3.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DC7267FF0750061712E /* TransactionServiceV3.pbobjc.m */; };
-		BDD51DF5267FF0750061712E /* TransactionServiceV3.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DC8267FF0750061712E /* TransactionServiceV3.pbrpc.m */; };
-		BDD51DF6267FF0750061712E /* TransactionServiceV3.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DC9267FF0750061712E /* TransactionServiceV3.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DF7267FF0750061712E /* TransactionServiceV3.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DCA267FF0750061712E /* TransactionServiceV3.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DF8267FF0750061712E /* Validate.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DCC267FF0750061712E /* Validate.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DF9267FF0750061712E /* Validate.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DCD267FF0750061712E /* Validate.pbobjc.m */; };
-		BDD51DFA267FF0750061712E /* Descriptor.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DD0267FF0750061712E /* Descriptor.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DFB267FF0750061712E /* Descriptor.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DD1267FF0750061712E /* Descriptor.pbobjc.m */; };
-		BDD51DFC267FF0750061712E /* ModelV4.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DD4267FF0750061712E /* ModelV4.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DFD267FF0750061712E /* ModelV4.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DD5267FF0750061712E /* ModelV4.pbobjc.m */; };
-		BDD51DFE267FF0750061712E /* ModelV3.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DD7267FF0750061712E /* ModelV3.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51DFF267FF0750061712E /* ModelV3.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DD8267FF0750061712E /* ModelV3.pbobjc.m */; };
-		BDD51E00267FF0750061712E /* AccountService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DDB267FF0750061712E /* AccountService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51E01267FF0750061712E /* AccountService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DDC267FF0750061712E /* AccountService.pbobjc.m */; };
-		BDD51E02267FF0750061712E /* AccountService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DDD267FF0750061712E /* AccountService.pbrpc.m */; };
-		BDD51E03267FF0750061712E /* AccountService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DDE267FF0750061712E /* AccountService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51E04267FF0750061712E /* AccountServiceV3.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DE0267FF0750061712E /* AccountServiceV3.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51E05267FF0750061712E /* AccountServiceV3.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DE1267FF0750061712E /* AccountServiceV3.pbrpc.m */; };
-		BDD51E06267FF0750061712E /* AccountServiceV3.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DE2267FF0750061712E /* AccountServiceV3.pbobjc.m */; };
-		BDD51E07267FF0750061712E /* AccountServiceV3.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DE3267FF0750061712E /* AccountServiceV3.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51E08267FF0750061712E /* AirdropService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DE6267FF0750061712E /* AirdropService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51E09267FF0750061712E /* AirdropService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51DE7267FF0750061712E /* AirdropService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDD51E0A267FF0750061712E /* AirdropService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DE8267FF0750061712E /* AirdropService.pbobjc.m */; };
-		BDD51E0B267FF0750061712E /* AirdropService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51DE9267FF0750061712E /* AirdropService.pbrpc.m */; };
-		C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */; };
+		BD56F0F82680B8F70071F302 /* kined25519.h in Headers */ = {isa = PBXBuildFile; fileRef = BD56F0F72680B8F70071F302 /* kined25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD56F1212680C1840071F302 /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56F1202680C1840071F302 /* Base32.swift */; };
+		BDD51F07268014EE0061712E /* IngestionService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51ED7268014EE0061712E /* IngestionService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F08268014EE0061712E /* IngestionService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51ED8268014EE0061712E /* IngestionService.pbrpc.m */; };
+		BDD51F09268014EE0061712E /* MetricsModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51ED9268014EE0061712E /* MetricsModel.pbobjc.m */; };
+		BDD51F0A268014EE0061712E /* IngestionService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EDA268014EE0061712E /* IngestionService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F0B268014EE0061712E /* IngestionService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EDB268014EE0061712E /* IngestionService.pbobjc.m */; };
+		BDD51F0C268014EE0061712E /* MetricsModel.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EDC268014EE0061712E /* MetricsModel.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F0D268014EE0061712E /* TransactionService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EDF268014EE0061712E /* TransactionService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F0E268014EE0061712E /* TransactionService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EE0268014EE0061712E /* TransactionService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F0F268014EE0061712E /* TransactionService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EE1268014EE0061712E /* TransactionService.pbrpc.m */; };
+		BDD51F10268014EE0061712E /* TransactionService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EE2268014EE0061712E /* TransactionService.pbobjc.m */; };
+		BDD51F11268014EE0061712E /* TransactionServiceV3.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EE4268014EE0061712E /* TransactionServiceV3.pbobjc.m */; };
+		BDD51F12268014EE0061712E /* TransactionServiceV3.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EE5268014EE0061712E /* TransactionServiceV3.pbrpc.m */; };
+		BDD51F13268014EE0061712E /* TransactionServiceV3.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EE6268014EE0061712E /* TransactionServiceV3.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F14268014EE0061712E /* TransactionServiceV3.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EE7268014EE0061712E /* TransactionServiceV3.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F15268014EE0061712E /* Validate.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EE9268014EE0061712E /* Validate.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F16268014EE0061712E /* Validate.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EEA268014EE0061712E /* Validate.pbobjc.m */; };
+		BDD51F17268014EE0061712E /* Descriptor.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EED268014EE0061712E /* Descriptor.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F18268014EE0061712E /* Descriptor.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EEE268014EE0061712E /* Descriptor.pbobjc.m */; };
+		BDD51F19268014EE0061712E /* ModelV4.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EF1268014EE0061712E /* ModelV4.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F1A268014EE0061712E /* ModelV4.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EF2268014EE0061712E /* ModelV4.pbobjc.m */; };
+		BDD51F1B268014EE0061712E /* ModelV3.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EF4268014EE0061712E /* ModelV3.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F1C268014EE0061712E /* ModelV3.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EF5268014EE0061712E /* ModelV3.pbobjc.m */; };
+		BDD51F1D268014EE0061712E /* AccountService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EF8268014EE0061712E /* AccountService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F1E268014EE0061712E /* AccountService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EF9268014EE0061712E /* AccountService.pbobjc.m */; };
+		BDD51F1F268014EE0061712E /* AccountService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EFA268014EE0061712E /* AccountService.pbrpc.m */; };
+		BDD51F20268014EE0061712E /* AccountService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EFB268014EE0061712E /* AccountService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F21268014EE0061712E /* AccountServiceV3.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51EFD268014EE0061712E /* AccountServiceV3.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F22268014EE0061712E /* AccountServiceV3.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EFE268014EE0061712E /* AccountServiceV3.pbrpc.m */; };
+		BDD51F23268014EE0061712E /* AccountServiceV3.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51EFF268014EE0061712E /* AccountServiceV3.pbobjc.m */; };
+		BDD51F24268014EE0061712E /* AccountServiceV3.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51F00268014EE0061712E /* AccountServiceV3.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F25268014EE0061712E /* AirdropService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51F03268014EE0061712E /* AirdropService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F26268014EE0061712E /* AirdropService.pbrpc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51F04268014EE0061712E /* AirdropService.pbrpc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BDD51F27268014EE0061712E /* AirdropService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51F05268014EE0061712E /* AirdropService.pbobjc.m */; };
+		BDD51F28268014EE0061712E /* AirdropService.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD51F06268014EE0061712E /* AirdropService.pbrpc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,11 +185,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		509B215374A50AEDD2D38FDE /* Pods-KinBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.debug.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.debug.xcconfig"; sourceTree = "<group>"; };
-		6720D833B4A6B64843BC5B8A /* Pods-KinBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.release.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.release.xcconfig"; sourceTree = "<group>"; };
-		81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.release.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.release.xcconfig"; sourceTree = "<group>"; };
-		82363D272B8652C191E782CD /* Pods_KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC1DAE52BBDC192583CD91E /* Pods_KinBaseTestsHost.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTestsHost.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5410BF698D3BBBFA186FC381 /* Pods-KinBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.release.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		57BC3D463DE980AA721CA58D /* Pods_KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6303B71333B77AED92B2F426 /* Pods_KinBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8518B10D244C9BE300EC329B /* KinServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceTests.swift; sourceTree = "<group>"; };
 		851B27892432821D004EE486 /* SecureKeyStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureKeyStorage.swift; sourceTree = "<group>"; };
 		851B278B24328225004EE486 /* KeyChainStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainStorageTests.swift; sourceTree = "<group>"; };
@@ -264,8 +263,10 @@
 		85EEEB7824BB7512002AAC29 /* KinBinaryMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBinaryMemo.swift; sourceTree = "<group>"; };
 		85EEEB7A24BB7554002AAC29 /* SHA224Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA224Hash.swift; sourceTree = "<group>"; };
 		85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBinaryMemoTests.swift; sourceTree = "<group>"; };
+		8B968A3E8585192CA5C3FB73 /* Pods-KinBaseTestsHost.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTestsHost.release.xcconfig"; path = "Target Support Files/Pods-KinBaseTestsHost/Pods-KinBaseTestsHost.release.xcconfig"; sourceTree = "<group>"; };
 		930A9F2C254345E900F84156 /* KeyPair+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyPair+Utilities.swift"; sourceTree = "<group>"; };
 		9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentInterceptor.swift; sourceTree = "<group>"; };
+		935CBFCC669624DE4BE380E8 /* Pods-KinBaseTestsHost.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTestsHost.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTestsHost/Pods-KinBaseTestsHost.debug.xcconfig"; sourceTree = "<group>"; };
 		9387E02F25434CB900D44509 /* KinServiceV4IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinServiceV4IntegrationTests.swift; sourceTree = "<group>"; };
 		9387E0352543EA2600D44509 /* KinAirdropApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinAirdropApi.swift; sourceTree = "<group>"; };
 		9387E0372543EAA800D44509 /* AgoraKinAidropApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraKinAidropApi.swift; sourceTree = "<group>"; };
@@ -278,7 +279,6 @@
 		93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVecTests.swift; sourceTree = "<group>"; };
 		9A29E20F2639ADFF005138F6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGRPCInterceptorManager.swift; sourceTree = "<group>"; };
-		9A99A3CA2666BE45003A76D5 /* Base32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base32.swift; sourceTree = "<group>"; };
 		9A99A3CD2666C035003A76D5 /* Data+CRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CRC.swift"; sourceTree = "<group>"; };
 		9AADA39B257EC1580019A419 /* KinNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinNetworkTests.swift; sourceTree = "<group>"; };
 		9AC60A6D264597B0002C740A /* precomp_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = precomp_data.h; sourceTree = "<group>"; };
@@ -291,7 +291,6 @@
 		9AC60A76264597B0002C740A /* sha512.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha512.h; sourceTree = "<group>"; };
 		9AC60A77264597B0002C740A /* key_exchange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = key_exchange.c; sourceTree = "<group>"; };
 		9AC60A78264597B0002C740A /* add_scalar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = add_scalar.c; sourceTree = "<group>"; };
-		9AC60A79264597B0002C740A /* ed25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ed25519.h; sourceTree = "<group>"; };
 		9AC60A7A264597B0002C740A /* fe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fe.h; sourceTree = "<group>"; };
 		9AC60A7B264597B0002C740A /* keypair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = keypair.c; sourceTree = "<group>"; };
 		9AC60A7C264597B0002C740A /* fixedint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixedint.h; sourceTree = "<group>"; };
@@ -302,7 +301,6 @@
 		9AC60A952645C8D4002C740A /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		9AC60A962645C8D4002C740A /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		9AC60A972645C8D5002C740A /* KeyPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
-		9AC60A9D2645CED1002C740A /* ed25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ed25519.h; sourceTree = "<group>"; };
 		9AC60AA02645CF58002C740A /* Data+Slice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Slice.swift"; sourceTree = "<group>"; };
 		9AC60AA12645CF58002C740A /* Data+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Hex.swift"; sourceTree = "<group>"; };
 		9AC60AA32645CF58002C740A /* Byte+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Byte+Data.swift"; sourceTree = "<group>"; };
@@ -320,41 +318,45 @@
 		9AC60B662661178D002C740A /* SHA512.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA512.swift; sourceTree = "<group>"; };
 		9AC60B68266117D0002C740A /* SHA224.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA224.swift; sourceTree = "<group>"; };
 		9AC60B6A26611AA9002C740A /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
-		BDD51DBA267FF0750061712E /* IngestionService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngestionService.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DBB267FF0750061712E /* IngestionService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngestionService.pbrpc.m; sourceTree = "<group>"; };
-		BDD51DBC267FF0750061712E /* MetricsModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsModel.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DBD267FF0750061712E /* IngestionService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngestionService.pbrpc.h; sourceTree = "<group>"; };
-		BDD51DBE267FF0750061712E /* IngestionService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngestionService.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DBF267FF0750061712E /* MetricsModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsModel.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DC2267FF0750061712E /* TransactionService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionService.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DC3267FF0750061712E /* TransactionService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionService.pbrpc.h; sourceTree = "<group>"; };
-		BDD51DC4267FF0750061712E /* TransactionService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionService.pbrpc.m; sourceTree = "<group>"; };
-		BDD51DC5267FF0750061712E /* TransactionService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionService.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DC7267FF0750061712E /* TransactionServiceV3.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionServiceV3.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DC8267FF0750061712E /* TransactionServiceV3.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionServiceV3.pbrpc.m; sourceTree = "<group>"; };
-		BDD51DC9267FF0750061712E /* TransactionServiceV3.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionServiceV3.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DCA267FF0750061712E /* TransactionServiceV3.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionServiceV3.pbrpc.h; sourceTree = "<group>"; };
-		BDD51DCC267FF0750061712E /* Validate.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validate.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DCD267FF0750061712E /* Validate.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Validate.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DD0267FF0750061712E /* Descriptor.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Descriptor.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DD1267FF0750061712E /* Descriptor.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Descriptor.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DD4267FF0750061712E /* ModelV4.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelV4.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DD5267FF0750061712E /* ModelV4.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelV4.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DD7267FF0750061712E /* ModelV3.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelV3.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DD8267FF0750061712E /* ModelV3.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelV3.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DDB267FF0750061712E /* AccountService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountService.pbrpc.h; sourceTree = "<group>"; };
-		BDD51DDC267FF0750061712E /* AccountService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountService.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DDD267FF0750061712E /* AccountService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountService.pbrpc.m; sourceTree = "<group>"; };
-		BDD51DDE267FF0750061712E /* AccountService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountService.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DE0267FF0750061712E /* AccountServiceV3.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountServiceV3.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DE1267FF0750061712E /* AccountServiceV3.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountServiceV3.pbrpc.m; sourceTree = "<group>"; };
-		BDD51DE2267FF0750061712E /* AccountServiceV3.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountServiceV3.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DE3267FF0750061712E /* AccountServiceV3.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountServiceV3.pbrpc.h; sourceTree = "<group>"; };
-		BDD51DE6267FF0750061712E /* AirdropService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirdropService.pbobjc.h; sourceTree = "<group>"; };
-		BDD51DE7267FF0750061712E /* AirdropService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirdropService.pbrpc.h; sourceTree = "<group>"; };
-		BDD51DE8267FF0750061712E /* AirdropService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirdropService.pbobjc.m; sourceTree = "<group>"; };
-		BDD51DE9267FF0750061712E /* AirdropService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirdropService.pbrpc.m; sourceTree = "<group>"; };
-		DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB895DF1A106D3968E338445 /* Pods-KinBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.debug.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.debug.xcconfig"; sourceTree = "<group>"; };
+		BD56F0F72680B8F70071F302 /* kined25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kined25519.h; sourceTree = "<group>"; };
+		BD56F1202680C1840071F302 /* Base32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base32.swift; sourceTree = "<group>"; };
+		BDD51ED7268014EE0061712E /* IngestionService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngestionService.pbobjc.h; sourceTree = "<group>"; };
+		BDD51ED8268014EE0061712E /* IngestionService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngestionService.pbrpc.m; sourceTree = "<group>"; };
+		BDD51ED9268014EE0061712E /* MetricsModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsModel.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EDA268014EE0061712E /* IngestionService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngestionService.pbrpc.h; sourceTree = "<group>"; };
+		BDD51EDB268014EE0061712E /* IngestionService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngestionService.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EDC268014EE0061712E /* MetricsModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsModel.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EDF268014EE0061712E /* TransactionService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionService.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EE0268014EE0061712E /* TransactionService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionService.pbrpc.h; sourceTree = "<group>"; };
+		BDD51EE1268014EE0061712E /* TransactionService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionService.pbrpc.m; sourceTree = "<group>"; };
+		BDD51EE2268014EE0061712E /* TransactionService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionService.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EE4268014EE0061712E /* TransactionServiceV3.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionServiceV3.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EE5268014EE0061712E /* TransactionServiceV3.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionServiceV3.pbrpc.m; sourceTree = "<group>"; };
+		BDD51EE6268014EE0061712E /* TransactionServiceV3.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionServiceV3.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EE7268014EE0061712E /* TransactionServiceV3.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionServiceV3.pbrpc.h; sourceTree = "<group>"; };
+		BDD51EE9268014EE0061712E /* Validate.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validate.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EEA268014EE0061712E /* Validate.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Validate.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EED268014EE0061712E /* Descriptor.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Descriptor.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EEE268014EE0061712E /* Descriptor.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Descriptor.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EF1268014EE0061712E /* ModelV4.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelV4.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EF2268014EE0061712E /* ModelV4.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelV4.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EF4268014EE0061712E /* ModelV3.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelV3.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EF5268014EE0061712E /* ModelV3.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelV3.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EF8268014EE0061712E /* AccountService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountService.pbrpc.h; sourceTree = "<group>"; };
+		BDD51EF9268014EE0061712E /* AccountService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountService.pbobjc.m; sourceTree = "<group>"; };
+		BDD51EFA268014EE0061712E /* AccountService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountService.pbrpc.m; sourceTree = "<group>"; };
+		BDD51EFB268014EE0061712E /* AccountService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountService.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EFD268014EE0061712E /* AccountServiceV3.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountServiceV3.pbobjc.h; sourceTree = "<group>"; };
+		BDD51EFE268014EE0061712E /* AccountServiceV3.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountServiceV3.pbrpc.m; sourceTree = "<group>"; };
+		BDD51EFF268014EE0061712E /* AccountServiceV3.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountServiceV3.pbobjc.m; sourceTree = "<group>"; };
+		BDD51F00268014EE0061712E /* AccountServiceV3.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountServiceV3.pbrpc.h; sourceTree = "<group>"; };
+		BDD51F03268014EE0061712E /* AirdropService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirdropService.pbobjc.h; sourceTree = "<group>"; };
+		BDD51F04268014EE0061712E /* AirdropService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirdropService.pbrpc.h; sourceTree = "<group>"; };
+		BDD51F05268014EE0061712E /* AirdropService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirdropService.pbobjc.m; sourceTree = "<group>"; };
+		BDD51F06268014EE0061712E /* AirdropService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirdropService.pbrpc.m; sourceTree = "<group>"; };
+		C7958CD4102EA4AED66FBC86 /* Pods-KinBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.release.xcconfig"; path = "Target Support Files/Pods-KinBase/Pods-KinBase.release.xcconfig"; sourceTree = "<group>"; };
+		F4426A0F1F8A1A63B740DA06 /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				369FEF8729245BC4FC094575 /* Pods_KinBaseTestsHost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				167108C93CE609A97325BB6E /* Pods_KinBase.framework in Frameworks */,
+				4DB7B29CD163A965D3666C5A /* Pods_KinBase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,33 +381,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				85B024072371CC7700829FD6 /* KinBase.framework in Frameworks */,
-				C146AB1B45E71887002FDD17 /* Pods_KinBaseTests.framework in Frameworks */,
+				415B3B856414E6D290FBD64B /* Pods_KinBaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4778AA979B6B2663CF8952FE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				509B215374A50AEDD2D38FDE /* Pods-KinBase.debug.xcconfig */,
-				6720D833B4A6B64843BC5B8A /* Pods-KinBase.release.xcconfig */,
-				DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */,
-				81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
-			sourceTree = "<group>";
-		};
 		64DCE9545BED844A80D66CDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				853EC7B824EF582F004E0BED /* KinGrpcApi.framework */,
-				82363D272B8652C191E782CD /* Pods_KinBase.framework */,
-				29AFC029A4C60585FE054881 /* Pods_KinBaseTests.framework */,
+				57BC3D463DE980AA721CA58D /* Pods_KinBase.framework */,
+				6303B71333B77AED92B2F426 /* Pods_KinBaseTests.framework */,
+				0DC1DAE52BBDC192583CD91E /* Pods_KinBaseTestsHost.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75D5C99AC419743FE72EB422 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB895DF1A106D3968E338445 /* Pods-KinBase.debug.xcconfig */,
+				C7958CD4102EA4AED66FBC86 /* Pods-KinBase.release.xcconfig */,
+				F4426A0F1F8A1A63B740DA06 /* Pods-KinBaseTests.debug.xcconfig */,
+				5410BF698D3BBBFA186FC381 /* Pods-KinBaseTests.release.xcconfig */,
+				935CBFCC669624DE4BE380E8 /* Pods-KinBaseTestsHost.debug.xcconfig */,
+				8B968A3E8585192CA5C3FB73 /* Pods-KinBaseTestsHost.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		851B27882432820D004EE486 /* Storage */ = {
@@ -577,7 +582,7 @@
 				851B279424354AF9004EE486 /* KinBaseTestsHost */,
 				85B023FE2371CC7700829FD6 /* Products */,
 				64DCE9545BED844A80D66CDE /* Frameworks */,
-				4778AA979B6B2663CF8952FE /* Pods */,
+				75D5C99AC419743FE72EB422 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -702,9 +707,8 @@
 		9AC60A6C264597B0002C740A /* ed25519 */ = {
 			isa = PBXGroup;
 			children = (
-				9AC60A9C2645CED1002C740A /* include */,
+				BD56F0F72680B8F70071F302 /* kined25519.h */,
 				9AC60A6D264597B0002C740A /* precomp_data.h */,
-				9AC60A79264597B0002C740A /* ed25519.h */,
 				9AC60A7C264597B0002C740A /* fixedint.h */,
 				9AC60A7A264597B0002C740A /* fe.h */,
 				9AC60A71264597B0002C740A /* fe.c */,
@@ -727,8 +731,8 @@
 		9AC60A9226459C65002C740A /* Base58 */ = {
 			isa = PBXGroup;
 			children = (
+				BD56F1202680C1840071F302 /* Base32.swift */,
 				9A99A3CD2666C035003A76D5 /* Data+CRC.swift */,
-				9A99A3CA2666BE45003A76D5 /* Base32.swift */,
 				9AC60A9326459C65002C740A /* Base58.swift */,
 			);
 			path = Base58;
@@ -744,14 +748,6 @@
 			path = Keys;
 			sourceTree = "<group>";
 		};
-		9AC60A9C2645CED1002C740A /* include */ = {
-			isa = PBXGroup;
-			children = (
-				9AC60A9D2645CED1002C740A /* ed25519.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
 		9AC60A9F2645CF58002C740A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,7 +761,7 @@
 		9AC60AA82645D2A2002C740A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DB7267FF0750061712E /* gen */,
+				BDD51ED4268014EE0061712E /* gen */,
 				9AC60B6126611731002C740A /* Hashes */,
 				9AC60A9226459C65002C740A /* Base58 */,
 				9AC60A6C264597B0002C740A /* ed25519 */,
@@ -793,172 +789,171 @@
 			path = Hashes;
 			sourceTree = "<group>";
 		};
-		BDD51DB7267FF0750061712E /* gen */ = {
+		BDD51ED4268014EE0061712E /* gen */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DB8267FF0750061712E /* metrics */,
-				BDD51DC0267FF0750061712E /* transaction */,
-				BDD51DCB267FF0750061712E /* validate */,
-				BDD51DCE267FF0750061712E /* google */,
-				BDD51DD2267FF0750061712E /* common */,
-				BDD51DD9267FF0750061712E /* account */,
-				BDD51DE4267FF0750061712E /* airdrop */,
+				BDD51ED5268014EE0061712E /* metrics */,
+				BDD51EDD268014EE0061712E /* transaction */,
+				BDD51EE8268014EE0061712E /* validate */,
+				BDD51EEB268014EE0061712E /* google */,
+				BDD51EEF268014EE0061712E /* common */,
+				BDD51EF6268014EE0061712E /* account */,
+				BDD51F01268014EE0061712E /* airdrop */,
 			);
-			name = gen;
-			path = ../../../../../temp/gen;
+			path = gen;
 			sourceTree = "<group>";
 		};
-		BDD51DB8267FF0750061712E /* metrics */ = {
+		BDD51ED5268014EE0061712E /* metrics */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DB9267FF0750061712E /* v3 */,
+				BDD51ED6268014EE0061712E /* v3 */,
 			);
 			path = metrics;
 			sourceTree = "<group>";
 		};
-		BDD51DB9267FF0750061712E /* v3 */ = {
+		BDD51ED6268014EE0061712E /* v3 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DBA267FF0750061712E /* IngestionService.pbobjc.h */,
-				BDD51DBB267FF0750061712E /* IngestionService.pbrpc.m */,
-				BDD51DBC267FF0750061712E /* MetricsModel.pbobjc.m */,
-				BDD51DBD267FF0750061712E /* IngestionService.pbrpc.h */,
-				BDD51DBE267FF0750061712E /* IngestionService.pbobjc.m */,
-				BDD51DBF267FF0750061712E /* MetricsModel.pbobjc.h */,
+				BDD51ED7268014EE0061712E /* IngestionService.pbobjc.h */,
+				BDD51ED8268014EE0061712E /* IngestionService.pbrpc.m */,
+				BDD51ED9268014EE0061712E /* MetricsModel.pbobjc.m */,
+				BDD51EDA268014EE0061712E /* IngestionService.pbrpc.h */,
+				BDD51EDB268014EE0061712E /* IngestionService.pbobjc.m */,
+				BDD51EDC268014EE0061712E /* MetricsModel.pbobjc.h */,
 			);
 			path = v3;
 			sourceTree = "<group>";
 		};
-		BDD51DC0267FF0750061712E /* transaction */ = {
+		BDD51EDD268014EE0061712E /* transaction */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DC1267FF0750061712E /* v4 */,
-				BDD51DC6267FF0750061712E /* v3 */,
+				BDD51EDE268014EE0061712E /* v4 */,
+				BDD51EE3268014EE0061712E /* v3 */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
 		};
-		BDD51DC1267FF0750061712E /* v4 */ = {
+		BDD51EDE268014EE0061712E /* v4 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DC2267FF0750061712E /* TransactionService.pbobjc.h */,
-				BDD51DC3267FF0750061712E /* TransactionService.pbrpc.h */,
-				BDD51DC4267FF0750061712E /* TransactionService.pbrpc.m */,
-				BDD51DC5267FF0750061712E /* TransactionService.pbobjc.m */,
+				BDD51EDF268014EE0061712E /* TransactionService.pbobjc.h */,
+				BDD51EE0268014EE0061712E /* TransactionService.pbrpc.h */,
+				BDD51EE1268014EE0061712E /* TransactionService.pbrpc.m */,
+				BDD51EE2268014EE0061712E /* TransactionService.pbobjc.m */,
 			);
 			path = v4;
 			sourceTree = "<group>";
 		};
-		BDD51DC6267FF0750061712E /* v3 */ = {
+		BDD51EE3268014EE0061712E /* v3 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DC7267FF0750061712E /* TransactionServiceV3.pbobjc.m */,
-				BDD51DC8267FF0750061712E /* TransactionServiceV3.pbrpc.m */,
-				BDD51DC9267FF0750061712E /* TransactionServiceV3.pbobjc.h */,
-				BDD51DCA267FF0750061712E /* TransactionServiceV3.pbrpc.h */,
+				BDD51EE4268014EE0061712E /* TransactionServiceV3.pbobjc.m */,
+				BDD51EE5268014EE0061712E /* TransactionServiceV3.pbrpc.m */,
+				BDD51EE6268014EE0061712E /* TransactionServiceV3.pbobjc.h */,
+				BDD51EE7268014EE0061712E /* TransactionServiceV3.pbrpc.h */,
 			);
 			path = v3;
 			sourceTree = "<group>";
 		};
-		BDD51DCB267FF0750061712E /* validate */ = {
+		BDD51EE8268014EE0061712E /* validate */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DCC267FF0750061712E /* Validate.pbobjc.h */,
-				BDD51DCD267FF0750061712E /* Validate.pbobjc.m */,
+				BDD51EE9268014EE0061712E /* Validate.pbobjc.h */,
+				BDD51EEA268014EE0061712E /* Validate.pbobjc.m */,
 			);
 			path = validate;
 			sourceTree = "<group>";
 		};
-		BDD51DCE267FF0750061712E /* google */ = {
+		BDD51EEB268014EE0061712E /* google */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DCF267FF0750061712E /* protobuf */,
+				BDD51EEC268014EE0061712E /* protobuf */,
 			);
 			path = google;
 			sourceTree = "<group>";
 		};
-		BDD51DCF267FF0750061712E /* protobuf */ = {
+		BDD51EEC268014EE0061712E /* protobuf */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DD0267FF0750061712E /* Descriptor.pbobjc.h */,
-				BDD51DD1267FF0750061712E /* Descriptor.pbobjc.m */,
+				BDD51EED268014EE0061712E /* Descriptor.pbobjc.h */,
+				BDD51EEE268014EE0061712E /* Descriptor.pbobjc.m */,
 			);
 			path = protobuf;
 			sourceTree = "<group>";
 		};
-		BDD51DD2267FF0750061712E /* common */ = {
+		BDD51EEF268014EE0061712E /* common */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DD3267FF0750061712E /* v4 */,
-				BDD51DD6267FF0750061712E /* v3 */,
+				BDD51EF0268014EE0061712E /* v4 */,
+				BDD51EF3268014EE0061712E /* v3 */,
 			);
 			path = common;
 			sourceTree = "<group>";
 		};
-		BDD51DD3267FF0750061712E /* v4 */ = {
+		BDD51EF0268014EE0061712E /* v4 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DD4267FF0750061712E /* ModelV4.pbobjc.h */,
-				BDD51DD5267FF0750061712E /* ModelV4.pbobjc.m */,
+				BDD51EF1268014EE0061712E /* ModelV4.pbobjc.h */,
+				BDD51EF2268014EE0061712E /* ModelV4.pbobjc.m */,
 			);
 			path = v4;
 			sourceTree = "<group>";
 		};
-		BDD51DD6267FF0750061712E /* v3 */ = {
+		BDD51EF3268014EE0061712E /* v3 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DD7267FF0750061712E /* ModelV3.pbobjc.h */,
-				BDD51DD8267FF0750061712E /* ModelV3.pbobjc.m */,
+				BDD51EF4268014EE0061712E /* ModelV3.pbobjc.h */,
+				BDD51EF5268014EE0061712E /* ModelV3.pbobjc.m */,
 			);
 			path = v3;
 			sourceTree = "<group>";
 		};
-		BDD51DD9267FF0750061712E /* account */ = {
+		BDD51EF6268014EE0061712E /* account */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DDA267FF0750061712E /* v4 */,
-				BDD51DDF267FF0750061712E /* v3 */,
+				BDD51EF7268014EE0061712E /* v4 */,
+				BDD51EFC268014EE0061712E /* v3 */,
 			);
 			path = account;
 			sourceTree = "<group>";
 		};
-		BDD51DDA267FF0750061712E /* v4 */ = {
+		BDD51EF7268014EE0061712E /* v4 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DDB267FF0750061712E /* AccountService.pbrpc.h */,
-				BDD51DDC267FF0750061712E /* AccountService.pbobjc.m */,
-				BDD51DDD267FF0750061712E /* AccountService.pbrpc.m */,
-				BDD51DDE267FF0750061712E /* AccountService.pbobjc.h */,
+				BDD51EF8268014EE0061712E /* AccountService.pbrpc.h */,
+				BDD51EF9268014EE0061712E /* AccountService.pbobjc.m */,
+				BDD51EFA268014EE0061712E /* AccountService.pbrpc.m */,
+				BDD51EFB268014EE0061712E /* AccountService.pbobjc.h */,
 			);
 			path = v4;
 			sourceTree = "<group>";
 		};
-		BDD51DDF267FF0750061712E /* v3 */ = {
+		BDD51EFC268014EE0061712E /* v3 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DE0267FF0750061712E /* AccountServiceV3.pbobjc.h */,
-				BDD51DE1267FF0750061712E /* AccountServiceV3.pbrpc.m */,
-				BDD51DE2267FF0750061712E /* AccountServiceV3.pbobjc.m */,
-				BDD51DE3267FF0750061712E /* AccountServiceV3.pbrpc.h */,
+				BDD51EFD268014EE0061712E /* AccountServiceV3.pbobjc.h */,
+				BDD51EFE268014EE0061712E /* AccountServiceV3.pbrpc.m */,
+				BDD51EFF268014EE0061712E /* AccountServiceV3.pbobjc.m */,
+				BDD51F00268014EE0061712E /* AccountServiceV3.pbrpc.h */,
 			);
 			path = v3;
 			sourceTree = "<group>";
 		};
-		BDD51DE4267FF0750061712E /* airdrop */ = {
+		BDD51F01268014EE0061712E /* airdrop */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DE5267FF0750061712E /* v4 */,
+				BDD51F02268014EE0061712E /* v4 */,
 			);
 			path = airdrop;
 			sourceTree = "<group>";
 		};
-		BDD51DE5267FF0750061712E /* v4 */ = {
+		BDD51F02268014EE0061712E /* v4 */ = {
 			isa = PBXGroup;
 			children = (
-				BDD51DE6267FF0750061712E /* AirdropService.pbobjc.h */,
-				BDD51DE7267FF0750061712E /* AirdropService.pbrpc.h */,
-				BDD51DE8267FF0750061712E /* AirdropService.pbobjc.m */,
-				BDD51DE9267FF0750061712E /* AirdropService.pbrpc.m */,
+				BDD51F03268014EE0061712E /* AirdropService.pbobjc.h */,
+				BDD51F04268014EE0061712E /* AirdropService.pbrpc.h */,
+				BDD51F05268014EE0061712E /* AirdropService.pbobjc.m */,
+				BDD51F06268014EE0061712E /* AirdropService.pbrpc.m */,
 			);
 			path = v4;
 			sourceTree = "<group>";
@@ -970,33 +965,32 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDD51DED267FF0750061712E /* IngestionService.pbrpc.h in Headers */,
-				BDD51DF6267FF0750061712E /* TransactionServiceV3.pbobjc.h in Headers */,
-				BDD51DFE267FF0750061712E /* ModelV3.pbobjc.h in Headers */,
-				BDD51DF1267FF0750061712E /* TransactionService.pbrpc.h in Headers */,
-				BDD51DF7267FF0750061712E /* TransactionServiceV3.pbrpc.h in Headers */,
-				BDD51DFA267FF0750061712E /* Descriptor.pbobjc.h in Headers */,
-				BDD51DEA267FF0750061712E /* IngestionService.pbobjc.h in Headers */,
-				BDD51E07267FF0750061712E /* AccountServiceV3.pbrpc.h in Headers */,
-				BDD51E09267FF0750061712E /* AirdropService.pbrpc.h in Headers */,
-				BDD51DFC267FF0750061712E /* ModelV4.pbobjc.h in Headers */,
-				BDD51E00267FF0750061712E /* AccountService.pbrpc.h in Headers */,
-				BDD51DEF267FF0750061712E /* MetricsModel.pbobjc.h in Headers */,
-				BDD51E03267FF0750061712E /* AccountService.pbobjc.h in Headers */,
-				BDD51DF8267FF0750061712E /* Validate.pbobjc.h in Headers */,
-				BDD51DF0267FF0750061712E /* TransactionService.pbobjc.h in Headers */,
-				BDD51E04267FF0750061712E /* AccountServiceV3.pbobjc.h in Headers */,
-				BDD51E08267FF0750061712E /* AirdropService.pbobjc.h in Headers */,
-				85B0240E2371CC7700829FD6 /* KinBase.h in Headers */,
-				9AC60A9E2645CED1002C740A /* ed25519.h in Headers */,
-				85713C2E2450A83E005F5A48 /* Storage.pbobjc.h in Headers */,
+				BDD51F0A268014EE0061712E /* IngestionService.pbrpc.h in Headers */,
+				BDD51F19268014EE0061712E /* ModelV4.pbobjc.h in Headers */,
+				BDD51F13268014EE0061712E /* TransactionServiceV3.pbobjc.h in Headers */,
+				BDD51F0E268014EE0061712E /* TransactionService.pbrpc.h in Headers */,
+				BDD51F07268014EE0061712E /* IngestionService.pbobjc.h in Headers */,
+				BDD51F0C268014EE0061712E /* MetricsModel.pbobjc.h in Headers */,
+				BDD51F1D268014EE0061712E /* AccountService.pbrpc.h in Headers */,
 				9AC60A80264597B0002C740A /* precomp_data.h in Headers */,
 				9AC60A8C264597B0002C740A /* fe.h in Headers */,
 				9AC60A8E264597B0002C740A /* fixedint.h in Headers */,
-				9AC60A8B264597B0002C740A /* ed25519.h in Headers */,
 				9AC60A90264597B0002C740A /* sc.h in Headers */,
 				9AC60A91264597B0002C740A /* ge.h in Headers */,
 				9AC60A88264597B0002C740A /* sha512.h in Headers */,
+				85B0240E2371CC7700829FD6 /* KinBase.h in Headers */,
+				85713C2E2450A83E005F5A48 /* Storage.pbobjc.h in Headers */,
+				BDD51F0D268014EE0061712E /* TransactionService.pbobjc.h in Headers */,
+				BDD51F24268014EE0061712E /* AccountServiceV3.pbrpc.h in Headers */,
+				BDD51F14268014EE0061712E /* TransactionServiceV3.pbrpc.h in Headers */,
+				BD56F0F82680B8F70071F302 /* kined25519.h in Headers */,
+				BDD51F26268014EE0061712E /* AirdropService.pbrpc.h in Headers */,
+				BDD51F17268014EE0061712E /* Descriptor.pbobjc.h in Headers */,
+				BDD51F1B268014EE0061712E /* ModelV3.pbobjc.h in Headers */,
+				BDD51F15268014EE0061712E /* Validate.pbobjc.h in Headers */,
+				BDD51F25268014EE0061712E /* AirdropService.pbobjc.h in Headers */,
+				BDD51F21268014EE0061712E /* AccountServiceV3.pbobjc.h in Headers */,
+				BDD51F20268014EE0061712E /* AccountService.pbobjc.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,6 +1001,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 851B27A424354AFB004EE486 /* Build configuration list for PBXNativeTarget "KinBaseTestsHost" */;
 			buildPhases = (
+				5CA2E123121441F6EAA6EC73 /* [CP] Check Pods Manifest.lock */,
 				851B278F24354AF9004EE486 /* Sources */,
 				851B279024354AF9004EE486 /* Frameworks */,
 				851B279124354AF9004EE486 /* Resources */,
@@ -1024,7 +1019,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024112371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBase" */;
 			buildPhases = (
-				7231B06145C3663364EF9BAA /* [CP] Check Pods Manifest.lock */,
+				C831F670CF2D299519D35A06 /* [CP] Check Pods Manifest.lock */,
 				85B023F82371CC7700829FD6 /* Headers */,
 				85B023F92371CC7700829FD6 /* Sources */,
 				85B023FA2371CC7700829FD6 /* Frameworks */,
@@ -1043,11 +1038,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024142371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBaseTests" */;
 			buildPhases = (
-				E3D28F604C27FD90113045D9 /* [CP] Check Pods Manifest.lock */,
+				B56A47016BA4EF909BF66798 /* [CP] Check Pods Manifest.lock */,
 				85B024022371CC7700829FD6 /* Sources */,
 				85B024032371CC7700829FD6 /* Frameworks */,
 				85B024042371CC7700829FD6 /* Resources */,
-				80247D2EE62F12DBEE34FE9F /* [CP] Embed Pods Frameworks */,
+				0BE3203DE2DC5A58FC6DF57C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1131,29 +1126,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7231B06145C3663364EF9BAA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KinBase-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		80247D2EE62F12DBEE34FE9F /* [CP] Embed Pods Frameworks */ = {
+		0BE3203DE2DC5A58FC6DF57C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1170,7 +1143,29 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E3D28F604C27FD90113045D9 /* [CP] Check Pods Manifest.lock */ = {
+		5CA2E123121441F6EAA6EC73 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinBaseTestsHost-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B56A47016BA4EF909BF66798 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1186,6 +1181,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-KinBaseTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C831F670CF2D299519D35A06 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KinBase-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1210,8 +1227,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC60A83264597B0002C740A /* fe.c in Sources */,
-				BDD51DFB267FF0750061712E /* Descriptor.pbobjc.m in Sources */,
-				BDD51DFD267FF0750061712E /* ModelV4.pbobjc.m in Sources */,
+				BDD51F18268014EE0061712E /* Descriptor.pbobjc.m in Sources */,
+				BDD51F1A268014EE0061712E /* ModelV4.pbobjc.m in Sources */,
 				9AC60A84264597B0002C740A /* verify.c in Sources */,
 				8525B7F424DCCF1F008277AB /* AppUserAuthInterceptor.swift in Sources */,
 				9AC60B6526611772002C740A /* SHA256.swift in Sources */,
@@ -1219,8 +1236,8 @@
 				851B278A2432821D004EE486 /* SecureKeyStorage.swift in Sources */,
 				9AC60A86264597B0002C740A /* sc.c in Sources */,
 				9AC60B5426497F35002C740A /* AccountMeta.swift in Sources */,
-				BDD51DF5267FF0750061712E /* TransactionServiceV3.pbrpc.m in Sources */,
-				BDD51E05267FF0750061712E /* AccountServiceV3.pbrpc.m in Sources */,
+				BDD51F12268014EE0061712E /* TransactionServiceV3.pbrpc.m in Sources */,
+				BDD51F22268014EE0061712E /* AccountServiceV3.pbrpc.m in Sources */,
 				9AC60A992645C8D5002C740A /* Types.swift in Sources */,
 				9AC60B5326497F35002C740A /* MessageHeader.swift in Sources */,
 				85737EF22443AFFB0012132E /* Helper.swift in Sources */,
@@ -1235,7 +1252,7 @@
 				9AC60A89264597B0002C740A /* key_exchange.c in Sources */,
 				85737EE5243E63E70012132E /* KinNetwork.swift in Sources */,
 				85737EDD243E629C0012132E /* KinAccountApi.swift in Sources */,
-				BDD51DF2267FF0750061712E /* TransactionService.pbrpc.m in Sources */,
+				BDD51F0F268014EE0061712E /* TransactionService.pbrpc.m in Sources */,
 				851E7BB624A2A5FD00B800C8 /* AgoraKinAccountsApi.swift in Sources */,
 				85572F9C24A80E8C003734CB /* ProtoToModel.swift in Sources */,
 				855B76E72436775C0037F407 /* KinTransaction.swift in Sources */,
@@ -1246,16 +1263,17 @@
 				9AC60AA72645CF58002C740A /* Byte+Data.swift in Sources */,
 				9AC60B5526497F35002C740A /* Message.swift in Sources */,
 				85EEEB7724BB748A002AAC29 /* Invoices.swift in Sources */,
+				BD56F1212680C1840071F302 /* Base32.swift in Sources */,
 				853EC7B724EF569F004E0BED /* GrpcServiceProvider.swift in Sources */,
 				9AC60A8A264597B0002C740A /* add_scalar.c in Sources */,
 				85737EC1243D7CC30012132E /* KinService.swift in Sources */,
 				85713C2D2450A83E005F5A48 /* Storage.pbobjc.m in Sources */,
-				BDD51E01267FF0750061712E /* AccountService.pbobjc.m in Sources */,
+				BDD51F1E268014EE0061712E /* AccountService.pbobjc.m in Sources */,
 				9AC60B5026497F35002C740A /* ShortVec.swift in Sources */,
 				85572F9A24A80AEA003734CB /* ModelToProto.swift in Sources */,
 				9342E2B924FF2DBB008449A2 /* UserAgentInterceptor.swift in Sources */,
 				9387E03A254A1D5100D44509 /* Cache.swift in Sources */,
-				BDD51DF4267FF0750061712E /* TransactionServiceV3.pbobjc.m in Sources */,
+				BDD51F11268014EE0061712E /* TransactionServiceV3.pbobjc.m in Sources */,
 				85737ED8243E59060012132E /* KinEnvironment.swift in Sources */,
 				93A591232502CBC200E43C65 /* KinLogger.swift in Sources */,
 				853EC7A924EC5D38004E0BED /* KinTestService.swift in Sources */,
@@ -1264,38 +1282,37 @@
 				9AC60B5626497F35002C740A /* Transaction.swift in Sources */,
 				9A99A3CC2666BF3E003A76D5 /* Base58.swift in Sources */,
 				9387E0362543EA2600D44509 /* KinAirdropApi.swift in Sources */,
-				BDD51DEC267FF0750061712E /* MetricsModel.pbobjc.m in Sources */,
+				BDD51F09268014EE0061712E /* MetricsModel.pbobjc.m in Sources */,
 				9AC60B5226497F35002C740A /* Program.swift in Sources */,
-				BDD51DF3267FF0750061712E /* TransactionService.pbobjc.m in Sources */,
+				BDD51F10268014EE0061712E /* TransactionService.pbobjc.m in Sources */,
 				9AC60A87264597B0002C740A /* sign.c in Sources */,
 				8525B7EF24DB5101008277AB /* AppInfo.swift in Sources */,
 				9AC60A8F264597B0002C740A /* sha512.c in Sources */,
-				BDD51DF9267FF0750061712E /* Validate.pbobjc.m in Sources */,
+				BDD51F16268014EE0061712E /* Validate.pbobjc.m in Sources */,
 				9AC60B632661175E002C740A /* HashType.swift in Sources */,
 				855B76E524366E710037F407 /* KinAccount.swift in Sources */,
 				85737EEE2443A15A0012132E /* KinBalance.swift in Sources */,
 				8525B7F624DCD835008277AB /* AppInfoProvider.swift in Sources */,
 				85EEEB7B24BB7554002AAC29 /* SHA224Hash.swift in Sources */,
-				9A99A3CB2666BE45003A76D5 /* Base32.swift in Sources */,
 				930A9F2D254345E900F84156 /* KeyPair+Utilities.swift in Sources */,
-				BDD51E0A267FF0750061712E /* AirdropService.pbobjc.m in Sources */,
+				BDD51F27268014EE0061712E /* AirdropService.pbobjc.m in Sources */,
 				85713C332450CE8C005F5A48 /* KinStorableObjectExtensions.swift in Sources */,
 				85572FAA24B3CABB003734CB /* KinStreamingApi.swift in Sources */,
-				BDD51DEB267FF0750061712E /* IngestionService.pbrpc.m in Sources */,
+				BDD51F08268014EE0061712E /* IngestionService.pbrpc.m in Sources */,
 				85737ED6243E587C0012132E /* KinPayment.swift in Sources */,
-				BDD51E06267FF0750061712E /* AccountServiceV3.pbobjc.m in Sources */,
+				BDD51F23268014EE0061712E /* AccountServiceV3.pbobjc.m in Sources */,
 				85EEEB7924BB7512002AAC29 /* KinBinaryMemo.swift in Sources */,
 				9AC60AA52645CF58002C740A /* Data+Hex.swift in Sources */,
 				9AC60B672661178D002C740A /* SHA512.swift in Sources */,
-				BDD51DEE267FF0750061712E /* IngestionService.pbobjc.m in Sources */,
-				BDD51DFF267FF0750061712E /* ModelV3.pbobjc.m in Sources */,
+				BDD51F0B268014EE0061712E /* IngestionService.pbobjc.m in Sources */,
+				BDD51F1C268014EE0061712E /* ModelV3.pbobjc.m in Sources */,
 				85737EC3243D7CF90012132E /* KinFileStorage.swift in Sources */,
 				9AC60A9A2645C8D5002C740A /* KeyPair.swift in Sources */,
 				85763611249038B00011C356 /* ListSubject.swift in Sources */,
 				858ECDB02458819D006AF3D6 /* NetworkOperationHandler.swift in Sources */,
 				9AC60B5126497F35002C740A /* Instruction.swift in Sources */,
-				BDD51E02267FF0750061712E /* AccountService.pbrpc.m in Sources */,
-				BDD51E0B267FF0750061712E /* AirdropService.pbrpc.m in Sources */,
+				BDD51F1F268014EE0061712E /* AccountService.pbrpc.m in Sources */,
+				BDD51F28268014EE0061712E /* AirdropService.pbrpc.m in Sources */,
 				85737EDF243E62AD0012132E /* KinAccountCreationApi.swift in Sources */,
 				855B76E224366E350037F407 /* KinStorage.swift in Sources */,
 				854C64AC24478C0600CF398D /* KinOperation.swift in Sources */,
@@ -1370,12 +1387,13 @@
 /* Begin XCBuildConfiguration section */
 		851B27A524354AFB004EE486 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 935CBFCC669624DE4BE380E8 /* Pods-KinBaseTestsHost.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = DKJ27H7CDW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1392,12 +1410,13 @@
 		};
 		851B27A624354AFB004EE486 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B968A3E8585192CA5C3FB73 /* Pods-KinBaseTestsHost.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = KinBaseTestsHost/KinBaseTestsHost.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"KinBaseTestsHost/Preview Content\"";
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = DKJ27H7CDW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = KinBaseTestsHost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1524,6 +1543,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1535,17 +1555,18 @@
 		};
 		85B024122371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 509B215374A50AEDD2D38FDE /* Pods-KinBase.debug.xcconfig */;
+			baseConfigurationReference = AB895DF1A106D3968E338445 /* Pods-KinBase.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 83VHY3GSWL;
+				DEVELOPMENT_TEAM = DKJ27H7CDW;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = KinBase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1574,17 +1595,19 @@
 		};
 		85B024132371CC7700829FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6720D833B4A6B64843BC5B8A /* Pods-KinBase.release.xcconfig */;
+			baseConfigurationReference = C7958CD4102EA4AED66FBC86 /* Pods-KinBase.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 83VHY3GSWL;
+				DEVELOPMENT_TEAM = DKJ27H7CDW;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = YES;
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = KinBase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1594,6 +1617,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -1612,11 +1636,11 @@
 		};
 		85B024152371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF0569BEE1E90DF2BC6B36FC /* Pods-KinBaseTests.debug.xcconfig */;
+			baseConfigurationReference = F4426A0F1F8A1A63B740DA06 /* Pods-KinBaseTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = DKJ27H7CDW;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1633,11 +1657,11 @@
 		};
 		85B024162371CC7700829FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81D2F24BAB9DE7CE391FE76C /* Pods-KinBaseTests.release.xcconfig */;
+			baseConfigurationReference = 5410BF698D3BBBFA186FC381 /* Pods-KinBaseTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64923RW79V;
+				DEVELOPMENT_TEAM = DKJ27H7CDW;
 				INFOPLIST_FILE = KinBaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

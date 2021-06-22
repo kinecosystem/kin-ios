@@ -1,5 +1,5 @@
-#ifndef ED25519_H
-#define ED25519_H
+#ifndef KINED25519_H
+#define KINED25519_H
 
 #include <stddef.h>
 
