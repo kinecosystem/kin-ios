@@ -40,4 +40,4 @@ FOUNDATION_EXPORT const unsigned char KinBaseVersionString[];
 
 #import <KinBase/Validate.pbobjc.h>
 
-#import "ed25519.h"
+#import "kined25519.h"
