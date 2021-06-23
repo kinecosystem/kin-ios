@@ -24,12 +24,12 @@ public struct KinEnvironment {
     public let testService: KinTestServiceType?
 
     /// Use this initializer to specify your custom environment.
-    /// Otherwise, use `KinEnvironment.Horizon.mainNet()` or  `KinEnvironment.Horizon.testNet()` for default setups.
+    /// Otherwise, use `KinEnvironment.Agora.mainNet()` or  `KinEnvironment.Agora.testNet()` for default setups.
     /// - Parameters:
     ///   - network: the network of Kin Blockchain to connect to, `.mainNet` or `.testNet`.
     ///   - service: an implementation of `KinServiceType`.
     ///   - storage: an implementation of `KinStorageType`.
-    ///   - networkHandler: an `NetworkOperationHandler` instance.
+    ///   - networkHandler: a `NetworkOperationHandler` instance.
     ///   - dispatchQueue: a default `DispatchQueue` the SDK should use.
     public init(network: KinNetwork, service: KinServiceType, storage: KinStorageType, networkHandler: NetworkOperationHandler, dispatchQueue: DispatchQueue, testService: KinTestServiceType? = nil, logger: KinLoggerFactory) {
         self.network = network
@@ -42,30 +42,32 @@ public struct KinEnvironment {
     }
 
     public class Agora {
-        public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = false, minApiVersion: Int = 4) -> KinEnvironment {
+        public static func mainNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = false, minApiVersion: Int = 4, storagePath: URL? = nil) -> KinEnvironment {
             return defaultEnvironmentSetup(
                 network: .mainNet,
                 appInfoProvider: appInfoProvider,
                 enableLogging: enableLogging,
-                minApiVersion: minApiVersion
+                minApiVersion: minApiVersion,
+                storagePath: storagePath
             )
         }
         
-        public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = true, minApiVersion: Int = 4) -> KinEnvironment {
+        public static func testNet(appInfoProvider: AppInfoProvider = DummyAppInfoProvider(), enableLogging: Bool = true, minApiVersion: Int = 4, storagePath: URL? = nil) -> KinEnvironment {
             return defaultEnvironmentSetup(
                 network: .testNet,
                 appInfoProvider: appInfoProvider,
                 enableLogging: enableLogging,
-                minApiVersion: minApiVersion
+                minApiVersion: minApiVersion,
+                storagePath: storagePath
             )
         }
         
-        private static func defaultEnvironmentSetup(network: KinNetwork, appInfoProvider: AppInfoProvider, enableLogging: Bool, minApiVersion: Int) -> KinEnvironment {
+        private static func defaultEnvironmentSetup(network: KinNetwork, appInfoProvider: AppInfoProvider, enableLogging: Bool, minApiVersion: Int, storagePath: URL?) -> KinEnvironment {
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
             let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let networkHandler = NetworkOperationHandler()
-
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            // If custom storagePath is set, use that. Otherwise provide a default.
+            let documentDirectory = storagePath ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let storage = KinFileStorage(directory: documentDirectory, network: network)
             
             let grpcProxy = AgoraGrpcProxy(
@@ -116,7 +118,7 @@ public struct KinEnvironment {
 }
 
 extension KinEnvironment {
-    /// A convinence function to get all account ids stored in the current environment.
+    /// A convenience function to get all account ids stored in the current environment.
     /// - Returns: a `Promise` of `KinAccount.Id`s
     public func allAccountIds() -> Promise<[PublicKey]> {
         return storage.getAllAccountIds()
