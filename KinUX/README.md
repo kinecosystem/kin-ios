@@ -6,7 +6,7 @@ The KinUX module provides an easy to use out of the box spend flow UI that is pr
 Add the following to your project's Podfile.
 This will also transitively pull in KinBase and KinDesign into your project as well.
 ```
-pod 'KinUX', '~> 1.0.0'
+pod 'KinUX', '~> 1.0.1'
 ```
 
 ##  Overview

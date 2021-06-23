@@ -30,13 +30,13 @@ pod 'KinBaseCompat', '~> 0.4.5'
 // mix of the libraries below:
 
 // If you just want to access the blockchain & no UI
-pod 'KinBase', '~> 1.0.0'
+pod 'KinBase', '~> 1.0.1'
 
 // Add spend to use the modal spend flow to allow users to buy things with Kin
-pod 'KinUX', '~> 1.0.0'
+pod 'KinUX', '~> 1.0.1'
 
 // Add design for direct access to UI views you can use in your own app
-pod 'KinDesign', '~> 1.0.0'
+pod 'KinDesign', '~> 1.0.1'
 ```
 
 ## Sample App
