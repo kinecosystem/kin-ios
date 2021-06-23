@@ -1,4 +1,5 @@
-#  Kin SDK iOS
+# Kin SDK iOS
+
 [![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
 [![codecov](https://codecov.io/gh/kinecosystem/kin-ios/branch/master/graph/badge.svg?token=WB9BS3J2VY)](https://codecov.io/gh/kinecosystem/kin-ios)
 [![CircleCI](https://img.shields.io/circleci/build/gh/kinecosystem/kin-ios/master?token=554b0d33a552795e7bcd927bbba119434918cacc)](https://circleci.com/gh/kinecosystem/kin-ios)
@@ -7,28 +8,23 @@
 
 Use the Kin SDK for iOS to enable the use of Kin inside of your app. Include only the functionality you need to provide the right experience to your users. Use just the base library to access the lightest-weight wrapper over the Kin crytocurrency.
 
+## Looking for a quick way to start?
 
-| Library&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Path&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description                                                                                                                                                                                                                                                                               |
-|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `KinBase`                                                                                                                                                                             | [`/KinBase`](KinBase)                                                                                                        | The foundation library used by all other libraries in the system to support basic Kin operations: <ul><li>Wallet creation and management</li><li>Send and receive Kin</li></ul>                                                                                                           |
-| `KinBaseCompat`                                                                                                                                                                       | [`/KinBaseCompat`](KinBaseCompat)                                                                                            | The KinBaseCompat library implements the public surface layer to be a drop in replacement of the, now deprecated, [kin-sdk-ios](https://github.com/kinecosystem/kin-sdk-ios) library. Just update your version in Podfile and have better performance and stability. |
-| `KinDesign`                                                                                                                                                                           | [`/KinDesign`](KinDesign)                                                                                                    | The shared KinDesign library components for creating consistent Kin user experiences. When creating a custom Kin experience, this library can be used to include standard UI components for displaying Kin prices, transactions, etc. |
-| `KinUX`                                                                                                                                                                               | [`/KinUX`](KinUX)                                                                                                            | The KinUX library provides an out of the box model UI for spending Kin within an iOS application. Specificy what you're buying, your account, tap confirm. Success.|
+The quickest way to get started is by following the [tutorial](https://kintegrate.dev/tutorials/getting-started-ios-sdk/) or by downloading the [starter kit](https://kintegrate.dev/starters/kin-ios-starter/).
 
-## Note on Upcoming Solana Migration (Dec 8, 2020)
-See [KinBase](KinBase) or [KinBaseCompat](KinBaseCompat) for specific migration details related to each module.
+## Repository Contents
+
+| Library     | Path                      | Description                                                                                                                                                                                                                           |
+| :---------- | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `KinBase`   | [`/KinBase`](KinBase)     | The foundation library used by all other libraries in the system to support basic Kin operations: <ul><li>Wallet creation and management</li><li>Send and receive Kin</li></ul>                                                       |
+| `KinDesign` | [`/KinDesign`](KinDesign) | The shared KinDesign library components for creating consistent Kin user experiences. When creating a custom Kin experience, this library can be used to include standard UI components for displaying Kin prices, transactions, etc. |
+| `KinUX`     | [`/KinUX`](KinUX)         | The KinUX library provides an out of the box model UI for spending Kin within an iOS application. Specificy what you're buying, your account, tap confirm. Success.                                                                   |
 
 ## Installation
+
 In your Podfile
+
 ```
-// *** KinBaseCompat is for LEGACY SUPPORT ONLY ***
-// If you're a longtime Kin developer and want to use the compat
-// interface that looks like the now deprecated SDKs
-pod 'KinBaseCompat', '~> 0.4.5'
-
-// If you're a new developer or want more functionality you want a
-// mix of the libraries below:
-
 // If you just want to access the blockchain & no UI
 pod 'KinBase', '~> 1.0.1'
 
@@ -44,5 +40,5 @@ pod 'KinDesign', '~> 1.0.1'
 The [`/KinSampleApp`](KinSampleApp) directory includes a sample application. On the home screen of the sample app, you will see options to view Kin Wallet Demo and Kin Design Demo.
 
 ## Documentation
-Jazzy Documentation for all classes in all modules located [here](https://kinecosystem.github.io/kin-ios/)
 
+Jazzy Documentation for all classes in all modules located [here](https://kinecosystem.github.io/kin-ios/)
