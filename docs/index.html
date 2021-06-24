@@ -1,130 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>KinUX  Reference</title>
+    <title>KinBase  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a title="KinUX  Reference"></a>
+    <a title="KinBase  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">KinUX Docs</a> (4% documented)</p>
+        <p><a href="index.html">KinBase 1.0.1 Docs</a> (0% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
-        <a href="index.html">KinUX Reference</a>
+        <a href="index.html">KinBase Reference</a>
         <img id="carat" src="img/carat.png" />
-        KinUX  Reference
+        KinBase  Reference
       </p>
     </div>
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Classes/BaseObservableViewModel.html">BaseObservableViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/BaseViewModel.html">BaseViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinNavigationController.html">KinNavigationController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinPresentationController.html">KinPresentationController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/PaymentFlowController.html">PaymentFlowController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/PaymentFlowViewController.html">PaymentFlowViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/PaymentFlowViewModel.html">PaymentFlowViewModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/SheetPresentationController.html">SheetPresentationController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/SheetTransition.html">SheetTransition</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Enums.html">Enumerations</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Enums/PaymentFlowFailureReason.html">PaymentFlowFailureReason</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/PaymentFlowViewModelResult.html">PaymentFlowViewModelResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/PaymentFlowViewModelState.html">PaymentFlowViewModelState</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/SheetTransitionCover.html">SheetTransitionCover</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Extensions/Bundle.html">Bundle</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/Invoice.html">Invoice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/LineItem.html">LineItem</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Protocols.html">Protocols</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Protocols.html#/s:5KinUX9NavigatorP">Navigator</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ObservableViewModelType.html">ObservableViewModelType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/PaymentFlowViewModelType.html">PaymentFlowViewModelType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ViewModelType.html">ViewModelType</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Structs.html">Structures</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Structs/PaymentFlowError.html">PaymentFlowError</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/PaymentFlowViewModelArgs.html">PaymentFlowViewModelArgs</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Typealiases.html">Type Aliases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:5KinUX13StateListenera">StateListener</a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -140,11 +49,15 @@
 <a href="https://cocoapods.org/pods/KinBase"><img src="https://img.shields.io/cocoapods/v/KinBase.svg?color=6f41e8" alt="CocoaPods"></a></p>
 
 <p>Use the Kin SDK for iOS to enable the use of Kin inside of your app. Include only the functionality you need to provide the right experience to your users. Use just the base library to access the lightest-weight wrapper over the Kin crytocurrency.</p>
+<h2 id='looking-for-a-quick-way-to-start' class='heading'>Looking for a quick way to start?</h2>
+
+<p>The quickest way to get started is by following the <a href="https://kintegrate.dev/tutorials/getting-started-ios-sdk/">tutorial</a> or by downloading the <a href="https://kintegrate.dev/starters/kin-ios-starter/">starter kit</a>.</p>
+<h2 id='repository-contents' class='heading'>Repository Contents</h2>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Library&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-<th style="text-align: left">Path&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th style="text-align: left">Library</th>
+<th style="text-align: left">Path</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -152,11 +65,6 @@
 <td style="text-align: left"><code>KinBase</code></td>
 <td style="text-align: left"><a href="KinBase"><code>/KinBase</code></a></td>
 <td style="text-align: left">The foundation library used by all other libraries in the system to support basic Kin operations: <ul><li>Wallet creation and management</li><li>Send and receive Kin</li></ul></td>
-</tr>
-<tr>
-<td style="text-align: left"><code>KinBaseCompat</code></td>
-<td style="text-align: left"><a href="KinBaseCompat"><code>/KinBaseCompat</code></a></td>
-<td style="text-align: left">The KinBaseCompat library implements the public surface layer to be a drop in replacement of the, now deprecated, <a href="https://github.com/kinecosystem/kin-sdk-ios">kin-sdk-ios</a> library. Just update your version in Podfile and have better performance and stability.</td>
 </tr>
 <tr>
 <td style="text-align: left"><code>KinDesign</code></td>
@@ -172,22 +80,14 @@
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>In your Podfile</p>
-<pre class="highlight plaintext"><code>// *** KinBaseCompat is for LEGACY SUPPORT ONLY ***
-// If you're a longtime Kin developer and want to use the compat 
-// interface that looks like the now deprecated SDKs
-pod 'KinBaseCompat', '~&gt; 0.2.0'
-
-// If you're a new developer or want more functionality you want a
-// mix of the libraries below:
-
-// If you just want to access the blockchain &amp; no UI
-pod 'KinBase', '~&gt; 0.2.0'
+<pre class="highlight plaintext"><code>// If you just want to access the blockchain &amp; no UI
+pod 'KinBase', '~&gt; 1.0.1'
 
 // Add spend to use the modal spend flow to allow users to buy things with Kin
-pod 'KinUX', '~&gt; 0.2.0'
+pod 'KinUX', '~&gt; 1.0.1'
 
 // Add design for direct access to UI views you can use in your own app
-pod 'KinDesign', '~&gt; 0.2.0'
+pod 'KinDesign', '~&gt; 1.0.1'
 </code></pre>
 <h2 id='sample-app' class='heading'>Sample App</h2>
 
@@ -199,8 +99,8 @@ pod 'KinDesign', '~&gt; 0.2.0'
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2020-08-20)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2021-06-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
