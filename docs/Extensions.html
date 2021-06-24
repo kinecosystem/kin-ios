@@ -8,18 +8,26 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Extensions" class="dashAnchor"></a>
     <a title="Extensions  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">KinUX Docs</a> (4% documented)</p>
+        <p><a href="index.html">KinBase 1.0.1 Docs</a> (8% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
-        <a href="index.html">KinUX Reference</a>
+        <a href="index.html">KinBase Reference</a>
         <img id="carat" src="img/carat.png" />
         Extensions  Reference
       </p>
@@ -31,31 +39,130 @@
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/BaseObservableViewModel.html">BaseObservableViewModel</a>
+                <a href="Classes/AgoraKinAccountsApi.html">AgoraKinAccountsApi</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/BaseViewModel.html">BaseViewModel</a>
+                <a href="Classes/AgoraKinAccountsApi/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/KinNavigationController.html">KinNavigationController</a>
+                <a href="Classes/AgoraKinAirdropApi.html">AgoraKinAirdropApi</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/KinPresentationController.html">KinPresentationController</a>
+                <a href="Classes/AgoraKinAirdropApi/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaymentFlowController.html">PaymentFlowController</a>
+                <a href="Classes/AgoraKinTransactionsApi.html">AgoraKinTransactionsApi</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaymentFlowViewController.html">PaymentFlowViewController</a>
+                <a href="Classes/AgoraKinTransactionsApi/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaymentFlowViewModel.html">PaymentFlowViewModel</a>
+                <a href="Classes/AppUserAuthContext.html">AppUserAuthContext</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SheetPresentationController.html">SheetPresentationController</a>
+                <a href="Classes/AppUserAuthInterceptor.html">AppUserAuthInterceptor</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SheetTransition.html">SheetTransition</a>
+                <a href="Classes/BackoffStrategy.html">BackoffStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BackoffStrategy/Constants.html">– Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BackoffStrategy/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BackoffStrategy/StrategyType.html">– StrategyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Cache.html">Cache</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Cache/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DisposeBag.html">DisposeBag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DummyAppInfoProvider.html">DummyAppInfoProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/GrpcServiceProvider.html">GrpcServiceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext.html">KinAccountContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/Builder.html">– Builder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/NewAccountBuilder.html">– NewAccountBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/ExistingAccountBuilder.html">– ExistingAccountBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinFileStorage.html">KinFileStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinFileStorage/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinLoggerFactoryImpl.html">KinLoggerFactoryImpl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinLoggerImpl.html">KinLoggerImpl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinServiceV4.html">KinServiceV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinServiceV4/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinTestServiceV4.html">KinTestServiceV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinTestServiceV4/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinTransaction.html">KinTransaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ListObservable.html">ListObservable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ListSubject.html">ListSubject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:7KinBase6LoggerC">Logger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MetaServiceApi.html">MetaServiceApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NetworkOperation.html">NetworkOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NetworkOperation/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NetworkOperationHandler.html">NetworkOperationHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Observable.html">Observable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/UserAgentContext.html">UserAgentContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/UserAgentInterceptor.html">UserAgentInterceptor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ValueSubject.html">ValueSubject</a>
               </li>
             </ul>
           </li>
@@ -63,16 +170,28 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/PaymentFlowFailureReason.html">PaymentFlowFailureReason</a>
+                <a href="Enums/AccountSpec.html">AccountSpec</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/PaymentFlowViewModelResult.html">PaymentFlowViewModelResult</a>
+                <a href="Enums/GrpcErrors.html">GrpcErrors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/PaymentFlowViewModelState.html">PaymentFlowViewModelState</a>
+                <a href="Enums/KinNetwork.html">KinNetwork</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/SheetTransitionCover.html">SheetTransitionCover</a>
+                <a href="Enums/NetworkOperationErrors.html">NetworkOperationErrors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ObservationMode.html">ObservationMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SystemProgram.html">SystemProgram</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SystemProgram/Command.html">– Command</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/TransactionOrder.html">TransactionOrder</a>
               </li>
             </ul>
           </li>
@@ -80,13 +199,28 @@
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/Bundle.html">Bundle</a>
+                <a href="Extensions/Data.html">Data</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/Invoice.html">Invoice</a>
+                <a href="Extensions/Data/HexEncodingOptions.html">– HexEncodingOptions</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/LineItem.html">LineItem</a>
+                <a href="Extensions/Error.html">Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Kin.html">Kin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/KinStorageInvoiceListBlob.html">KinStorageInvoiceListBlob</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/PublicKey.html">PublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Quark.html">Quark</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Seed.html">Seed</a>
               </li>
             </ul>
           </li>
@@ -94,16 +228,85 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:5KinUX9NavigatorP">Navigator</a>
+                <a href="Protocols/AppInfoProvider.html">AppInfoProvider</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/ObservableViewModelType.html">ObservableViewModelType</a>
+                <a href="Protocols/Disposable.html">Disposable</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/PaymentFlowViewModelType.html">PaymentFlowViewModelType</a>
+                <a href="Protocols/HashType.html">HashType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/ViewModelType.html">ViewModelType</a>
+                <a href="Protocols/KeyType.html">KeyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountApi.html">KinAccountApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountApiV4.html">KinAccountApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountCreationApi.html">KinAccountCreationApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountCreationApiV4.html">KinAccountCreationApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountReadOperations.html">KinAccountReadOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAirdropApi.html">KinAirdropApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinLogger.html">KinLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinLoggerFactory.html">KinLoggerFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:7KinBase0A9OperationP">KinOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinPaymentReadOperations.html">KinPaymentReadOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinPaymentWriteOperations.html">KinPaymentWriteOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinServiceType.html">KinServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinStorageType.html">KinStorageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinStreamingApi.html">KinStreamingApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinStreamingApiV4.html">KinStreamingApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTestServiceType.html">KinTestServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTransactionApiV4.html">KinTransactionApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTransactionType.html">KinTransactionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTransactionWhitelistingApi.html">KinTransactionWhitelistingApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ListObserverType.html">ListObserverType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MetaServiceType.html">MetaServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ObserverType.html">ObserverType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SolanaCodable.html">SolanaCodable</a>
               </li>
             </ul>
           </li>
@@ -111,10 +314,277 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/PaymentFlowError.html">PaymentFlowError</a>
+                <a href="Structs.html#/s:7KinBase18AccountDescriptionV">AccountDescription</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/PaymentFlowViewModelArgs.html">PaymentFlowViewModelArgs</a>
+                <a href="Structs/AccountMeta.html">AccountMeta</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AirdropRequest.html">AirdropRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AirdropResponse.html">AirdropResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AirdropResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AppIndex.html">AppIndex</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AppInfo.html">AppInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AppUserCredentials.html">AppUserCredentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CompiledInstruction.html">CompiledInstruction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountRequest.html">CreateAccountRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountRequestV4.html">CreateAccountRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponse.html">CreateAccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponseV4.html">CreateAccountResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountRequest.html">GetAccountRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountRequestV4.html">GetAccountRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponse.html">GetAccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponseV4.html">GetAccountResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinFeeForTransactionResponseV4.html">GetMinFeeForTransactionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinFeeForTransactionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumBalanceForRentExemptionRequestV4.html">GetMinimumBalanceForRentExemptionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumBalanceForRentExemptionResponseV4.html">GetMinimumBalanceForRentExemptionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumBalanceForRentExemptionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:7KinBase010GetMinimumA16VersionRequestV4V">GetMinimumKinVersionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumKinVersionResponseV4.html">GetMinimumKinVersionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumKinVersionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:7KinBase27GetRecentBlockHashRequestV4V">GetRecentBlockHashRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetRecentBlockHashResonseV4.html">GetRecentBlockHashResonseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetRecentBlockHashResonseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:7KinBase25GetServiceConfigRequestV4V">GetServiceConfigRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetServiceConfigResponseV4.html">GetServiceConfigResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetServiceConfigResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionHistoryRequestV4.html">GetTransactionHistoryRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionHistoryResponseV4.html">GetTransactionHistoryResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionHistoryResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionRequestV4.html">GetTransactionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionResponseV4.html">GetTransactionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Instruction.html">Instruction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Invoice.html">Invoice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Invoice/InvoiceFormatError.html">– InvoiceFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceError.html">InvoiceError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceError/Reason.html">– Reason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceList.html">InvoiceList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceList/InvoiceListFormatError.html">– InvoiceListFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Key32.html">Key32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Key64.html">Key64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KeyPair.html">KeyPair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinAccount.html">KinAccount</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinAccount/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBalance.html">KinBalance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBinaryMemo.html">KinBinaryMemo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBinaryMemo/AgoraMemoFormatError.html">– AgoraMemoFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBinaryMemo/TransferType.html">– TransferType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinEnvironment.html">KinEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinEnvironment/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinEnvironment/Agora.html">– Agora</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinMemo.html">KinMemo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPayment.html">KinPayment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPayment/Id.html">– Id</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPayment/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPaymentItem.html">KinPaymentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPaymentOperation.html">KinPaymentOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinTransactionHash.html">KinTransactionHash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinTransactions.html">KinTransactions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineItem.html">LineItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineItem/LineItemFormatError.html">– LineItemFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MD5.html">MD5</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageHeader.html">MessageHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PromisedCallback.html">PromisedCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Record.html">Record</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ResolveTokenAccountsRequestV4.html">ResolveTokenAccountsRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ResolveTokenAccountsResponseV4.html">ResolveTokenAccountsResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ResolveTokenAccountsResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA224.html">SHA224</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA224Hash.html">SHA224Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA256.html">SHA256</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA512.html">SHA512</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SKU.html">SKU</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SubmitTransactionRequestV4.html">SubmitTransactionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SubmitTransactionResponseV4.html">SubmitTransactionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SubmitTransactionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Transaction.html">Transaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Transaction/SigningError.html">– SigningError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WhitelistTransactionRequest.html">WhitelistTransactionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WhitelistTransactionResponse.html">WhitelistTransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WhitelistTransactionResponse/Result.html">– Result</a>
               </li>
             </ul>
           </li>
@@ -122,7 +592,31 @@
             <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:5KinUX13StateListenera">StateListener</a>
+                <a href="Typealiases.html#/s:7KinBase4Bytea">Byte</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase4Hasha">Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase0A0a">Kin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase11PagingTokena">PagingToken</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase10PrivateKeya">PrivateKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase9PublicKeya">PublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase5Quarka">Quark</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase4Seeda">Seed</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase9Signaturea">Signature</a>
               </li>
             </ul>
           </li>
@@ -141,9 +635,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:objc(cs)NSBundle"></a>
-                    <a name="//apple_ref/swift/Extension/Bundle" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)NSBundle">Bundle</a>
+                    <a name="/s:10Foundation4DataV"></a>
+                    <a name="//apple_ref/swift/Extension/Data" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10Foundation4DataV">Data</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -152,13 +646,13 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         
-                        <a href="Extensions/Bundle.html" class="slightly-smaller">See more</a>
+                        <a href="Extensions/Data.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Bundle</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Data</span></code></pre>
 
                         </div>
                       </div>
@@ -168,9 +662,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7KinBase7InvoiceV"></a>
-                    <a name="//apple_ref/swift/Extension/Invoice" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7KinBase7InvoiceV">Invoice</a>
+                    <a name="/s:7KinBase0A0a"></a>
+                    <a name="//apple_ref/swift/Extension/Kin" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A0a">Kin</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -178,14 +672,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
-                        <a href="Extensions/Invoice.html" class="slightly-smaller">See more</a>
+                        <p>Undocumented</p>
+
+                        <a href="Extensions/Kin.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Invoice</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="Typealiases.html#/s:7KinBase0A0a">Kin</a></span></code></pre>
 
                         </div>
                       </div>
@@ -195,9 +690,50 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7KinBase8LineItemV"></a>
-                    <a name="//apple_ref/swift/Extension/LineItem" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7KinBase8LineItemV">LineItem</a>
+                    <a name="/s:7KinBase5Quarka"></a>
+                    <a name="//apple_ref/swift/Extension/Quark" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase5Quarka">Quark</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Extensions/Quark.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt"><a href="Typealiases.html#/s:7KinBase5Quarka">Quark</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/GRPCStreamResponseHandler"></a>
+                <a name="//apple_ref/swift/Section/GRPCStreamResponseHandler" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/GRPCStreamResponseHandler"></a>
+                  <h3 class="section-name"><p>GRPCStreamResponseHandler</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s5ErrorP"></a>
+                    <a name="//apple_ref/swift/Extension/Error" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s5ErrorP">Error</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -206,13 +742,135 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         
-                        <a href="Extensions/LineItem.html" class="slightly-smaller">See more</a>
+                        <a href="Extensions/Error.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LineItem</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/SystemProgram"></a>
+                <a name="//apple_ref/swift/Section/SystemProgram" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/SystemProgram"></a>
+                  <h3 class="section-name"><p>SystemProgram</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase9PublicKeya"></a>
+                    <a name="//apple_ref/swift/Extension/PublicKey" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase9PublicKeya">PublicKey</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Extensions/PublicKey.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="Typealiases.html#/s:7KinBase9PublicKeya">PublicKey</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Seed"></a>
+                <a name="//apple_ref/swift/Section/Seed" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Seed"></a>
+                  <h3 class="section-name"><p>Seed</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase4Seeda"></a>
+                    <a name="//apple_ref/swift/Extension/Seed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase4Seeda">Seed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Extensions/Seed.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt"><a href="Typealiases.html#/s:7KinBase4Seeda">Seed</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/KinStorage%20Objects%20to%20Models"></a>
+                <a name="//apple_ref/swift/Section/KinStorage Objects to Models" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/KinStorage%20Objects%20to%20Models"></a>
+                  <h3 class="section-name"><p>KinStorage Objects to Models</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)GPBMessage"></a>
+                    <a name="//apple_ref/swift/Extension/KinStorageInvoiceListBlob" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)GPBMessage">KinStorageInvoiceListBlob</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/KinStorageInvoiceListBlob.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KinStorageInvoiceListBlob</span></code></pre>
 
                         </div>
                       </div>
@@ -224,8 +882,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2020-08-20)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2021-06-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

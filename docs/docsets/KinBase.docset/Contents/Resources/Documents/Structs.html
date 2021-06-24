@@ -8,18 +8,26 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">KinUX Docs</a> (4% documented)</p>
+        <p><a href="index.html">KinBase 1.0.1 Docs</a> (8% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
-        <a href="index.html">KinUX Reference</a>
+        <a href="index.html">KinBase Reference</a>
         <img id="carat" src="img/carat.png" />
         Structures  Reference
       </p>
@@ -31,31 +39,130 @@
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/BaseObservableViewModel.html">BaseObservableViewModel</a>
+                <a href="Classes/AgoraKinAccountsApi.html">AgoraKinAccountsApi</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/BaseViewModel.html">BaseViewModel</a>
+                <a href="Classes/AgoraKinAccountsApi/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/KinNavigationController.html">KinNavigationController</a>
+                <a href="Classes/AgoraKinAirdropApi.html">AgoraKinAirdropApi</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/KinPresentationController.html">KinPresentationController</a>
+                <a href="Classes/AgoraKinAirdropApi/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaymentFlowController.html">PaymentFlowController</a>
+                <a href="Classes/AgoraKinTransactionsApi.html">AgoraKinTransactionsApi</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaymentFlowViewController.html">PaymentFlowViewController</a>
+                <a href="Classes/AgoraKinTransactionsApi/Errors.html">– Errors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/PaymentFlowViewModel.html">PaymentFlowViewModel</a>
+                <a href="Classes/AppUserAuthContext.html">AppUserAuthContext</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SheetPresentationController.html">SheetPresentationController</a>
+                <a href="Classes/AppUserAuthInterceptor.html">AppUserAuthInterceptor</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SheetTransition.html">SheetTransition</a>
+                <a href="Classes/BackoffStrategy.html">BackoffStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BackoffStrategy/Constants.html">– Constants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BackoffStrategy/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BackoffStrategy/StrategyType.html">– StrategyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Cache.html">Cache</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Cache/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DisposeBag.html">DisposeBag</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/DummyAppInfoProvider.html">DummyAppInfoProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/GrpcServiceProvider.html">GrpcServiceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext.html">KinAccountContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/Builder.html">– Builder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/NewAccountBuilder.html">– NewAccountBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinAccountContext/ExistingAccountBuilder.html">– ExistingAccountBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinFileStorage.html">KinFileStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinFileStorage/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinLoggerFactoryImpl.html">KinLoggerFactoryImpl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinLoggerImpl.html">KinLoggerImpl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinServiceV4.html">KinServiceV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinServiceV4/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinTestServiceV4.html">KinTestServiceV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinTestServiceV4/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/KinTransaction.html">KinTransaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ListObservable.html">ListObservable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ListSubject.html">ListSubject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:7KinBase6LoggerC">Logger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/MetaServiceApi.html">MetaServiceApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NetworkOperation.html">NetworkOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NetworkOperation/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NetworkOperationHandler.html">NetworkOperationHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Observable.html">Observable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/UserAgentContext.html">UserAgentContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/UserAgentInterceptor.html">UserAgentInterceptor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ValueSubject.html">ValueSubject</a>
               </li>
             </ul>
           </li>
@@ -63,16 +170,28 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/PaymentFlowFailureReason.html">PaymentFlowFailureReason</a>
+                <a href="Enums/AccountSpec.html">AccountSpec</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/PaymentFlowViewModelResult.html">PaymentFlowViewModelResult</a>
+                <a href="Enums/GrpcErrors.html">GrpcErrors</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/PaymentFlowViewModelState.html">PaymentFlowViewModelState</a>
+                <a href="Enums/KinNetwork.html">KinNetwork</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/SheetTransitionCover.html">SheetTransitionCover</a>
+                <a href="Enums/NetworkOperationErrors.html">NetworkOperationErrors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ObservationMode.html">ObservationMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SystemProgram.html">SystemProgram</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SystemProgram/Command.html">– Command</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/TransactionOrder.html">TransactionOrder</a>
               </li>
             </ul>
           </li>
@@ -80,13 +199,28 @@
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/Bundle.html">Bundle</a>
+                <a href="Extensions/Data.html">Data</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/Invoice.html">Invoice</a>
+                <a href="Extensions/Data/HexEncodingOptions.html">– HexEncodingOptions</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/LineItem.html">LineItem</a>
+                <a href="Extensions/Error.html">Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Kin.html">Kin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/KinStorageInvoiceListBlob.html">KinStorageInvoiceListBlob</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/PublicKey.html">PublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Quark.html">Quark</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Seed.html">Seed</a>
               </li>
             </ul>
           </li>
@@ -94,16 +228,85 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols.html#/s:5KinUX9NavigatorP">Navigator</a>
+                <a href="Protocols/AppInfoProvider.html">AppInfoProvider</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/ObservableViewModelType.html">ObservableViewModelType</a>
+                <a href="Protocols/Disposable.html">Disposable</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/PaymentFlowViewModelType.html">PaymentFlowViewModelType</a>
+                <a href="Protocols/HashType.html">HashType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/ViewModelType.html">ViewModelType</a>
+                <a href="Protocols/KeyType.html">KeyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountApi.html">KinAccountApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountApiV4.html">KinAccountApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountCreationApi.html">KinAccountCreationApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountCreationApiV4.html">KinAccountCreationApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAccountReadOperations.html">KinAccountReadOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinAirdropApi.html">KinAirdropApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinLogger.html">KinLogger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinLoggerFactory.html">KinLoggerFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols.html#/s:7KinBase0A9OperationP">KinOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinPaymentReadOperations.html">KinPaymentReadOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinPaymentWriteOperations.html">KinPaymentWriteOperations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinServiceType.html">KinServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinStorageType.html">KinStorageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinStreamingApi.html">KinStreamingApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinStreamingApiV4.html">KinStreamingApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTestServiceType.html">KinTestServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTransactionApiV4.html">KinTransactionApiV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTransactionType.html">KinTransactionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/KinTransactionWhitelistingApi.html">KinTransactionWhitelistingApi</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ListObserverType.html">ListObserverType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/MetaServiceType.html">MetaServiceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ObserverType.html">ObserverType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SolanaCodable.html">SolanaCodable</a>
               </li>
             </ul>
           </li>
@@ -111,10 +314,277 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/PaymentFlowError.html">PaymentFlowError</a>
+                <a href="Structs.html#/s:7KinBase18AccountDescriptionV">AccountDescription</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/PaymentFlowViewModelArgs.html">PaymentFlowViewModelArgs</a>
+                <a href="Structs/AccountMeta.html">AccountMeta</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AirdropRequest.html">AirdropRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AirdropResponse.html">AirdropResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AirdropResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AppIndex.html">AppIndex</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AppInfo.html">AppInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AppUserCredentials.html">AppUserCredentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CompiledInstruction.html">CompiledInstruction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountRequest.html">CreateAccountRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountRequestV4.html">CreateAccountRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponse.html">CreateAccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponseV4.html">CreateAccountResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateAccountResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountRequest.html">GetAccountRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountRequestV4.html">GetAccountRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponse.html">GetAccountResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponse/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponseV4.html">GetAccountResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetAccountResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinFeeForTransactionResponseV4.html">GetMinFeeForTransactionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinFeeForTransactionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumBalanceForRentExemptionRequestV4.html">GetMinimumBalanceForRentExemptionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumBalanceForRentExemptionResponseV4.html">GetMinimumBalanceForRentExemptionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumBalanceForRentExemptionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:7KinBase010GetMinimumA16VersionRequestV4V">GetMinimumKinVersionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumKinVersionResponseV4.html">GetMinimumKinVersionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetMinimumKinVersionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:7KinBase27GetRecentBlockHashRequestV4V">GetRecentBlockHashRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetRecentBlockHashResonseV4.html">GetRecentBlockHashResonseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetRecentBlockHashResonseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:7KinBase25GetServiceConfigRequestV4V">GetServiceConfigRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetServiceConfigResponseV4.html">GetServiceConfigResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetServiceConfigResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionHistoryRequestV4.html">GetTransactionHistoryRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionHistoryResponseV4.html">GetTransactionHistoryResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionHistoryResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionRequestV4.html">GetTransactionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionResponseV4.html">GetTransactionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GetTransactionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Instruction.html">Instruction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Invoice.html">Invoice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Invoice/InvoiceFormatError.html">– InvoiceFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceError.html">InvoiceError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceError/Reason.html">– Reason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceList.html">InvoiceList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InvoiceList/InvoiceListFormatError.html">– InvoiceListFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Key32.html">Key32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Key64.html">Key64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KeyPair.html">KeyPair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinAccount.html">KinAccount</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinAccount/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBalance.html">KinBalance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBinaryMemo.html">KinBinaryMemo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBinaryMemo/AgoraMemoFormatError.html">– AgoraMemoFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinBinaryMemo/TransferType.html">– TransferType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinEnvironment.html">KinEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinEnvironment/Errors.html">– Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinEnvironment/Agora.html">– Agora</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinMemo.html">KinMemo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPayment.html">KinPayment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPayment/Id.html">– Id</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPayment/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPaymentItem.html">KinPaymentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinPaymentOperation.html">KinPaymentOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinTransactionHash.html">KinTransactionHash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/KinTransactions.html">KinTransactions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineItem.html">LineItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineItem/LineItemFormatError.html">– LineItemFormatError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MD5.html">MD5</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageHeader.html">MessageHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PromisedCallback.html">PromisedCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Record.html">Record</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ResolveTokenAccountsRequestV4.html">ResolveTokenAccountsRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ResolveTokenAccountsResponseV4.html">ResolveTokenAccountsResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ResolveTokenAccountsResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA224.html">SHA224</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA224Hash.html">SHA224Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA256.html">SHA256</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SHA512.html">SHA512</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SKU.html">SKU</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SubmitTransactionRequestV4.html">SubmitTransactionRequestV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SubmitTransactionResponseV4.html">SubmitTransactionResponseV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SubmitTransactionResponseV4/Result.html">– Result</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Transaction.html">Transaction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Transaction/SigningError.html">– SigningError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WhitelistTransactionRequest.html">WhitelistTransactionRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WhitelistTransactionResponse.html">WhitelistTransactionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WhitelistTransactionResponse/Result.html">– Result</a>
               </li>
             </ul>
           </li>
@@ -122,7 +592,31 @@
             <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:5KinUX13StateListenera">StateListener</a>
+                <a href="Typealiases.html#/s:7KinBase4Bytea">Byte</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase4Hasha">Hash</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase0A0a">Kin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase11PagingTokena">PagingToken</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase10PrivateKeya">PrivateKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase9PublicKeya">PublicKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase5Quarka">Quark</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase4Seeda">Seed</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:7KinBase9Signaturea">Signature</a>
               </li>
             </ul>
           </li>
@@ -141,9 +635,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5KinUX24PaymentFlowViewModelArgsV"></a>
-                    <a name="//apple_ref/swift/Struct/PaymentFlowViewModelArgs" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5KinUX24PaymentFlowViewModelArgsV">PaymentFlowViewModelArgs</a>
+                    <a name="/s:7KinBase0A11EnvironmentV"></a>
+                    <a name="//apple_ref/swift/Struct/KinEnvironment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A11EnvironmentV">KinEnvironment</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -153,13 +647,13 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
-                        <a href="Structs/PaymentFlowViewModelArgs.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/KinEnvironment.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PaymentFlowViewModelArgs</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinEnvironment</span></code></pre>
 
                         </div>
                       </div>
@@ -169,9 +663,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5KinUX16PaymentFlowErrorV"></a>
-                    <a name="//apple_ref/swift/Struct/PaymentFlowError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5KinUX16PaymentFlowErrorV">PaymentFlowError</a>
+                    <a name="/s:7KinBase8AppIndexV"></a>
+                    <a name="//apple_ref/swift/Struct/AppIndex" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase8AppIndexV">AppIndex</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -181,13 +675,1839 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
-                        <a href="Structs/PaymentFlowError.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/AppIndex.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PaymentFlowError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AppIndex</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase7AppInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/AppInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase7AppInfoV">AppInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/AppInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AppInfo</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase18AppUserCredentialsV"></a>
+                    <a name="//apple_ref/swift/Struct/AppUserCredentials" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase18AppUserCredentialsV">AppUserCredentials</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/AppUserCredentials.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AppUserCredentials</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase3SKUV"></a>
+                    <a name="//apple_ref/swift/Struct/SKU" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase3SKUV">SKU</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/SKU.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SKU</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase8LineItemV"></a>
+                    <a name="//apple_ref/swift/Struct/LineItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase8LineItemV">LineItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An individual item in an <code><a href="Structs/Invoice.html">Invoice</a></code></p>
+
+                        <a href="Structs/LineItem.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LineItem</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase7InvoiceV"></a>
+                    <a name="//apple_ref/swift/Struct/Invoice" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase7InvoiceV">Invoice</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains the information about what a given <code><a href="Structs/KinPayment.html">KinPayment</a></code> was for.</p>
+
+                        <a href="Structs/Invoice.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Invoice</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase11InvoiceListV"></a>
+                    <a name="//apple_ref/swift/Struct/InvoiceList" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase11InvoiceListV">InvoiceList</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A collection of <code><a href="Structs/Invoice.html">Invoice</a></code>s. Often submitted in the same <code><a href="Classes/KinTransaction.html">KinTransaction</a></code> together.</p>
+
+                        <a href="Structs/InvoiceList.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">InvoiceList</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase7KeyPairV"></a>
+                    <a name="//apple_ref/swift/Struct/KeyPair" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase7KeyPairV">KeyPair</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KeyPair.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KeyPair</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KeyPair</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase18AccountDescriptionV"></a>
+                    <a name="//apple_ref/swift/Struct/AccountDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase18AccountDescriptionV">AccountDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AccountDescription</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A7AccountV"></a>
+                    <a name="//apple_ref/swift/Struct/KinAccount" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A7AccountV">KinAccount</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinAccount.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinAccount</span> <span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KinAccount</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A7BalanceV"></a>
+                    <a name="//apple_ref/swift/Struct/KinBalance" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A7BalanceV">KinBalance</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinBalance.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinBalance</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A10BinaryMemoV"></a>
+                    <a name="//apple_ref/swift/Struct/KinBinaryMemo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A10BinaryMemoV">KinBinaryMemo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A memo format understood by the Agora services.
+@param magicByteIndicator    2 bits   | &lt; 4
+@param version               3 bits   | &lt; 8
+@param typeId                5 bits   | &lt; 32
+@param appIdx                16 bits  | &lt; 65,536
+@param foreignKey            230 bits | Base64 Encoded String of [230 bits + (2 zeros padding)]</p>
+
+                        <a href="Structs/KinBinaryMemo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinBinaryMemo</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A4MemoV"></a>
+                    <a name="//apple_ref/swift/Struct/KinMemo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A4MemoV">KinMemo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinMemo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinMemo</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A16PaymentOperationV"></a>
+                    <a name="//apple_ref/swift/Struct/KinPaymentOperation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A16PaymentOperationV">KinPaymentOperation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinPaymentOperation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinPaymentOperation</span> <span class="p">:</span> <span class="kt"><a href="Protocols.html#/s:7KinBase0A9OperationP">KinOperation</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A7PaymentV"></a>
+                    <a name="//apple_ref/swift/Struct/KinPayment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A7PaymentV">KinPayment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinPayment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinPayment</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A11PaymentItemV"></a>
+                    <a name="//apple_ref/swift/Struct/KinPaymentItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A11PaymentItemV">KinPaymentItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinPaymentItem.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinPaymentItem</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase6RecordV"></a>
+                    <a name="//apple_ref/swift/Struct/Record" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase6RecordV">Record</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/Record.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Record</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase11TransactionV"></a>
+                    <a name="//apple_ref/swift/Struct/Transaction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase11TransactionV">Transaction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/Transaction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Transaction</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Transaction</span><span class="p">:</span> <span class="kt"><a href="Protocols/SolanaCodable.html">SolanaCodable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A15TransactionHashV"></a>
+                    <a name="//apple_ref/swift/Struct/KinTransactionHash" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A15TransactionHashV">KinTransactionHash</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinTransactionHash.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinTransactionHash</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">KinTransactionHash</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase0A12TransactionsV"></a>
+                    <a name="//apple_ref/swift/Struct/KinTransactions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase0A12TransactionsV">KinTransactions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/KinTransactions.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">KinTransactions</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase10SHA224HashV"></a>
+                    <a name="//apple_ref/swift/Struct/SHA224Hash" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase10SHA224HashV">SHA224Hash</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The SHA-224 hash of an <code><a href="Structs/Invoice.html">Invoice</a></code> or <code><a href="Structs/InvoiceList.html">InvoiceList</a></code>.</p>
+
+                        <a href="Structs/SHA224Hash.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SHA224Hash</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase12InvoiceErrorV"></a>
+                    <a name="//apple_ref/swift/Struct/InvoiceError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase12InvoiceErrorV">InvoiceError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/InvoiceError.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">InvoiceError</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Request%20%26%20Response"></a>
+                <a name="//apple_ref/swift/Section/Request &amp; Response" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Request%20%26%20Response"></a>
+                  <h3 class="section-name"><p>Request &amp; Response</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase17GetAccountRequestV"></a>
+                    <a name="//apple_ref/swift/Struct/GetAccountRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase17GetAccountRequestV">GetAccountRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetAccountRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetAccountRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase18GetAccountResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/GetAccountResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase18GetAccountResponseV">GetAccountResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetAccountResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetAccountResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Request%20%26%20Response%20V4"></a>
+                <a name="//apple_ref/swift/Section/Request &amp; Response V4" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Request%20%26%20Response%20V4"></a>
+                  <h3 class="section-name"><p>Request &amp; Response V4</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase19GetAccountRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetAccountRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase19GetAccountRequestV4V">GetAccountRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetAccountRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetAccountRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase20GetAccountResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetAccountResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase20GetAccountResponseV4V">GetAccountResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetAccountResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetAccountResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase29ResolveTokenAccountsRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/ResolveTokenAccountsRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase29ResolveTokenAccountsRequestV4V">ResolveTokenAccountsRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/ResolveTokenAccountsRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ResolveTokenAccountsRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase30ResolveTokenAccountsResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/ResolveTokenAccountsResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase30ResolveTokenAccountsResponseV4V">ResolveTokenAccountsResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/ResolveTokenAccountsResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ResolveTokenAccountsResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Request%20%26%20Response2"></a>
+                <a name="//apple_ref/swift/Section/Request &amp; Response" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Request%20%26%20Response2"></a>
+                  <h3 class="section-name"><p>Request &amp; Response</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase20CreateAccountRequestV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateAccountRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase20CreateAccountRequestV">CreateAccountRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/CreateAccountRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateAccountRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase21CreateAccountResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateAccountResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase21CreateAccountResponseV">CreateAccountResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/CreateAccountResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateAccountResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase22CreateAccountRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/CreateAccountRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase22CreateAccountRequestV4V">CreateAccountRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/CreateAccountRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateAccountRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase23CreateAccountResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/CreateAccountResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase23CreateAccountResponseV4V">CreateAccountResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/CreateAccountResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateAccountResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase14AirdropRequestV"></a>
+                    <a name="//apple_ref/swift/Struct/AirdropRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase14AirdropRequestV">AirdropRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/AirdropRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AirdropRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase15AirdropResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/AirdropResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase15AirdropResponseV">AirdropResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/AirdropResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AirdropResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase010GetMinimumA16VersionRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetMinimumKinVersionRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase010GetMinimumA16VersionRequestV4V">GetMinimumKinVersionRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetMinimumKinVersionRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase010GetMinimumA17VersionResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetMinimumKinVersionResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase010GetMinimumA17VersionResponseV4V">GetMinimumKinVersionResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetMinimumKinVersionResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetMinimumKinVersionResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase25GetServiceConfigRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetServiceConfigRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase25GetServiceConfigRequestV4V">GetServiceConfigRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>subsidizerAccount  The public key of the account that the service will use to sign transactions for funding.
+                               If not specified, the service is <em>not</em> configured to fund transactions.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetServiceConfigRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase26GetServiceConfigResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetServiceConfigResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase26GetServiceConfigResponseV4V">GetServiceConfigResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetServiceConfigResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetServiceConfigResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase27GetRecentBlockHashRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetRecentBlockHashRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase27GetRecentBlockHashRequestV4V">GetRecentBlockHashRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetRecentBlockHashRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase27GetRecentBlockHashResonseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetRecentBlockHashResonseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase27GetRecentBlockHashResonseV4V">GetRecentBlockHashResonseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetRecentBlockHashResonseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetRecentBlockHashResonseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase42GetMinimumBalanceForRentExemptionRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetMinimumBalanceForRentExemptionRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase42GetMinimumBalanceForRentExemptionRequestV4V">GetMinimumBalanceForRentExemptionRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetMinimumBalanceForRentExemptionRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetMinimumBalanceForRentExemptionRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase43GetMinimumBalanceForRentExemptionResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetMinimumBalanceForRentExemptionResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase43GetMinimumBalanceForRentExemptionResponseV4V">GetMinimumBalanceForRentExemptionResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetMinimumBalanceForRentExemptionResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetMinimumBalanceForRentExemptionResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase30GetTransactionHistoryRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetTransactionHistoryRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase30GetTransactionHistoryRequestV4V">GetTransactionHistoryRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetTransactionHistoryRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetTransactionHistoryRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase31GetTransactionHistoryResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetTransactionHistoryResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase31GetTransactionHistoryResponseV4V">GetTransactionHistoryResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetTransactionHistoryResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetTransactionHistoryResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase23GetTransactionRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetTransactionRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase23GetTransactionRequestV4V">GetTransactionRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetTransactionRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetTransactionRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase24GetTransactionResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetTransactionResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase24GetTransactionResponseV4V">GetTransactionResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetTransactionResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetTransactionResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase33GetMinFeeForTransactionResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/GetMinFeeForTransactionResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase33GetMinFeeForTransactionResponseV4V">GetMinFeeForTransactionResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GetMinFeeForTransactionResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GetMinFeeForTransactionResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase26SubmitTransactionRequestV4V"></a>
+                    <a name="//apple_ref/swift/Struct/SubmitTransactionRequestV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase26SubmitTransactionRequestV4V">SubmitTransactionRequestV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/SubmitTransactionRequestV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SubmitTransactionRequestV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase27SubmitTransactionResponseV4V"></a>
+                    <a name="//apple_ref/swift/Struct/SubmitTransactionResponseV4" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase27SubmitTransactionResponseV4V">SubmitTransactionResponseV4</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/SubmitTransactionResponseV4.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SubmitTransactionResponseV4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase27WhitelistTransactionRequestV"></a>
+                    <a name="//apple_ref/swift/Struct/WhitelistTransactionRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase27WhitelistTransactionRequestV">WhitelistTransactionRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/WhitelistTransactionRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WhitelistTransactionRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase28WhitelistTransactionResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/WhitelistTransactionResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase28WhitelistTransactionResponseV">WhitelistTransactionResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/WhitelistTransactionResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WhitelistTransactionResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase16PromisedCallbackV"></a>
+                    <a name="//apple_ref/swift/Struct/PromisedCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase16PromisedCallbackV">PromisedCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/PromisedCallback.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PromisedCallback</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase11AccountMetaV"></a>
+                    <a name="//apple_ref/swift/Struct/AccountMeta" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase11AccountMetaV">AccountMeta</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/AccountMeta.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AccountMeta</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">AccountMeta</span><span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase11InstructionV"></a>
+                    <a name="//apple_ref/swift/Struct/Instruction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase11InstructionV">Instruction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/Instruction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Instruction</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/CompiledInstruction"></a>
+                <a name="//apple_ref/swift/Section/CompiledInstruction" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CompiledInstruction"></a>
+                  <h3 class="section-name"><p>CompiledInstruction</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase19CompiledInstructionV"></a>
+                    <a name="//apple_ref/swift/Struct/CompiledInstruction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase19CompiledInstructionV">CompiledInstruction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/CompiledInstruction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CompiledInstruction</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">CompiledInstruction</span><span class="p">:</span> <span class="kt"><a href="Protocols/SolanaCodable.html">SolanaCodable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase7MessageV"></a>
+                    <a name="//apple_ref/swift/Struct/Message" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase7MessageV">Message</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/Message.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Message</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Message</span><span class="p">:</span> <span class="kt"><a href="Protocols/SolanaCodable.html">SolanaCodable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase13MessageHeaderV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageHeader" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase13MessageHeaderV">MessageHeader</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/MessageHeader.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageHeader</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MessageHeader</span><span class="p">:</span> <span class="kt"><a href="Protocols/SolanaCodable.html">SolanaCodable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Key32"></a>
+                <a name="//apple_ref/swift/Section/Key32" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Key32"></a>
+                  <h3 class="section-name"><p>Key32</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase5Key32V"></a>
+                    <a name="//apple_ref/swift/Struct/Key32" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase5Key32V">Key32</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/Key32.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Key32</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/KeyType.html">KeyType</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Key32</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Key64"></a>
+                <a name="//apple_ref/swift/Section/Key64" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Key64"></a>
+                  <h3 class="section-name"><p>Key64</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase5Key64V"></a>
+                    <a name="//apple_ref/swift/Struct/Key64" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase5Key64V">Key64</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/Key64.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Key64</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/KeyType.html">KeyType</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Key64</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase3MD5V"></a>
+                    <a name="//apple_ref/swift/Struct/MD5" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase3MD5V">MD5</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/MD5.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MD5</span> <span class="p">:</span> <span class="kt"><a href="Protocols/HashType.html">HashType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase6SHA224V"></a>
+                    <a name="//apple_ref/swift/Struct/SHA224" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase6SHA224V">SHA224</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/SHA224.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SHA224</span> <span class="p">:</span> <span class="kt"><a href="Protocols/HashType.html">HashType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase6SHA256V"></a>
+                    <a name="//apple_ref/swift/Struct/SHA256" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase6SHA256V">SHA256</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/SHA256.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SHA256</span> <span class="p">:</span> <span class="kt"><a href="Protocols/HashType.html">HashType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7KinBase6SHA512V"></a>
+                    <a name="//apple_ref/swift/Struct/SHA512" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7KinBase6SHA512V">SHA512</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/SHA512.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SHA512</span> <span class="p">:</span> <span class="kt"><a href="Protocols/HashType.html">HashType</a></span></code></pre>
 
                         </div>
                       </div>
@@ -199,8 +2519,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2020-08-20)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2021-06-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
