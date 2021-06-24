@@ -8,12 +8,20 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a title="KinBase  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">KinBase Docs</a> (14% documented)</p>
+        <p><a href="index.html">KinBase 1.0.1 Docs</a> (0% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -26,324 +34,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="Classes.html">Classes</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Classes/BackoffStrategy.html">BackoffStrategy</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/BackoffStrategy/Constants.html">– Constants</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/BackoffStrategy/Errors.html">– Errors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/BackoffStrategy/StrategyType.html">– StrategyType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/DefaultHorizonKinAccountCreationApi.html">DefaultHorizonKinAccountCreationApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/DefaultHorizonKinTransactionWhitelistingApi.html">DefaultHorizonKinTransactionWhitelistingApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/DisposeBag.html">DisposeBag</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/HorizonKinApi.html">HorizonKinApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/HorizonKinApi/Errors.html">– Errors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccount.html">KinAccount</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccount/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccountContext.html">KinAccountContext</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccountContext/Errors.html">– Errors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccountContext/Builder.html">– Builder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccountContext/NewAccountBuilder.html">– NewAccountBuilder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinAccountContext/ExistingAccountBuilder.html">– ExistingAccountBuilder</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinFileStorage.html">KinFileStorage</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinFileStorage/Errors.html">– Errors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinService.html">KinService</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/KinService/Errors.html">– Errors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ListObservable.html">ListObservable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ListSubject.html">ListSubject</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/NetworkOperation.html">NetworkOperation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/NetworkOperation/State.html">– State</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/NetworkOperationHandler.html">NetworkOperationHandler</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/Observable.html">Observable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes.html#/s:7KinBase15StellarSdkProxyC">StellarSdkProxy</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ValueSubject.html">ValueSubject</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Enums.html">Enumerations</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Enums/KinNetwork.html">KinNetwork</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/NetworkOperationErrors.html">NetworkOperationErrors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/ObservationMode.html">ObservationMode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/TransactionOrder.html">TransactionOrder</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Extensions/Array.html">Array</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/Kin.html">Kin</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/KinStorageKinAccount_Status.html">KinStorageKinAccount_Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/KinStorageKinTransaction_Status.html">KinStorageKinTransaction_Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/KinStoragePublicKey.html">KinStoragePublicKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/PublicKey.html">PublicKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/Quark.html">Quark</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk.html">stellarsdk</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk/KeyPair.html">– KeyPair</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk/Seed.html">– Seed</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk/Transaction.html">– Transaction</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk/AccountResponse.html">– AccountResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk/TransactionResponse.html">– TransactionResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Extensions/stellarsdk/SubmitTransactionResponse.html">– SubmitTransactionResponse</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Protocols.html">Protocols</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Protocols/Disposable.html">Disposable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinAccountApi.html">KinAccountApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinAccountCreationApi.html">KinAccountCreationApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinAccountReadOperations.html">KinAccountReadOperations</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols.html#/s:7KinBase0A9OperationP">KinOperation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinPaymentReadOperations.html">KinPaymentReadOperations</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinPaymentWriteOperations.html">KinPaymentWriteOperations</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinServiceType.html">KinServiceType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinStorageType.html">KinStorageType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinTransactionApi.html">KinTransactionApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/KinTransactionWhitelistingApi.html">KinTransactionWhitelistingApi</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ListObserverType.html">ListObserverType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/ObserverType.html">ObserverType</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Structs.html">Structures</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Structs/CreateAccountRequest.html">CreateAccountRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CreateAccountResponse.html">CreateAccountResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CreateAccountResponse/Result.html">– Result</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetAccountRequest.html">GetAccountRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetAccountResponse.html">GetAccountResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetAccountResponse/Result.html">– Result</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetMinFeeForTransactionResponse.html">GetMinFeeForTransactionResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetMinFeeForTransactionResponse/Result.html">– Result</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetTransactionHistoryRequest.html">GetTransactionHistoryRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetTransactionHistoryResponse.html">GetTransactionHistoryResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetTransactionHistoryResponse/Result.html">– Result</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetTransactionRequest.html">GetTransactionRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetTransactionResponse.html">GetTransactionResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/GetTransactionResponse/Result.html">– Result</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinBalance.html">KinBalance</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinEnvironment.html">KinEnvironment</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinEnvironment/Errors.html">– Errors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinMemo.html">KinMemo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinPayment.html">KinPayment</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinPayment/Id.html">– Id</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinPayment/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinPaymentItem.html">KinPaymentItem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinPaymentOperation.html">KinPaymentOperation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinTransaction.html">KinTransaction</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinTransaction.html#/s:7KinBase0A11TransactionV6RecordV">– Record</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinTransactionHash.html">KinTransactionHash</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/KinTransactions.html">KinTransactions</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/PromisedCallback.html">PromisedCallback</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/SubmitTransactionRequest.html">SubmitTransactionRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/SubmitTransactionResponse.html">SubmitTransactionResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/SubmitTransactionResponse/Result.html">– Result</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/WhitelistTransactionRequest.html">WhitelistTransactionRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/WhitelistTransactionResponse.html">WhitelistTransactionResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/WhitelistTransactionResponse/Result.html">– Result</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a href="Typealiases.html">Type Aliases</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:7KinBase4Bytea">Byte</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:7KinBase0A0a">Kin</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Typealiases.html#/s:7KinBase5Quarka">Quark</a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -352,15 +42,22 @@
             
             <h1 id='kin-sdk-ios' class='heading'>Kin SDK iOS</h1>
 
-<p><a href="https://codecov.io/gh/kinecosystem/kin-ios"><img src="https://codecov.io/gh/kinecosystem/kin-ios/branch/master/graph/badge.svg?token=85lgAikcPU" alt="codecov"></a>
-<a href="https://circleci.com/gh/kinecosystem/kin-ios"><img src="https://img.shields.io/circleci/build/gh/kinecosystem/kin-ios?token=0b197542e0ae2e331da14d0aa92f20fa3977fd11" alt="CircleCI"></a></p>
+<p><a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-5.0-orange.svg" alt="Swift Version"></a>
+<a href="https://codecov.io/gh/kinecosystem/kin-ios"><img src="https://codecov.io/gh/kinecosystem/kin-ios/branch/master/graph/badge.svg?token=WB9BS3J2VY" alt="codecov"></a>
+<a href="https://circleci.com/gh/kinecosystem/kin-ios"><img src="https://img.shields.io/circleci/build/gh/kinecosystem/kin-ios/master?token=554b0d33a552795e7bcd927bbba119434918cacc" alt="CircleCI"></a>
+<a href="https://kinecosystem.github.io/kin-ios/"><img src="https://img.shields.io/badge/docs-jazzy-blue" alt="jazzy"></a>
+<a href="https://cocoapods.org/pods/KinBase"><img src="https://img.shields.io/cocoapods/v/KinBase.svg?color=6f41e8" alt="CocoaPods"></a></p>
 
 <p>Use the Kin SDK for iOS to enable the use of Kin inside of your app. Include only the functionality you need to provide the right experience to your users. Use just the base library to access the lightest-weight wrapper over the Kin crytocurrency.</p>
+<h2 id='looking-for-a-quick-way-to-start' class='heading'>Looking for a quick way to start?</h2>
+
+<p>The quickest way to get started is by following the <a href="https://kintegrate.dev/tutorials/getting-started-ios-sdk/">tutorial</a> or by downloading the <a href="https://kintegrate.dev/starters/kin-ios-starter/">starter kit</a>.</p>
+<h2 id='repository-contents' class='heading'>Repository Contents</h2>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Library&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-<th style="text-align: left">Path&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th style="text-align: left">Library</th>
+<th style="text-align: left">Path</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -370,31 +67,40 @@
 <td style="text-align: left">The foundation library used by all other libraries in the system to support basic Kin operations: <ul><li>Wallet creation and management</li><li>Send and receive Kin</li></ul></td>
 </tr>
 <tr>
-<td style="text-align: left"><code>KinBaseCompat</code></td>
-<td style="text-align: left"><a href="KinBaseCompat"><code>/KinBaseCompat</code></a></td>
-<td style="text-align: left">The <a href="KinBaseCompat">:KinBaseCompat</a> library implements the public surface layer to be a drop in replacement of the, now deprecated, <a href="https://github.com/kinecosystem/kin-sdk-ios">kin-sdk-ios</a> library. Just update your version in Podfile and have better performance and stability.</td>
+<td style="text-align: left"><code>KinDesign</code></td>
+<td style="text-align: left"><a href="KinDesign"><code>/KinDesign</code></a></td>
+<td style="text-align: left">The shared KinDesign library components for creating consistent Kin user experiences. When creating a custom Kin experience, this library can be used to include standard UI components for displaying Kin prices, transactions, etc.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>KinUX</code></td>
+<td style="text-align: left"><a href="KinUX"><code>/KinUX</code></a></td>
+<td style="text-align: left">The KinUX library provides an out of the box model UI for spending Kin within an iOS application. Specificy what you&rsquo;re buying, your account, tap confirm. Success.</td>
 </tr>
 </tbody></table>
 <h2 id='installation' class='heading'>Installation</h2>
 
-<p>For developers who are already on KinSDK <a href="https://github.com/kinecosystem/kin-sdk-ios/releases/tag/1.0.2">1.0.2</a>, simply upgrade the version to 1.0.3 in the Podfile:</p>
-<pre class="highlight plaintext"><code>pod 'KinSDK', '~&gt; 1.0.3'
-</code></pre>
+<p>In your Podfile</p>
+<pre class="highlight plaintext"><code>// If you just want to access the blockchain &amp; no UI
+pod 'KinBase', '~&gt; 1.0.1'
 
-<p>For developers wanting to check out the new APIs under KinBase:</p>
-<pre class="highlight plaintext"><code>pod 'KinBase', '~&gt; 0.1.0'
-</code></pre>
-<h2 id='generate-documentations-in-html' class='heading'>Generate documentations in HTML</h2>
+// Add spend to use the modal spend flow to allow users to buy things with Kin
+pod 'KinUX', '~&gt; 1.0.1'
 
-<p>Install jazzy <code>gem install jazzy</code>
-Run <code>./generate_docs.sh</code>
-Docs are under <code>docs/</code></p>
+// Add design for direct access to UI views you can use in your own app
+pod 'KinDesign', '~&gt; 1.0.1'
+</code></pre>
+<h2 id='sample-app' class='heading'>Sample App</h2>
+
+<p>The <a href="KinSampleApp"><code>/KinSampleApp</code></a> directory includes a sample application. On the home screen of the sample app, you will see options to view Kin Wallet Demo and Kin Design Demo.</p>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p>Jazzy Documentation for all classes in all modules located <a href="https://kinecosystem.github.io/kin-ios/">here</a></p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2020-06-15)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/kinecosystem/kin-ios" target="_blank" rel="external">Kin Foundation</a>. All rights reserved. (Last updated: 2021-06-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
