@@ -339,18 +339,14 @@ extension KinFileStorage: KinStorageType {
         userDefaults.removeObject(forKey: Constants.minFeeUserDefaultsKey)
         userDefaults.removeObject(forKey: Constants.minApiVersionUserDefaultsKey)
         userDefaults.removeObject(forKey: Constants.cidUserDefaultsKey)
-        return removeFileOrDirectory(kinStorageDirectory)
+        return removeFileOrDirectory(rootDirectory)
     }
 }
 
 // MARK: Private - File Location
 private extension KinFileStorage {
-    var kinStorageDirectory: URL {
-        return rootDirectory.appendingPathComponent("kin_storage", isDirectory: true)
-    }
-
     var directoryForAllAccounts: URL {
-        return kinStorageDirectory.appendingPathComponent("kin_accounts", isDirectory: true)
+        return rootDirectory.appendingPathComponent("kin_accounts", isDirectory: true)
     }
 
     func directoryForAccount(_ account: PublicKey) -> URL {
