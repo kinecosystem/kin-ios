@@ -2,7 +2,7 @@
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/KinBase.svg?color=6f41e8)](https://cocoapods.org/pods/KinBase)
 
-The KinBase module is the foundation upon which the rest of the sdk stands on, however can be used on it's own to headlessly access the Kin Blockchain.
+The KinBase module is the foundation upon which the rest of the SDK stands.
 
 ## Installation
 Add the following to your Podfile.
@@ -12,8 +12,8 @@ pod 'KinBase', '~> 1.0.1'
 
 ## Overview
 KinBase contains two main components that are to be instantiated and used by the developer:
-- a `KinEnvironment` instance to describe the network (test or production), and provide some external dependencies
-- a `KinAccountContext` instance to access functionality of a Kin account on the Kin Blockchain and also provides local storage for your private key, and data cache for account and payment history data.
+- a `KinEnvironment` instance to describe the network (test or production) and provide some external dependencies
+- a `KinAccountContext` instance to access functionality of a Kin account on the Kin Blockchain and also to provide local storage for your private key and data cache for account and payment history data
 Below you'll find a general overview on how to make use of KinBase, but also consider diving into the specific documentation [found here](https://kinecosystem.github.io/kin-ios/docs) for more details.
 
 
@@ -21,32 +21,32 @@ Below you'll find a general overview on how to make use of KinBase, but also con
 Everything starts with a `KinEnvironment` instance that describes which blockchain, services, and storage will be used. For a default setup, simply
 
 ### Agora Kin Environment
-The Agora Kin Environment is now the preferred method of communicating to the Kin Blockchain. Agora is a both a gateway to submit payments, but also a history collected that can be used to resolve your full payment history.
-When submitting payments, a developer should properly configure an [Agora webhook](https://docs.kin.org/how-it-works#webhooks)., which acts as a delegate to approve and optionally co-sign a transaction to mediate transaction fees.
-Agora can also store additional meta-data about your transaction concerning what your payments were for. This bundle of information is called an `Invoice`, and is offchain data which is referenced by the payment's associated Memo, both which you can read more about down below in the [Sending Payments section](#sending-payments)
+The Agora Kin Environment is now the preferred method of communicating to the Kin Blockchain. Agora is both a gateway to submit payments and a history collector that can be used to resolve your full payment history.
+When submitting payments, a developer should properly configure an [Agora webhook](https://docs.kin.org/how-it-works#webhooks), which acts as a delegate to approve and optionally co-sign a transaction to mediate transaction fees.
+Agora can also store additional metadata about your transaction concerning what your payments were for. This bundle of information is called an `Invoice`: offchain data which is referenced by the payment's associated `Memo`, both which you can read more about below in the [Sending Payments](#sending-payments) section.
 
 You'll also need to tell the SDK a bit about your app in an AppInfoProvider implementation to work with some features (like paying and resolving Invoices and the [spend](../spend) module UI)
 There are two bundles of information an App provides through this interface:
-- An AppInfo object to describe the App. This contains your Apps unique App Index whcih you can obtain by registering [here](https://docs.kin.org/app-registration)
+- An AppInfo object to describe the App. This contains your App's unique App Index which you can obtain by registering [here](https://docs.kin.org/app-registration)
 - Passthrough Auth User Credentials are passed onto the webhook when submitting a transaction
 For more information regarding webhooks and webhook integration please read more about [how it works](https://docs.kin.org/how-it-works#webhooks).
+
 ```swift
-let environment = KinEnvironment.Agora.mainNet(appInfoProvider: yourAppInfoProvider)
+let environment = KinEnvironment.Agora.mainNet(
+  appInfoProvider: BasicAppInfoProvider(
+    appInfo: AppInfo(
+      appIdx: AppIndex(value: YOUR_APP_INDEX),
+      kinAccount: YOUR_PUBLIC_KEY,
+      name: "YOUR_APP_NAME",
+      appIconData: YOUR_APP_ICON_DATA
+    ),
+    appUserId: "YOUR_USER_ID",
+    appUserPasskey: "YOUR_USER_PASSKEY"
+  )
+)
 ```
 
-### Horizon Kin Environment
-Horizon access from the SDK has been deprecated. While it's still included in the SDK and can be used it may become unavailable in a future blockchain migration.
-```swift
-// DEPCRECATED - SEE KinEnvironment.Agora
-// Main net
-let accountCreationApi = YourAccountCreationApiImpl()
-let whitelistingApi = YourWhitelistingApiImpl()
-let environment: KinEnvironment = KinEnvironment.Horizon.mainNet(accountCreationApi: accountCreationApi,
-                                                                 whitelistingApi: whitelistingApi)
-
-// Test net
-let environment: KinEnvironment = KinEnvironment.Horizon.testNet()
-```
+### KinAccountContext
 For a given `KinAccount` that you want to operate on, you will need a `KinAccountContext` instance.
 This will be used to both create and access all `KinAccount` and `KinPayment`s.
  ```swift
@@ -56,29 +56,6 @@ let context: KinAccountContext =
         .build()
 ```
 
-### Note on Upcoming Solana Migration
-With the migration to Solana just around the corner, apps that want to continue to function during and post the move to the Solana blockchain are required to upgrade their `kin-ios` sdk to 0.4.0 or higher.
-*Any application that does not upgrade will start to receive a `KinService.Errors.upgradeRequired` exception on any request made from `KinAccountContext`.*
-
-#### Testing migration within your app
-To enable migration of Kin3 -> Kin4 accounts on testnet, `KinEnvironment.Builder` instances have a
-new option, ``.testMigration()` that will force this sdk into a state where migration will occur on demand.
-#### On Migration Day (Dec 8, 2020)
-Apps should expect to see increased transaction times temporarily on the date of migration.
-An on-demand migration will be attempted to trigger a migration, rebuild, and retry transactions that are submitted from an unmigrated account on this day and optimistically will complete successfully but are not guaranteed.
-After all accounts have been migrated to Solana, transaction times should noticeably improve to around ~1s. Additional performance improvements are still possible and will roll out in future sdk releases.
-
-### Kin 2 Support
-*For those apps that are still on Kin 2 and require support for Kin 2 -> Kin 4 migration*
-You should configure your KinEnvironment to use the Kin 2 NetworkEnvironment as follows:
-```kotlin
-KinEnvironment.Agora.defaultEnvironmentSetup(network: .mainNetKin2, ...)
-```
-
-*Failure to do this will default your app to start on Kin 3 which will create a new account for your users on Kin3 with a 0 Kin balance. You probably do not want to do this.*
-
-### *As you may notice on the `KinAccountContext.Builder`, there are a few options on how to configure a `KinAccountContext`...*
-
 ## Creating An Account
 If you want to create a new `KinAccount` use:
 ```swift
@@ -87,18 +64,18 @@ If you want to create a new `KinAccount` use:
 ## Access An Existing Account
 If you want to access an existing `KinAccount` with options to send `KinPayment`s, input the `KinAccount.Id` with:
 ```swift
-.useExistingAccount(KinAccount.Id("GATG_example_and_fake_key"))
+.useExistingAccount(PublicKey(base58: "example_and_fake_key"))
 ```
 *Note: this variant requires that the sdk knows about this `KinAccount`s `Key.PrivateKey` which can be imported the first time by:*
 ```swift
-.importExistingPrivateKey(KinAccount.Key("key_containing_private_key"))
+.importExistingPrivateKey(KeyPair(seed: Seed(base58: "private_seed")))
 ```
 ## Sending Payments
-Sending `KinPayment`s are easy. Just add the amount and the destination `KinAccount.Id`.
+Sending `KinPayment`s is easy. Just add the amount and the destination `PublicKey`.
 
 *Note: successive calls to this function before the previous is completed will be properly queued according to blockchain implementation needs.*
 ```swift
-let paymentItem = KinPaymentItem(amount: Kin(5), destAccountId: KinAccount.Id("GATG_example_and_fake_key"))
+let paymentItem = KinPaymentItem(amount: Kin(5), destAccount: PublicKey(base58: "example_and_fake_key"))
 context.sendKinPayment(paymentItem, memo: KinMemo(text: "my_memo"))
     .then { payment in
         // Payment Completed
@@ -108,8 +85,8 @@ Sending a batch of payments to the blockchain to be completed together, in a sin
 
 *Note: This operation is atomic. All payments will either succeed or fail together.*
 ```swift
-let payments = [KinPaymentItem(amount: Kin(5), destAccountId: KinAccount.Id("GATG_example_and_fake_key")),
-                KinPaymentItem(amount: Kin(30), destAccountId: KinAccount.Id("GATG_example_and_fake_key"))]
+let payments = [KinPaymentItem(amount: Kin(5), destAccount: PublicKey(base58: "example_and_fake_key")),
+                KinPaymentItem(amount: Kin(30), destAccount: PublicKey(base58: "example_and_fake_key"))]
 context.sendKinPayments(payments, KinMemo(text: "my_memo"))
   .then { completedPayments in
     // Payments Completed
@@ -117,7 +94,7 @@ context.sendKinPayments(payments, KinMemo(text: "my_memo"))
 ```
 
 ### Are there Fees?
-It depends. Normally by default payments on the Kin Blockchain are charged a minimal fee of 100 Quark (1 Quark = 0.001 Kin) each. The minimum required fee is dictated by the Blockchain. Fees on the Kin blockchain are an anti-spam feature intended to prevent malicious actors from spamming the network. Registered Kin apps are given a whitelisted account, which they can use to exempt their or their users' transactions using the [Sign Transaction webhook](https://docs.kin.org/how-it-works#sign-transaction).
+It depends. By default, payments on the Kin Blockchain are charged a minimal fee of 100 Quark (1 Quark = 0.001 Kin) each. The minimum required fee is dictated by the Blockchain. Fees on the Kin blockchain are an anti-spam feature intended to prevent malicious actors from spamming the network. Registered Kin apps are given a whitelisted account, which they can use to exempt their or their users' transactions using the [Sign Transaction webhook](https://docs.kin.org/how-it-works#sign-transaction).
 
 When using KinAccountContext configured with the Agora KinEnvironment, by default a fee will not be added to the payment unless you specifically want your users to pay fees instead of you providing whitelisting. This can be achieved by overridintg and setting the `isWhitelistingAvailable` parameter to false in the `KinTransactionWhitelistingApi` instance when configuring your `KinEnvironment` instance.
 
@@ -144,7 +121,7 @@ try KinBinaryMemo(typeId: KinBinaryMemo.TransferType.p2p.rawValue,
 ```
 
 #### *Text Memos (Old style memos)*
-In this SDK you can provide a text based memo by using the `KinMemo` class. This format should only be used be existing incumbant apps that have been issued AppIds and have yet to upgrade to the new Kin Binary Memo Format.
+You can provide a text-based memo with the `KinMemo` class. This format should only be used be existing incumbant apps that have been issued AppIds and have yet to upgrade to the new Kin Binary Memo Format.
 
 #### Invoices
 [Invoices](https://docs.kin.org/how-it-works#invoices) are a great way to leverage Agora to store data about your payments off chain for you to retrieve later (e.g. in your payment history). They can be submitted to Agora via `payInvoice` method with a properly formatted KinBinaryMemo which is used to reference the applicable Invoice data at a later time.
@@ -166,10 +143,10 @@ let invoice = try Invoice(lineItems: [lineItem])
 
 To Execute a payment for an `Invoice` you can make use of the `payInvoice` convenience function on `KinAccountContext`. This essentially calls `sendPayment` on your behalf with the correctly formatted `KinBinaryMemo` and TransferType of `KinBinaryMemo.TransferType.Spend`. Invoices can and should also be used for other TransferTypes such as P2P and Earns.
 
-*The destinationKinAccountId must match the expected & registered desginationKinAppIdx provided [during registration](https://docs.kin.org/app-registration)*
+*The destinationKinAccountId must match the expected & registered destinationKinAppIdx provided [during registration](https://docs.kin.org/app-registration)*
 ```swift
-payInvoice(processingAppIdx: yourAppIndx,
-           destinationAccount: destAccountId,
+payInvoice(processingAppIdx: yourAppIdx,
+           destinationAccount: destAccount,
            invoice: yourInvoice,
            type: .spend).then { kinPayment ->
     // Payment Completed
@@ -184,9 +161,9 @@ kinPayment.invoice
 *Note:* If you are paying for an `Invoice` you *must* use the Kin Binary Memo Format for the memo.*
 
 ## Retrieving Account Data
-The `KinAccount.Id` for a given `KinAccountContext` instance is always available
+The `PublicKey` for a given `KinAccountContext` instance is always available
 ```swift
-context.accountId
+context.accountPublicKey
 ```
 If you require more than just the id, the full `KinAccount` is available by querying with:
 ```swift
@@ -232,3 +209,4 @@ context.clearStorage()
         // The data with this KinAccountContext is now gone forever
     }
 ```
+
