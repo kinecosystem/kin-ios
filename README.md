@@ -7,8 +7,11 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/KinBase.svg?color=6f41e8)](https://cocoapods.org/pods/KinBase)
 
 Use the Kin SDK for iOS to enable the use of Kin inside of your app. Include only the functionality you need to provide the right experience to your users. Use just the base library to access the lightest-weight wrapper over the Kin cryptocurrency.
+<<<<<<< HEAD
 
 ## Looking for a quick way to start?
+=======
+>>>>>>> c6d6b7aaca7bf7d36bf3a803913bf7040945858d
 
 The quickest way to get started is by following the [tutorial](https://kintegrate.dev/tutorials/getting-started-ios-sdk/) or by downloading the [starter kit](https://kintegrate.dev/starters/kin-ios-starter/).
 
