@@ -26,13 +26,13 @@ In your Podfile
 
 ```
 // If you just want to access the blockchain & no UI
-pod 'KinBase', '~> 1.0.1'
+pod 'KinBase', '~> 1.0.2'
 
 // Add spend to use the modal spend flow to allow users to buy things with Kin
-pod 'KinUX', '~> 1.0.1'
+pod 'KinUX', '~> 1.0.2'
 
 // Add design for direct access to UI views you can use in your own app
-pod 'KinDesign', '~> 1.0.1'
+pod 'KinDesign', '~> 1.0.2'
 ```
 
 ## Sample App
