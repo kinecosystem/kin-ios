@@ -6,7 +6,7 @@
 [![jazzy](https://img.shields.io/badge/docs-jazzy-blue)](https://kinecosystem.github.io/kin-ios/)
 [![CocoaPods](https://img.shields.io/cocoapods/v/KinBase.svg?color=6f41e8)](https://cocoapods.org/pods/KinBase)
 
-Use the Kin SDK for iOS to enable the use of Kin inside of your app. Include only the functionality you need to provide the right experience to your users. Use just the base library to access the lightest-weight wrapper over the Kin crytocurrency.
+Use the Kin SDK for iOS to enable the use of Kin inside of your app. Include only the functionality you need to provide the right experience to your users. Use just the base library to access the lightest-weight wrapper over the Kin cryptocurrency.
 
 ## Looking for a quick way to start?
 
@@ -42,3 +42,7 @@ The [`/KinSampleApp`](KinSampleApp) directory includes a sample application. On 
 ## Documentation
 
 Jazzy Documentation for all classes in all modules located [here](https://kinecosystem.github.io/kin-ios/)
+
+## Apps using legacy versions
+
+For specific instructions related to migrating from older versions, see the [migration help document](migration_help.md).

@@ -67,7 +67,7 @@ public struct KinEnvironment {
             let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
             let networkHandler = NetworkOperationHandler()
             // If custom storagePath is set, use that. Otherwise provide a default.
-            let documentDirectory = storagePath ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let documentDirectory = storagePath ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("kin_storage", isDirectory: true)
             let storage = KinFileStorage(directory: documentDirectory, network: network)
             
             let grpcProxy = AgoraGrpcProxy(

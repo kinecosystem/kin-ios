@@ -247,6 +247,13 @@ extension KinTransactionHash: CustomStringConvertible {
     }
 }
 
+// MARK: - Base58 -
+extension KinTransactionHash {
+    public var base58: String {
+        return Base58.base58FromBytes(rawValue)
+    }
+}
+
 public struct KinTransactions {
     public let items: [KinTransaction]
     public let headPagingToken: PagingToken?

@@ -13,6 +13,20 @@ public protocol AppInfoProvider {
     func getPassthroughAppUserCredentials() -> AppUserCredentials
 }
 
+public class BasicAppInfoProvider: AppInfoProvider {
+    public var appInfo: AppInfo
+    private var appUserCredentials: AppUserCredentials
+
+    public func getPassthroughAppUserCredentials() -> AppUserCredentials {
+        return self.appUserCredentials
+    }
+
+    public init(appInfo: AppInfo, appUserId: String, appUserPasskey: String) {
+        self.appInfo = appInfo
+        self.appUserCredentials = AppUserCredentials.init(appUserId: appUserId, appUserPasskey: appUserPasskey)
+    }
+}
+
 public class DummyAppInfoProvider: AppInfoProvider {
     public var appInfo: AppInfo {
         return .testApp
