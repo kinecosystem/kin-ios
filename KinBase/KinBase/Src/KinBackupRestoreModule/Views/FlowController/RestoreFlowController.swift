@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import KinSDK
 
 class RestoreFlowController: FlowController {
-    let kinClient: KinClient
+    let kinEnvironment: KinEnvironment
     var importedKinAccount: KinAccount?
 
-    init(kinClient: KinClient, navigationController: UINavigationController) {
-        self.kinClient = kinClient
+    init(kinEnvironment: KinEnvironment, navigationController: UINavigationController) {
+        self.kinEnvironment = kinEnvironment
         super.init(navigationController: navigationController)
     }
 
@@ -90,7 +89,7 @@ extension RestoreFlowController: RestoreViewControllerDelegate {
             return .invalidImage
         }
 
-        let (result, kinAccount) = isAccountInClient(json: json, password: password)
+        let (result, kinAccount) = isAccountInEnvironment(json: json, password: password)
 
         if let result = result {
             importedKinAccount = kinAccount
@@ -98,7 +97,7 @@ extension RestoreFlowController: RestoreViewControllerDelegate {
         }
 
         do {
-            importedKinAccount = try kinClient.importAccount(json, passphrase: password)
+            importedKinAccount = try kinEnvironment.importAccount(json, passphrase: password)
             return .success
         }
         catch {
@@ -124,25 +123,16 @@ extension RestoreFlowController: RestoreViewControllerDelegate {
 // MARK: - Account Duplication
 
 extension RestoreFlowController {
-    // This code needs to be in the KinSDK. Until then it's handled here.
-
-    fileprivate struct AccountData: Codable {
-        let pkey: String
-        let seed: String
-        let salt: String
-        let extra: Data?
-    }
-
-    fileprivate func accountData(in json: String) throws -> AccountData? {
+    fileprivate func accountData(in json: String) throws -> KeyUtils.AccountData? {
         guard let data = json.data(using: .utf8) else {
             return nil
         }
 
-        return try JSONDecoder().decode(AccountData.self, from: data)
+        return try JSONDecoder().decode(KeyUtils.AccountData.self, from: data)
     }
 
-    fileprivate func isAccountInClient(json: String, password: String) -> (RestoreViewController.ImportResult?, kinAccount: KinAccount?) {
-        var data: AccountData?
+    fileprivate func isAccountInEnvironment(json: String, password: String) -> (RestoreViewController.ImportResult?, kinAccount: KinAccount?) {
+        var data: KeyUtils.AccountData?
 
         do {
             data = try accountData(in: json)

@@ -90,8 +90,8 @@ public class KinBackupRestoreManager: NSObject {
      - Returns: False if a session already exists, true otherwise.
      */
     @discardableResult
-    public func restore(_ kinClient: KinClient, pushedOnto navigationController: UINavigationController) -> Bool {
-        return start(with: .client(kinClient), presentor: .pushedOnto(navigationController))
+    public func restore(_ kinEnvironment: KinEnvironment, pushedOnto navigationController: UINavigationController) -> Bool {
+        return start(with: .environment(kinEnvironment), presentor: .pushedOnto(navigationController))
     }
 
     /**
@@ -103,8 +103,8 @@ public class KinBackupRestoreManager: NSObject {
      - Returns: False if a session already exists, true otherwise.
      */
     @discardableResult
-    public func restore(_ kinClient: KinClient, presentedOnto viewController: UIViewController) -> Bool {
-        return start(with: .client(kinClient), presentor: .presentedOnto(viewController))
+    public func restore(_ kinEnvironment: KinEnvironment, presentedOnto viewController: UIViewController) -> Bool {
+        return start(with: .environment(kinEnvironment), presentor: .presentedOnto(viewController))
     }
 
     private var instance: Instance?
@@ -127,7 +127,7 @@ extension KinBackupRestoreManager {
 
 extension KinBackupRestoreManager {
     fileprivate enum Connector {
-        case client(_ kinClient: KinClient)
+        case environment(_ kinEnvironment: KinEnvironment)
         case account(_ kinAccount: KinAccount)
     }
 
@@ -179,8 +179,8 @@ extension KinBackupRestoreManager {
         let controller: FlowController
 
         switch connector {
-        case .client(let kinClient):
-            controller = RestoreFlowController(kinClient: kinClient, navigationController: navigationController)
+        case .environment(let kinEnvironment):
+            controller = RestoreFlowController(kinEnvironment: kinEnvironment, navigationController: navigationController)
         case .account(let kinAccount):
             controller = BackupFlowController(kinAccount: kinAccount, navigationController: navigationController)
         }

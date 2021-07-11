@@ -177,7 +177,7 @@ DEPENDENCIES:
   - gRPC-ProtoRPC (~> 1.28.0)
   - PromisesSwift (~> 1.2.8)
   - Protobuf (~> 3.11.4)
-  - Sodium (= 0.8.0)
+  - Sodium (~> 0.8.0)
 
 SPEC REPOS:
   trunk:
@@ -208,6 +208,6 @@ SPEC CHECKSUMS:
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: c72943aace7682a5898a8e963adcb6bcdd41d8cc
+PODFILE CHECKSUM: a169d8e4a4cb23a722299da10ac28792d5ff70f6
 
 COCOAPODS: 1.10.1
