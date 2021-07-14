@@ -1,6 +1,6 @@
 ignore:
   - "KinSampleApp"
-  - "KinBaseCompat"
+  - "KinBase/KinBase/Src/KinBackupRestoreModule"
   - "KinBase/KinBase/Src/Vendor/gen"
   - "KinBase/KinBase/Src/Storage/Gen"
   - "KinBase/KinBase/Src/Tools/ListObservable.swift"
