@@ -84,29 +84,34 @@ extension RestoreFlowController: QRPickerControllerDelegate {
 }
 
 extension RestoreFlowController: RestoreViewControllerDelegate {
-    func restoreViewController(_ viewController: RestoreViewController, importWith password: String) -> RestoreViewController.ImportResult {
+    func restoreViewController(_ viewController: RestoreViewController, importWith password: String, _ callback: @escaping (RestoreViewController.ImportResult)->()) {
         guard let qrImage = viewController.qrImage, let json = QR.decode(image: qrImage) else {
-            return .invalidImage
+            callback(.invalidImage)
+            return
         }
 
-        let (result, kinAccount) = isAccountInEnvironment(json: json, password: password)
-
-        if let result = result {
-            importedKinAccount = kinAccount
-            return result
-        }
-
-        do {
-            importedKinAccount = try kinEnvironment.importAccount(json, passphrase: password)
-            return .success
-        }
-        catch {
-            if case KeyUtilsError.passphraseIncorrect = error {
-                return .wrongPassword
+        isAccountInEnvironment(json: json, password: password) { (result, kinAccount) in
+            if let result = result {
+                self.importedKinAccount = kinAccount
+                callback(result)
+                return
             }
-            else {
-                delegate?.flowController(self, error: error)
-                return .internalIssue
+
+            do {
+                self.importedKinAccount = try self.kinEnvironment.importAccount(json, passphrase: password)
+                callback(.success)
+                return
+            }
+            catch {
+                if case KeyUtilsError.passphraseIncorrect = error {
+                    callback(.wrongPassword)
+                    return
+                }
+                else {
+                    self.delegate?.flowController(self, error: error)
+                    callback(.internalIssue)
+                    return
+                }
             }
         }
     }
@@ -131,33 +136,40 @@ extension RestoreFlowController {
         return try JSONDecoder().decode(KeyUtils.AccountData.self, from: data)
     }
 
-    fileprivate func isAccountInEnvironment(json: String, password: String) -> (RestoreViewController.ImportResult?, kinAccount: KinAccount?) {
+    fileprivate func isAccountInEnvironment(json: String, password: String, _ callback: @escaping (RestoreViewController.ImportResult?, KinAccount?)->()) {
         var data: KeyUtils.AccountData?
 
         do {
             data = try accountData(in: json)
         }
         catch {
-            return (.internalIssue, nil)
+            callback(.internalIssue, nil)
+            return
         }
 
         guard let d = data else {
-            return (.internalIssue, nil)
+            callback(.internalIssue, nil)
+            return
         }
 
         do {
             _ = try KeyUtils.seed(from: password, encryptedSeed: d.seed, salt: d.salt)
         }
         catch {
-            return (.wrongPassword, nil)
+            callback(.wrongPassword, nil)
+            return
         }
 
-        let foundAccount = kinClient.accounts.makeIterator().first { $0?.publicAddress == d.pkey }
+        kinEnvironment.allAccountIds().then { (envKeys: [PublicKey]) in
+            let foundKey = envKeys.makeIterator().first { $0.base58 == d.pkey || $0.stellarID == d.pkey }
 
-        if let kinAccount = foundAccount {
-            return (.success, kinAccount)
+            if let key = foundKey {
+                callback(.success, KinAccount(publicKey: key))
+                return
+            } else {
+                callback(nil, nil)
+                return
+            }
         }
-
-        return (nil, nil)
     }
 }

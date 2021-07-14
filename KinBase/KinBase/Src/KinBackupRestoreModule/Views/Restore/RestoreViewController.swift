@@ -9,7 +9,7 @@
 import UIKit
 
 protocol RestoreViewControllerDelegate: NSObjectProtocol {
-    func restoreViewController(_ viewController: RestoreViewController, importWith password: String) -> RestoreViewController.ImportResult
+    func restoreViewController(_ viewController: RestoreViewController, importWith password: String, _ callback: @escaping (RestoreViewController.ImportResult)->())
     func restoreViewControllerDidComplete(_ viewController: RestoreViewController)
 }
 
@@ -94,28 +94,30 @@ class RestoreViewController: KinViewController {
 
         button.isEnabled = false
         navigationItem.hidesBackButton = true
-        
-        let importResult = delegate.restoreViewController(self, importWith: passwordTextField.text ?? "")
 
-        if importResult == .success {
-            passwordLabel.state = .success
-            passwordTextField.entryState = .valid
-            passwordTextField.isEnabled = false
+        delegate.restoreViewController(self, importWith: passwordTextField.text ?? "") { (importResult) in
+            DispatchQueue.main.async {
+                if importResult == .success {
+                    self.passwordLabel.state = .success
+                    self.passwordTextField.entryState = .valid
+                    self.passwordTextField.isEnabled = false
 
-            button.transitionToConfirmed {
-                delegate.restoreViewControllerDidComplete(self)
-            }
-        }
-        else {
-            passwordTextField.entryState = .invalid
-            button.isEnabled = true
-            navigationItem.hidesBackButton = false
+                    button.transitionToConfirmed {
+                        delegate.restoreViewControllerDidComplete(self)
+                    }
+                }
+                else {
+                    self.passwordTextField.entryState = .invalid
+                    button.isEnabled = true
+                    self.navigationItem.hidesBackButton = false
 
-            if importResult == .wrongPassword {
-                passwordLabel.state = .invalid
-            }
-            else {
-                presentErrorAlertController(result: importResult)
+                    if importResult == .wrongPassword {
+                        self.passwordLabel.state = .invalid
+                    }
+                    else {
+                        self.presentErrorAlertController(result: importResult)
+                    }
+                }
             }
         }
     }
