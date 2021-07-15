@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinBase'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'Kin SDK for iOS'
 
   s.description      = <<-DESC
@@ -25,11 +25,13 @@ Pod::Spec.new do |s|
 
   non_arc_files = 'KinBase/KinBase/Src/Storage/Gen/*.{h,m}', 'KinBase/KinBase/Src/Vendor/gen/**/*.{h,m}'
   s.source_files = 'KinBase/KinBase/**/*.{h,c,swift}'
+  s.resources = 'KinBase/KinBase/Src/KinBackupRestoreModule/*.{strings,xcassets}'
   
   s.dependency 'PromisesSwift', '~> 1.2.8'
   s.dependency '!ProtoCompiler-gRPCPlugin', '~> 1.28.0'
   s.dependency 'Protobuf', '~> 3.11.4'
   s.dependency 'gRPC-ProtoRPC', '~> 1.28.0'
+  s.dependency 'Sodium', '~> 0.8.0'
   
   s.subspec 'no-arc' do |sna|
       sna.requires_arc = false

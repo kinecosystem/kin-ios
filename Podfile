@@ -9,11 +9,7 @@ def kin_base_dependencies
     pod '!ProtoCompiler-gRPCPlugin', '~> 1.28.0'
     pod 'Protobuf', '~> 3.11.4'
     pod 'gRPC-ProtoRPC', '~> 1.28.0'
-end
-
-def kin_base_compat_dependencies
-  kin_base_dependencies
-  pod 'Sodium', '0.8.0'
+    pod 'Sodium', '~> 0.8.0'
 end
 
 target 'KinBase' do

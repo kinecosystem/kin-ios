@@ -136,3 +136,37 @@ extension KinEnvironment {
         logger.isLoggingEnabled = enableLogging
     }
 }
+
+
+// MARK: - import account from BackupRestoreModule -
+extension KinEnvironment {
+    /**
+         Import the account data from a JSON string.
+         - Parameter jsonString: The JSON representation of the KinAccount
+         - Parameter passphrase: The passphrase with which to decrypt the seed
+         - Returns: A KinAccount
+         */
+    func importAccount(_ jsonString: String,
+                       passphrase: String) throws -> KinAccount {
+        guard let data = jsonString.data(using: .utf8) else {
+            throw KeyUtilsError.decodingFailed("invalid data")
+        }
+        let accountData = try JSONDecoder().decode(KeyUtils.AccountData.self, from: data)
+
+        let decryptedSeed = try KeyUtils.seed(from: passphrase, encryptedSeed: accountData.seed, salt: accountData.salt)
+        if let seed = Seed(decryptedSeed) {
+            // Legacy backup, use seed
+            let keyPair = KeyPair(seed: seed)
+            try self.importPrivateKey(keyPair)
+            return KinAccount(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey)
+        } else {
+            // v1+ backup, use private key
+            guard let publicKey = PublicKey(base58: accountData.pkey), let privateKey = PrivateKey(decryptedSeed) else {
+                throw KeyUtilsError.decodingFailed("invalid key")
+            }
+            let keyPair = KeyPair(publicKey: publicKey, privateKey: privateKey)
+            try self.importPrivateKey(keyPair)
+            return KinAccount(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey)
+        }
+    }
+}

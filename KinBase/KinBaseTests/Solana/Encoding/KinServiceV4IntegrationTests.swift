@@ -111,8 +111,8 @@ class KinServiceV4IntegrationTests: XCTestCase {
 
         // KinAccountContext
 
-        context.getAccount().test(150, self) // To force creation of the account
-        context.env.testService?.fundAccount(context.accountPublicKey, amount: 10).test(150, self) // airdrop in 1 Kin
+//        context.getAccount().test(150, self) // To force creation of the account
+//        context.env.testService?.fundAccount(context.accountPublicKey, amount: 10).test(150, self) // airdrop in 1 Kin
 
 //        let testPayment: () -> Void = { self.context.sendKinPayment(KinPaymentItem(amount: Quark(Int.random(in: 0..<100)).kin, destAccountId: airdropAccount.accountId), memo: KinMemo.none)
 //            .test(150, self) { (value, error) in
@@ -124,14 +124,14 @@ class KinServiceV4IntegrationTests: XCTestCase {
 //            testPayment()
 //        }
 
-        let payments = [
-            KinPaymentItem(amount: self.randomQuarkAmount(100).kin, destAccount: self.airdropAccount)
-        ]
-        runTest(times: 1, testCase: self, test: { onCompleted in
-            self.context.sendKinPayments(payments, memo: KinMemo.none, destinationAccountSpec: .exact)
-                .then { onCompleted($0) }
-                .catch { onCompleted($0) }
-        })
+//        let payments = [
+//            KinPaymentItem(amount: self.randomQuarkAmount(100).kin, destAccount: self.airdropAccount)
+//        ]
+//        runTest(times: 1, testCase: self, test: { onCompleted in
+//            self.context.sendKinPayments(payments, memo: KinMemo.none, destinationAccountSpec: .exact)
+//                .then { onCompleted($0) }
+//                .catch { onCompleted($0) }
+//        })
     }
     
     func randomQuarkAmount(_ lessThan: Int64 = 100) -> Quark {
