@@ -17,6 +17,7 @@ class MockKinService: KinServiceType {
     var stubCreateAccountResult: KinAccount?
     var stubGetTransactionResult: KinTransaction?
     var stubBuildAndSignTransactionResult: KinTransaction?
+    var stubSignTransactionResult: Promise<KinTransaction>?
     var stubSubmitTransactionResult: Promise<KinTransaction>?
     var stubBuildSignAndSubmitTransactionResult: Promise<KinTransaction>?
     var stubStreamAccountObservable: Observable<KinAccount>?
@@ -71,6 +72,10 @@ class MockKinService: KinServiceType {
     
     func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
         return .init(stubBuildAndSignTransactionResult!)
+    }
+
+    func signTransaction(transaction: KinTransaction) -> Promise<KinTransaction> {
+        return stubSignTransactionResult!
     }
     
     func submitTransaction(transaction: KinTransaction) -> Promise<KinTransaction> {

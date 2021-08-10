@@ -179,6 +179,52 @@ extension AgoraKinTransactionsApi: KinTransactionApiV4 {
                                                        fee: Quark(0))
         completion(response)
     }
+
+    public func signTransaction(request: SignTransactionRequestV4, completion: @escaping (SignTransactionResponseV4) -> Void) {
+        let network = agoraGrpc.network
+        agoraGrpc.signTransaction(request.protoRequest)
+            .then { (grpcResponse: APBTransactionV4SignTransactionResponse) in
+                switch grpcResponse.result {
+                case .invoiceError:
+                    let invoiceErrors = grpcResponse.invoiceErrorsArray.compactMap { item -> InvoiceError? in
+                        guard let error = item as? APBCommonV3InvoiceError else {
+                            return nil
+                        }
+                        return error.invoiceError
+                    }
+                    let response = SignTransactionResponseV4(result: .invoiceError, error: Errors.invoiceErrors(errors: invoiceErrors), kinTransaction: nil)
+                    completion(response)
+
+                case .rejected:
+                    let response = SignTransactionResponseV4(result: .webhookRejected, error: nil, kinTransaction: nil)
+                    completion(response)
+
+                case .ok:
+                    guard let signature = Signature(grpcResponse.signature.value) else {
+                        fallthrough
+                    }
+                    let solanaTransaction = request.transaction.updatingSignature(signature: signature)
+                    guard let transaction = grpcResponse.toKinTransactionAcknowledged(solanaTransaction: solanaTransaction, network: network) else {
+                        fallthrough
+                    }
+                    let response = SignTransactionResponseV4(result: .ok, error: nil, kinTransaction: transaction)
+                    completion(response)
+
+                default:
+                    let response = SignTransactionResponseV4(result: .undefinedError, error: nil, kinTransaction: nil)
+                    completion(response)
+                }
+            }
+            .catch { error in
+                var result = SignTransactionResponseV4.Result.undefinedError
+                if error.canRetry() {
+                    result = .transientFailure
+                } else if error.isForcedUpgrade() {
+                    result = .upgradeRequired
+                }
+                completion(SignTransactionResponseV4(result: result, error: error, kinTransaction: nil))
+            }
+    }
     
     public func submitTransaction(request: SubmitTransactionRequestV4, completion: @escaping (SubmitTransactionResponseV4) -> Void) {
         let network = agoraGrpc.network

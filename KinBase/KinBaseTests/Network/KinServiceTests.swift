@@ -40,6 +40,7 @@ class MockKinTransactionApi: KinTransactionApiV4 {
     var stubGetTransactionHistory: GetTransactionHistoryResponseV4?
     var stubGetTransaction: GetTransactionResponseV4?
     var stubGetTransactionMinFee: GetMinFeeForTransactionResponseV4?
+    var stubSignTransaction: SignTransactionResponseV4?
     var stubSubmitTransaction: SubmitTransactionResponseV4?
     
     func getMinKinVersion(request: GetMinimumKinVersionRequestV4, completion: @escaping (GetMinimumKinVersionResponseV4) -> Void) {
@@ -68,6 +69,10 @@ class MockKinTransactionApi: KinTransactionApiV4 {
     
     func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponseV4) -> Void) {
         completion(stubGetTransactionMinFee!)
+    }
+
+    func signTransaction(request: SignTransactionRequestV4, completion: @escaping (SignTransactionResponseV4) -> Void) {
+        completion(stubSignTransaction!)
     }
     
     func submitTransaction(request: SubmitTransactionRequestV4, completion: @escaping (SubmitTransactionResponseV4) -> Void) {
@@ -625,6 +630,62 @@ class KinServiceTests: XCTestCase {
                 XCTAssertError(error, is: KinService.Errors.upgradeRequired)
                 expect.fulfill()
             }
+
+        waitForExpectations(timeout: 1)
+    }
+
+    func testSignTransactionSucceed() {
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet,
+            invoiceList: StubObjects.stubInvoiceList1
+        )
+
+        let ackedTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .acknowledged(
+                ts: 123456799,
+                resultXdrBytes: [0, 1]
+            ),
+            network: .testNet
+        )
+
+        mockKinTransactionApi.stubSignTransaction = .init(
+            result: .ok,
+            error: nil,
+            kinTransaction: ackedTransaction
+        )
+
+        let expect = expectation(description: "callback")
+        sut.signTransaction(transaction: inFlightTransaction)
+            .then { transaction in
+                XCTAssertEqual(transaction, ackedTransaction)
+                expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+    }
+
+    func testSignTransactionError() {
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: StubObjects.transactionEvelope1)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet
+        )
+
+        mockKinTransactionApi.stubSignTransaction = .init(
+            result: .transientFailure,
+            error: KinService.Errors.unknown,
+            kinTransaction: nil
+        )
+
+        let expect = expectation(description: "callback")
+        sut.signTransaction(transaction: inFlightTransaction)
+            .catch { error in
+                XCTAssertError(error, is: KinService.Errors.transientFailure(error: error))
+                expect.fulfill()
+        }
 
         waitForExpectations(timeout: 1)
     }

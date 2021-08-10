@@ -84,6 +84,17 @@ extension GetTransactionHistoryRequestV4 {
     }
 }
 
+extension SignTransactionRequestV4 {
+    var protoRequest: APBTransactionV4SignTransactionRequest {
+        let request = APBTransactionV4SignTransactionRequest()
+        request.transaction = APBCommonV4Transaction()
+        request.transaction.value = transaction.encode()
+        request.invoiceList = invoiceList?.proto
+
+        return request
+    }
+}
+
 extension SubmitTransactionRequestV4 {
     var protoRequest: APBTransactionV4SubmitTransactionRequest {
         let request = APBTransactionV4SubmitTransactionRequest()

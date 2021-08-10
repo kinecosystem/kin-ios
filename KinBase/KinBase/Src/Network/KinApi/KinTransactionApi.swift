@@ -53,6 +53,9 @@ public protocol KinTransactionApiV4 {
 
     func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponseV4) -> Void)
 
+    func signTransaction(request: SignTransactionRequestV4,
+                         completion: @escaping (SignTransactionResponseV4) -> Void)
+
     func submitTransaction(request: SubmitTransactionRequestV4,
                            completion: @escaping (SubmitTransactionResponseV4) -> Void)
 }
@@ -192,6 +195,38 @@ public struct GetMinFeeForTransactionResponseV4 {
         self.error = error
         self.fee = fee
     }
+}
+
+public struct SignTransactionRequestV4 {
+    public let transaction: Transaction
+    public let invoiceList: InvoiceList?
+
+    public init(transaction: Transaction,
+                invoiceList: InvoiceList? = nil) {
+        self.transaction = transaction
+        self.invoiceList = invoiceList
+    }
+}
+
+public struct SignTransactionResponseV4 {
+    internal init(result: SignTransactionResponseV4.Result, error: Error?, kinTransaction: KinTransaction?) {
+        self.result = result
+        self.error = error
+        self.kinTransaction = kinTransaction
+    }
+
+    public enum Result: Int {
+        case upgradeRequired = -3
+        case undefinedError = -2
+        case transientFailure = -1
+        case ok = 0
+        case webhookRejected = 1
+        case invoiceError = 2
+    }
+
+    public let result: Result
+    public let error: Error?
+    public let kinTransaction: KinTransaction?
 }
 
 public struct SubmitTransactionRequestV4 {

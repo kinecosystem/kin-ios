@@ -62,6 +62,19 @@ extension APBTransactionV4HistoryItem {
     }
 }
 
+extension APBTransactionV4SignTransactionResponse {
+    func toKinTransactionAcknowledged(solanaTransaction: Transaction, network: KinNetwork) -> KinTransaction? {
+
+        let record = Record.acknowledged(ts: Date().timeIntervalSince1970)
+
+        return try? KinTransaction(
+            envelopeXdrBytes: [Byte](solanaTransaction.encode()),
+            record: record,
+            network: network
+        )
+    }
+}
+
 extension APBTransactionV4SubmitTransactionResponse {
     func toKinTransactionAcknowledged(solanaTransaction: Transaction, network: KinNetwork) -> KinTransaction? {
 
