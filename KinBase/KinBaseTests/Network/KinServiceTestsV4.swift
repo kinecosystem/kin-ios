@@ -262,6 +262,14 @@ class KinServiceTestsV4: XCTestCase {
             KinPaymentItem(amount: Kin(123), destAccount: destAccount)
         ]
 
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet
+        )
+
+        mockKinTransactionApi.stubSignTransactionResponse = SignTransactionResponseV4(result: .ok, error: nil, kinTransaction: inFlightTransaction)
+
         let expect = expectation(description: "callback")
         sut.buildAndSignTransaction(
             ownerKey: sourceKey, sourceKey: account.publicKey, nonce: account.sequence!,
@@ -310,6 +318,15 @@ class KinServiceTestsV4: XCTestCase {
             appIdx: 0,
             foreignKeyBytes: invoiceList.id.decode()
         )
+
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet,
+            invoiceList: invoiceList
+        )
+
+        mockKinTransactionApi.stubSignTransactionResponse = SignTransactionResponseV4(result: .ok, error: nil, kinTransaction: inFlightTransaction)
         
         let expect = expectation(description: "callback")
         sut.buildAndSignTransaction(

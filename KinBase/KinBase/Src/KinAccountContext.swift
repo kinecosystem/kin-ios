@@ -528,7 +528,6 @@ extension KinAccountContext: KinPaymentWriteOperations {
                     guard attemptNumber < MAX_ATTEMPTS else {
                         return Promise.init(error)
                     }
-                    
                     if (error as? KinServiceV4.Errors) == KinServiceV4.Errors.badSequenceNumber {
                         self.service.invalidateRecentBlockHashCache()
                         return attempt()
