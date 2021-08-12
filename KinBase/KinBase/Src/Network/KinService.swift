@@ -51,7 +51,7 @@ public protocol KinServiceType {
 public class KinServiceV4 {
     public enum Errors: Error, Equatable {
         case unknown
-        case transientFailure(error: Error)
+        case transientFailure(error: Error? = nil)
         case invalidAccount
         case missingApi
         case insufficientBalance
@@ -754,12 +754,6 @@ extension KinServiceV4 : KinServiceType {
             self.transactionApi.submitTransaction(request: request) { [weak self] response in
                 self?.responsePrint(response:response)
                 switch response.result {
-                case .ok:
-                    if let transaction = response.kinTransaction {
-                        respond.onSuccess(transaction)
-                        break
-                    }
-                    fallthrough
                 case .insufficientBalance:
                     respond.onError?(Errors.insufficientBalance)
                 case .upgradeRequired:
@@ -772,19 +766,22 @@ extension KinServiceV4 : KinServiceType {
                     respond.onError?(Errors.invalidAccount)
                 case .webhookRejected:
                     respond.onError?(Errors.webhookRejectedTransaction)
+                case .transientFailure:
+                    respond.onError?(Errors.transientFailure(error: response.error))
+                case .ok:
+                    if let transaction = response.kinTransaction {
+                        respond.onSuccess(transaction)
+                        break
+                    }
+                    fallthrough
                 case .invoiceError:
                     guard let error = response.error as? AgoraKinTransactionsApi.Errors,
                         case let .invoiceErrors(invoiceErrors) = error else {
                         fallthrough
                     }
-
                     respond.onError?(Errors.invoiceErrorsInRequest(errors: invoiceErrors))
                 default:
-                    var error = Errors.unknown
-                    if let transientError = response.error {
-                        error = Errors.transientFailure(error: transientError)
-                    }
-                    respond.onError?(error)
+                    respond.onError?(Errors.unknown)
                 }
             }
         }

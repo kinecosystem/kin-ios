@@ -532,15 +532,9 @@ extension KinAccountContext: KinPaymentWriteOperations {
                         self.service.invalidateRecentBlockHashCache()
                         return attempt()
                         
-                    } else if (error as? KinServiceV4.Errors) == KinServiceV4.Errors.badSequenceNumber {
-                        return self.getAccount(forceUpdate: true).then { _ in
-                            return attempt()
-                        }
-                        
                     } else if (error as? KinServiceV4.Errors == KinServiceV4.Errors.invalidAccount) {
                         Thread.sleep(until: Date().addingTimeInterval((try? invalidAccountErrorRetryStrategy.nextDelay()) ?? 0))
                         return attempt()
-                        
                     } else {
                         return Promise.init(error)
                     }
