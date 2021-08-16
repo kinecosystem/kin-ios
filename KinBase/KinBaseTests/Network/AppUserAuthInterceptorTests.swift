@@ -27,7 +27,7 @@ class AppUserAuthInterceptorTests: XCTestCase {
 
     func testDontInjectAppCredentials() {
         let requestOptions: GRPCRequestOptions = .init(host: "host",
-                                                       path: "/kin.agora.transaction.v3.Transaction/GetHistory",
+                                                       path: "/kin.agora.transaction.v4.Transaction/GetHistory",
                                                        safety: .default)
         sut.start(with: requestOptions,
                   callOptions: .init())
@@ -38,7 +38,7 @@ class AppUserAuthInterceptorTests: XCTestCase {
 
     func testInjectAppCredentials() {
         let requestOptions: GRPCRequestOptions = .init(host: "host",
-                                                       path: "/kin.agora.transaction.v3.Transaction/SubmitTransaction",
+                                                       path: "/kin.agora.transaction.v4.Transaction/SubmitTransaction",
                                                        safety: .default)
         sut.start(with: requestOptions,
                   callOptions: .init())

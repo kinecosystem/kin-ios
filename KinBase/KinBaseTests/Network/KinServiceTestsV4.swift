@@ -34,6 +34,7 @@ class MockKinTransactionApiV4: KinTransactionApiV4 {
     var stubGetTransactionHistoryResponse: GetTransactionHistoryResponseV4?
     var stubGetTransactionResponse: GetTransactionResponseV4?
     var stubGetMinFeeResponse: GetMinFeeForTransactionResponseV4?
+    var stubSignTransactionResponse: SignTransactionResponseV4?
     var stubSubmitTransactionResponse: SubmitTransactionResponseV4?
     var subServiceConfigResponse: GetServiceConfigResponseV4?
     var stubRecentBlockhashResponse: GetRecentBlockHashResonseV4?
@@ -50,6 +51,10 @@ class MockKinTransactionApiV4: KinTransactionApiV4 {
 
     func getTransactionMinFee(completion: @escaping (GetMinFeeForTransactionResponseV4) -> Void) {
         completion(stubGetMinFeeResponse!)
+    }
+
+    func signTransaction(request: SignTransactionRequestV4, completion: @escaping (SignTransactionResponseV4) -> Void) {
+        completion(stubSignTransactionResponse!)
     }
 
     func submitTransaction(request: SubmitTransactionRequestV4, completion: @escaping (SubmitTransactionResponseV4) -> Void) {
@@ -257,6 +262,14 @@ class KinServiceTestsV4: XCTestCase {
             KinPaymentItem(amount: Kin(123), destAccount: destAccount)
         ]
 
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet
+        )
+
+        mockKinTransactionApi.stubSignTransactionResponse = SignTransactionResponseV4(result: .ok, error: nil, kinTransaction: inFlightTransaction)
+
         let expect = expectation(description: "callback")
         sut.buildAndSignTransaction(
             ownerKey: sourceKey, sourceKey: account.publicKey, nonce: account.sequence!,
@@ -305,6 +318,15 @@ class KinServiceTestsV4: XCTestCase {
             appIdx: 0,
             foreignKeyBytes: invoiceList.id.decode()
         )
+
+        let inFlightTransaction = try! KinTransaction(
+            envelopeXdrBytes: [Byte](Data(base64Encoded: expectEnvelope)!),
+            record: .inFlight(ts: 123456789),
+            network: .testNet,
+            invoiceList: invoiceList
+        )
+
+        mockKinTransactionApi.stubSignTransactionResponse = SignTransactionResponseV4(result: .ok, error: nil, kinTransaction: inFlightTransaction)
         
         let expect = expectation(description: "callback")
         sut.buildAndSignTransaction(
@@ -633,9 +655,9 @@ class KinServiceTestsV4: XCTestCase {
             error: nil,
             kinTransaction: ackedTransaction
         )
-        
+
         mockKinTransactionApi.stubSubmitTransactionResponse = expectResponse
-        
+
         let expect = expectation(description: "callback")
         sut.submitTransaction(transaction: inFlightTransaction)
             .then { transaction in
@@ -659,15 +681,15 @@ class KinServiceTestsV4: XCTestCase {
             error: error,
             kinTransaction: nil
         )
-        
+
         mockKinTransactionApi.stubSubmitTransactionResponse = expectResponse
-        
+
         let expect = expectation(description: "callback")
         sut.submitTransaction(transaction: inFlightTransaction).catch { error in
             XCTAssertEqual(error as! KinServiceV4.Errors, KinServiceV4.Errors.transientFailure(error: error))
             expect.fulfill()
         }
-        
+
         waitForExpectations(timeout: 1)
     }
     

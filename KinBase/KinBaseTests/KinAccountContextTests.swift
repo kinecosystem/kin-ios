@@ -221,7 +221,7 @@ class KinAccountContextTests: XCTestCase {
         let memo = KinMemo.none
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
-        mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
+        mockKinService.stubBuildAndSignTransactionResult = .init(stubInFlightTransaction)
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
@@ -269,7 +269,7 @@ class KinAccountContextTests: XCTestCase {
         let memo = KinMemo.none
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
-        mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
+        mockKinService.stubBuildAndSignTransactionResult = .init(stubInFlightTransaction)
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
@@ -315,7 +315,7 @@ class KinAccountContextTests: XCTestCase {
         let memo = KinMemo.none
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
-        mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
+        mockKinService.stubBuildAndSignTransactionResult = .init(stubInFlightTransaction)
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce
@@ -355,7 +355,7 @@ class KinAccountContextTests: XCTestCase {
         
         let stubInFlightTransaction = StubObjects.inFlightTransaction(from: StubObjects.transactionEnvelopeSigned)
 
-        mockKinService.stubBuildAndSignTransactionResult = stubInFlightTransaction
+        mockKinService.stubBuildAndSignTransactionResult = .init(stubInFlightTransaction)
         mockKinService.stubGetAccountResult = expectAccount
 
         // Set up submited transaction on serivce

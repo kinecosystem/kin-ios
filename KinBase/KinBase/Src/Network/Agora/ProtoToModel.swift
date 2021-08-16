@@ -47,17 +47,36 @@ extension APBTransactionV4HistoryItem {
 
         var bytes: [Byte]
 
-        if ([Byte](solanaTransaction.value).count != 0 ) {
+        if ([Byte](solanaTransaction.value).count != 0) {
             bytes =  [Byte](solanaTransaction.value)
+            return try? KinTransaction(
+                envelopeXdrBytes: bytes,
+                record: record,
+                network: network,
+                invoiceList: invoices
+            )
         } else {
             bytes = [Byte](stellarTransaction.envelopeXdr)
+            return try? KinTransaction(
+                envelopeXdrBytes: bytes,
+                record: record,
+                network: network,
+                invoiceList: invoices,
+                historyItem: self
+            )
         }
-        
+    }
+}
+
+extension APBTransactionV4SignTransactionResponse {
+    func toKinTransactionAcknowledged(solanaTransaction: Transaction, network: KinNetwork) -> KinTransaction? {
+
+        let record = Record.acknowledged(ts: Date().timeIntervalSince1970)
+
         return try? KinTransaction(
-            envelopeXdrBytes: bytes,
+            envelopeXdrBytes: [Byte](solanaTransaction.encode()),
             record: record,
-            network: network,
-            invoiceList: invoices
+            network: network
         )
     }
 }

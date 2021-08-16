@@ -14,6 +14,7 @@ class MockAgoraTransactionServiceGrpcProxy: AgoraTransactionServiceGrpcProxy {
     var network: KinNetwork = .testNet
     
     var stubGetHistoryResponsePromiseV4: Promise<APBTransactionV4GetHistoryResponse>?
+    var stubSignTransactionResponsePromiseV4: Promise<APBTransactionV4SignTransactionResponse>?
     var stubSubmitTransactionResponsePromiseV4: Promise<APBTransactionV4SubmitTransactionResponse>?
     var stubGetTransactionResponsePromiseV4: Promise<APBTransactionV4GetTransactionResponse>?
     var stubGetServiceConfigResponsePromise: Promise<APBTransactionV4GetServiceConfigResponse>?
@@ -23,6 +24,10 @@ class MockAgoraTransactionServiceGrpcProxy: AgoraTransactionServiceGrpcProxy {
     
     func getHistory(_ request: APBTransactionV4GetHistoryRequest) -> Promise<APBTransactionV4GetHistoryResponse> {
         return stubGetHistoryResponsePromiseV4!
+    }
+
+    func signTransaction(_ request: APBTransactionV4SignTransactionRequest) -> Promise<APBTransactionV4SignTransactionResponse> {
+        return stubSignTransactionResponsePromiseV4!
     }
     
     func submitTransaction(_ request: APBTransactionV4SubmitTransactionRequest) -> Promise<APBTransactionV4SubmitTransactionResponse> {

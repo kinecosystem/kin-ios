@@ -39,7 +39,7 @@ public class AppUserAuthInterceptor: GRPCInterceptor {
         
         let newCallOptions = callOptions.mutableCopy() as! GRPCMutableCallOptions
 
-        if requestOptions.path == "/kin.agora.transaction.v3.Transaction/SubmitTransaction" || requestOptions.path == "/kin.agora.transaction.v4.Transaction/SubmitTransaction" {
+        if requestOptions.path == "/kin.agora.transaction.v4.Transaction/SubmitTransaction" || requestOptions.path == "/kin.agora.transaction.v4.Transaction/SignTransaction" {
             let creds = appInfoProvider.getPassthroughAppUserCredentials()
             let headersCopy = NSMutableDictionary.init(dictionary: ["app-user-id": creds.appUserId,
                                                                     "app-user-passkey": creds.appUserPasskey])

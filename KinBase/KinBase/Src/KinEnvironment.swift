@@ -65,7 +65,11 @@ public struct KinEnvironment {
         private static func defaultEnvironmentSetup(network: KinNetwork, appInfoProvider: AppInfoProvider, enableLogging: Bool, minApiVersion: Int, storagePath: URL?) -> KinEnvironment {
             DispatchQueue.promises = DispatchQueue(label: "KinBase.default")
             let logger = KinLoggerFactoryImpl(isLoggingEnabled: enableLogging)
-            let networkHandler = NetworkOperationHandler()
+            let networkHandler = NetworkOperationHandler(
+                shouldRetryError: { (error: Error) in
+                    error is KinServiceV4.Errors && error as! KinServiceV4.Errors == KinServiceV4.Errors.transientFailure()
+                }
+            )
             // If custom storagePath is set, use that. Otherwise provide a default.
             let documentDirectory = storagePath ?? FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("kin_storage", isDirectory: true)
             let storage = KinFileStorage(directory: documentDirectory, network: network)

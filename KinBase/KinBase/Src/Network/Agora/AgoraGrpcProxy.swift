@@ -22,6 +22,7 @@ protocol AgoraAccountServiceGrpcProxy: AgoraGrpcProxyType {
 
 protocol AgoraTransactionServiceGrpcProxy: AgoraGrpcProxyType {
     func getHistory(_ request: APBTransactionV4GetHistoryRequest) -> Promise<APBTransactionV4GetHistoryResponse>
+    func signTransaction(_ request: APBTransactionV4SignTransactionRequest) -> Promise<APBTransactionV4SignTransactionResponse>
     func submitTransaction(_ request: APBTransactionV4SubmitTransactionRequest) -> Promise<APBTransactionV4SubmitTransactionResponse>
     func getTransaction(_ request: APBTransactionV4GetTransactionRequest) -> Promise<APBTransactionV4GetTransactionResponse>
     func getServiceConfig(_ request: APBTransactionV4GetServiceConfigRequest) -> Promise<APBTransactionV4GetServiceConfigResponse>
@@ -163,6 +164,10 @@ extension AgoraGrpcProxy: AgoraTransactionServiceGrpcProxy {
     func getHistory(_ request: APBTransactionV4GetHistoryRequest) -> Promise<APBTransactionV4GetHistoryResponse> {
         return callUnaryRPC(request: request,
                             protoMethod: grpcTransactionServiceV4.getHistoryWithMessage(_:responseHandler:callOptions:))
+    }
+
+    func signTransaction(_ request: APBTransactionV4SignTransactionRequest) -> Promise<APBTransactionV4SignTransactionResponse> {
+        return callUnaryRPC(request: request, protoMethod: grpcTransactionServiceV4.sign(withMessage:responseHandler:callOptions:))
     }
     
     func submitTransaction(_ request: APBTransactionV4SubmitTransactionRequest) -> Promise<APBTransactionV4SubmitTransactionResponse> {
