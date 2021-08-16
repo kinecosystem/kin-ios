@@ -47,18 +47,24 @@ extension APBTransactionV4HistoryItem {
 
         var bytes: [Byte]
 
-        if ([Byte](solanaTransaction.value).count != 0 ) {
+        if ([Byte](solanaTransaction.value).count != 0) {
             bytes =  [Byte](solanaTransaction.value)
+            return try? KinTransaction(
+                envelopeXdrBytes: bytes,
+                record: record,
+                network: network,
+                invoiceList: invoices
+            )
         } else {
             bytes = [Byte](stellarTransaction.envelopeXdr)
+            return try? KinTransaction(
+                envelopeXdrBytes: bytes,
+                record: record,
+                network: network,
+                invoiceList: invoices,
+                historyItem: self
+            )
         }
-        
-        return try? KinTransaction(
-            envelopeXdrBytes: bytes,
-            record: record,
-            network: network,
-            invoiceList: invoices
-        )
     }
 }
 

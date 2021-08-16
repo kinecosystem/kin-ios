@@ -75,40 +75,42 @@ extension KinTransactionType {
 }
 
 public class KinTransaction: Equatable, KinTransactionType {
-    
-    public let solanaTransaction: Transaction
-    
     public var record: Record
     public var network: KinNetwork
     public var envelopeXdrBytes: [Byte]
     public var invoiceList: InvoiceList?
-    
-    public var transactionHash: KinTransactionHash {
-        solanaTransaction.transactionHash
-    }
-    
-    public var sourceAccount: PublicKey {
-        solanaTransaction.sourceAccount
-    }
+    public var transactionHash: KinTransactionHash
+    public var sourceAccount: PublicKey
     
     public var sequenceNumber: Int64 = 0
     
     public var fee: Quark = 0
     
-    public var memo: KinMemo {
-        solanaTransaction.memo
-    }
+    public var memo: KinMemo
     
-    public var paymentOperations: [KinPaymentOperation] {
-       solanaTransaction.paymentOperations
-    }
+    public var paymentOperations: [KinPaymentOperation]
     
-    init(envelopeXdrBytes: [Byte], record: Record, network: KinNetwork, invoiceList: InvoiceList? = nil) throws {
+    init(envelopeXdrBytes: [Byte], record: Record, network: KinNetwork, invoiceList: InvoiceList? = nil, historyItem: APBTransactionV4HistoryItem? = nil) throws {
         self.envelopeXdrBytes = envelopeXdrBytes
-        self.solanaTransaction = Transaction(data: Data(envelopeXdrBytes))!
         self.record = record
         self.network = network
         self.invoiceList = invoiceList
+
+        if let solanaTransaction = Transaction(data: Data(envelopeXdrBytes)) {
+            self.transactionHash = solanaTransaction.transactionHash
+            self.sourceAccount = solanaTransaction.sourceAccount
+            self.memo = solanaTransaction.memo
+            self.paymentOperations = solanaTransaction.paymentOperations
+        } else {
+            let payments = historyItem!.paymentsArray as NSArray as! [APBTransactionV4HistoryItem_Payment]
+            let payment = payments.first!
+            self.transactionHash = KinTransactionHash(historyItem!.transactionId.value)
+            self.sourceAccount = payment.source.publicKey
+            self.memo = KinMemo.none
+            self.paymentOperations = payments.compactMap {
+                KinPaymentOperation(amount: Kin($0.amount), source: $0.source.publicKey, destination: $0.destination.publicKey, isNonNativeAsset: false)
+            }
+        }
     }
     
     public static func == (lhs: KinTransaction, rhs: KinTransaction) -> Bool {
