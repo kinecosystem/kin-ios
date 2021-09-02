@@ -121,6 +121,10 @@ public struct Transaction {
     // MARK: - Signing -
     
     public func signing(using keyPairs: KeyPair...) throws -> Transaction {
+        // Swift does not support splatting, wrapping the function this way allows it to be called with an array or variadic
+        return try signing(using: keyPairs)
+    }
+    public func signing(using keyPairs: [KeyPair]) throws -> Transaction {
         let requiredSignatureCount = message.header.signatureCount
         if keyPairs.count > requiredSignatureCount {
             throw SigningError.tooManySigners

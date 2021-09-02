@@ -275,7 +275,9 @@ class KinServiceTestsV4: XCTestCase {
             ownerKey: sourceKey, sourceKey: account.publicKey, nonce: account.sequence!,
             paymentItems: paymentItems,
             memo: KinMemo(text: "1-kek-blah"),
-            fee: Quark(100)
+            fee: Quark(100),
+            createAccountInstructions: [],
+            additionalSigners: []
         )
         .then { transaction in
             XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)
@@ -333,7 +335,9 @@ class KinServiceTestsV4: XCTestCase {
             ownerKey: sourceKey, sourceKey: account.publicKey, nonce: account.sequence!,
             paymentItems: paymentItems,
             memo: agoraMemo.kinMemo,
-            fee: Quark(100)
+            fee: Quark(100),
+            createAccountInstructions: [],
+            additionalSigners: []
         )
         .then { transaction in
             XCTAssertEqual(Data(transaction.envelopeXdrBytes).base64EncodedString(), expectEnvelope)

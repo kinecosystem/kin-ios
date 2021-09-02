@@ -15,6 +15,7 @@ class MockKinService: KinServiceType {
     var stubGetAccountResult: KinAccount?
     var stubGetAccountResultPromise: Promise<KinAccount>?
     var stubCreateAccountResult: KinAccount?
+    var stubCreateTokenAccountForDestinationResult: Promise<([Instruction], KeyPair)>?
     var stubGetTransactionResult: KinTransaction?
     var stubBuildAndSignTransactionResult: Promise<KinTransaction>?
     var stubSubmitTransactionResult: Promise<KinTransaction>?
@@ -45,6 +46,10 @@ class MockKinService: KinServiceType {
         return .init(stubCreateAccountResult!)
     }
 
+    func createTokenAccountForDestination(account: PublicKey) -> Promise<([Instruction], KeyPair)> {
+        return stubCreateTokenAccountForDestinationResult!
+    }
+
     func streamAccount(account: PublicKey) -> Observable<KinAccount> {
         return stubStreamAccountObservable!
     }
@@ -69,7 +74,7 @@ class MockKinService: KinServiceType {
         return .init(stubCanWhitelistTransactionResult!)
     }
     
-    func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
+    func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark, createAccountInstructions: [Instruction], additionalSigners: [KeyPair]) -> Promise<KinTransaction> {
         return stubBuildAndSignTransactionResult!
     }
     

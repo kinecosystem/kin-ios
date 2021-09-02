@@ -425,7 +425,7 @@ extension KinAccountContext: KinPaymentWriteOperations {
         var attemptNumber = 0
         let invalidAccountErrorRetryStrategy = BackoffStrategy.fixed(after: 3, maxAttempts: MAX_ATTEMPTS)
         
-        func buildAttempt() -> Promise<KinTransaction> {
+        func buildAttempt(error: KinServiceV4.Errors? = nil) -> Promise<KinTransaction> {
             all(self.getAccount(), self.getFee())
                 .then(on: self.dispatchQueue) { account, fee -> Promise<KinTransaction> in
                     var sourceAccountPromise: Promise<SourceAccountSigningData>
@@ -453,6 +453,9 @@ extension KinAccountContext: KinPaymentWriteOperations {
                     }
                     
                     var paymentItemsPromise: Promise<[KinPaymentItem]>
+
+                    var createAccountInstructions = [Instruction]()
+                    var additionalSigners = [KeyPair]()
                     
                     if attemptNumber == 0 || destinationAccountSpec == .exact {
                         paymentItemsPromise = Promise { payments }
@@ -461,7 +464,16 @@ extension KinAccountContext: KinPaymentWriteOperations {
                             payments.map { paymentItem in
                                 self.service.resolveTokenAccounts(account: paymentItem.destAccount)
                                     .then {
-                                        paymentItem.copy(destAccount: $0.first?.publicKey)
+                                        if $0.isEmpty && error == KinServiceV4.Errors.invalidAccount {
+                                            return self.service.createTokenAccountForDestination(account: paymentItem.destAccount)
+                                                .then { (instructions: [Instruction], newKeypair: KeyPair) in
+                                                    createAccountInstructions.append(contentsOf: instructions)
+                                                    additionalSigners.append(newKeypair)
+                                                    return Promise(paymentItem.copy(destAccount: newKeypair.asPublicKey()))
+                                                }
+                                        } else {
+                                            return Promise(paymentItem.copy(destAccount: $0.first?.publicKey))
+                                        }
                                     }
                                     .recover { _ in Promise { paymentItem } }
                             }
@@ -478,7 +490,9 @@ extension KinAccountContext: KinPaymentWriteOperations {
                                     nonce: accountData.nonce,
                                     paymentItems: it,
                                     memo: memo,
-                                    fee: fee // feeOverride ?: fee
+                                    fee: fee,
+                                    createAccountInstructions: createAccountInstructions,
+                                    additionalSigners: additionalSigners
                                 )
                             }
                         }
@@ -486,9 +500,9 @@ extension KinAccountContext: KinPaymentWriteOperations {
                 }
         }
         
-        func attempt() -> Promise<[KinPayment]> {
+        func attempt(error: KinServiceV4.Errors? = nil) -> Promise<[KinPayment]> {
             func buildSignSubmit() -> Promise<KinTransaction> {
-                return buildAttempt().then { signedTransaction -> Promise<KinTransaction> in
+                return buildAttempt(error: error).then { signedTransaction -> Promise<KinTransaction> in
                     guard let transaction: KinTransaction = try? KinTransaction(envelopeXdrBytes: signedTransaction.envelopeXdrBytes, record: signedTransaction.record, network: signedTransaction.network, invoiceList: invoiceList) else {
                         return Promise(Errors.unknown)
                     }
@@ -530,11 +544,10 @@ extension KinAccountContext: KinPaymentWriteOperations {
                     }
                     if (error as? KinServiceV4.Errors) == KinServiceV4.Errors.badSequenceNumber {
                         self.service.invalidateRecentBlockHashCache()
-                        return attempt()
-                        
-                    } else if (error as? KinServiceV4.Errors == KinServiceV4.Errors.invalidAccount) {
+                        return attempt(error: error as? KinServiceV4.Errors)
+                    } else if (error as? KinServiceV4.Errors) == KinServiceV4.Errors.invalidAccount {
                         Thread.sleep(until: Date().addingTimeInterval((try? invalidAccountErrorRetryStrategy.nextDelay()) ?? 0))
-                        return attempt()
+                        return attempt(error: error as? KinServiceV4.Errors)
                     } else {
                         return Promise.init(error)
                     }
