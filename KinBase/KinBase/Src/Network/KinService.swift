@@ -19,6 +19,8 @@ public protocol KinServiceType {
     
     func createAccount(account: PublicKey, signer: KeyPair, appIndex: AppIndex?) -> Promise<KinAccount>
 
+    func createTokenAccountForDestination(account: PublicKey) -> Promise<([Instruction], KeyPair)>
+
     func getAccount(account: PublicKey) -> Promise<KinAccount>
     
     func resolveTokenAccounts(account: PublicKey) -> Promise<[AccountDescription]>
@@ -35,7 +37,7 @@ public protocol KinServiceType {
 
     func canWhitelistTransactions() -> Promise<Bool>
 
-    func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction>
+    func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark, createAccountInstructions: [Instruction], additionalSigners: [KeyPair]) -> Promise<KinTransaction>
 
     func submitTransaction(transaction: KinTransaction) -> Promise<KinTransaction>
     
@@ -442,6 +444,59 @@ extension KinServiceV4 : KinServiceType {
             }
         }
     }
+
+    public func createTokenAccountForDestination(account: PublicKey) -> Promise<([Instruction], KeyPair)> {
+        networkOperationHandler.queueWork { [weak self] respond in
+            guard let self = self else {
+                respond.onError?(Errors.unknown)
+                return
+            }
+
+            all(self.cachedServiceConfig(), self.cachedMinRentExemption()).then { serviceConfig, minRentExemption in
+                guard
+                    serviceConfig.result == GetServiceConfigResponseV4.Result.ok ||
+                        minRentExemption.result == GetMinimumBalanceForRentExemptionResponseV4.Result.ok
+                else {
+                    respond.onError?(Errors.unknown)
+                    return
+                }
+
+                let subsidizer = serviceConfig.subsidizerAccount!
+                let programKey = serviceConfig.tokenProgram!
+                let mint = serviceConfig.token!
+
+                guard let ephemeralKeypair = KeyPair.generate()
+                else {
+                    respond.onError?(Errors.unknown)
+                    return
+                }
+                let pub = ephemeralKeypair.asPublicKey()
+
+                let instructions: [Instruction] = [
+                    SystemProgram.createAccountInstruction(
+                        subsidizer: subsidizer,
+                        address: pub,
+                        owner: programKey,
+                        lamports: minRentExemption.lamports,
+                        size: TokenProgram.accountSize
+                    ),
+                    TokenProgram.initializeAccountInstruction(
+                        account: pub,
+                        mint: mint,
+                        owner: pub,
+                        programKey: programKey
+                    ),
+                    TokenProgram.setAuthority(account: pub, currentAuthority: pub, newAuthority: subsidizer, authorityType: .authorityCloseAccount, programKey: programKey),
+                    TokenProgram.setAuthority(account: pub, currentAuthority: pub, newAuthority: account, authorityType: .authorityAccountHolder, programKey: programKey)
+                ]
+
+                respond.onSuccess((instructions, ephemeralKeypair))
+            }
+            .catch {
+                respond.onError?($0)
+            }
+        }
+    }
     
     public func getAccount(account: PublicKey) -> Promise<KinAccount> {
         return networkOperationHandler.queueWork { [weak self] respond in
@@ -641,7 +696,7 @@ extension KinServiceV4 : KinServiceType {
         return Promise.init(true)
     }
     
-    public func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark) -> Promise<KinTransaction> {
+    public func buildAndSignTransaction(ownerKey: KeyPair, sourceKey: PublicKey, nonce: Int64, paymentItems: [KinPaymentItem], memo: KinMemo, fee: Quark, createAccountInstructions: [Instruction], additionalSigners: [KeyPair]) -> Promise<KinTransaction> {
         return networkOperationHandler.queueWork { [weak self] respond in
             guard let self = self else {
                 respond.onError?(Errors.unknown)
@@ -680,6 +735,8 @@ extension KinServiceV4 : KinServiceType {
                         )
                     }
                 }
+
+                instructions.append(contentsOf: createAccountInstructions)
                 
                 instructions.append(contentsOf: paymentItems.map { paymentItem in
                     TokenProgram.transferInstruction(
@@ -690,13 +747,15 @@ extension KinServiceV4 : KinServiceType {
                         programKey: programKey
                     )
                 })
-                
+
+                var signers = additionalSigners
+                signers.insert(signer, at: 0)
                 let transaction = try! Transaction(
                     payer: subsidizer,
                     instructions: instructions
                 )
                 .updatingBlockhash(recentBlockHash.blockHash!)
-                .signing(using: signer)
+                .signing(using: signers)
                 
                 print(transaction)
                 
