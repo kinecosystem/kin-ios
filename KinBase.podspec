@@ -31,6 +31,7 @@ Pod::Spec.new do |s|
   s.dependency '!ProtoCompiler-gRPCPlugin', '~> 1.40.0'
   s.dependency 'Protobuf', '~> 3.17'
   s.dependency 'gRPC-ProtoRPC', '~> 1.40.0'
+  s.dependency 'KinSodium', '~> 0.9.2'
   
   s.subspec 'no-arc' do |sna|
       sna.requires_arc = false
