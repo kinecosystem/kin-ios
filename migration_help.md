@@ -20,4 +20,4 @@ Replace `[ENV_ID]` in the above example with `A1QM4R39CCG4ER3FC9GMO82BD5N20HB3DT
 
 #### Other
 The `ENV_ID` referenced above is the base32hex encoding of the KinNetwork.Id your app was using prior to updating to 1.x. Listed above are the encodings for Kin3 mainnet and Kin2 mainnet, but if you had a different configuration, you can use a base32hex encoder to generate the appropriate string, or check an existing device to find the precise storage location it was using.
-
+ 
