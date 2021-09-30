@@ -8,7 +8,7 @@ references:
   image_config: &image_config
 #    working_directory: *workspace
     macos:
-      xcode: "12.5.1"
+      xcode: "11.5.0"
     environment:
       FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 60
 #    shell: /bin/bash --login -o pipefail
