@@ -424,7 +424,7 @@ DEPENDENCIES:
   - "!ProtoCompiler-gRPCPlugin (~> 1.40.0)"
   - gRPC-ProtoRPC (~> 1.40.0)
   - KinSodium (~> 0.9.2)
-  - PromisesSwift (~> 1.2.8)
+  - PromisesSwift (~> 1.2.12)
   - Protobuf (~> 3.17)
 
 SPEC REPOS:
@@ -456,6 +456,6 @@ SPEC CHECKSUMS:
   PromisesSwift: 64085cf6e5fc1b5001f90cf31e87a1f1621fefee
   Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
 
-PODFILE CHECKSUM: b7fc5eee46d1ea0a23b497a0e00e6fef852121fc
+PODFILE CHECKSUM: fe143919b7471be569acfffb8f08cf95ef43141a
 
 COCOAPODS: 1.11.2

@@ -5,7 +5,7 @@ install! 'cocoapods', :deterministic_uuids => false
 use_frameworks!
 
 def kin_base_dependencies
-    pod 'PromisesSwift', '~> 1.2.8'
+    pod 'PromisesSwift', '~> 1.2.12'
     pod '!ProtoCompiler-gRPCPlugin', '~> 1.40.0'
     pod 'Protobuf', '~> 3.17'
     pod 'gRPC-ProtoRPC', '~> 1.40.0'

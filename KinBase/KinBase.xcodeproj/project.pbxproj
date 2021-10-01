@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F38DB71FCA12AFF0448CC70 /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E8DCA39417E1A40695E1FF /* Pods_KinBase.framework */; };
 		7E176CC0269763A600355EF2 /* KinBackupRestoreBI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E176C8E269763A600355EF2 /* KinBackupRestoreBI.swift */; };
 		7E176CC1269763A600355EF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E176C8F269763A600355EF2 /* Assets.xcassets */; };
 		7E176CC2269763A600355EF2 /* KinBackupRestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E176C90269763A600355EF2 /* KinBackupRestoreError.swift */; };
@@ -113,6 +114,7 @@
 		85EEEB7924BB7512002AAC29 /* KinBinaryMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB7824BB7512002AAC29 /* KinBinaryMemo.swift */; };
 		85EEEB7B24BB7554002AAC29 /* SHA224Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB7A24BB7554002AAC29 /* SHA224Hash.swift */; };
 		85EEEB8224BE237A002AAC29 /* KinBinaryMemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEEB8124BE237A002AAC29 /* KinBinaryMemoTests.swift */; };
+		87AC2288196146C88C724700 /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE571C841088F59C16A6986 /* Pods_KinBaseTests.framework */; };
 		930A9F2D254345E900F84156 /* KeyPair+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930A9F2C254345E900F84156 /* KeyPair+Utilities.swift */; };
 		9342E2B924FF2DBB008449A2 /* UserAgentInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9342E2B824FF2DBB008449A2 /* UserAgentInterceptor.swift */; };
 		9387E03025434CB900D44509 /* KinServiceV4IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9387E02F25434CB900D44509 /* KinServiceV4IntegrationTests.swift */; };
@@ -125,7 +127,6 @@
 		93F66F1D253BEC4600E14D59 /* SolanaCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */; };
 		93F66F1E253BEC4600E14D59 /* TransactionEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */; };
 		93F66F20253BEC4600E14D59 /* ShortVecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */; };
-		955F3B84CC10E2F85DCD673C /* Pods_KinBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6AAB244339E43C50DA1FCC /* Pods_KinBaseTests.framework */; };
 		9A29E2102639ADFF005138F6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A29E20F2639ADFF005138F6 /* Extensions.swift */; };
 		9A629FB925717DEA00D8E29B /* MockGRPCInterceptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */; };
 		9A99A3CC2666BF3E003A76D5 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60A9326459C65002C740A /* Base58.swift */; };
@@ -167,7 +168,6 @@
 		9AC60B672661178D002C740A /* SHA512.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B662661178D002C740A /* SHA512.swift */; };
 		9AC60B69266117D0002C740A /* SHA224.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B68266117D0002C740A /* SHA224.swift */; };
 		9AC60B6B26611AA9002C740A /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC60B6A26611AA9002C740A /* MD5.swift */; };
-		B1AFEA01BFF37D6E4658F6AA /* Pods_KinBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635BE7E87BCD9F4F04A51E59 /* Pods_KinBase.framework */; };
 		BD56F0F82680B8F70071F302 /* kined25519.h in Headers */ = {isa = PBXBuildFile; fileRef = BD56F0F72680B8F70071F302 /* kined25519.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD56F1212680C1840071F302 /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56F1202680C1840071F302 /* Base32.swift */; };
 		BDD51F07268014EE0061712E /* IngestionService.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD51ED7268014EE0061712E /* IngestionService.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -224,10 +224,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		058D06360DA3AF3965A523B6 /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3751576CC3CF8BFB91B3A150 /* Pods-KinBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.release.xcconfig"; sourceTree = "<group>"; };
-		4D6AAB244339E43C50DA1FCC /* Pods_KinBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		635BE7E87BCD9F4F04A51E59 /* Pods_KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00C75F25E4073F8E182A2C90 /* Pods-KinBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		09E8DCA39417E1A40695E1FF /* Pods_KinBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EE0D1E723836643E1388637 /* Pods-KinBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBase/Pods-KinBase.debug.xcconfig"; sourceTree = "<group>"; };
 		7E176C8E269763A600355EF2 /* KinBackupRestoreBI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinBackupRestoreBI.swift; sourceTree = "<group>"; };
 		7E176C8F269763A600355EF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E176C90269763A600355EF2 /* KinBackupRestoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinBackupRestoreError.swift; sourceTree = "<group>"; };
@@ -354,6 +353,8 @@
 		93F66F19253BEC4600E14D59 /* SolanaCodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolanaCodableTests.swift; sourceTree = "<group>"; };
 		93F66F1A253BEC4600E14D59 /* TransactionEncodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionEncodingTests.swift; sourceTree = "<group>"; };
 		93F66F1C253BEC4600E14D59 /* ShortVecTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVecTests.swift; sourceTree = "<group>"; };
+		9716CD2233E8C773FF97BD04 /* Pods-KinBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBaseTests.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		9929FDA266BFEEB1D46A6F84 /* Pods-KinBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBase/Pods-KinBase.release.xcconfig"; sourceTree = "<group>"; };
 		9A29E20F2639ADFF005138F6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9A629FB825717DEA00D8E29B /* MockGRPCInterceptorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGRPCInterceptorManager.swift; sourceTree = "<group>"; };
 		9A99A3CD2666C035003A76D5 /* Data+CRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+CRC.swift"; sourceTree = "<group>"; };
@@ -395,8 +396,6 @@
 		9AC60B662661178D002C740A /* SHA512.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA512.swift; sourceTree = "<group>"; };
 		9AC60B68266117D0002C740A /* SHA224.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA224.swift; sourceTree = "<group>"; };
 		9AC60B6A26611AA9002C740A /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
-		A97AC4A36AE47F2E27CF79BF /* Pods-KinBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBase/Pods-KinBase.debug.xcconfig"; sourceTree = "<group>"; };
-		BD1B9659382C3080A2601FA3 /* Pods-KinBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinBase.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-KinBase/Pods-KinBase.release.xcconfig"; sourceTree = "<group>"; };
 		BD56F0F72680B8F70071F302 /* kined25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kined25519.h; sourceTree = "<group>"; };
 		BD56F1202680C1840071F302 /* Base32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base32.swift; sourceTree = "<group>"; };
 		BDD51ED7268014EE0061712E /* IngestionService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngestionService.pbobjc.h; sourceTree = "<group>"; };
@@ -433,6 +432,7 @@
 		BDD51F04268014EE0061712E /* AirdropService.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirdropService.pbrpc.h; sourceTree = "<group>"; };
 		BDD51F05268014EE0061712E /* AirdropService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirdropService.pbobjc.m; sourceTree = "<group>"; };
 		BDD51F06268014EE0061712E /* AirdropService.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirdropService.pbrpc.m; sourceTree = "<group>"; };
+		CBE571C841088F59C16A6986 /* Pods_KinBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,7 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1AFEA01BFF37D6E4658F6AA /* Pods_KinBase.framework in Frameworks */,
+				5F38DB71FCA12AFF0448CC70 /* Pods_KinBase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85B024072371CC7700829FD6 /* KinBase.framework in Frameworks */,
-				955F3B84CC10E2F85DCD673C /* Pods_KinBaseTests.framework in Frameworks */,
+				87AC2288196146C88C724700 /* Pods_KinBaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,8 +467,8 @@
 			isa = PBXGroup;
 			children = (
 				853EC7B824EF582F004E0BED /* KinGrpcApi.framework */,
-				635BE7E87BCD9F4F04A51E59 /* Pods_KinBase.framework */,
-				4D6AAB244339E43C50DA1FCC /* Pods_KinBaseTests.framework */,
+				09E8DCA39417E1A40695E1FF /* Pods_KinBase.framework */,
+				CBE571C841088F59C16A6986 /* Pods_KinBaseTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -476,10 +476,10 @@
 		75D5C99AC419743FE72EB422 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A97AC4A36AE47F2E27CF79BF /* Pods-KinBase.debug.xcconfig */,
-				BD1B9659382C3080A2601FA3 /* Pods-KinBase.release.xcconfig */,
-				058D06360DA3AF3965A523B6 /* Pods-KinBaseTests.debug.xcconfig */,
-				3751576CC3CF8BFB91B3A150 /* Pods-KinBaseTests.release.xcconfig */,
+				5EE0D1E723836643E1388637 /* Pods-KinBase.debug.xcconfig */,
+				9929FDA266BFEEB1D46A6F84 /* Pods-KinBase.release.xcconfig */,
+				00C75F25E4073F8E182A2C90 /* Pods-KinBaseTests.debug.xcconfig */,
+				9716CD2233E8C773FF97BD04 /* Pods-KinBaseTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1226,7 +1226,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024112371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBase" */;
 			buildPhases = (
-				2DA8F86BE22FFF47E89B45C5 /* [CP] Check Pods Manifest.lock */,
+				99DF162C52EA453028301B89 /* [CP] Check Pods Manifest.lock */,
 				85B023F82371CC7700829FD6 /* Headers */,
 				85B023F92371CC7700829FD6 /* Sources */,
 				85B023FA2371CC7700829FD6 /* Frameworks */,
@@ -1237,8 +1237,6 @@
 			dependencies = (
 			);
 			name = KinBase;
-			packageProductDependencies = (
-			);
 			productName = KinBase;
 			productReference = 85B023FD2371CC7700829FD6 /* KinBase.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1247,11 +1245,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85B024142371CC7700829FD6 /* Build configuration list for PBXNativeTarget "KinBaseTests" */;
 			buildPhases = (
-				90CC4F59A9949726DF9255E4 /* [CP] Check Pods Manifest.lock */,
+				FE4952792D1E79AE9F8E5D4C /* [CP] Check Pods Manifest.lock */,
 				85B024022371CC7700829FD6 /* Sources */,
 				85B024032371CC7700829FD6 /* Frameworks */,
 				85B024042371CC7700829FD6 /* Resources */,
-				4A57096A11191433A1874918 /* [CP] Embed Pods Frameworks */,
+				A076DEAD09F8DE9E9E81F9C8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1296,8 +1294,6 @@
 				Base,
 			);
 			mainGroup = 85B023F32371CC7700829FD6;
-			packageReferences = (
-			);
 			productRefGroup = 85B023FE2371CC7700829FD6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1339,7 +1335,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2DA8F86BE22FFF47E89B45C5 /* [CP] Check Pods Manifest.lock */ = {
+		99DF162C52EA453028301B89 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1361,7 +1357,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4A57096A11191433A1874918 /* [CP] Embed Pods Frameworks */ = {
+		A076DEAD09F8DE9E9E81F9C8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1378,7 +1374,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinBaseTests/Pods-KinBaseTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		90CC4F59A9949726DF9255E4 /* [CP] Check Pods Manifest.lock */ = {
+		FE4952792D1E79AE9F8E5D4C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1782,7 +1778,7 @@
 		};
 		85B024122371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A97AC4A36AE47F2E27CF79BF /* Pods-KinBase.debug.xcconfig */;
+			baseConfigurationReference = 5EE0D1E723836643E1388637 /* Pods-KinBase.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -1824,7 +1820,7 @@
 		};
 		85B024132371CC7700829FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD1B9659382C3080A2601FA3 /* Pods-KinBase.release.xcconfig */;
+			baseConfigurationReference = 9929FDA266BFEEB1D46A6F84 /* Pods-KinBase.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -1866,7 +1862,7 @@
 		};
 		85B024152371CC7700829FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 058D06360DA3AF3965A523B6 /* Pods-KinBaseTests.debug.xcconfig */;
+			baseConfigurationReference = 00C75F25E4073F8E182A2C90 /* Pods-KinBaseTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1887,7 +1883,7 @@
 		};
 		85B024162371CC7700829FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3751576CC3CF8BFB91B3A150 /* Pods-KinBaseTests.release.xcconfig */;
+			baseConfigurationReference = 9716CD2233E8C773FF97BD04 /* Pods-KinBaseTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
