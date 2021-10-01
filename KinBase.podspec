@@ -28,15 +28,15 @@ Pod::Spec.new do |s|
   s.resources = 'KinBase/KinBase/Src/KinBackupRestoreModule/*.{strings,xcassets}'
   
   s.dependency 'PromisesSwift', '~> 1.2.8'
-  s.dependency '!ProtoCompiler-gRPCPlugin', '~> 1.28.0'
-  s.dependency 'Protobuf', '~> 3.11.4'
-  s.dependency 'gRPC-ProtoRPC', '~> 1.28.0'
-  s.dependency 'Sodium', '~> 0.8.0'
+  s.dependency '!ProtoCompiler-gRPCPlugin', '~> 1.40.0'
+  s.dependency 'Protobuf', '~> 3.17'
+  s.dependency 'gRPC-ProtoRPC', '~> 1.40.0'
+  s.dependency 'KinSodium', '~> 0.9.2'
   
   s.subspec 'no-arc' do |sna|
       sna.requires_arc = false
       sna.source_files = non_arc_files
-      sna.dependency 'Protobuf', '~> 3.11.4'
+    #  sna.dependency 'Protobuf', '~> 3.11.4'
   end
 
   s.pod_target_xcconfig = {
