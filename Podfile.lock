@@ -166,18 +166,18 @@ PODS:
     - gRPC/Interface-Legacy (= 1.28.2)
   - gRPC/Interface-Legacy (1.28.2):
     - gRPC-RxLibrary/Interface (= 1.28.2)
+  - KinSodium (0.9.2)
   - PromisesObjC (1.2.12)
   - PromisesSwift (1.2.12):
     - PromisesObjC (= 1.2.12)
   - Protobuf (3.11.4)
-  - Sodium (0.8.0)
 
 DEPENDENCIES:
   - "!ProtoCompiler-gRPCPlugin (~> 1.28.0)"
   - gRPC-ProtoRPC (~> 1.28.0)
+  - KinSodium (~> 0.9.2)
   - PromisesSwift (~> 1.2.8)
   - Protobuf (~> 3.11.4)
-  - Sodium (~> 0.8.0)
 
 SPEC REPOS:
   trunk:
@@ -189,10 +189,10 @@ SPEC REPOS:
     - gRPC-Core
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
+    - KinSodium
     - PromisesObjC
     - PromisesSwift
     - Protobuf
-    - Sodium
 
 SPEC CHECKSUMS:
   "!ProtoCompiler": da24805d8339f352ec7bb4cb4df2db6a3be45665
@@ -203,11 +203,11 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   gRPC-ProtoRPC: cb8a66ef60a177174bae734ae54efa4188846dfc
   gRPC-RxLibrary: d3e2f7e4c3c36dc1b45b7c47f6961f894c9d6810
+  KinSodium: 85f49399c34448a08984aba560efecd0eff88086
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   PromisesSwift: 64085cf6e5fc1b5001f90cf31e87a1f1621fefee
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
-  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
 
-PODFILE CHECKSUM: a169d8e4a4cb23a722299da10ac28792d5ff70f6
+PODFILE CHECKSUM: 9700d506877d07dc33f8a87e8c20a1223354ff5e
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
