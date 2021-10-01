@@ -1,5 +1,5 @@
 workspace 'kin-ios'
-platform :ios, '10.0'
+platform :ios, '12.0'
 
 install! 'cocoapods', :deterministic_uuids => false
 use_frameworks!
@@ -9,7 +9,8 @@ def kin_base_dependencies
     pod '!ProtoCompiler-gRPCPlugin', '~> 1.40.0'
     pod 'Protobuf', '~> 3.17'
     pod 'gRPC-ProtoRPC', '~> 1.40.0'
-    pod 'KinSodium', '~> 0.9.2'
+    pod 'libsodium'
+    pod 'Sodium', '~> 0.9.1'
 end
 
 target 'KinBase' do

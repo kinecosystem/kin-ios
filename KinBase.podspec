@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Kik Engineering' => 'engineering@kik.com' }
   s.source           = { :git => 'https://github.com/kinecosystem/kin-ios.git', :tag => "#{s.version}" }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
   s.swift_version = '5.0'
 
   non_arc_files = 'KinBase/KinBase/Src/Storage/Gen/*.{h,m}', 'KinBase/KinBase/Src/Vendor/gen/**/*.{h,m}'
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.dependency '!ProtoCompiler-gRPCPlugin', '~> 1.40.0'
   s.dependency 'Protobuf', '~> 3.17'
   s.dependency 'gRPC-ProtoRPC', '~> 1.40.0'
-  s.dependency 'KinSodium', '~> 0.9.2'
+  s.dependency 'Sodium', '~> 0.9.1'
   
   s.subspec 'no-arc' do |sna|
       sna.requires_arc = false

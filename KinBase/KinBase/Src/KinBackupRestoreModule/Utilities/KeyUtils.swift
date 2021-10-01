@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import KinSodium
+import Sodium
 
 public enum KeyUtilsError: Error {
     case encodingFailed (String)
