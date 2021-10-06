@@ -5,11 +5,11 @@ install! 'cocoapods', :deterministic_uuids => false
 use_frameworks!
 
 def kin_base_dependencies
-    pod 'PromisesSwift', '~> 1.2.8'
-    pod '!ProtoCompiler-gRPCPlugin', '~> 1.28.0'
-    pod 'Protobuf', '~> 3.11.4'
-    pod 'gRPC-ProtoRPC', '~> 1.28.0'
-    pod 'Sodium', '~> 0.8.0'
+    pod 'PromisesSwift', '~> 1.2.12'
+    pod '!ProtoCompiler-gRPCPlugin', '~> 1.40.0'
+    pod 'Protobuf', '~> 3.17'
+    pod 'gRPC-ProtoRPC', '~> 1.40.0'
+    pod 'KinSodium', '~> 0.9.2'
 end
 
 target 'KinBase' do

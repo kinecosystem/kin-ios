@@ -9,3 +9,8 @@ ignore:
   - KinGrpcApi/*
   - KinSampleApp/*
   - KinBase/KinBase/Classes/Grpc/*
+  - KinBase/KinBase/Src/Vendor/gen/*
+  - KinBase/KinBase/Src/Storage/Gen/*
+  - KinBase/KinBase/Src/Tools/ListObservable.swift
+  - KinBase/KinBase/Src/KinBackupRestoreModule/*
+  - KinBase/KinBase/Src/Stellar/StellarSdkProxy.swift
