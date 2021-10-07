@@ -89,6 +89,10 @@ public class KinTransaction: Equatable, KinTransactionType {
     public var memo: KinMemo
     
     public var paymentOperations: [KinPaymentOperation]
+
+    public enum Errors: Error {
+        case unknown
+    }
     
     init(envelopeXdrBytes: [Byte], record: Record, network: KinNetwork, invoiceList: InvoiceList? = nil, historyItem: APBTransactionV4HistoryItem? = nil) throws {
         self.envelopeXdrBytes = envelopeXdrBytes
@@ -102,9 +106,12 @@ public class KinTransaction: Equatable, KinTransactionType {
             self.memo = solanaTransaction.memo
             self.paymentOperations = solanaTransaction.paymentOperations
         } else {
-            let payments = historyItem!.paymentsArray as NSArray as! [APBTransactionV4HistoryItem_Payment]
+            guard let historyItem = historyItem else {
+                throw Errors.unknown
+            }
+            let payments = historyItem.paymentsArray as NSArray as! [APBTransactionV4HistoryItem_Payment]
             let payment = payments.first!
-            self.transactionHash = KinTransactionHash(historyItem!.transactionId.value)
+            self.transactionHash = KinTransactionHash(historyItem.transactionId.value)
             self.sourceAccount = payment.source.publicKey
             self.memo = KinMemo.none
             self.paymentOperations = payments.compactMap {
