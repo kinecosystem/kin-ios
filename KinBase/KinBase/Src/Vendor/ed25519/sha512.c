@@ -175,7 +175,7 @@ int sha512_update (sha512_context * md, const unsigned char *in, size_t inlen)
     int           err;     
     if (md == NULL) return 1;  
     if (in == NULL) return 1;                                                              
-    if (md->curlen > sizeof(md->buf)) {                             
+    if (md->curlen > (int)sizeof(md->buf)) {
        return 1;                                                            
     }                                                                                       
     while (inlen > 0) {                                                                     
@@ -222,7 +222,7 @@ int sha512_update (sha512_context * md, const unsigned char *in, size_t inlen)
     if (md == NULL) return 1;
     if (out == NULL) return 1;
 
-    if (md->curlen >= sizeof(md->buf)) {
+    if (md->curlen >= (int)sizeof(md->buf)) {
      return 1;
  }
 
