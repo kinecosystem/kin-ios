@@ -88,13 +88,6 @@ class HomeViewController: UIViewController {
 
         kinUXPaymentFlowButton.center = view.center
         kinUXPaymentFlowButton.frame.origin.y = kinDesignInvoiceTableButton.frame.maxY + padding
-        
-        kinAccountContext!.getAccount().then { (ka: KinAccount) in
-            ka.privateKey?.stellarID
-            let kp1: KeyPair = KeyPair.init(publicKey: ka.publicKey, privateKey: ka.privateKey)
-            print(kp1.seed)
-            let kp2: KeyPair = KeyPair.init(seed: Seed(stellarID: ka.privateKey?.stellarID))
-        }
     }
 
     @objc private func kinWalletDemoButtonTapped() {
