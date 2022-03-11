@@ -100,23 +100,26 @@ public class KinTransaction: Equatable, KinTransactionType {
         self.network = network
         self.invoiceList = invoiceList
 
-        if let solanaTransaction = Transaction(data: Data(envelopeXdrBytes)) {
-            self.transactionHash = solanaTransaction.transactionHash
-            self.sourceAccount = solanaTransaction.sourceAccount
-            self.memo = solanaTransaction.memo
-            self.paymentOperations = solanaTransaction.paymentOperations
-        } else {
-            guard let historyItem = historyItem else {
+        if let historyItem = historyItem {
+            guard let payments = historyItem.paymentsArray as NSArray as? [APBTransactionV4HistoryItem_Payment] else {
                 throw Errors.unknown
             }
-            let payments = historyItem.paymentsArray as NSArray as! [APBTransactionV4HistoryItem_Payment]
-            let payment = payments.first!
+            guard let payment = payments.first else {
+                throw Errors.unknown
+            }
             self.transactionHash = KinTransactionHash(historyItem.transactionId.value)
             self.sourceAccount = payment.source.publicKey
             self.memo = KinMemo.none
             self.paymentOperations = payments.compactMap {
                 KinPaymentOperation(amount: Kin($0.amount), source: $0.source.publicKey, destination: $0.destination.publicKey, isNonNativeAsset: false)
             }
+        } else if let solanaTransaction = Transaction(data: Data(envelopeXdrBytes)) {
+                self.transactionHash = solanaTransaction.transactionHash
+                self.sourceAccount = solanaTransaction.sourceAccount
+                self.memo = solanaTransaction.memo
+                self.paymentOperations = solanaTransaction.paymentOperations
+        } else {
+            throw Errors.unknown
         }
     }
     
