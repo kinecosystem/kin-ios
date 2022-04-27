@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'KinDesign'
-  s.version          = '2.1.2'
+  s.version          = '2.1.3'
   s.summary          = 'Kin Design Library for iOS'
 
   s.description      = <<-DESC
