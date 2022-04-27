@@ -32,10 +32,11 @@ public enum AccountSpec {
 public protocol KinAccountReadOperations {
     /**
      Returns the account info
+     - Parameter appIndex: set to client AppIndex to attribute account creation,
      - Parameter forceUpdate: set to `true` to force an update from network
      - Returns: a `Promise` containing the `KinAccount` or an error
     */
-    func getAccount(forceUpdate: Bool) -> Promise<KinAccount>
+    func getAccount(appIndex: AppIndex, forceUpdate: Bool) -> Promise<KinAccount>
 
     /**
      Returns the current balance and listens to future account balance changes.
@@ -273,17 +274,17 @@ public class KinAccountContext {
 
 // MARK: KinAccountReadOperations
 extension KinAccountContext: KinAccountReadOperations {
-    public func getAccount(forceUpdate: Bool = false) -> Promise<KinAccount> {
+    public func getAccount(appIndex: AppIndex = AppIndex(value: 0), forceUpdate: Bool = false) -> Promise<KinAccount> {
         log.info(msg: #function)
         return storage.getAccount(accountPublicKey)
             .then(on: dispatchQueue) { storedAccount -> Promise<KinAccount> in
                 guard let account = storedAccount else {
                     return self.getAccountAndRecover()
                 }
-                
+
                 switch account.status {
                 case .unregistered:
-                    return self.registerAccount(account: account)
+                    return self.registerAccount(account: account, appIndex: appIndex)
                         .then(on: self.dispatchQueue) { _ in
                             self.getAccountAndRecover()
                         }
@@ -587,9 +588,9 @@ extension KinAccountContext {
         }
     }
 
-    private func registerAccount(account: KinAccount) -> Promise<KinAccount> {
-        let keyPair = KeyPair(publicKey: account.publicKey, privateKey: account.privateKey!) // FIXME:
-        return service.createAccount(account: account.publicKey, signer: keyPair, appIndex: AppIndex(value: 0))
+    private func registerAccount(account: KinAccount, appIndex: AppIndex) -> Promise<KinAccount> {
+        let keyPair = KeyPair(publicKey: account.publicKey, privateKey: account.privateKey!)
+        return service.createAccount(account: account.publicKey, signer: keyPair, appIndex: appIndex)
             .then(on: dispatchQueue) { registeredAccount -> KinAccount in
                 return account.merge(registeredAccount)
             }

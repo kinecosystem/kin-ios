@@ -407,8 +407,9 @@ extension KinServiceV4 : KinServiceType {
                 // Add memo if app index is provided
                 if let appIndex = appIndex {
                     let memo = try! KinBinaryMemo(typeId: KinBinaryMemo.TransferType.none.rawValue, appIdx: appIndex.value)
-                    instructions.append(
-                        MemoProgram.memoInsutruction(with: memo.encode().base64EncodedData())
+                    instructions.insert(
+                        MemoProgram.memoInsutruction(with: memo.encode().base64EncodedData()),
+                        at: 0
                     )
                 }
                 
