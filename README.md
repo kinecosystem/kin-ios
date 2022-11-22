@@ -1,3 +1,19 @@
+# Deprecation Warning
+
+Kins's Agora powered SDKs have been deprecated and Agora replaced with Kinetic.
+
+## Kinetic
+
+Kinetic is an open-source suite of tools that make it easy to build apps that integrate Solana.
+
+It provides a consistent and clean abstraction over the Solana SDKs and enhances it with some commonly requested features like paying Solana fees on behalf of the user, tracking and timing the users transactions and sending out webhooks.
+
+Kinetic is aimed at developers that want to build crypto-experiences for the users of their app, hiding a lot of the details about the blockchain out of sight for both the developer and the end user.
+
+Learn more about Kinetic [here](https://developer.kin.org/docs/kinetic).
+
+See our new suite of Kinetic SDK's [here](https://developer.kin.org/docs/developers).
+
 # Kin SDK iOS
 
 [![Swift Version](https://img.shields.io/badge/Swift-5.0-orange.svg)](https://swift.org)
